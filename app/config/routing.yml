@@ -1,0 +1,19 @@
+_welcome:
+    resource: "@RaykuStaticBundle/Controller/WelcomeController.php"
+    type:     annotation
+    prefix: /
+
+_rayku_register:
+    resource: "@RaykuUserBundle/Controller/RegisterController.php"
+    type:     annotation
+    prefix:   /register
+
+_rayku_login:
+    resource: "@RaykuUserBundle/Controller/LoginController.php"
+    type:     annotation
+    prefix:   /login
+
+_rayku_user:
+    resource: "@RaykuUserBundle/Controller/"
+    type:     annotation
+    prefix:   /

@@ -1,5 +1,5 @@
 {
-    "hash": "879343c739d0b8d46199e091214604ed",
+    "hash": "e2949e65ddd1bd7042588fa617df37a9",
     "packages": [
         {
             "name": "Ingewikkeld/WrapperBundle",
@@ -316,6 +316,71 @@
                 "orm"
             ],
             "time": "2013-01-07 20:05:04"
+        },
+        {
+            "name": "friendsofsymfony/user-bundle",
+            "version": "dev-master",
+            "target-dir": "FOS/UserBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
+                "reference": "21379154943aad95ca0be85e1e0ade3d5ece9527"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/21379154943aad95ca0be85e1e0ade3d5ece9527",
+                "reference": "21379154943aad95ca0be85e1e0ade3d5ece9527",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": ">=2.1,<2.3-dev",
+                "symfony/security-bundle": ">=2.1,<2.3-dev"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "*",
+                "swiftmailer/swiftmailer": "*",
+                "symfony/validator": "2.1.*",
+                "symfony/yaml": "2.1.*",
+                "twig/twig": "*",
+                "willdurand/propel-typehintable-behavior": "dev-master"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "FOS\\UserBundle": ""
+                }
+            },
+            "notification-url": "http://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christophe Coevoet",
+                    "email": "stof@notk.org"
+                },
+                {
+                    "name": "Thibault Duplessis",
+                    "email": "thibault.duplessis@gmail.com",
+                    "homepage": "http://ornicar.github.com"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/friendsofsymfony/FOSUserBundle/contributors"
+                }
+            ],
+            "description": "Symfony FOSUserBundle",
+            "homepage": "http://friendsofsymfony.github.com",
+            "keywords": [
+                "User management"
+            ],
+            "time": "2013-03-05 22:18:46"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -1462,6 +1527,7 @@
     ],
     "minimum-stability": "alpha",
     "stability-flags": {
-        "ingewikkeld/wrapperbundle": 20
+        "ingewikkeld/wrapperbundle": 20,
+        "friendsofsymfony/user-bundle": 20
     }
 }

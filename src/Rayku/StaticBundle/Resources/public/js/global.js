@@ -24,7 +24,7 @@ $(document).ready(function(){
         $('.login-form').show();
         $('.forgot-email-form').hide();
     });
-
+    
     //Ask a question signup form
     $('#intro input.ask').keyup(function(){
         if($('#intro input.ask').val()!= ""){

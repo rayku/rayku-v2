@@ -2146,7 +2146,7 @@ ul.team li:nth-child(9).active span.line {
 	margin-bottom: 5px;
 	margin-left: 5px;
 }
-form input.login-input, #task_email1, #task_password1 {
+input.login-input, #user_login_email, #user_login_password{
 	padding:22px 10px;
 	border-radius: 5px;
 	box-shadow: inset 0 0 6px rgba(100, 100, 100, 0.5);
@@ -2205,7 +2205,4 @@ label.remember-checkbox{
 	text-shadow: 0 1px 0 rgba(255,255,255,.6);
 	text-decoration: none;
 	padding:10px 5px;
-}
-.forgot-email-form{
-
 }

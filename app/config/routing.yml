@@ -1,19 +1,23 @@
 _welcome:
-    resource: "@RaykuStaticBundle/Controller/WelcomeController.php"
-    type:     annotation
-    prefix: /
+    pattern:  /
+    defaults: { _controller: RaykuStaticBundle:Welcome:index }
 
-_rayku_register:
-    resource: "@RaykuUserBundle/Controller/RegisterController.php"
-    type:     annotation
-    prefix:   /register
+_become:
+    pattern:  /become-a-tutor
+    defaults: { _controller: RaykuStaticBundle:Welcome:become }
 
-_rayku_login:
-    resource: "@RaykuUserBundle/Controller/LoginController.php"
-    type:     annotation
-    prefix:   /login
+_about:
+    pattern:  /about
+    defaults: { _controller: RaykuStaticBundle:Welcome:about }
 
-_rayku_user:
-    resource: "@RaykuUserBundle/Controller/"
-    type:     annotation
-    prefix:   /
+_signup_tutor:
+    pattern:  /signup-tutor
+    defaults: { _controller: RaykuStaticBundle:Welcome:signupTutor }
+
+_rayku_security:
+    resource: "@RaykuStaticBundle/Resources/config/routing/security.yml"
+
+_rayku_dashboard:
+    resource: "@RaykuUserBundle/Resources/config/routing/dashboard.yml"
+    prefix: /dashboard
+

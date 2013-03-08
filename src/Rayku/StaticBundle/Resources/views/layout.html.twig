@@ -6,6 +6,7 @@
     {% block stylesheets %}
         <link href="{{ asset('bundles/raykustatic/css/normalize.css') }}" type="text/css" rel="stylesheet" media="screen" />
         <link href="{{ asset('bundles/raykustatic/css/foundation.min.css') }}" type="text/css" rel="stylesheet" media="screen" />
+        <link href="{{ asset('bundles/raykustatic/css/animation.css') }}" type="text/css" rel="stylesheet" media="screen" />
         <link href="{{ asset('bundles/raykustatic/css/style.css') }}" type="text/css" rel="stylesheet" media="screen" />
     {% endblock %}
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,600" rel="stylesheet" type="text/css" />
@@ -15,6 +16,16 @@
 
 {% block body %}
     {% block header %}
+    <header>
+        <div class="inside">
+            <a href="#" id="logo"><img src="{{asset('bundles/raykustatic/images/logo.png')}}" alt="" /></a>
+            <nav>
+                <a href="#" class="ask-login-button" data-reveal-id="loginModal">Login</a>
+                <a href="#" class="signup-user">Signup</a>
+                <a href="/joinus">Become a Tutor</a>
+            </nav>
+        </div>
+    </header>
     {% endblock %}
 
     {% block content %}{% endblock %}

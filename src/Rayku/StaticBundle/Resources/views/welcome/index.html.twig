@@ -1,13 +1,13 @@
-{% extends 'RaykuStaticBundle::layout.html.twig' %}
+{% extends 'RaykuStaticBundle::layout2.html.twig' %}
 
 {% block header %}
     <header>
         <div class="inside">
-            <a href="#" id="logo"><img src="{{asset('bundles/raykustatic/images/logo.png')}}" alt="" /></a>
+            <a href="/" id="logo"><img src="{{asset('bundles/raykustatic/images/logo.png')}}" alt="" /></a>
             <nav>
                 <a href="#" class="ask-login-button" data-reveal-id="loginModal">Login</a>
                 <a href="#" class="signup-user">Signup</a>
-                <a href="/joinus">Become a Tutor</a>
+                <a href="/become-a-tutor">Become a Tutor</a>
             </nav>
         </div>
     </header>
@@ -19,13 +19,14 @@
 			<div class="left">
 				<h1>Instant Math Tutoring</h1>
 				<h2>Connect with a live online tutor, over a beautiful &amp; interactive whiteboard, whenever you need help. Your first session is free!</h2>
-				<form action="/register" method="post">
+				<form action="{{ path('_rayku_user_register') }}" method="post" {{ form_enctype(form) }}>
 					<p>
 						<input type="text" class="ask" placeholder="Describe what you need help with..." />
 						<input type="submit" value="Ask" />
 					</p>
 					<div id="signup-ask">
 						<div class="head"><a href="#" class="close ask-login-button">x</a><span>Please provide account information in order to continue</span> <a href="#" data-reveal-id="loginModal" class="right ask-login-button">Already have an account</a><div class="clear"></div></div>
+
 
 						<!-- Added form -->
 						<div class="row signup-form">
@@ -39,7 +40,7 @@
 					        	{{ form_widget(form.password, { 'attr': {'placeholder': 'Password'} }) }}
 					      	</div>
 					      	<div class="large-6 columns">
-					        	{{ form_widget(form.confirm_password, { 'attr': {'placeholder': 'Confirm Password'} }) }}
+					        	{{ form_widget(form.password_confirm, { 'attr': {'placeholder': 'Confirm Password'} }) }}
 					      	</div>
 					    	<div class="large-6 columns terms">
 					    		By clicking Create Account you are indicating that you have read and agree to the <strong>Terms & Conditions</strong>
@@ -181,7 +182,7 @@
 	<div class="inside">
 		<p class="copy left">Copyright 2013 Rayku Corp. All rights reserved | Questions? 1-888-98RAYKU</p>
 		<nav class="right">
-			<a href="#">About</a>
+			<a href="/about">About</a>
 			<a href="#">Jobs</a>
 			<a href="#">Contact Us</a>
 			<a href="#">Legal</a>
@@ -199,15 +200,15 @@
 		<div class="login-modal-divider1">
 		</div>
 		<div class="row login-form">
-			<form action="" method="post">
-	    		<div class="row">
+			<form action="{{ path('_rayku_user_login') }}" method="post">
+				<div class="row">
 			      	<div class="large-12 columns">
-			        	{{ form_widget(form.email1, { 'attr': {'class': 'login-input'}, 'attr': {'placeholder': 'E-mail'} }) }}
+			        	{{ form_widget(form.login_email, { 'attr': {'class': 'login-input'}, 'attr': {'placeholder': 'E-mail'} }) }}
 			      	</div>
 			    </div>
 			    <div class="row">
 			      	<div class="large-12 columns">
-			        	{{ form_widget(form.password1, { 'attr': {'class': 'login-input'}, 'attr': {'placeholder': 'Password'} }) }}
+			        	{{ form_widget(form.login_password, { 'attr': {'class': 'login-input'}, 'attr': {'placeholder': 'Password'} }) }}
 			        	<input type="submit" class="abutton login-button"/>
 			      	</div>
 			    </div>

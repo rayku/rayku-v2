@@ -8,14 +8,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-// login form
-use Rayku\StaticBundle\Form\LoginType;
+// Login & Registration form
+use Rayku\StaticBundle\Form\Type\UserType;
+use Rayku\StaticBundle\Form\Type\TutorRegistrationType;
+//use Rayku\StaticBundle\Form\Model\Registration;
 
 class WelcomeController extends Controller
 {	
 	/**
      * @Route("/", name="_welcome")
      */
+    private function form()
+    {
+        $form = $this->createForm(
+            new UserType()
+        );
+        return $form;
+    }
     public function indexAction()
     {
         /*
@@ -23,35 +32,37 @@ class WelcomeController extends Controller
          * or @Template annotation as demonstrated in DemoController.
          *
          */
-
-        $registration = array();
-        $form = $this->createForm(new LoginType(), $registration);
-        array('form' => $form->createView());
+        $form  = $this->form();
         return $this->render('RaykuStaticBundle:Welcome:index.html.twig', array('form' => $form->createView()));
     }
-    /**
-     * @Route("/login", name="_rayku_login")
-     * @Template()
-     */
-    public function loginAction()
+    public function createAction()
     {
-        /*
-         * Renders the login page
-         *
-         */
-        return $this->render('RaykuStaticBundle:Login:index.html.twig');
+
     }
     /**
-     * @Route("/register", name="_rayku_register")
-     * @Template()
+     * @Route("/become-a-tutor", name="_become")
      */
-    public function RegisterAction(Request $request)
+    public function becomeAction()
     {
-        /*
-         * Renders the registration page
-         *
-         */
-        
-        return $this->render('RaykuStaticBundle:Register:index.html.twig');
+        $form  = $this->form();
+        return $this->render('RaykuStaticBundle:Welcome:become.html.twig', array('form' => $form->createView()));
+    }
+    /**
+     * @Route("/signup-tutor", name="_signup_tutor")
+     */
+    public function signupTutorAction()
+    {
+        $form = $this->createForm(
+            new TutorRegistrationType()
+        );
+        return $this->render('RaykuStaticBundle:Welcome:signup-tutor.html.twig', array('form' => $form->createView()));
+    }
+    /**
+     * @Route("/about", name="_become")
+     */
+    public function aboutAction()
+    {
+        $form  = $this->form();
+        return $this->render('RaykuStaticBundle:Welcome:about.html.twig', array('form' => $form->createView()));
     }
 }

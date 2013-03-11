@@ -1,0 +1,3 @@
+_rayku_user_dashboard:
+    pattern:  /
+    defaults: { _controller: RaykuUserBundle:Dashboard:index }

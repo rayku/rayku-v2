@@ -1,0 +1,128 @@
+{% extends 'RaykuStaticBundle::layout2.html.twig' %}
+
+{% block header %}
+    <header>
+        <div class="inside">
+            <a href="/" id="logo"><img src="{{asset('bundles/raykustatic/images/logo.png')}}" alt="" /></a>
+            <nav>
+                <a href="#" class="ask-login-button" data-reveal-id="loginModal">Login</a>
+                <a href="/signup" class="signup-user">Signup</a>
+                <a href="/become-a-tutor">Become a Tutor</a>
+            </nav>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+<div class="inside static" id="become-a-tutor">
+	<hgroup>
+		<h2>Tutor Math Online, Get Paid!</h2>
+		<h3>Rayku lets you teach math students online. Start today, and charge by-the-minute rates of your choice (recommended $0.40/min. or $24/hour).</h3>
+	</hgroup>
+	<div class="feature-list">
+		<div class="feature">
+			<h4>Shared live whiteboard</h4>
+			<p>Sessions are carried out through a live shared whiteboard, where students can interact with video, audio, and math equation writer tools.</p>
+		</div>
+		<div class="feature">
+			<h4>Request notifications</h4>
+			<p>Instant chat / desktop tutoring request notifications. With passive notifications, you can log in and tutor at your own self-determined schedule.</p>
+		</div>
+		<div class="feature">
+			<h4>Flexible schedules</h4>
+			<p>100% flexible tutoring schedules. Tutor when you want, wherever you want! <br><br></p>
+		</div>
+		<div class="feature">
+			<h4>Set your own rates</h4>
+			<p>Start today, and charge by-the-minute rates of your choice. Your first few sessions will be capped at $0/minute to build up some experience.</p>
+		</div>
+		<div class="feature">
+			<h4>Full billing system</h4>
+			<p>Rayku Points (RP) is the currency we use. 1RP currently equals $1. Full billing system to deliver payments directly to your paypal or bank account.</p>
+		</div>
+		<div class="feature">
+			<h4>Walkthrough video</h4>
+			<p>Tutoring on Rayku is easy! Watch the videos thoroughly, and read the descriptions below each video, to get a full understanding of how to get started as a Rayku tutor.</p>
+		</div>
+		<div class="feature">
+			<h4>Getting clients is easy</h4>
+			<p>You don’t need to bother getting clients. Getting clients is super easy! We pay for advertising and everything to get you great clients. That's our job!</p>
+		</div>
+		<div class="feature">
+			<h4>Earn money</h4>
+			<p>Get paid an average of 75% per session (average $18/hour) after fees. Dependent on the quality of the tutoring session. The higher the quality, the more you earn.</p>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+
+<div id="signup">
+	<div class="inside">
+		<hgroup>
+			<h2>Start tutoring on Rayku today</h2>
+			<h3>Create a free tutor account to get started:</h3>
+		</hgroup>
+		<p>
+			<a href="#" class="signup">Get Started</a>
+		</p>
+	</div>
+</div>
+{% endblock %}
+{% block footer %}
+	<div class="inside">
+		<p class="copy left">Copyright 2013 Rayku Corp. All rights reserved | Questions? 1-888-98RAYKU</p>
+		<nav class="right">
+			<a href="/about">About</a>
+			<a href="#">Jobs</a>
+			<a href="#">Contact Us</a>
+			<a href="#">Legal</a>
+		</nav>
+		<div class="clear"></div>
+	</div>
+{% endblock %}
+
+{% block login_modal %}
+	<div id="loginModal" class="reveal-modal small">
+		<div class="login-modal-header">
+			<img src="{{asset('/bundles/raykustatic/images/logo.png')}}" alt="rayku">
+			<a class="close-reveal-modal">&#215;</a>
+		</div>
+		<div class="login-modal-divider1">
+		</div>
+		<div class="row login-form">
+			<form action="{{ path('_rayku_user_login') }}" method="post">
+				<div class="row">
+			      	<div class="large-12 columns">
+			        	{{ form_widget(form.login_email, { 'attr': {'class': 'login-input'}, 'attr': {'placeholder': 'E-mail'} }) }}
+			      	</div>
+			    </div>
+			    <div class="row">
+			      	<div class="large-12 columns">
+			        	{{ form_widget(form.login_password, { 'attr': {'class': 'login-input'}, 'attr': {'placeholder': 'Password'} }) }}
+			        	<input type="submit" class="abutton login-button"/>
+			      	</div>
+			    </div>
+			    <div class="row">
+				    <div class="large-6 columns remember">
+				      	<label for="checkbox1" class="remember-checkbox">
+				      	<input name="remember-me" type="checkbox" id="remember-me"><span class="custom checkbox"></span> Remember me</label>
+				    </div>
+				    <div class="large-6 columns forgot">
+		    			<a href="#" class="forgot-password">Forgot your password?</a>
+		    		</div>
+			    </div>
+			</form>
+		</div>
+		<div class="row forgot-email-form">
+			<form action="" method="post">
+				<div class="row">
+			      	<div class="large-12 columns">
+			      		<label class="login-label">Forgot Password</label>
+			        	<input class="login-input" type="text" placeholder="Enter your e-mail and we'll send it along...">
+			        	<input type="submit" class="abutton submit-button"/>
+			      	</div>
+			    </div>
+			</form>
+		</div>
+	</div>
+{% endblock %}

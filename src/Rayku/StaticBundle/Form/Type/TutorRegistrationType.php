@@ -14,15 +14,7 @@ class TutorRegistrationType extends AbstractType
         $builder->add('password', 'password');
         $builder->add('findus', 'text');
     }
-    /* public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'Rayku\StaticBundle\Entity\User',
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token'
-        ));
-    }
-    */
+
     public function getName()
     {
         return 'user';

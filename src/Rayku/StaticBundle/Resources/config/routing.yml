@@ -1,0 +1,3 @@
+rayku_static:
+    resource: "@RaykuStaticBundle/Controller/StaticController.php"
+    type:     annotation

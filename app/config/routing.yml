@@ -1,23 +1,4 @@
-_welcome:
-    pattern:  /
-    defaults: { _controller: RaykuStaticBundle:Welcome:index }
-
-_become:
-    pattern:  /become-a-tutor
-    defaults: { _controller: RaykuStaticBundle:Welcome:become }
-
-_about:
-    pattern:  /about
-    defaults: { _controller: RaykuStaticBundle:Welcome:about }
-
-_signup_tutor:
-    pattern:  /signup-tutor
-    defaults: { _controller: RaykuStaticBundle:Welcome:signupTutor }
-
-_rayku_security:
-    resource: "@RaykuStaticBundle/Resources/config/routing/security.yml"
-
-_rayku_dashboard:
-    resource: "@RaykuUserBundle/Resources/config/routing/dashboard.yml"
-    prefix: /dashboard
+_rayku_static:
+    resource: "@RaykuStaticBundle/Resources/config/routing.yml"
+    prefix: /
 

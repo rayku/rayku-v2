@@ -14,12 +14,6 @@ class FormType extends AbstractType
         $builder->add('email1', 'email');
         $builder->add('password1', 'password');
         $builder->add('confirm_password', 'password');
-
-    }
-
-    public function getName()
-    {
-        return 'task';
     }
 }
 ?>

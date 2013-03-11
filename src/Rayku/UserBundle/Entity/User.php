@@ -2,6 +2,7 @@
 
 namespace Rayku\UserBundle\Entity;
 
+use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user")
  * @ORM\Entity
  */
-class User
+class User extends BaseUser
 {
     /**
      * @var integer
@@ -20,27 +21,6 @@ class User
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=255, nullable=false)
-     */
-    protected $username;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
-     */
-    protected $email;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
-     */
-    protected $password;
 
     /**
      * @var float
@@ -279,99 +259,6 @@ class User
      * @ORM\Column(name="referred_by", type="integer", nullable=false)
      */
     protected $referredBy;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username_canonical", type="string", length=255, nullable=false)
-     */
-    protected $usernameCanonical;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email_canonical", type="string", length=255, nullable=false)
-     */
-    protected $emailCanonical;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="enabled", type="boolean", nullable=false)
-     */
-    protected $enabled;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="salt", type="string", length=255, nullable=false)
-     */
-    protected $salt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="last_login", type="datetime", nullable=true)
-     */
-    protected $lastLogin;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="locked", type="boolean", nullable=false)
-     */
-    protected $locked;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="expired", type="boolean", nullable=false)
-     */
-    protected $expired;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="expires_at", type="datetime", nullable=true)
-     */
-    protected $expiresAt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="confirmation_token", type="string", length=255, nullable=true)
-     */
-    protected $confirmationToken;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="password_requested_at", type="datetime", nullable=true)
-     */
-    protected $passwordRequestedAt;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="roles", type="array", nullable=false)
-     */
-    protected $roles;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="credentials_expired", type="boolean", nullable=false)
-     */
-    protected $credentialsExpired;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="credentials_expire_at", type="datetime", nullable=true)
-     */
-    protected $credentialsExpireAt;
-
-
 
     /**
      * Get id
@@ -1327,29 +1214,6 @@ class User
     }
 
     /**
-     * Set lastLogin
-     *
-     * @param \DateTime $lastLogin
-     * @return User
-     */
-    public function setLastLogin($lastLogin)
-    {
-        $this->lastLogin = $lastLogin;
-    
-        return $this;
-    }
-
-    /**
-     * Get lastLogin
-     *
-     * @return \DateTime 
-     */
-    public function getLastLogin()
-    {
-        return $this->lastLogin;
-    }
-
-    /**
      * Set locked
      *
      * @param boolean $locked
@@ -1396,29 +1260,6 @@ class User
     }
 
     /**
-     * Set expiresAt
-     *
-     * @param \DateTime $expiresAt
-     * @return User
-     */
-    public function setExpiresAt($expiresAt)
-    {
-        $this->expiresAt = $expiresAt;
-    
-        return $this;
-    }
-
-    /**
-     * Get expiresAt
-     *
-     * @return \DateTime 
-     */
-    public function getExpiresAt()
-    {
-        return $this->expiresAt;
-    }
-
-    /**
      * Set confirmationToken
      *
      * @param string $confirmationToken
@@ -1442,52 +1283,6 @@ class User
     }
 
     /**
-     * Set passwordRequestedAt
-     *
-     * @param \DateTime $passwordRequestedAt
-     * @return User
-     */
-    public function setPasswordRequestedAt($passwordRequestedAt)
-    {
-        $this->passwordRequestedAt = $passwordRequestedAt;
-    
-        return $this;
-    }
-
-    /**
-     * Get passwordRequestedAt
-     *
-     * @return \DateTime 
-     */
-    public function getPasswordRequestedAt()
-    {
-        return $this->passwordRequestedAt;
-    }
-
-    /**
-     * Set roles
-     *
-     * @param array $roles
-     * @return User
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-    
-        return $this;
-    }
-
-    /**
-     * Get roles
-     *
-     * @return array 
-     */
-    public function getRoles()
-    {
-        return $this->roles;
-    }
-
-    /**
      * Set credentialsExpired
      *
      * @param boolean $credentialsExpired
@@ -1508,28 +1303,5 @@ class User
     public function getCredentialsExpired()
     {
         return $this->credentialsExpired;
-    }
-
-    /**
-     * Set credentialsExpireAt
-     *
-     * @param \DateTime $credentialsExpireAt
-     * @return User
-     */
-    public function setCredentialsExpireAt($credentialsExpireAt)
-    {
-        $this->credentialsExpireAt = $credentialsExpireAt;
-    
-        return $this;
-    }
-
-    /**
-     * Get credentialsExpireAt
-     *
-     * @return \DateTime 
-     */
-    public function getCredentialsExpireAt()
-    {
-        return $this->credentialsExpireAt;
     }
 }

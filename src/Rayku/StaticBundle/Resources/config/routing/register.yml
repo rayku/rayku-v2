@@ -1,3 +1,0 @@
-_rayku_user_register:
-    pattern:  /
-    defaults: { _controller: RaykuStaticBundle:Registration:register }

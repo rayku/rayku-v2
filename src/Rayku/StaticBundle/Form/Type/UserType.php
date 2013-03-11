@@ -19,7 +19,7 @@ class UserType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Rayku\StaticBundle\Entity\User',
+            'data_class' => 'Rayku\UserBundle\Entity\User',
             'csrf_protection' => true,
             'csrf_field_name' => '_token'
         ));

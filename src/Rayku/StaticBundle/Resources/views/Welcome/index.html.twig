@@ -19,7 +19,7 @@
 			<div class="left">
 				<h1>Instant Math Tutoring</h1>
 				<h2>Connect with a live online tutor, over a beautiful &amp; interactive whiteboard, whenever you need help. Your first session is free!</h2>
-				<form action="{{ path('_rayku_user_register') }}" method="post" {{ form_enctype(form) }}>
+				<form action="/register" method="post" {{ form_enctype(form) }}>
 					<p>
 						<input type="text" class="ask" placeholder="Describe what you need help with..." />
 						<input type="submit" value="Ask" />
@@ -200,7 +200,7 @@
 		<div class="login-modal-divider1">
 		</div>
 		<div class="row login-form">
-			<form action="{{ path('_rayku_user_login') }}" method="post">
+			<form action="/login" method="post">
 				<div class="row">
 			      	<div class="large-12 columns">
 			        	{{ form_widget(form.login_email, { 'attr': {'class': 'login-input'}, 'attr': {'placeholder': 'E-mail'} }) }}

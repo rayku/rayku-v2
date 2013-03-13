@@ -21,7 +21,6 @@ class StaticController extends Controller
         );
         return $form;
     }
-    
     /**
      * @Route("/", name="_welcome")
      */
@@ -30,6 +29,15 @@ class StaticController extends Controller
         return $this->render('RaykuStaticBundle:Welcome:index.html.twig', array('form' => $this->form()->createView()));
     }
     
+    /**
+     * @Route("/login", name="_login")
+     */
+    public function loginAction()
+    {
+        $form  = $this->form();
+        return $this->render('RaykuStaticBundle:Welcome:login.html.twig', array('form' => $form->createView()));
+    }
+
     /**
      * @Route("/become-a-tutor", name="_become")
      */
@@ -50,7 +58,18 @@ class StaticController extends Controller
     }
     
     /**
-     * @Route("/about", name="_become")
+     * @Route("/signup", name="_signup")
+     */
+    public function signupAction()
+    {
+        $form = $this->createForm(
+            new TutorRegistrationType()
+        );
+        return $this->render('RaykuStaticBundle:Welcome:signup.html.twig', array('form' => $form->createView()));
+    }
+    
+    /**
+     * @Route("/about", name="_about")
      */
     public function aboutAction()
     {

@@ -1,4 +1,4 @@
-{% extends 'RaykuStaticBundle::layout2.html.twig' %}
+{% extends 'RaykuStaticBundle::layout.html.twig' %}
 
 {% block header %}
     <header>
@@ -172,7 +172,7 @@
 				<h3>Create a free account to get started (no credit card required):</h3>
 			</hgroup>
 			<p>
-				<a href="#" class="signup">Register Now</a>
+				<a href="#" class="signup signup-user">Register Now</a>
 			</p>
 		</div>
 	</div>
@@ -188,51 +188,5 @@
 			<a href="#">Legal</a>
 		</nav>
 		<div class="clear"></div>
-	</div>
-{% endblock %}
-
-{% block login_modal %}
-	<div id="loginModal" class="reveal-modal small">
-		<div class="login-modal-header">
-			<img src="{{asset('/bundles/raykustatic/images/logo.png')}}" alt="rayku">
-			<a class="close-reveal-modal">&#215;</a>
-		</div>
-		<div class="login-modal-divider1">
-		</div>
-		<div class="row login-form">
-			<form action="/login" method="post">
-				<div class="row">
-			      	<div class="large-12 columns">
-			        	{{ form_widget(form.login_email, { 'attr': {'class': 'login-input'}, 'attr': {'placeholder': 'E-mail'} }) }}
-			      	</div>
-			    </div>
-			    <div class="row">
-			      	<div class="large-12 columns">
-			        	{{ form_widget(form.login_password, { 'attr': {'class': 'login-input'}, 'attr': {'placeholder': 'Password'} }) }}
-			        	<input type="submit" class="abutton login-button"/>
-			      	</div>
-			    </div>
-			    <div class="row">
-				    <div class="large-6 columns remember">
-				      	<label for="checkbox1" class="remember-checkbox">
-				      	<input name="remember-me" type="checkbox" id="remember-me"><span class="custom checkbox"></span> Remember me</label>
-				    </div>
-				    <div class="large-6 columns forgot">
-		    			<a href="#" class="forgot-password">Forgot your password?</a>
-		    		</div>
-			    </div>
-			</form>
-		</div>
-		<div class="row forgot-email-form">
-			<form action="" method="post">
-				<div class="row">
-			      	<div class="large-12 columns">
-			      		<label class="login-label">Forgot Password</label>
-			        	<input class="login-input" type="text" placeholder="Enter your e-mail and we'll send it along...">
-			        	<input type="submit" class="abutton submit-button"/>
-			      	</div>
-			    </div>
-			</form>
-		</div>
 	</div>
 {% endblock %}

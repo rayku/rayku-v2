@@ -12,14 +12,18 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class LoginController extends Controller
 {
     /**
-     * @Route("/login", name="_rayku_user_login")
+     * @Route("/login_check", name="_rayku_user_login")
      * @Template()
      */
-    public function loginAction()
+    public function loginCheckAction()
     {
         $response = new RedirectResponse('/dashboard');
         return $response;
     }
+    /**
+     * @Route("/logout", name="_rayku_user_logout")
+     * @Template()
+     */
     public function logoutAction()
     {
     	$response = new RedirectResponse('/');

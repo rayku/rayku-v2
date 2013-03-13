@@ -5,8 +5,6 @@ framework:
     test: ~
     session:
         storage_id: session.storage.mock_file
-    profiler:
-        enabled: false
 
 web_profiler:
     toolbar: false
@@ -14,3 +12,9 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        memory: true
+        path: app/cache/test/test.db

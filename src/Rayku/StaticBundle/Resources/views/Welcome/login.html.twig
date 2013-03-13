@@ -1,0 +1,38 @@
+{% extends 'RaykuStaticBundle::signup-layout.html.twig' %}
+
+{% block body %}
+<div class="form-box login-box fade-in">
+	<a href="/login" class="logo"></a>
+	<form action="#">
+		<ul>
+			<li>
+				<label>Email address</label>
+				<input type="email" name="e-mail" required />
+			</li>
+			<li>
+				<label>Password <a href="#" class="right">Forgot your password?</a></label>
+				<input type="password" name="password" required />
+			</li>
+			<li class="left checkboxes">
+				<label><input type="checkbox" name="remeberme" /> Remember me</label>
+				<label><input type="checkbox" name="invisible" /> Login as invisible</label>
+			</li>
+			<li class="right submit">
+				<input type="submit" value="Sign in" />
+			</li>
+		</ul>
+		<div class="clear"></div>
+	</form>
+	<p class="bottom-line">Don't have an account? <a href="/signup">Sign Up for Rayku!</a></p>
+</div>
+
+<footer>
+	<nav>
+		<a href="/about">about</a>
+		<a href="#">jobs</a>
+		<a href="#">Email us</a>
+		<a href="#">Legal</a>
+		<a href="/become-a-tutor">become  a tutor</a>
+	</nav>
+</footer>
+{% endblock %}

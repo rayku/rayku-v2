@@ -1,0 +1,45 @@
+{% extends 'RaykuStaticBundle::signup-layout.html.twig' %}
+
+{% block body %}
+<div class="form-box signup-box fade-in">
+	<a href="/register" class="logo"></a>
+	<form action="#">
+		<ul>
+			<li>
+				<label>First Name</label>
+				<input type="text" name="name" required />
+			</li>
+			<li>
+				<label>Last Name</label>
+				<input type="text" name="name" required />
+			</li>
+			<li>
+				<label>Email address</label>
+				<input type="email" name="email" required />
+			</li>
+			<li>
+				<label>Password</label>
+				<input type="password" name="password" required />
+			</li>
+			<li class="left align_right">
+				By clicking Get Started you agree to the <a href="#">Terms & Conditions</a>
+			</li>
+			<li class="right submit">
+				<input type="submit" value="Get Started" />
+			</li>
+		</ul>
+		<div class="clear"></div>
+	</form>
+	<p class="bottom-line">Already have an account? <a href="/login">Sign In to Rayku!</a></p>
+</div>
+
+<footer>
+	<nav>
+		<a href="/about">about</a>
+		<a href="#">jobs</a>
+		<a href="#">Email us</a>
+		<a href="#">Legal</a>
+		<a href="/become-a-tutor">become  a tutor</a>
+	</nav>
+</footer>
+{% endblock %}

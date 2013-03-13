@@ -1,3 +1,20 @@
+$(function(){
+    $('a.forgot-password').click(function(){
+        if($('.login-button').hasClass('disabled')){
+            $('.forgot-email-form').slideUp(200);
+            $('.login-modal-divider1').hide();
+            $('.login-button').removeClass('disabled');
+            $('.login-button').attr('disabled', false);
+        }
+        else {
+            $('.forgot-email-form').slideDown(200);
+            $('.login-modal-divider1').show();
+            $('.login-button').addClass('disabled');
+            $('.login-button').attr('disabled', true);
+        }
+    });
+});
+
 $(document).ready(function(){
 
     //Custom checkbox skin
@@ -14,10 +31,6 @@ $(document).ready(function(){
     });
 
     //If user forgot password, show them the email form to retrieve the password
-    $('a.forgot-password').click(function(){
-        $('.login-form').hide();
-        $('.forgot-email-form').slideDown(200);
-    });
 
     //Dismiss modal and show login form
     $('a.close-reveal-modal').click(function(){

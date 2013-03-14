@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: config_sonata.yml }
+    - { resource: @RaykuSessionBundle/Resources/config/admin.xml }
 
 framework:
     #esi:             ~

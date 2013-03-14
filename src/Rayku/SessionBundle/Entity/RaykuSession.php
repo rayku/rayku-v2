@@ -71,9 +71,9 @@ class RaykuSession
     private $recordingId;
 
     /**
-     * @var \FosUserUser
+     * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="FosUserUser")
+     * @ORM\ManyToOne(targetEntity="\Rayku\UserBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="student_id", referencedColumnName="id")
      * })
@@ -81,9 +81,9 @@ class RaykuSession
     private $student;
 
     /**
-     * @var \FosUserUser
+     * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="FosUserUser")
+     * @ORM\ManyToOne(targetEntity="\Rayku\UserBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="tutor_id", referencedColumnName="id")
      * })
@@ -266,10 +266,10 @@ class RaykuSession
     /**
      * Set student
      *
-     * @param \Rayku\SessionBundle\Entity\FosUserUser $student
+     * @param \Rayku\UserBundle\Entity\User $student
      * @return RaykuSession
      */
-    public function setStudent(\Rayku\SessionBundle\Entity\FosUserUser $student = null)
+    public function setStudent(\Rayku\UserBundle\Entity\User $student = null)
     {
         $this->student = $student;
     
@@ -279,7 +279,7 @@ class RaykuSession
     /**
      * Get student
      *
-     * @return \Rayku\SessionBundle\Entity\FosUserUser 
+     * @return \Rayku\UserBundle\Entity\User
      */
     public function getStudent()
     {
@@ -289,10 +289,10 @@ class RaykuSession
     /**
      * Set tutor
      *
-     * @param \Rayku\SessionBundle\Entity\FosUserUser $tutor
+     * @param \Rayku\UserBundle\Entity\User $tutor
      * @return RaykuSession
      */
-    public function setTutor(\Rayku\SessionBundle\Entity\FosUserUser $tutor = null)
+    public function setTutor(\Rayku\UserBundle\Entity\User $tutor = null)
     {
         $this->tutor = $tutor;
     
@@ -302,7 +302,7 @@ class RaykuSession
     /**
      * Get tutor
      *
-     * @return \Rayku\SessionBundle\Entity\FosUserUser 
+     * @return \Rayku\UserBundle\Entity\User 
      */
     public function getTutor()
     {

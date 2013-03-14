@@ -71,7 +71,17 @@ class RaykuSession
     private $recordingId;
 
     /**
-     * @var \User
+     * @var \FosUserUser
+     *
+     * @ORM\ManyToOne(targetEntity="FosUserUser")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="email", referencedColumnName="email_canonical")
+     * })
+     */
+    private $email;
+
+    /**
+     * @var \FosUserUser
      *
      * @ORM\ManyToOne(targetEntity="\Rayku\UserBundle\Entity\User")
      * @ORM\JoinColumns({
@@ -81,7 +91,7 @@ class RaykuSession
     private $student;
 
     /**
-     * @var \User
+     * @var \FosUserUser
      *
      * @ORM\ManyToOne(targetEntity="\Rayku\UserBundle\Entity\User")
      * @ORM\JoinColumns({
@@ -89,6 +99,16 @@ class RaykuSession
      * })
      */
     private $tutor;
+
+    /**
+     * @var \FosUserUser
+     *
+     * @ORM\ManyToOne(targetEntity="\Rayku\UserBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="username", referencedColumnName="username_canonical")
+     * })
+     */
+    private $username;
 
 
 
@@ -264,6 +284,29 @@ class RaykuSession
     }
 
     /**
+     * Set email
+     *
+     * @param \Rayku\UserBundle\Entity\User $email
+     * @return RaykuSession
+     */
+    public function setEmail(\Rayku\SessionBundle\Entity\FosUserUser $email = null)
+    {
+        $this->email = $email;
+    
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return \Rayku\UserBundle\Entity\User 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
      * Set student
      *
      * @param \Rayku\UserBundle\Entity\User $student
@@ -279,7 +322,7 @@ class RaykuSession
     /**
      * Get student
      *
-     * @return \Rayku\UserBundle\Entity\User
+     * @return \Rayku\UserBundle\Entity\User 
      */
     public function getStudent()
     {
@@ -302,10 +345,33 @@ class RaykuSession
     /**
      * Get tutor
      *
-     * @return \Rayku\UserBundle\Entity\User 
+     * @return \Rayku\UserBundle\Entity\User
      */
     public function getTutor()
     {
         return $this->tutor;
+    }
+
+    /**
+     * Set username
+     *
+     * @param \Rayku\UserBundle\Entity\User $username
+     * @return RaykuSession
+     */
+    public function setUsername(\Rayku\UserBundle\Entity\User $username = null)
+    {
+        $this->username = $username;
+    
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return \Rayku\UserBundle\Entity\User
+     */
+    public function getUsername()
+    {
+        return $this->username;
     }
 }

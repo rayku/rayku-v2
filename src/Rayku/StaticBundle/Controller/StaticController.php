@@ -21,6 +21,15 @@ class StaticController extends Controller
         );
         return $form;
     }
+
+    /**
+     * @Route("/home", name="homepage")
+     */
+    public function homepageAction()
+    {
+        die('not made yet');
+    }
+
     /**
      * @Route("/", name="_welcome")
      */

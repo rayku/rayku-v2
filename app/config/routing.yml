@@ -1,3 +1,8 @@
+rayku_session:
+    resource: "@RaykuSessionBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 _rayku_static:
     resource: "@RaykuStaticBundle/Resources/config/routing.yml"
     prefix: /

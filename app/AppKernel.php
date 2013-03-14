@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new Sonata\jQueryBundle\SonatajQueryBundle(),
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
             new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new Rayku\SessionBundle\RaykuSessionBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

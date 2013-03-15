@@ -13,5 +13,9 @@ use Application\Sonata\UserBundle\Entity\User as BaseUser;
  */
 class User extends BaseUser
 {
+	public function __toString()
+	{
+		return $this->getUsername();
+	}
  
 }

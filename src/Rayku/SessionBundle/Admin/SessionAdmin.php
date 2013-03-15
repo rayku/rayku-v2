@@ -19,14 +19,41 @@ class SessionAdmin extends Admin
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-            ->add('username')
+			->with('General')
+				->add('username')
+				->add('email')
+            	->add('duration')
+            	->add('rating')
+            	->add('rate')
+            	->add('question')
+            	//->add('start_time')
+            	//->add('end_time')
+            ->end()
         ;
 	}
-
+	// Allows for filtering
+	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add('duration')
+            ->add('rating')
+            ->add('rate')
+           	->add('question')
+           	//->add('start_time')
+            //->add('end_time')
+        ;
+    }
 	protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('Username')
+        	->add('Username')
+        	->add('Email')
+            ->addIdentifier('Duration')
+            ->addIdentifier('Rating')
+            ->addIdentifier('Rate')
+           	->addIdentifier('Question')
+           	//->addIdentifier('Start')
+            //->addIdentifier('End')
         ;
     }
 }

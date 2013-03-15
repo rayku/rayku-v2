@@ -71,17 +71,14 @@ class RaykuSession
     private $recordingId;
 
     /**
-     * @var \FosUserUser
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="FosUserUser")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="email", referencedColumnName="email_canonical")
-     * })
+     * @ORM\Column(name="email", type="string", nullable=false)
      */
     private $email;
 
     /**
-     * @var \FosUserUser
+     * @var \User
      *
      * @ORM\ManyToOne(targetEntity="\Rayku\UserBundle\Entity\User")
      * @ORM\JoinColumns({
@@ -91,7 +88,7 @@ class RaykuSession
     private $student;
 
     /**
-     * @var \FosUserUser
+     * @var \User
      *
      * @ORM\ManyToOne(targetEntity="\Rayku\UserBundle\Entity\User")
      * @ORM\JoinColumns({
@@ -101,12 +98,9 @@ class RaykuSession
     private $tutor;
 
     /**
-     * @var \FosUserUser
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="\Rayku\UserBundle\Entity\User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="username", referencedColumnName="username_canonical")
-     * })
+     * @ORM\Column(name="username", type="string", nullable=false)
      */
     private $username;
 
@@ -286,10 +280,10 @@ class RaykuSession
     /**
      * Set email
      *
-     * @param \Rayku\UserBundle\Entity\User $email
+     * @param string $email
      * @return RaykuSession
      */
-    public function setEmail(\Rayku\SessionBundle\Entity\FosUserUser $email = null)
+    public function setEmail($email = null)
     {
         $this->email = $email;
     
@@ -299,7 +293,7 @@ class RaykuSession
     /**
      * Get email
      *
-     * @return \Rayku\UserBundle\Entity\User 
+     * @return string
      */
     public function getEmail()
     {
@@ -355,10 +349,10 @@ class RaykuSession
     /**
      * Set username
      *
-     * @param \Rayku\UserBundle\Entity\User $username
+     * @param string $username
      * @return RaykuSession
      */
-    public function setUsername(\Rayku\UserBundle\Entity\User $username = null)
+    public function setUsername($username = null)
     {
         $this->username = $username;
     
@@ -368,7 +362,7 @@ class RaykuSession
     /**
      * Get username
      *
-     * @return \Rayku\UserBundle\Entity\User
+     * @return string
      */
     public function getUsername()
     {

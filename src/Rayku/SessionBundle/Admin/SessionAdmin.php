@@ -38,7 +38,6 @@ class SessionAdmin extends Admin
             ->add('duration')
             ->add('rating')
             ->add('rate')
-           	->add('question')
            	//->add('start_time')
             //->add('end_time')
         ;

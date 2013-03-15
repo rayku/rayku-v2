@@ -2,7 +2,7 @@ framework:
     translator:      { fallback: %locale% }
 
 sonata_admin:
-    title:      Sonata Project
+    title:      Rayku Admin Dashboard
     title_logo: /bundles/sonataadmin/logo_title.png
     templates:
         # default global templates

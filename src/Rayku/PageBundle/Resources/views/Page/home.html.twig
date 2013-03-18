@@ -1,17 +1,4 @@
-{% extends "::frontend_layout.html.twig" %}
-
-{% block header %}
-    <header>
-        <div class="inside">
-            <a href="/" id="logo"><img src="{{asset('bundles/raykupage/images/logo.png')}}" alt="" /></a>
-            <nav>
-                <a href="#" class="ask-login-button" data-reveal-id="loginModal">Login</a>
-                <a href="#" class="signup-user">Signup</a>
-                <a href="/become-a-tutor">Become a Tutor</a>
-            </nav>
-        </div>
-    </header>
-{% endblock %}
+{% extends "::base.html.twig" %}
 
 {% block content %}
 <div id="intro" class="v1">
@@ -175,18 +162,5 @@
 				<a href="#" class="signup signup-user">Register Now</a>
 			</p>
 		</div>
-	</div>
-{% endblock %}
- 
-{% block footer %}
-	<div class="inside">
-		<p class="copy left">Copyright 2013 Rayku Corp. All rights reserved | Questions? 1-888-98RAYKU</p>
-		<nav class="right">
-			<a href="/about">About</a>
-			<a href="#">Jobs</a>
-			<a href="#">Contact Us</a>
-			<a href="#">Legal</a>
-		</nav>
-		<div class="clear"></div>
 	</div>
 {% endblock %}

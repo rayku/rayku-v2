@@ -9,11 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="tutor")
  * @ORM\Entity
- * @ORM\HasLifecycleCallbacks
  */
 class Tutor
 {
-	
     /**
      * @var integer
      *
@@ -36,6 +34,27 @@ class Tutor
      * @ORM\Column(name="school_amount", type="string", length=255, nullable=true)
      */
     private $schoolAmount;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="online_web", type="boolean", nullable=true)
+     */
+    private $onlineWeb;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="online_gchat", type="boolean", nullable=true)
+     */
+    private $onlineGchat;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="rate", type="float", nullable=true)
+     */
+    private $rate;
 
     /**
      * @var \DateTime
@@ -118,12 +137,74 @@ class Tutor
     {
         return $this->schoolAmount;
     }
-    
+
     /**
+     * Set onlineWeb
+     *
+     * @param boolean $onlineWeb
+     * @return Tutor
      */
-    public function setCreated()
+    public function setOnlineWeb($onlineWeb)
     {
-    	$this->createdAt = new \DateTime();
+        $this->onlineWeb = $onlineWeb;
+    
+        return $this;
+    }
+
+    /**
+     * Get onlineWeb
+     *
+     * @return boolean 
+     */
+    public function getOnlineWeb()
+    {
+        return $this->onlineWeb;
+    }
+
+    /**
+     * Set onlineGchat
+     *
+     * @param boolean $onlineGchat
+     * @return Tutor
+     */
+    public function setOnlineGchat($onlineGchat)
+    {
+        $this->onlineGchat = $onlineGchat;
+    
+        return $this;
+    }
+
+    /**
+     * Get onlineGchat
+     *
+     * @return boolean 
+     */
+    public function getOnlineGchat()
+    {
+        return $this->onlineGchat;
+    }
+
+    /**
+     * Set rate
+     *
+     * @param float $rate
+     * @return Tutor
+     */
+    public function setRate($rate)
+    {
+        $this->rate = $rate;
+    
+        return $this;
+    }
+
+    /**
+     * Get rate
+     *
+     * @return float 
+     */
+    public function getRate()
+    {
+        return $this->rate;
     }
 
     /**
@@ -193,17 +274,5 @@ class Tutor
     public function getUser()
     {
         return $this->user;
-    }
-    
-    /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function updateTimeStamps()
-    {
-    	$this->setUpdatedAt(new \DateTime());
-    	if($this->getCreatedAt() == null){
-	    	$this->setCreatedAt(new \DateTime());
-    	}
     }
 }

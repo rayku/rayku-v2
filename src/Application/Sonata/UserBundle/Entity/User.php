@@ -28,7 +28,6 @@ class User extends BaseUser
      */
     protected $id;
 
-
     /**
      * Get id
      *
@@ -37,10 +36,5 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
-    }
-
-    public function __toString()
-    {
-        return $this->getFullname().' ('.$this->getUsername().')';
     }
 }

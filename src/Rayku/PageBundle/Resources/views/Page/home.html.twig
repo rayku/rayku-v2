@@ -1,0 +1,192 @@
+{% extends 'RaykuPageBundle::layout.html.twig' %}
+
+{% block header %}
+    <header>
+        <div class="inside">
+            <a href="/" id="logo"><img src="{{asset('bundles/raykupage/images/logo.png')}}" alt="" /></a>
+            <nav>
+                <a href="#" class="ask-login-button" data-reveal-id="loginModal">Login</a>
+                <a href="#" class="signup-user">Signup</a>
+                <a href="/become-a-tutor">Become a Tutor</a>
+            </nav>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+<div id="intro" class="v1">
+		<div class="inside">
+			<div class="left">
+				<h1>Instant Math Tutoring</h1>
+				<h2>Connect with a live online tutor, over a beautiful &amp; interactive whiteboard, whenever you need help. Your first session is free!</h2>
+				<form action="/register" method="post">
+					<p>
+						<input type="text" class="ask" placeholder="Describe what you need help with..." />
+						<input type="submit" value="Ask" />
+					</p>
+					<div id="signup-ask">
+						<div class="head"><a href="#" class="close ask-login-button">x</a><span>Please provide account information in order to continue</span> <a href="#" data-reveal-id="loginModal" class="right ask-login-button">Already have an account</a><div class="clear"></div></div>
+
+
+						<!-- Added form -->
+						<div class="row signup-form">
+							<div class="large-6 columns">
+					        	<input type="text" name="fullname" />
+					      	</div>
+					      	<div class="large-6 columns">
+					        	<input type="text" name="email" />
+					      	</div>
+					      	<div class="large-6 columns">
+					        	<input type="password" name="password" />
+					      	</div>
+					      	<div class="large-6 columns">
+					        	<input type="password" name="password2" />
+					      	</div>
+					    	<div class="large-6 columns terms">
+					    		By clicking Create Account you are indicating that you have read and agree to the <strong>Terms & Conditions</strong>
+					    	</div>
+					    	<div class="large-6 columns submit">
+					    		<input type="submit" value="Create an account and ask" />
+					    	</div>
+					    </div>
+					</div>
+				</form>
+				<p class="seen-on">
+					As seen on: <img src="{{asset('bundles/raykupage/images/seen_on.png')}}" alt="" />
+				</p>
+			</div>
+			<div class="right">
+				<a href="#" class="video">
+					<img src="{{asset('bundles/raykupage/images/video.jpg')}}" alt="" />
+					<span class="play"></span>
+				</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="wood">
+			<div class="dust left"></div>
+			<div class="dust"></div>
+			<div class="chalk"></div>
+			<div class="dust right"></div>
+		</div>
+	</div>
+	
+	<div id="steps">
+		<div class="inside">
+			<div class="step">
+				<div class="text">
+					<h3>Ask Question</h3>
+					<p>Let us know the  question or topic that you need help with.</p>
+				</div>
+				<div class="img"></div>
+			</div>
+			<div class="step">
+				<div class="text">
+					<h3>Select Tutor</h3>
+					<p>Select from a list of online tutors that are BEST suited to help you.</p>
+				</div>
+				<div class="img"></div>
+			</div>
+			<div class="step">
+				<div class="text">
+					<h3>Learn!</h3>
+					<p>Connect with a live tutor over our whiteboard, within 60 seconds!</p>
+				</div>
+				<div class="img"></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	
+	<div id="testimonials">
+		<div class="inside">
+			<hgroup>
+				<h2>People love Rayku</h2>
+				<h3>Find out what everyone is saying about us. People are talking!</h3>
+			</hgroup>
+		</div>
+		<div class="testimonials">
+			<div class="testimonial element">
+				<blockquote>					
+					<p>I must say that the current system is pretty neat, I enjoyed playing around with all the features and the Latex integration is truly quite nice. The interface is really smooth and sleek which I like. The ease of use is wonderful.</p>
+					<footer>Pratheek Nagaraj <em>MIT student, NASA intern</em></footer>
+				</blockquote>
+				<div class="avatar">
+					<img src="http://rayku.com/images/prf3.png" alt="" />
+				</div>
+			</div>
+			<div class="testimonial element">
+				<blockquote>					
+					<p>My son got in touch with a Yale math major who helped him understand a math problem that neither of us could figure out. This is a crucial year for him, and Rayku.com is one way for me to support his efforts.</p>
+					<footer>Sarah Ming <em>Parent, Kingston New York</em></footer>
+				</blockquote>
+				<div class="avatar">
+					<img src="{{asset('bundles/raykupage/images/sarah-icon.png')}}" alt="" />
+				</div>
+			</div>
+			<div class="testimonial element">
+				<blockquote>					
+					<p>Available globally 24 hours a day, seven days a week, Rayku enables tutors to set their own fees, and students to select their tutors based on price and quality. The Canadian startup estimates that this saves users an average of 60% per tutoring session compared with conventional alternatives.</p>
+					<footer>Techvibes <em>Technology News Blog</em></footer>
+				</blockquote>
+				<div class="avatar">
+					<img src="{{asset('bundles/raykupage/images/tv-icon.png')}}" alt="" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="whiteboard">
+		<div class="inside">
+			<hgroup>
+				<h2>Rayku works because we show, not tell</h2>
+				<h3>We've put together a fast and easy-to-use whiteboard app, with everything from audio/video to a sleek math equation writer. Connect with your online tutor immediately for a painless experience.</h3>
+			</hgroup>
+			<div class="macbook">
+				<img src="{{asset('bundles/raykupage/images/whiteboard_demo.jpg')}}" alt="" />
+				<ul>
+					<li>
+						<strong>Tools</strong>
+						The math equation writer makes it easy to communicate your question and thoughts
+					</li>
+					<li>
+						<strong>Board</strong>
+						Watch as the tutor illustrates each step in a visual way on the live shared whiteboard
+					</li>
+					<li>
+						<strong>Video</strong>
+						See or listen to the tutor explain the concepts in question as they draw it out for you in real time
+					</li>
+					<li>
+						<strong>Chat</strong>
+						More comfortable typing? We've got you covered! Everything is recorded for you as notes</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div id="signup">
+		<div class="inside">
+			<hgroup>
+				<h2>Get your first session free!</h2>
+				<h3>Create a free account to get started (no credit card required):</h3>
+			</hgroup>
+			<p>
+				<a href="#" class="signup signup-user">Register Now</a>
+			</p>
+		</div>
+	</div>
+{% endblock %}
+ 
+{% block footer %}
+	<div class="inside">
+		<p class="copy left">Copyright 2013 Rayku Corp. All rights reserved | Questions? 1-888-98RAYKU</p>
+		<nav class="right">
+			<a href="/about">About</a>
+			<a href="#">Jobs</a>
+			<a href="#">Contact Us</a>
+			<a href="#">Legal</a>
+		</nav>
+		<div class="clear"></div>
+	</div>
+{% endblock %}

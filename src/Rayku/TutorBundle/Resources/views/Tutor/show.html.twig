@@ -15,6 +15,18 @@
             <td>{{ entity.schoolAmount }}</td>
         </tr>
         <tr>
+            <th>Onlineweb</th>
+            <td>{{ entity.onlineWeb }}</td>
+        </tr>
+        <tr>
+            <th>Onlinegchat</th>
+            <td>{{ entity.onlineGchat }}</td>
+        </tr>
+        <tr>
+            <th>Rate</th>
+            <td>{{ entity.rate }}</td>
+        </tr>
+        <tr>
             <th>Createdat</th>
             <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
         </tr>
@@ -30,16 +42,5 @@
         <a href="{{ path('tutor') }}">
             Back to the list
         </a>
-    </li>
-    <li>
-        <a href="{{ path('tutor_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('tutor_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
     </li>
 </ul>

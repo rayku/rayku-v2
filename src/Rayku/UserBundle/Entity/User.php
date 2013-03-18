@@ -1,10 +1,10 @@
 <?php
- 
+
 namespace Rayku\UserBundle\Entity;
- 
+
 use Doctrine\ORM\Mapping as ORM;
 use Application\Sonata\UserBundle\Entity\User as BaseUser;
- 
+
 /**
  * User
  *
@@ -13,9 +13,5 @@ use Application\Sonata\UserBundle\Entity\User as BaseUser;
  */
 class User extends BaseUser
 {
-	public function __toString()
-	{
-		return $this->getUsername();
-	}
- 
+
 }

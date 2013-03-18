@@ -1,1 +1,0 @@
-Rayku running on Symfony 2, with Sonata Admin

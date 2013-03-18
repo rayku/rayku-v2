@@ -1,14 +1,22 @@
-rayku_session:
-    resource: "@RaykuSessionBundle/Controller/"
+rayku_page:
+    resource: "@RaykuPageBundle/Controller/"
     type:     annotation
     prefix:   /
 
-_rayku_static:
-    resource: "@RaykuStaticBundle/Resources/config/routing.yml"
-    prefix: /
+rayku_user:
+    resource: "@RaykuUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
 
-_sonata:
-    resource: routing_sonata.yml
+rayku_tutor:
+    resource: "@RaykuTutorBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+# Internal routing configuration to handle ESI
+#_internal:
+#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#   prefix:   /_internal
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
@@ -27,9 +35,21 @@ fos_user_resetting:
 
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
-    prefix: /profile
+    prefix: /change-password
 
-# Internal routing configuration to handle ESI
-#_internal:
-#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
-#    prefix:   /_internal
+#_imagine:
+#    resource: .
+#    type:     imagine
+
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+
+soanata_user:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin

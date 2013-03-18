@@ -37,11 +37,11 @@ class AppKernel extends Kernel
 
             // USER
             new FOS\UserBundle\FOSUserBundle(),
-            new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
 
             // MEDIA
             new Sonata\MediaBundle\SonataMediaBundle(),
+        	new Sonata\UserBundle\SonataUserBundle(),
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             // new Liip\ImagineBundle\LiipImagineBundle(),
 

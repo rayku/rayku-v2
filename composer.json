@@ -39,6 +39,7 @@
         "sonata-project/admin-bundle": "2.1.*@dev",
         "sonata-project/block-bundle": "2.1.*",
         "sonata-project/media-bundle": "2.1.*@dev",
+        "sonata-project/user-bundle": "2.1.*@dev",
         "sonata-project/doctrine-orm-admin-bundle": "2.1.*@dev",
 
         "symfony-cmf/routing-extra-bundle": "1.*@dev",

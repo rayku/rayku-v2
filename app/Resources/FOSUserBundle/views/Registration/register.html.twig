@@ -1,38 +1,78 @@
-{% extends "::empty.html.twig" %}
+{% extends app.request.attributes.get('_route') == '_internal' ? "::empty.html.twig" : "::base.html.twig" %}
 
-{% block content %}
-<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
-	<p>
-		<input type="text" class="ask" placeholder="Describe what you need help with..." />
-		{{ form_errors(form) }}
-		<input type="submit" value="Ask" />
-	</p>
-	<div id="signup-ask">
-		<div class="head"><a href="#" class="close ask-login-button">x</a><span>Please provide account information in order to continue</span> <a href="#" data-reveal-id="loginModal" class="right ask-login-button">Already have an account</a><div class="clear"></div></div>
-		<div class="row signup-form">
-			<div class="large-6 columns">
-	        	{{ form_widget(form.username, { 'attr': {'placeholder': 'Username'} }) }}
-	        	{{ form_errors(form.username) }}
-	      	</div>
-	      	<div class="large-6 columns">
-	        	{{ form_widget(form.email, { 'attr': {'placeholder': 'E-mail'} }) }}
-	        	{{ form_errors(form.email) }}
-	      	</div>
-	      	<div class="large-6 columns">
-	      		{{ form_errors(form.plainPassword) }}
-	        	{{ form_widget(form.plainPassword.first, { 'attr': {'placeholder': 'Password'} }) }}
-	      	</div>
-	      	<div class="large-6 columns">
-	        	{{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': 'Confirm Password'} }) }}
-	      	</div>
-	    	<div class="large-6 columns terms">
-	    		By clicking Create Account you are indicating that you have read and agree to the <strong>Terms & Conditions</strong>
-	    	</div>
-	    	<div class="large-6 columns submit">
-	    		{{ form_rest(form) }}
-	    		<input type="submit" value="Create an account and ask" />
-	    	</div>
-	    </div>
-	</div>
-</form>
+{% block body %}
+	{% if app.request.attributes.get('_route') == '_internal' %}
+		<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+			<p>
+				<input type="text" class="ask" placeholder="Describe what you need help with..." />
+				{{ form_errors(form) }}
+				<input type="submit" value="Ask" />
+			</p>
+			<div id="signup-ask">
+				<div class="head"><a href="#" class="close ask-login-button">x</a><span>Please provide account information in order to continue</span> <a href="#" data-reveal-id="loginModal" class="right ask-login-button">Already have an account</a><div class="clear"></div></div>
+				<div class="row signup-form">
+					<div class="large-6 columns">
+			        	{{ form_widget(form.username, { 'attr': {'placeholder': 'Username'} }) }}
+			        	{{ form_errors(form.username) }}
+			      	</div>
+			      	<div class="large-6 columns">
+			        	{{ form_widget(form.email, { 'attr': {'placeholder': 'E-mail'} }) }}
+			        	{{ form_errors(form.email) }}
+			      	</div>
+			      	<div class="large-6 columns">
+			      		{{ form_errors(form.plainPassword) }}
+			        	{{ form_widget(form.plainPassword.first, { 'attr': {'placeholder': 'Password'} }) }}
+			      	</div>
+			      	<div class="large-6 columns">
+			        	{{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': 'Confirm Password'} }) }}
+			      	</div>
+			    	<div class="large-6 columns terms">
+			    		By clicking Create Account you are indicating that you have read and agree to the <strong>Terms & Conditions</strong>
+			    	</div>
+			    	<div class="large-6 columns submit">
+			    		{{ form_rest(form) }}
+			    		<input type="submit" value="Create an account and ask" />
+			    	</div>
+			    </div>
+			</div>
+		</form>
+	{% else %}
+        <div class="form-box signup-box fade-in">
+			<a href="/register" class="logo"></a>
+			<form action="#">
+				<ul>
+					<li>
+						{{ form_row(form.username) }}
+					</li>
+					<li>
+						{{ form_row(form.email) }}
+					</li>
+					<li>
+						{{ form_row(form.plainPassword.first) }}
+					</li>
+					<li>
+						{{ form_row(form.plainPassword.second) }}
+					</li>
+					<li class="left align_right">
+						By clicking Get Started you agree to the <a href="#">Terms & Conditions</a>
+					</li>
+					<li class="right submit">
+						<input type="submit" value="Get Started" />
+					</li>
+				</ul>
+				<div class="clear"></div>
+			</form>
+			<p class="bottom-line">Already have an account? <a href="/login">Sign In to Rayku!</a></p>
+		</div>
+		
+		<footer>
+			<nav>
+				<a href="/about">about</a>
+				<a href="#">jobs</a>
+				<a href="#">Email us</a>
+				<a href="#">Legal</a>
+				<a href="/become-a-tutor">become  a tutor</a>
+			</nav>
+		</footer>
+	{% endif %}
 {% endblock %}

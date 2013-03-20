@@ -53,6 +53,9 @@ security:
         - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
+        # Insecure part of site
+        - { path: ^/become-a-tutor, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        
         # Secure rest of the site
         - { path: ^/, roles: ROLE_USER }
         

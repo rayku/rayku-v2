@@ -3,11 +3,6 @@ rayku_page:
     type:     annotation
     prefix:   /
 
-rayku_user:
-    resource: "@RaykuUserBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 rayku_tutor:
     resource: "@RaykuTutorBundle/Controller/"
     type:     annotation

@@ -2096,6 +2096,7 @@ ul.team li:nth-child(9).active span.line {
 }
 .reveal-modal{
 	border: none;
+	border-radius: 3px;
 }
 .login-modal-header{
 	position: absolute;
@@ -2208,7 +2209,13 @@ a.forgot-password{
 	text-decoration: underline;
 	padding: 10px 5px;
 }
+input[name="_remember_me"]{
+	position: relative;
+	top:-26px;
+}
 label.remember-checkbox{
+	position: relative;
+	left:12px;
 	color: #57595d;
 	font-size: 12px;
 	text-shadow: 0 1px 0 rgba(255,255,255,.6);

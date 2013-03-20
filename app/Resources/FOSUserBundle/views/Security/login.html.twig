@@ -11,19 +11,19 @@
         	<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />        
             <div class="row">
                 <div class="large-12 columns">
-				    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="login-input" />
+				    <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="E-mail" required="required" class="login-input" />
                 </div>
             </div>
             <div class="row">
                 <div class="large-12 columns">
-				    <input type="password" id="password" name="_password" required="required"  class="login-input" />
+				    <input type="password" id="password" name="_password" placeholder="Password" required="required"  class="login-input" />
 					<input type="submit" class="abutton login-button" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
                 </div>
             </div>
             <div class="row">
                 <div class="large-6 columns remember">
+                    <label for="remember_me" class="remember-checkbox">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
 				    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-				    <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
                 </div>
                 <div class="large-6 columns forgot">
                     <a href="#" class="forgot-password">Forgot your password?</a>

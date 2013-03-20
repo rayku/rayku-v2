@@ -11,19 +11,19 @@
 		<div class="head"><a href="#" class="close ask-login-button">x</a><span>Please provide account information in order to continue</span> <a href="#" data-reveal-id="loginModal" class="right ask-login-button">Already have an account</a><div class="clear"></div></div>
 		<div class="row signup-form">
 			<div class="large-6 columns">
-	        	{{ form_widget(form.username) }}
+	        	{{ form_widget(form.username, { 'attr': {'placeholder': 'Username'} }) }}
 	        	{{ form_errors(form.username) }}
 	      	</div>
 	      	<div class="large-6 columns">
-	        	{{ form_widget(form.email) }}
+	        	{{ form_widget(form.email, { 'attr': {'placeholder': 'E-mail'} }) }}
 	        	{{ form_errors(form.email) }}
 	      	</div>
 	      	<div class="large-6 columns">
 	      		{{ form_errors(form.plainPassword) }}
-	        	{{ form_widget(form.plainPassword.first) }}
+	        	{{ form_widget(form.plainPassword.first, { 'attr': {'placeholder': 'Password'} }) }}
 	      	</div>
 	      	<div class="large-6 columns">
-	        	{{ form_widget(form.plainPassword.second) }}
+	        	{{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': 'Confirm Password'} }) }}
 	      	</div>
 	    	<div class="large-6 columns terms">
 	    		By clicking Create Account you are indicating that you have read and agree to the <strong>Terms & Conditions</strong>

@@ -548,26 +548,26 @@
         },
         {
             "name": "egeloen/ckeditor-bundle",
-            "version": "2.1.2",
+            "version": "2.1.3",
             "target-dir": "Ivory/CKEditorBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egeloen/IvoryCKEditorBundle.git",
-                "reference": "2.1.2"
+                "reference": "2.1.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egeloen/IvoryCKEditorBundle/zipball/2.1.2",
-                "reference": "2.1.2",
+                "url": "https://api.github.com/repos/egeloen/IvoryCKEditorBundle/zipball/2.1.3",
+                "reference": "2.1.3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0",
+                "symfony/form": ">=2.1",
                 "symfony/framework-bundle": ">=2.1"
             },
             "require-dev": {
-                "symfony/form": "2.1.*",
-                "symfony/yaml": "2.1.*",
+                "symfony/yaml": ">=2.1",
                 "twig/twig": "1.*"
             },
             "type": "symfony-bundle",
@@ -590,7 +590,7 @@
             "keywords": [
                 "CKEditor"
             ],
-            "time": "2013-02-19 19:15:52"
+            "time": "2013-03-18 22:09:28"
         },
         {
             "name": "friendsofsymfony/user-bundle",

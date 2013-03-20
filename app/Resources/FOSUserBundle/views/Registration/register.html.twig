@@ -1,0 +1,38 @@
+{% extends "::empty.html.twig" %}
+
+{% block content %}
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+	<p>
+		<input type="text" class="ask" placeholder="Describe what you need help with..." />
+		{{ form_errors(form) }}
+		<input type="submit" value="Ask" />
+	</p>
+	<div id="signup-ask">
+		<div class="head"><a href="#" class="close ask-login-button">x</a><span>Please provide account information in order to continue</span> <a href="#" data-reveal-id="loginModal" class="right ask-login-button">Already have an account</a><div class="clear"></div></div>
+		<div class="row signup-form">
+			<div class="large-6 columns">
+	        	{{ form_widget(form.username) }}
+	        	{{ form_errors(form.username) }}
+	      	</div>
+	      	<div class="large-6 columns">
+	        	{{ form_widget(form.email) }}
+	        	{{ form_errors(form.email) }}
+	      	</div>
+	      	<div class="large-6 columns">
+	      		{{ form_errors(form.plainPassword) }}
+	        	{{ form_widget(form.plainPassword.first) }}
+	      	</div>
+	      	<div class="large-6 columns">
+	        	{{ form_widget(form.plainPassword.second) }}
+	      	</div>
+	    	<div class="large-6 columns terms">
+	    		By clicking Create Account you are indicating that you have read and agree to the <strong>Terms & Conditions</strong>
+	    	</div>
+	    	<div class="large-6 columns submit">
+	    		{{ form_rest(form) }}
+	    		<input type="submit" value="Create an account and ask" />
+	    	</div>
+	    </div>
+	</div>
+</form>
+{% endblock %}

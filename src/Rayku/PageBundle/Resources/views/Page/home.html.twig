@@ -6,38 +6,9 @@
 			<div class="left">
 				<h1>Instant Math Tutoring</h1>
 				<h2>Connect with a live online tutor, over a beautiful &amp; interactive whiteboard, whenever you need help. Your first session is free!</h2>
-				<form action="/register" method="post">
-					<p>
-						<input type="text" class="ask" placeholder="Describe what you need help with..." />
-						<input type="submit" value="Ask" />
-					</p>
-					<div id="signup-ask">
-						<div class="head"><a href="#" class="close ask-login-button">x</a><span>Please provide account information in order to continue</span> <a href="#" data-reveal-id="loginModal" class="right ask-login-button">Already have an account</a><div class="clear"></div></div>
-
-
-						<!-- Added form -->
-						<div class="row signup-form">
-							<div class="large-6 columns">
-					        	<input type="text" name="fullname" />
-					      	</div>
-					      	<div class="large-6 columns">
-					        	<input type="text" name="email" />
-					      	</div>
-					      	<div class="large-6 columns">
-					        	<input type="password" name="password" />
-					      	</div>
-					      	<div class="large-6 columns">
-					        	<input type="password" name="password2" />
-					      	</div>
-					    	<div class="large-6 columns terms">
-					    		By clicking Create Account you are indicating that you have read and agree to the <strong>Terms & Conditions</strong>
-					    	</div>
-					    	<div class="large-6 columns submit">
-					    		<input type="submit" value="Create an account and ask" />
-					    	</div>
-					    </div>
-					</div>
-				</form>
+				
+				{% render "FOSUserBundle:Registration:register" %}
+				
 				<p class="seen-on">
 					As seen on: <img src="{{asset('bundles/raykupage/images/seen_on.png')}}" alt="" />
 				</p>

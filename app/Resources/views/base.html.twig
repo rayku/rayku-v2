@@ -23,12 +23,22 @@
     {% block header %}
     <header>
         <div class="inside">
-            <a href="#" id="logo"><img src="{{asset('bundles/raykupage/images/logo.png')}}" alt="" /></a>
-            <nav>
-                <a href="#" class="ask-login-button" data-reveal-id="loginModal">Login</a>
-                <a href="#" class="signup-user">Signup</a>
-                <a href="/joinus">Become a Tutor</a>
-            </nav>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            	<a href="{{ path('rayku_page_dashboard') }}" id="logo"><img src="{{asset('bundles/raykupage/images/logo.png')}}" alt="" /></a>
+            	<nav>
+                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+				<a href="{{ path('fos_user_security_logout') }}">
+                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                </a>
+                </nav>
+            {% else %}
+            	<a href="{{ path('rayku_page_homepage') }}" id="logo"><img src="{{asset('bundles/raykupage/images/logo.png')}}" alt="" /></a>
+	            <nav>
+	                <a href="#" class="ask-login-button" data-reveal-id="loginModal">Login</a>
+	                <a href="#" class="signup-user">Signup</a>
+	                <a href="{{ path('rayku_page_become_a_tutor') }}">Become a Tutor</a>
+	            </nav>
+	        {% endif %}
         </div>
     </header>
     {% endblock %}
@@ -36,69 +46,19 @@
     {% block content %}{% endblock %}
 
     <footer class="footer">
-    {% block footer %}
-        
-    {% endblock %}
+    	<div class="inside">
+		<p class="copy left">Copyright 2013 Rayku Corp. All rights reserved | Questions? 1-888-98RAYKU</p>
+		<nav class="right">
+			<a href="{{ path('rayku_page_about') }}">About</a>
+			<a href="#">Jobs</a>
+			<a href="#">Contact Us</a>
+			<a href="#">Legal</a>
+		</nav>
+		<div class="clear"></div>
+		</div>
     </footer>
 
-    {% block login_modal %}
-    <div id="loginModal" class="reveal-modal medium">
-        <div class="login-modal-header">
-            <img src="{{asset('/bundles/raykupage/images/logo.png')}}" alt="rayku">
-            <a class="close-reveal-modal">&#215;</a>
-        </div>
-        <div class="row login-form">
-            <form action="/login" method="post">
-                <div class="row">
-                    <div class="large-12 columns">
-                        <input type="text" name="email" class="login-input"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-12 columns">
-                    	<input type="password" name="login_password" class="login-input" />
-                        <input type="submit" class="abutton login-button"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-6 columns remember">
-                        <label for="checkbox1" class="remember-checkbox">
-                        <input name="remember-me" type="checkbox" id="remember-me"><span class="custom checkbox"></span> Remember me</label>
-                    </div>
-                    <div class="large-6 columns forgot">
-                        <a href="#" class="forgot-password">Forgot your password?</a>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="login-modal-divider1">
-        </div>
-        <div class="row forgot-email-form">
-            <form action="" method="post">
-                <div class="row">
-                    <div class="large-12 columns">
-                        <label class="login-label">Forgot Password</label>
-                        <input class="login-input" type="text" placeholder="Enter your e-mail and we'll send it along..." required>
-                        <input type="submit" class="abutton submit-button"/>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="login-modal-footer">
-            <div class="copyright">
-                <p>Rayku &copy; 2013</p>
-            </div>
-            <div class="footer-links">
-                <ul>
-                    <li><a href=#>Privacy</a></li>
-                    <li>/</li>
-                    <li><a href=#>Legal</a></li>
-                    <li>/</li>
-                    <li><a href=#>Help</a></li>
-            </div>
-        </div>
-    </div>
-    {% endblock %}
+	{% render "FOSUserBundle:Security:login" %}
 
     {% block javascripts %}
         <script>

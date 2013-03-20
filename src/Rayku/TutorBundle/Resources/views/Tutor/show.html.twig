@@ -42,9 +42,20 @@
 
 <ul class="record_actions">
     <li>
-        <a href="{{ path('tutor') }}">
+        <a href="{{ path('rayku_tutor') }}">
             Back to the list
         </a>
+    </li>
+    <li>
+        <a href="{{ path('rayku_tutor_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('rayku_tutor_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
     </li>
 </ul>
 {% endblock %}

@@ -7,6 +7,8 @@ vendor/*
 */cache/*
 web/uploads/*
 web/bundles/*
+.vagrant
+composer.lock
 
 # Configuration files
 app/config/parameters.ini

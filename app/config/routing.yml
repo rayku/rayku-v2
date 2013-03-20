@@ -8,6 +8,11 @@ rayku_tutor:
     type:     annotation
     prefix:   /
 
+rayku_session:
+    resource: "@RaykuSessionBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 # Internal routing configuration to handle ESI
 #_internal:
 #   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"

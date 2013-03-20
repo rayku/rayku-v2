@@ -2,6 +2,8 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: fos_user.yml }
+    - { resource: @RaykuSessionBundle/Resources/config/admin.xml }
+
 
     # Sonata Bundles
     - { resource: sonata/sonata_admin.yml }

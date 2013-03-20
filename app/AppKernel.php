@@ -63,6 +63,7 @@ class AppKernel extends Kernel
         	new Rayku\TutorBundle\RaykuTutorBundle(),
             new Rayku\UserBundle\RaykuUserBundle(),
             new Rayku\PageBundle\RaykuPageBundle(),
+            new Rayku\SessionBundle\RaykuSessionBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

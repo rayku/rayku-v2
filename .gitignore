@@ -7,7 +7,7 @@ vendor/*
 */cache/*
 web/uploads/*
 web/bundles/*
-.vagrant
+.vagrant/*
 composer.lock
 
 # Configuration files

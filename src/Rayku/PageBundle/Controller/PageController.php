@@ -43,4 +43,20 @@ class PageController extends Controller
 	{
 		return $this->render('RaykuPageBundle:Page:become.html.twig');
 	}
+    
+    /**
+     * @Route("/signup-tutor", name="rayku_page_signup_tutor")
+     */
+    public function signupTutorAction()
+    {
+        return $this->render('RaykuPageBundle:Page:signup-tutor.html.twig');
+    }
+    
+    /**
+     * @Route("/signup", name="rayku_page_signup")
+     */
+    public function signupAction()
+    {
+        return $this->render('RaykuPageBundle:Page:signup.html.twig');
+    }
 }

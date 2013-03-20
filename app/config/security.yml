@@ -35,6 +35,8 @@ security:
                 use_forward:    false
                 check_path:     /login_check
                 failure_path:   /
+                always_use_default_target_path: true
+                default_target_path: /dashboard
             logout:       true
             anonymous:    true
 

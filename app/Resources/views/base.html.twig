@@ -20,6 +20,7 @@
 		{% endblock %}
 	</head>
 	<body>
+	{% block body %}
     {% block header %}
     <header>
         <div class="inside">
@@ -35,7 +36,7 @@
             	<a href="{{ path('rayku_page_homepage') }}" id="logo"><img src="{{asset('bundles/raykupage/images/logo.png')}}" alt="" /></a>
 	            <nav>
 	                <a href="#" class="ask-login-button" data-reveal-id="loginModal">Login</a>
-	                <a href="#" class="signup-user">Signup</a>
+	                <a href="{% block signuplink %}{{ path('fos_user_registration_register') }}{% endblock %}" class="signup-user">Signup</a>
 	                <a href="{{ path('rayku_page_become_a_tutor') }}">Become a Tutor</a>
 	            </nav>
 	        {% endif %}
@@ -45,6 +46,7 @@
 
     {% block content %}{% endblock %}
 
+	{% block footer %}
     <footer class="footer">
     	<div class="inside">
 		<p class="copy left">Copyright 2013 Rayku Corp. All rights reserved | Questions? 1-888-98RAYKU</p>
@@ -57,8 +59,11 @@
 		<div class="clear"></div>
 		</div>
     </footer>
+    {% endblock %}
 
-	{% render "FOSUserBundle:Security:login" %}
+	{% if is_granted("IS_AUTHENTICATED_ANONYMOUSLY") %}	
+		{% render "FOSUserBundle:Security:login" %}
+	{% endif %}
 
     {% block javascripts %}
         <script>
@@ -84,5 +89,6 @@
             $(document).foundation();
         </script>
     {% endblock %}
+    {% endblock body %}
     </body>
 </html>

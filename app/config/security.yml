@@ -52,12 +52,6 @@ security:
         - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        # Non-secure part of site
-        - { path: ^/about$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/become-a-tutor$, role: IS_AUTHENTICATED_ANONYMOUSLY } 
-        - { path: ^/signup-tutor$, role: IS_AUTHENTICATED_ANONYMOUSLY } 
-        - { path: ^/signup$, role: IS_AUTHENTICATED_ANONYMOUSLY } 
-
         # Secure rest of the site
         - { path: ^/, roles: ROLE_USER }
         

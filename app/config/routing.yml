@@ -1,7 +1,5 @@
-rayku_page:
-    resource: "@RaykuPageBundle/Controller/"
-    type:     annotation
-    prefix:   /
+rayku_page_import:
+    resource: "@RaykuPageBundle/Resources/config/routing/routing.yml"
 
 rayku_tutor:
     resource: "@RaykuTutorBundle/Controller/"

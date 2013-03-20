@@ -38,7 +38,7 @@
 		</form>
 	{% else %}
         <div class="form-box signup-box fade-in">
-			<a href="/register" class="logo"></a>
+			<a href="/" class="logo"></a>
 			<form action="#">
 				<ul>
 					<li>
@@ -62,17 +62,10 @@
 				</ul>
 				<div class="clear"></div>
 			</form>
-			<p class="bottom-line">Already have an account? <a href="/login">Sign In to Rayku!</a></p>
+			<p class="bottom-line">Already have an account? <a href="#" data-reveal-id="loginModal">Sign In to Rayku!</a></p>
 		</div>
-		
-		<footer>
-			<nav>
-				<a href="/about">about</a>
-				<a href="#">jobs</a>
-				<a href="#">Email us</a>
-				<a href="#">Legal</a>
-				<a href="/become-a-tutor">become  a tutor</a>
-			</nav>
-		</footer>
+		{% if is_granted("IS_AUTHENTICATED_ANONYMOUSLY") %}	
+			{% render "FOSUserBundle:Security:login" %}
+		{% endif %}
 	{% endif %}
 {% endblock %}

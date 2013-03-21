@@ -50,7 +50,8 @@
         "simplethings/entity-audit-bundle": "dev-master",
         "willdurand/faker-bundle": "dev-master",
 
-        "kriswallsmith/assetic": "1.1.*@dev"
+        "kriswallsmith/assetic": "1.1.*@dev",
+        "friendsofsymfony/rest-bundle": "@dev"
     },
 
     "require-dev": {

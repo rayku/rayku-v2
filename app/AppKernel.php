@@ -37,6 +37,12 @@ class AppKernel extends Kernel
 
             // USER
             new FOS\UserBundle\FOSUserBundle(),
+        		
+        	// SONATA
+        	new Sonata\BlockBundle\SonataBlockBundle(),
+        	new Sonata\jQueryBundle\SonatajQueryBundle(),
+        	new Sonata\AdminBundle\SonataAdminBundle(),
+        	new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
 
             // CMF Integration
             new Symfony\Cmf\Bundle\RoutingExtraBundle\SymfonyCmfRoutingExtraBundle(),
@@ -48,6 +54,7 @@ class AppKernel extends Kernel
         	new Rayku\TutorBundle\RaykuTutorBundle(),
             new Rayku\UserBundle\RaykuUserBundle(),
             new Rayku\PageBundle\RaykuPageBundle(),
+        	new Rayku\SessionBundle\RaykuSessionBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

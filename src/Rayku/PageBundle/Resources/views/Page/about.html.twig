@@ -1,5 +1,10 @@
 {% extends "::base.html.twig" %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/raykupage/css/style.css') }}" type="text/css" rel="stylesheet" media="screen" />
+{% endblock %}
+
 {% block content %}
 <div id="timeline">
 	<div class="inside">

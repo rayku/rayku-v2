@@ -21,8 +21,8 @@
         "sensio/framework-extra-bundle": "2.1.*",
         "sensio/generator-bundle": "2.1.*",
 
-        "jms/security-extra-bundle": "1.2.*",
-        "jms/di-extra-bundle": "1.1.*",
+        "jms/security-extra-bundle": "@dev",
+        "jms/di-extra-bundle": "@dev",
 
         "doctrine/orm": ">=2.2.3,<2.4-dev@stable",
         "doctrine/doctrine-bundle": "1.0.*",
@@ -51,7 +51,8 @@
         "willdurand/faker-bundle": "dev-master",
 
         "kriswallsmith/assetic": "1.1.*@dev",
-        "friendsofsymfony/rest-bundle": "@dev"
+        "friendsofsymfony/rest-bundle": "@dev",
+        "jms/serializer-bundle": "@dev"
     },
 
     "require-dev": {

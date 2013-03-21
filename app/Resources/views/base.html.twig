@@ -15,7 +15,30 @@
 	        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	        <script src="{{ asset('bundles/raykupage/js/vendor/custom.modernizr.js') }}"></script>
 	        <script src="{{ asset('bundles/raykupage/js/global.js') }}" type="text/javascript"></script>
+            <script type="text/javascript">
+            function init(){
+                var canvas = document.getElementById("canvas");
+                if(canvas.getContext){
+                    var ctx = canvas.getContext("2d");
+                    ctx.beginPath();
+                    //define stroke, fill style and line width
+                    ctx.strokeStyle = "#ababab";
+                    ctx.fillStyle = "#ababab";
 
+                    ctx.lineWidth = 2;
+                    //define starting point of line1, line 2 and line 3
+                    ctx.moveTo(11,4);
+                    ctx.lineTo(3,14);
+                    ctx.lineTo(19,14);
+                    ctx.lineTo(11,4);
+                    ctx.closePath();
+                    //fill the triangle and apply stroke
+                    ctx.fill();
+                    ctx.stroke();
+                }
+            }
+
+            </script>
 		    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,600" rel="stylesheet" type="text/css" />
 		{% endblock %}
 	</head>
@@ -25,11 +48,18 @@
     <header>
         <div class="inside">
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            	<a href="{{ path('rayku_page_dashboard') }}" id="logo"><img src="{{asset('bundles/raykupage/images/logo.png')}}" alt="" /></a>
+                <a href="{{ path('rayku_page_dashboard') }}" id="logo"><img src="{{asset('bundles/raykupage/images/logo.png')}}" alt="" /></a>
             	<nav>
                 {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
 				<a href="{{ path('fos_user_security_logout') }}">
                     {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                    <canvas id="canvas" class="submenu-triangle"></canvas>
+                    <ul class="submenu-item">
+                        <li><a href=#>Ask a question</a></li>
+                        <li><a href=#>Tutor List</a></li>
+                        <li><a href=#>View Profile</a></li>
+                        <li><a href=#>Edit Profile</a></li>
+                    </ul>
                 </a>
                 </nav>
             {% else %}

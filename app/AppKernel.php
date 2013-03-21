@@ -37,21 +37,6 @@ class AppKernel extends Kernel
 
             // USER
             new FOS\UserBundle\FOSUserBundle(),
-            new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
-
-            // MEDIA
-            new Sonata\MediaBundle\SonataMediaBundle(),
-        	new Sonata\UserBundle\SonataUserBundle(),
-            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
-            // new Liip\ImagineBundle\LiipImagineBundle(),
-
-            // SONATA CORE & HELPER BUNDLES
-            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
-            new Sonata\jQueryBundle\SonatajQueryBundle(),
-            new Sonata\AdminBundle\SonataAdminBundle(),
-            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
-            new Sonata\FormatterBundle\SonataFormatterBundle(),
-            new Sonata\BlockBundle\SonataBlockBundle(),
 
             // CMF Integration
             new Symfony\Cmf\Bundle\RoutingExtraBundle\SymfonyCmfRoutingExtraBundle(),
@@ -63,7 +48,6 @@ class AppKernel extends Kernel
         	new Rayku\TutorBundle\RaykuTutorBundle(),
             new Rayku\UserBundle\RaykuUserBundle(),
             new Rayku\PageBundle\RaykuPageBundle(),
-            new Rayku\SessionBundle\RaykuSessionBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

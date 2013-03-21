@@ -2,24 +2,15 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: fos_user.yml }
-    - { resource: @RaykuSessionBundle/Resources/config/admin.xml }
-
-
-    # Sonata Bundles
-    - { resource: sonata/sonata_admin.yml }
-    - { resource: sonata/sonata_block.yml }
-    - { resource: sonata/sonata_media.yml }
-    - { resource: sonata/sonata_formatter.yml }
 
 framework:
-    #esi:             ~
     translator: ~
     secret:          %secret%
     router:          { resource: "%kernel.root_dir%/config/routing.yml" }
     form:            true
     csrf_protection: true
     validation:      { enable_annotations: true }
-    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    templating:      { engines: ['twig'] }
     default_locale:  %locale%
     session: ~
 
@@ -28,21 +19,12 @@ twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
 
-    form:
-        resources:
-            - 'SonataAdminBundle:Form:silex_form_div_layout.html.twig'
-            - 'SonataFormatterBundle:Form:formatter.html.twig'
-
 # Assetic Configuration
 assetic:
     debug:          %kernel.debug%
     use_controller: false
     filters:
         cssrewrite: ~
-        # closure:
-        #     jar: %kernel.root_dir%/java/compiler.jar
-        # yui_css:
-        #     jar: %kernel.root_dir%/java/yuicompressor-2.4.2.jar
 
 # Doctrine Configuration
 doctrine:
@@ -57,18 +39,12 @@ doctrine:
                 host:     %database_host%
                 password: %database_password%
 
-        types:
-            json: Sonata\Doctrine\Types\JsonType
-
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         default_entity_manager: default
 
         entity_managers:
-            default:
-                #metadata_cache_driver: apc
-                #query_cache_driver: apc
-                #result_cache_driver: apc
+            default:  
                 auto_mapping: true
                 mappings: ~
 

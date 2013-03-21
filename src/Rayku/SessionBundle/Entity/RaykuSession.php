@@ -71,13 +71,6 @@ class RaykuSession
     private $recordingId;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", nullable=false)
-     */
-    private $email;
-
-    /**
      * @var \User
      *
      * @ORM\ManyToOne(targetEntity="\Rayku\UserBundle\Entity\User")
@@ -96,13 +89,6 @@ class RaykuSession
      * })
      */
     private $tutor;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", nullable=false)
-     */
-    private $username;
 
 
 

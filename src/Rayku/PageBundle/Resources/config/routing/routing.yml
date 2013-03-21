@@ -1,0 +1,23 @@
+rayku_page_homepage:
+    pattern:  /
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'RaykuPageBundle:Page:home.html.twig'
+
+rayku_page_dashboard:
+    pattern: /dashboard
+    defaults: 
+        _controller: FrameworkBundle:Template:template
+        template: 'RaykuPageBundle:Page:dashboard.html.twig'
+
+rayku_page_about:
+    pattern: /about
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'RaykuPageBundle:Page:about.html.twig'
+
+rayku_page_become_a_tutor:
+    pattern: /become-a-tutor
+    defaults: 
+        _controller: FrameworkBundle:Template:template
+        template: 'RaykuPageBundle:Page:become.html.twig'

@@ -3,7 +3,7 @@
 namespace Rayku\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Application\Sonata\UserBundle\Entity\User as BaseUser;
+use FOS\UserBundle\Entity\User as BaseUser;
 
 /**
  * User
@@ -13,5 +13,10 @@ use Application\Sonata\UserBundle\Entity\User as BaseUser;
  */
 class User extends BaseUser
 {
-
+	/**
+	 * @ORM\Id
+	 * @ORM\Column(type="integer")
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	protected $id;
 }

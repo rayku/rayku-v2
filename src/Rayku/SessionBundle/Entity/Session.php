@@ -5,12 +5,12 @@ namespace Rayku\SessionBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * RaykuSession
+ * Session
  *
  * @ORM\Table(name="rayku_session")
  * @ORM\Entity
  */
-class RaykuSession
+class Session
 {
     /**
      * @var integer
@@ -71,13 +71,6 @@ class RaykuSession
     private $recordingId;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", nullable=false)
-     */
-    private $email;
-
-    /**
      * @var \User
      *
      * @ORM\ManyToOne(targetEntity="\Rayku\UserBundle\Entity\User")
@@ -97,13 +90,6 @@ class RaykuSession
      */
     private $tutor;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", nullable=false)
-     */
-    private $username;
-
 
 
     /**
@@ -120,7 +106,7 @@ class RaykuSession
      * Set startTime
      *
      * @param \DateTime $startTime
-     * @return RaykuSession
+     * @return Session
      */
     public function setStartTime($startTime)
     {
@@ -143,7 +129,7 @@ class RaykuSession
      * Set endTime
      *
      * @param \DateTime $endTime
-     * @return RaykuSession
+     * @return Session
      */
     public function setEndTime($endTime)
     {
@@ -166,7 +152,7 @@ class RaykuSession
      * Set duration
      *
      * @param integer $duration
-     * @return RaykuSession
+     * @return Session
      */
     public function setDuration($duration)
     {
@@ -189,7 +175,7 @@ class RaykuSession
      * Set rating
      *
      * @param integer $rating
-     * @return RaykuSession
+     * @return Session
      */
     public function setRating($rating)
     {
@@ -212,7 +198,7 @@ class RaykuSession
      * Set rate
      *
      * @param float $rate
-     * @return RaykuSession
+     * @return Session
      */
     public function setRate($rate)
     {
@@ -235,7 +221,7 @@ class RaykuSession
      * Set question
      *
      * @param string $question
-     * @return RaykuSession
+     * @return Session
      */
     public function setQuestion($question)
     {
@@ -258,7 +244,7 @@ class RaykuSession
      * Set recordingId
      *
      * @param integer $recordingId
-     * @return RaykuSession
+     * @return Session
      */
     public function setRecordingId($recordingId)
     {
@@ -281,7 +267,7 @@ class RaykuSession
      * Set email
      *
      * @param string $email
-     * @return RaykuSession
+     * @return Session
      */
     public function setEmail($email = null)
     {
@@ -304,7 +290,7 @@ class RaykuSession
      * Set student
      *
      * @param \Rayku\UserBundle\Entity\User $student
-     * @return RaykuSession
+     * @return Session
      */
     public function setStudent(\Rayku\UserBundle\Entity\User $student = null)
     {
@@ -327,7 +313,7 @@ class RaykuSession
      * Set tutor
      *
      * @param \Rayku\UserBundle\Entity\User $tutor
-     * @return RaykuSession
+     * @return Session
      */
     public function setTutor(\Rayku\UserBundle\Entity\User $tutor = null)
     {
@@ -350,7 +336,7 @@ class RaykuSession
      * Set username
      *
      * @param string $username
-     * @return RaykuSession
+     * @return Session
      */
     public function setUsername($username = null)
     {

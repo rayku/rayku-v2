@@ -18,5 +18,5 @@ ln -s /var/rayku/web /var/www
 sudo curl -s https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 cd /var/rayku; COMPOSER_PROCESS_TIMEOUT=2400 composer -v update
-# cd /var/www/src; php app/console doctrine:database:create
+cd /var/rayku; php app/console doctrine:database:create
 cd /var/rayku; php app/console doctrine:schema:update --force

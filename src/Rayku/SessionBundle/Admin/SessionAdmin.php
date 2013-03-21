@@ -5,32 +5,33 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class SessionAdmin extends Admin
 {
-    /*protected function configureShowFields(ShowMapper $showMapper)
-    {
-        $showMapper
-            ->add('username')
-            ->add('email')
-        ;
-    }*/
-
-	protected function configureFormFields(FormMapper $formMapper)
+	protected function configureRoutes(RouteCollection $collection)
 	{
-		$formMapper
-			->with('General')
-				->add('username')
-				->add('email')
-            	->add('duration')
-            	->add('rating')
-            	->add('rate')
-            	->add('question')
-            	//->add('start_time')
-            	//->add('end_time')
-            ->end()
-        ;
+		$collection
+			->remove('create')
+			->remove('delete')
+			->remove('edit')
+		;
 	}
+	
+	protected function configureShowFields(ShowMapper $showMapper)
+	{
+		$showMapper
+            ->add('duration')
+            ->add('rating')
+            ->add('rate')
+            ->add('student')
+            ->add('tutor')
+            ->add('starttime', 'datetime')
+            ->add('endtime', 'datetime')
+		;
+	}
+	
 	// Allows for filtering
 	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
@@ -38,21 +39,22 @@ class SessionAdmin extends Admin
             ->add('duration')
             ->add('rating')
             ->add('rate')
-           	//->add('start_time')
-            //->add('end_time')
+            ->add('student')
+            ->add('tutor')
         ;
     }
+    
 	protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-        	->add('Username')
-        	->add('Email')
-            ->addIdentifier('Duration')
-            ->addIdentifier('Rating')
-            ->addIdentifier('Rate')
-           	->addIdentifier('Question')
-           	//->addIdentifier('Start')
-            //->addIdentifier('End')
+        	->addIdentifier('id', null, array('route' => array('name' => 'show')))
+        	->add('Student')
+        	->add('Tutor')
+        	->add('StartTime', 'datetime')
+            ->add('Duration')
+            ->add('Rating')
+            ->add('Rate')
+           	->add('Question')
         ;
     }
 }

@@ -2248,35 +2248,3 @@ label.remember-checkbox{
 .login-modal-footer .footer-links ul li a{
 	color:rgba(221, 221, 221, 1);
 }
-
-/*Dashboard*/
-/*Submenu*/
-.submenu{
-	position: relative;
-	left:10px;
-}
-.submenu-triangle { 
-    position:absolute; 
-    width: 25;
-    height: 15;
-    left:5px; 
-    top:-15px;
-}
-ul.submenu-item{
-	position: absolute;
-	background: rgba(255, 255, 255, 1);
-	border:1px solid rgba(221, 221, 221, 1);
-	border-radius: 3px;
-	list-style-type: none;
-	width:150px;
-}
-ul.submenu-item li{
-	padding:0;
-	margin:0;
-}
-ul.submenu-item li a{
-	font-family:Arial;
-	font-size: 12px;
-	text-shadow:none;
-	color:rgba(10, 10, 10, 1);
-}

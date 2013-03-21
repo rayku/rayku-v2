@@ -41,7 +41,7 @@
 		    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,600" rel="stylesheet" type="text/css" />
 		{% endblock %}
 	</head>
-	<body>
+	<body onload="init();">
 	{% block body %}
     {% block header %}
     <header>
@@ -50,15 +50,17 @@
                 <a href="{{ path('rayku_page_dashboard') }}" id="logo"><img src="{{asset('bundles/raykupage/images/logo.png')}}" alt="" /></a>
             	<nav>
                 {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-				<a href="{{ path('fos_user_security_logout') }}">
+				<a class="logout" href="{{ path('fos_user_security_logout') }}">
                     {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                    <canvas id="canvas" class="submenu-triangle"></canvas>
-                    <ul class="submenu-item">
-                        <li><a href=#>Ask a question</a></li>
-                        <li><a href=#>Tutor List</a></li>
-                        <li><a href=#>View Profile</a></li>
-                        <li><a href=#>Edit Profile</a></li>
-                    </ul>
+                    <div class="submenu">
+                        <canvas id="canvas" class="submenu-triangle"></canvas>
+                        <ul class="submenu-item">
+                            <li><a href=#>Ask a question</a></li>
+                            <li><a href=#>Tutor List</a></li>
+                            <li><a href=#>View Profile</a></li>
+                            <li><a href=#>Edit Profile</a></li>
+                        </ul>
+                    </div>
                 </a>
                 </nav>
             {% else %}

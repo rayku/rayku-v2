@@ -1,10 +1,15 @@
 {% extends "::base.html.twig" %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/raykupage/css/innerstyle.css') }}" type="text/css" rel="stylesheet" media="screen" />
+{% endblock %}
+
 {% block content %}
 <div class="container dashboard">
 	<div class="row">
-  		<div class="large-12 columns">Dashboard goes here</div>
-  		<div class="large-12 columns">And here</div>
+  		<div class="large-4 columns">Dashboard goes here</div>
+  		<div class="large-8 columns">And here</div>
 	</div>
 </div>
 {% endblock %}

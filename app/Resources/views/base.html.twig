@@ -49,19 +49,21 @@
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <a href="{{ path('rayku_page_dashboard') }}" id="logo"><img src="{{asset('bundles/raykupage/images/logo.png')}}" alt="" /></a>
             	<nav>
+                <a href=#>760RP</a> 
+                <a> | </a>
                 {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
 				<a class="logout" href="{{ path('fos_user_security_logout') }}">
                     {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                    <div class="submenu">
-                        <canvas id="canvas" class="submenu-triangle"></canvas>
-                        <ul class="submenu-item">
-                            <li><a href=#>Ask a question</a></li>
-                            <li><a href=#>Tutor List</a></li>
-                            <li><a href=#>View Profile</a></li>
-                            <li><a href=#>Edit Profile</a></li>
-                        </ul>
-                    </div>
                 </a>
+                <div class="submenu">
+                    <canvas id="canvas" class="submenu-triangle"></canvas>
+                    <ul class="submenu-item">
+                        <li><a href=#>Ask a question</a></li>
+                        <li><a href=#>Tutor List</a></li>
+                        <li><a href=#>View Profile</a></li>
+                        <li><a href=#>Edit Profile</a></li>
+                    </ul>
+                </div>
                 </nav>
             {% else %}
             	<a href="{{ path('rayku_page_homepage') }}" id="logo"><img src="{{asset('bundles/raykupage/images/logo.png')}}" alt="" /></a>

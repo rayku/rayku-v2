@@ -79,34 +79,38 @@ header nav a.logout:hover {
 /*Submenu*/
 .submenu{
 	position: absolute;
+	width:130px;
+	margin-left: 51px;
 }
 .submenu-triangle { 
-    position:absolute; 
-    width: 5;
-    height: 5;
+	position: absolute;
+	top:0;
+    width: 10;
+    height: 10;
 }
 
 ul.submenu-item{
 	position: relative;
-	top:-40px;
+	top:0px;
 	background: rgba(255, 255, 255, 1);
 	border:1px solid rgba(221, 221, 221, 1);
 	border-radius: 3px;
 	list-style-type: none;
-	width:150px;
-	box-shadow: 0 0 5px rgba(221, 221, 221, 0.5);
+	box-shadow: 0 0 8px rgba(120, 120, 120, 0.5);
+	padding:8px 0;
 }
 
 ul.submenu-item li{
-	padding:0;
+	padding:7px 8px;
 	margin:0;
 }
 
 ul.submenu-item li a{
 	font-family:Arial;
-	font-size: 12px;
+	font-size: 13px;
 	text-shadow:none;
 	color:rgba(10, 10, 10, 1);
+	padding:10px;
 }
 /*Submenu*/
 

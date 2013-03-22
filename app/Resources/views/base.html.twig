@@ -51,7 +51,8 @@
             	<nav>
                 <a href=#>760RP</a> 
                 <a> | </a>
-                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                <a href=# class="logged-in-as">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a> 
+                <a> | </a>
 				<a class="logout" href="{{ path('fos_user_security_logout') }}">
                     {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
                 </a>

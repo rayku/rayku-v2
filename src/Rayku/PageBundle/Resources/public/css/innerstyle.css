@@ -40,6 +40,9 @@ header nav {
 	margin: 0 -10px 0 0;
 }
 
+header nav a{
+	padding:20px 5px;
+}
 header nav a.logout {
 	display: inline-block;
 	height: 50px;
@@ -80,7 +83,8 @@ header nav a.logout:hover {
 .submenu{
 	position: absolute;
 	width:130px;
-	margin-left: 51px;
+	margin-left: 75px;
+	display: none;
 }
 .submenu-triangle { 
 	position: absolute;
@@ -113,6 +117,20 @@ ul.submenu-item li a{
 	padding:10px;
 }
 /*Submenu*/
+
+/*Dashboard Content*/
+.dashboard{
+	padding:10px 0;
+}
+/*Dashboard Content*/
+
+/*Sidebar*/
+.sidebar{
+	background:rgba(255, 255, 255, 1);
+}
+/*Sidebar*/
+
+
 
 /*Footer*/
 footer.footer {

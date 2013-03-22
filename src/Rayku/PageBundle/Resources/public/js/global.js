@@ -13,6 +13,14 @@ $(function(){
             $('.login-button').attr('disabled', true);
         }
     });
+    $('a.logged-in-as').hover(function(){
+            $('div.submenu').slideDown('fast', function(){
+                $(this).mouseleave(function(){
+                    $(this).slideUp('fast');
+                }); 
+            });
+        }
+    );
 });
 
 $(document).ready(function(){

@@ -1,4 +1,5 @@
 $(function(){
+    //Forgot password on login modal
     $('a.forgot-password').click(function(){
         if($('.login-button').hasClass('disabled')){
             $('.forgot-email-form').slideUp(200);
@@ -13,6 +14,7 @@ $(function(){
             $('.login-button').attr('disabled', true);
         }
     });
+    //Show dropdown navigation
     $('a.logged-in-as').hover(function(){
             $('div.submenu').slideDown('fast', function(){
                 $(this).mouseleave(function(){

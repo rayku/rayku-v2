@@ -1,0 +1,4 @@
+rayku_session_rest:
+    resource: Rayku\SessionBundle\Controller\SessionController
+    type:     rest
+    prefix:   /

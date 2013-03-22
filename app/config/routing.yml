@@ -1,10 +1,12 @@
 rayku_page_import:
     resource: "@RaykuPageBundle/Resources/config/routing/routing.yml"
 
-rayku_tutor:
-    resource: "@RaykuTutorBundle/Controller/"
-    type:     annotation
-    prefix:   /
+rayku_session_import:
+    resource: "@RaykuSessionBundle/Resources/config/routing.yml"
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
 
 # Internal routing configuration to handle ESI
 #_internal:

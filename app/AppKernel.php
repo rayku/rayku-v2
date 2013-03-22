@@ -26,7 +26,8 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
-        	new JMS\SerializerBundle\JMSSerializerBundle(),
+        	new JMS\DiExtraBundle\JMSDiExtraBundle($this),
+        	new JMS\SerializerBundle\JMSSerializerBundle($this),
 
             // DOCTRINE
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
@@ -52,6 +53,8 @@ class AppKernel extends Kernel
             // Enable this if you want to audit backend action
             new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
             
+        	new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+        	
         	// Rayku
         	new Rayku\TutorBundle\RaykuTutorBundle(),
             new Rayku\UserBundle\RaykuUserBundle(),

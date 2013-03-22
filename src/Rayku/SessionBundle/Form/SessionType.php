@@ -11,8 +11,11 @@ class SessionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('startTime')
-            ->add('endTime')
+            ->add('startTime', NULL, array(
+				    'input'  => 'datetime',
+				    'widget' => 'single_text',
+				))
+            ->add('endTime', 'date')
             ->add('duration')
             ->add('rating')
             ->add('rate')
@@ -26,12 +29,13 @@ class SessionType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Rayku\SessionBundle\Entity\Session'
+            'data_class' => 'Rayku\SessionBundle\Entity\Session',
+            'csrf_protection'   => false
         ));
     }
 
     public function getName()
     {
-        return 'rayku_sessionbundle_sessiontype';
+        return '';
     }
 }

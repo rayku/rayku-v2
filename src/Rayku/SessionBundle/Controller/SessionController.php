@@ -8,9 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
 use Rayku\SessionBundle\Entity\Session;
 use Rayku\SessionBundle\Form\SessionType;
 
@@ -21,8 +18,6 @@ class SessionController extends Controller
 {
 	
 	/**
-	 * @Route("/session/{session}/keepalive.{_format}", requirements={"session" = "\d+"}, defaults={"_format" = "json"})
-	 * @Method({"POST"})
 	 * @ApiDoc(
 	 *   description="Ends a whiteboard session",
 	 *   statusCodes={
@@ -33,7 +28,8 @@ class SessionController extends Controller
 	 */
 	public function postSessionEndAction(Session $session)
 	{
-		if(isset($session->getEndTime())){
+		$endTime = $session->getEndTime();
+		if(isset($endTime)){
 			return $session;
 		}
 		

@@ -77,4 +77,14 @@ class AppKernel extends Kernel
     {
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
     }
+    
+    public function getCacheDir()
+    {
+    	return '/tmp/cache/rayku/';
+    }
+    
+    public function getLogDir()
+    {
+    	return '/var/log/rayku/';
+    }
 }

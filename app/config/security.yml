@@ -1,4 +1,6 @@
 security:
+    acl:
+        connection: default
     encoders:
         "FOS\UserBundle\Entity\User":
             algorithm: sha512

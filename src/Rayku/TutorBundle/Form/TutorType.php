@@ -10,10 +10,36 @@ class TutorType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+    	$schoolAmountChoices = array(
+            		"Freshman",
+            		"Sophomore",
+            		"Junior",
+            		"Senior",
+            		"Masters Student",
+            		"Phd Candidate",
+            		"Undergrad Degree Holder",
+            		"Masters Degree Holder",
+            		"Phd Degree Holder",
+            		"Teaching Assistant",
+            		"Professor",
+            		"Middle School Teacher",
+            		"High School Teacher"
+            	);
+    	$schoolAmountChoices = array_combine($schoolAmountChoices, $schoolAmountChoices);
+
         $builder
-            ->add('schoolName')
-            ->add('schoolAmount')
-        ;
+            ->add('schoolName', NULL, array(
+            	'label' => 'School'		
+            ))
+            ->add('rate', NULL, array(
+            	'label' => 'RP/Min'		
+            ))
+            ->add('schoolAmount', 'choice', array(
+            	'label' => 'What best describes you?',
+            	'choices' => $schoolAmountChoices,
+            	'required' => true	
+          )
+        );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

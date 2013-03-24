@@ -4,6 +4,11 @@ rayku_page_import:
 rayku_session_import:
     resource: "@RaykuSessionBundle/Resources/config/routing.yml"
 
+rayku_tutor:
+    resource: "@RaykuTutorBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc

@@ -3,11 +3,12 @@
 namespace Rayku\TutorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tutor
  *
- * @ORM\Table(name="tutor")
+ * @ORM\Table(name="rayku_tutor")
  * @ORM\Entity
  */
 class Tutor
@@ -24,6 +25,7 @@ class Tutor
     /**
      * @var string
      *
+     * @Assert\NotBlank
      * @ORM\Column(name="school_name", type="string", length=255, nullable=true)
      */
     private $schoolName;
@@ -31,6 +33,7 @@ class Tutor
     /**
      * @var string
      *
+     * @Assert\NotBlank
      * @ORM\Column(name="school_amount", type="string", length=255, nullable=true)
      */
     private $schoolAmount;
@@ -52,6 +55,9 @@ class Tutor
     /**
      * @var float
      *
+     * @Assert\NotBlank
+     * @Assert\Min(limit = 0, message = "You can't have a rate less than 0.")
+     * @Assert\Max(limit = 500, message = "Highest rate available is 500.")
      * @ORM\Column(name="rate", type="float", nullable=true)
      */
     private $rate;
@@ -73,13 +79,10 @@ class Tutor
     /**
      * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="\Rayku\UserBundle\Entity\User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     * })
+     * @ORM\OneToOne(targetEntity="\Rayku\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
-
 
 
     /**

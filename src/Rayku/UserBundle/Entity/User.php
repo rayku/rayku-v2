@@ -34,6 +34,14 @@ class User extends BaseUser
 	 */
 	private $onlineGchat;
 
+	/**
+	 * @var \User
+	 *
+	 * @ORM\OneToOne(targetEntity="\Rayku\TutorBundle\Entity\Tutor")
+	 * @ORM\JoinColumn(name="tutor_id", referencedColumnName="id")
+	 */
+	private $tutor;
+	
     /**
      * Get id
      *
@@ -88,5 +96,28 @@ class User extends BaseUser
     public function getOnlineGchat()
     {
         return $this->onlineGchat;
+    }
+
+    /**
+     * Set tutor
+     *
+     * @param \Rayku\TutorBundle\Entity\Tutor $tutor
+     * @return User
+     */
+    public function setTutor(\Rayku\TutorBundle\Entity\Tutor $tutor = null)
+    {
+        $this->tutor = $tutor;
+    
+        return $this;
+    }
+
+    /**
+     * Get tutor
+     *
+     * @return \Rayku\TutorBundle\Entity\Tutor 
+     */
+    public function getTutor()
+    {
+        return $this->tutor;
     }
 }

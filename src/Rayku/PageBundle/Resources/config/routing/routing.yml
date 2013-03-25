@@ -1,8 +1,7 @@
 rayku_page_homepage:
     pattern:  /
     defaults:
-        _controller: FrameworkBundle:Template:template
-        template: 'RaykuPageBundle:Page:home.html.twig'
+        _controller: RaykuPageBundle:Page:index
 
 rayku_page_dashboard:
     pattern: /dashboard

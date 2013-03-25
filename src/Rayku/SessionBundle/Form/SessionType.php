@@ -2,6 +2,7 @@
 
 namespace Rayku\SessionBundle\Form;
 
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -15,14 +16,18 @@ class SessionType extends AbstractType
 				    'input'  => 'datetime',
 				    'widget' => 'single_text',
 				))
-            ->add('endTime', 'date')
-            ->add('duration')
+            ->add('endTime', NULL, array(
+				    'input'  => 'datetime',
+				    'widget' => 'single_text',
+				))
             ->add('rating')
-            ->add('rate')
             ->add('question')
             ->add('recordingId')
-            ->add('student')
-            ->add('tutor')
+            ->add('tutors', 'collection', array(
+            	'type' => new SessionTutorType(),
+            	'allow_add' => true,
+            	'by_reference' => false
+            ))
         ;
     }
 

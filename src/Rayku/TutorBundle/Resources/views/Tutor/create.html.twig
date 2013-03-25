@@ -1,15 +1,9 @@
-{% extends "::base.html.twig" %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link href="{{ asset('bundles/raykupage/css/innerstyle.css') }}" type="text/css" rel="stylesheet" media="screen" />
-{% endblock %}
-
 {% block content %}
 <div class="container">
     <div class="row dashboard">
 		<h1>Tutor creation</h1>
 
-		<form action="{{ path('rayku_tutor_create') }}" method="post" {{ form_enctype(form) }}>
+		<form action="{{ path('rayku_tutor_save') }}" method="post" {{ form_enctype(form) }}>
 		    {{ form_widget(form) }}
 		    <p>
 		        <button type="submit">Create</button>

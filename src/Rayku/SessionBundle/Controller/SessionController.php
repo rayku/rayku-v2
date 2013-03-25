@@ -9,6 +9,7 @@ use FOS\RestBundle\Controller\Annotations\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 use Rayku\SessionBundle\Entity\Session;
+use Rayku\SessionBundle\Entity\SessionTutors;
 use Rayku\SessionBundle\Form\SessionType;
 
 /**
@@ -65,8 +66,14 @@ class SessionController extends Controller
 		if($form->isValid()){
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($session);
-			$em->flush();
 			
+			//@todo this shouldn't be necessary http://symfony.com/doc/2.1/cookbook/form/form_collections.html
+			foreach($session->getTutors() as $tutor)
+			{
+				$tutor->setSession($session);
+				$em->persist($tutor);
+			}
+			$em->flush();
 			return $session;
 		}
 		

@@ -80,7 +80,6 @@ class TutorController extends Controller
     
     private function processForm(Request $request, Tutor $entity)
     {
-    	//if ($request->getMethod() == 'POST' && $request->isXmlHttpRequest()) {
     	$new = (null === $entity->getId()) ? true : false;
     	$form = $this->createForm(new TutorType(), $entity);
     	$form->bind($request);
@@ -139,4 +138,5 @@ class TutorController extends Controller
     		'form'   => $form->createView(),
     	);
     }
+
 }

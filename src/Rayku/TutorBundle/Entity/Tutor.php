@@ -84,6 +84,10 @@ class Tutor
      */
     private $user;
 
+    public function __toString()
+    {
+    	return $this->getUser()->__toString();
+    }
 
     /**
      * Get id

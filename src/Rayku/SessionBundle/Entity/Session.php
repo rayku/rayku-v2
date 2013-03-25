@@ -4,6 +4,7 @@ namespace Rayku\SessionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Session
@@ -26,8 +27,7 @@ class Session
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="start_time", type="datetime", nullable=false)
-     * @Assert\NotNull()
+     * @ORM\Column(name="start_time", type="datetime", nullable=true)
      * @Assert\DateTime()
      */
     private $startTime;
@@ -57,8 +57,7 @@ class Session
     /**
      * @var float
      *
-     * @ORM\Column(name="rate", type="decimal", nullable=false)
-     * @Assert\NotNull()
+     * @ORM\Column(name="rate", type="decimal", nullable=true)
      */
     private $rate;
 
@@ -98,22 +97,18 @@ class Session
      *   @ORM\JoinColumn(name="student_id", referencedColumnName="id")
      * })
      * @Assert\NotNull()
+     * @Assert\Type(type="\Rayku\UserBundle\Entity\User")
      */
     private $student;
+    
 
     /**
-     * @var \User
+     * @var \RaykuSession
      *
-     * @ORM\ManyToOne(targetEntity="\Rayku\UserBundle\Entity\User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="tutor_id", referencedColumnName="id")
-     * })
-     * @Assert\NotNull()
+     * @ORM\OneToMany(targetEntity="\Rayku\SessionBundle\Entity\SessionTutors", mappedBy="session", cascade={"persist", "remove"})
      */
-    private $tutor;
-
-
-
+    private $tutors;
+    
     /**
      * Get id
      *
@@ -332,29 +327,6 @@ class Session
     }
 
     /**
-     * Set tutor
-     *
-     * @param \Rayku\UserBundle\Entity\User $tutor
-     * @return Session
-     */
-    public function setTutor(\Rayku\UserBundle\Entity\User $tutor = null)
-    {
-        $this->tutor = $tutor;
-    
-        return $this;
-    }
-
-    /**
-     * Get tutor
-     *
-     * @return \Rayku\UserBundle\Entity\User
-     */
-    public function getTutor()
-    {
-        return $this->tutor;
-    }
-
-    /**
      * Set username
      *
      * @param string $username
@@ -435,5 +407,45 @@ class Session
     	{
     		$this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
     	}
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tutors = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add tutors
+     *
+     * @param \Rayku\SessionBundle\Entity\SessionTutors $tutors
+     * @return Session
+     */
+    public function addTutor(\Rayku\SessionBundle\Entity\SessionTutors $tutors)
+    {
+        $this->tutors[] = $tutors;
+    
+        return $this;
+    }
+
+    /**
+     * Remove tutors
+     *
+     * @param \Rayku\SessionBundle\Entity\SessionTutors $tutors
+     */
+    public function removeTutor(\Rayku\SessionBundle\Entity\SessionTutors $tutors)
+    {
+        $this->tutors->removeElement($tutors);
+    }
+
+    /**
+     * Get tutors
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTutors()
+    {
+        return $this->tutors;
     }
 }

@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Tutor
  *
- * @ORM\Table(name="rayku_tutor")
+ * @ORM\Table(name="rayku_tutor",uniqueConstraints={@ORM\UniqueConstraint(name="user_idx", columns={"user_id"})})
  * @ORM\Entity
  */
 class Tutor

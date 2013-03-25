@@ -63,9 +63,9 @@ class TutorController extends Controller
     /**
      * Creates a new Tutor entity.
      *
-     * @Route("/create", name="rayku_tutor_create")
+     * @Route("/save", name="rayku_tutor_save")
      * @Method("POST")
-     * @Template("RaykuTutorBundle:Tutor:new.html.twig")
+     * @Template("RaykuTutorBundle:Tutor:create.html.twig")
      */
     public function newAction(Request $request)
     {
@@ -80,6 +80,7 @@ class TutorController extends Controller
     
     private function processForm(Request $request, Tutor $entity)
     {
+    	//if ($request->getMethod() == 'POST' && $request->isXmlHttpRequest()) {
     	$new = (null === $entity->getId()) ? true : false;
     	$form = $this->createForm(new TutorType(), $entity);
     	$form->bind($request);
@@ -111,7 +112,7 @@ class TutorController extends Controller
     	
     	return array(
     		'entity' => $entity,
-    		'form'   => $form->createView(),
+    		'form'   => $form,
     	);
     }
 

@@ -96,7 +96,6 @@ class Session
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="student_id", referencedColumnName="id")
      * })
-     * @Assert\NotNull()
      * @Assert\Type(type="\Rayku\UserBundle\Entity\User")
      */
     private $student;

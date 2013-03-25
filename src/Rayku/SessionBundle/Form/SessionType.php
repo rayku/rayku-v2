@@ -20,12 +20,9 @@ class SessionType extends AbstractType
 				    'input'  => 'datetime',
 				    'widget' => 'single_text',
 				))
-            ->add('duration')
             ->add('rating')
-            ->add('rate')
             ->add('question')
             ->add('recordingId')
-            ->add('student')
             ->add('tutors', 'collection', array(
             	'type' => new SessionTutorType(),
             	'allow_add' => true,

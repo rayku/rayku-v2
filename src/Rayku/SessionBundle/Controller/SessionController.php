@@ -61,6 +61,7 @@ class SessionController extends Controller
 	
 	private function processForm(Session $session)
 	{
+		$session->setStudent($this->getUser());
 		$form = $this->createForm(new SessionType(), $session)->bind($this->getRequest());
 		
 		if($form->isValid()){

@@ -6,24 +6,262 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-	<div class="row dashboard">
-  		<div class="large-3 columns sidebar">
-  			<div class="row tutor-button">
-  				<div class="small-12 columns">
-  					<ul>
-  						<li>Tutor</li>
-  						<li>On | Off</li>
-  					</ul>
-  				</div>
-  			</div>
-  			<div class="row">
-  				<div class="small-12 columns">
-  					Something
-  				</div>
-  			</div>
-  		</div>
-  		<div class="large-9 columns main-content">And here</div>
-	</div>
+<div class="dashboard">
+    <!--Sidebar-->
+		<div class="large-3 columns sidebar">
+			<div class="row tutor-button">
+        <div class="small-6 columns">
+          Tutor
+        </div>
+				<div class="small-6 columns">
+          <div class="switch small">
+            <input id="tutorOff" name="switch-x" type="radio" checked>
+            <label for="x" onclick="">Off</label>
+            <input id="tutoroOn" name="switch-x" type="radio">
+            <label for="x1" onclick="">On</label>
+            <span></span>
+          </div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="small-12 columns">
+					Something
+				</div>
+			</div>
+		</div>
+    <!--End Sidebar-->
+
+    <!--Main Content-->
+		<div class="large-9 columns main-content">
+      <!--Ask Form-->
+      <div class="row ask">
+        <div class="large-12 columns">
+          <form class="custom">
+            <div class="row">
+              <div class="large-5 columns large-centered help-header">
+                <h4>What do you need help with?</h4>
+              </div>
+              <div class="large-5 columns large-centered category">
+                <select id="categorySelect" class="medium" name="category">
+                  <option>Choose Category</option>
+                  <option value="General Math">General Math</option>
+                  <option value="Pre-Algebra">Pre-Algebra</option>
+                  <option value="Geometry">Geometry</option>
+                  <option value="Algebra">Algebra</option>
+                  <option value="Trigonometry">Trigonometry</option>
+                  <option value="Calculus">Calculus</option>
+                  <option value="Statistics">Statistics & Probability</option>
+                  <option value="Advanced Math">Advanced Math</option>
+                </select>
+              </div>
+              <div class="large-12 columns question-container">
+                <div class="input-container">
+                  <input type="text" placeholder="" name="ask">
+                </div>
+                <input type="submit" class="abutton" value="Ask" name="aSubmit">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!--End Ask Form-->
+
+    <!--Tutor List-->
+    <div class="row tutor-header">
+      <div class="large-6 large-centered columns">
+        <h4>Tutors that can help with your question</h4>
+        <p class="user-question"></p>
+      </div>
+    </div>
+
+    <div class="row tutor-list">
+      <form>
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th width="130px">Name</th>
+              <th width="470px" class="short-bio">Short Bio</th>
+              <th>Rate/Min</th>
+              <th>Connect</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><a href=#>Nick Agopoulos</a></td>
+              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+              <td>20.00RP</td>
+              <td><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><a href=#>Flint Ago</a></td>
+              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+              <td>35.00RP</td>
+              <td><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><a href=#>Naef Poulos</a></td>
+              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+              <td>14.00RP</td>
+              <td><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><a href=#>Adam Opoulos</a></td>
+              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+              <td>20.00RP</td>
+              <td><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td><a href=#>Clint Gomez</a></td>
+              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+              <td>35.00RP</td>
+              <td><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td><a href=#>Neal Poul</a></td>
+              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+              <td>14.00RP</td>
+              <td><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td><a href=#>Nick Agopoulos</a></td>
+              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+              <td>20.00RP</td>
+              <td><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td><a href=#>Flint Ago</a></td>
+              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+              <td>35.00RP</td>
+              <td><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td><a href=#>Naef Poulos</a></td>
+              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+              <td>14.00RP</td>
+              <td><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td><a href=#>Adam Opoulos</a></td>
+              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+              <td>20.00RP</td>
+              <td><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td><a href=#>Clint Gomez</a></td>
+              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+              <td>35.00RP</td>
+              <td><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td><a href=#>Neal Poul</a></td>
+              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+              <td>14.00RP</td>
+              <td><input type="checkbox"></td>
+            </tr>
+          </tbody>
+        </table>
+        <input type="submit" class="abutton" value="Connect" name="connectButton">
+      </form>
+    </div>
+  </div>
+  <!--End Tutor List-->
 </div>
+
+<div id="myTutorModal" class="reveal-modal small">
+  <h2>Complete Your Tutor Profile</h2>
+  <div class="large-12 columns">
+    <p>Before activating your tutor status, please fill out as much as possible to completeyour tutor profile.</p>
+  </div>
+  <div class="large-12 columns">
+    <form class="custom">
+      <div class="row">
+        <div class="row subjects">
+          <div class="large-12 columns">
+            <label>What subjects are you comfortable teaching?</label>
+            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> General Math</label>
+            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> Pre-Algebra</label>
+            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> Geometry</label>
+            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> Algebra</label>
+            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> Trigonometry</label>
+            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> Calculus</label>
+          </div>
+        </div>
+
+        <div class="row describes">
+          <div class="large-12 columns">
+            <label>What best describes you?</label>
+            <select id="customDropdown1" class="large">
+              <option DISABLED>What describes you</option>
+              <option>Freshman</option>
+              <option>Sophomore</option>
+              <option>Junior</option>
+              <option>Senior</option>
+              <option selected>Under Graduate Degree Holder</option>
+              <option>Masters Sutdent</option>
+              <option>Masters Degree Holder</option>
+              <option>Phd Candidate</option>
+              <option>Phd Degree Holder</option>
+              <option>Teaching Assistant</option>
+              <option>Professor</option>
+              <option>Middle School Teacher</option>
+              <option>High School Teacher</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row schoolname">  
+          <div class="large-12 columns">
+            <label>Schoo Name</label>
+            <input type="text" name="schoolname" placeholder="Ryerson University">
+          </div>
+        </div>
+
+        <div class="row degree">
+          <div class="large-12 columns">
+            <label>Degree</label>
+            <input type="text" name="degree" placeholder="Economics">
+          </div>
+        </div>
+
+        <div class="row relevant"> 
+          <div class="large-12 columns">
+            <label>List all relevant couse codes (1 per line):</label>
+            <textarea placeholder="MAT 133"></textarea>
+          </div>
+        </div>
+
+        <div class="row listing-preview">
+          <div class="large-12 columns">
+            <label>Listing Preview</label>
+            <p>(When students search for tutors, you will appear as):</p>
+            <p class="preview">Under Graduate Degree Holder From Ryerson University Economics</p>
+          </div>
+        </div>
+      </div>
+      <input type="submit" class="abutton" value="Save & Activate Tutor Status" name="tutorStatusButton">
+    </form>
+  </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#tutoroOn').click(function(){
+      console.log('Checked');
+      $('#myTutorModal').foundation('reveal', 'open');
+  })
+});
+</script>
 {% endblock %}

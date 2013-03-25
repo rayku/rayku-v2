@@ -14,15 +14,46 @@ $(function(){
             $('.login-button').attr('disabled', true);
         }
     });
+
     //Show dropdown navigation
     $('a.logged-in-as').hover(function(){
-            $('div.submenu').slideDown('fast', function(){
+            $('div.submenu').slideDown(200, function(){
                 $(this).mouseleave(function(){
-                    $(this).slideUp('fast');
+                    $(this).slideUp(200);
                 }); 
             });
         }
     );
+
+    //Category Select
+    $('#categorySelect').change(function() {
+        var category = $('select[name="category"]').val();
+        //If the current option is Choose Category, do not show the input box
+        if (category == "Choose Category"){
+            $('.question-container').slideUp('fast');
+            $('.ask').css('padding-bottom', '0px');
+            $('.tutor-header').fadeOut('fast');
+            $('.tutor-list').fadeOut('fast');
+        }
+        else{
+            var placeholder = 'What is your ' + category + ' question?';
+            $('input[name="ask"]').attr('placeholder', placeholder);
+            $('.ask').css('padding-bottom', '15px');
+            $('.question-container').slideDown('fast');
+        }
+    });
+
+    //Submit Question
+    $('input[name="aSubmit"]').click(function(e){
+        e.preventDefault();
+        var question = $('input[name="ask"]').val();
+        $('p.user-question').html("\"" + question +"\"");
+        $('.footer').animate({
+            'margin-top':'100px'
+        }, 200);
+        $('.tutor-header').fadeIn('fast');
+        $('.tutor-list').fadeIn('fast');
+    });
 });
 
 $(document).ready(function(){

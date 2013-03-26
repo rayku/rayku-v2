@@ -74,20 +74,6 @@ class Session
      * @ORM\Column(name="recording_id", type="integer", nullable=true)
      */
     private $recordingId;
-    
-    /**
-     * @var \DateTime
-     * 
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     */
-    private $createdAt;
-    
-    /**
-     * @var \DateTime
-     * 
-     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
-     */
-    private $updatedAt;
 
     /**
      * @var \User
@@ -104,11 +90,11 @@ class Session
     /**
      * @var \Subject
      * 
-     * @ORM\ManyToOne(targetEntity="\Rayku\TutorBundle\Entity\Tutor")
+     * @ORM\ManyToOne(targetEntity="\Rayku\TutorBundle\Entity\Subject")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="subject_id", referencedColumnName="id")
      * })
-     * @Assert\Type(type="\Rayku\TutorBundle\Entity\Tutor")
+     * @Assert\Type(type="\Rayku\TutorBundle\Entity\Subject")
      * @Assert\Valid
      */
     private $subject;
@@ -119,7 +105,29 @@ class Session
      *
      * @ORM\OneToMany(targetEntity="\Rayku\SessionBundle\Entity\SessionTutors", mappedBy="session", cascade={"persist", "remove"})
      */
-    private $tutors;
+    private $potential_tutors;
+    
+    /**
+     * @var \Tutor
+     * 
+     * @ORM\OneToOne(targetEntity="\Rayku\TutorBundle\Entity\Tutor")
+     * @ORM\JoinColumn(name="selected_tutor_id", referencedColumnName="id")
+     */
+    private $selected_tutor;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     */
+    private $createdAt;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
+     */
+    private $updatedAt;
     
     /**
      * Get id
@@ -339,29 +347,6 @@ class Session
     }
 
     /**
-     * Set username
-     *
-     * @param string $username
-     * @return Session
-     */
-    public function setUsername($username = null)
-    {
-        $this->username = $username;
-    
-        return $this;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
@@ -427,39 +412,6 @@ class Session
     {
         $this->tutors = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
-    /**
-     * Add tutors
-     *
-     * @param \Rayku\SessionBundle\Entity\SessionTutors $tutors
-     * @return Session
-     */
-    public function addTutor(\Rayku\SessionBundle\Entity\SessionTutors $tutors)
-    {
-        $this->tutors[] = $tutors;
-    
-        return $this;
-    }
-
-    /**
-     * Remove tutors
-     *
-     * @param \Rayku\SessionBundle\Entity\SessionTutors $tutors
-     */
-    public function removeTutor(\Rayku\SessionBundle\Entity\SessionTutors $tutors)
-    {
-        $this->tutors->removeElement($tutors);
-    }
-
-    /**
-     * Get tutors
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTutors()
-    {
-        return $this->tutors;
-    }
 
     /**
      * Set subject
@@ -482,5 +434,61 @@ class Session
     public function getSubject()
     {
         return $this->subject;
+    }
+
+    /**
+     * Add potential_tutors
+     *
+     * @param \Rayku\SessionBundle\Entity\SessionTutors $potentialTutors
+     * @return Session
+     */
+    public function addPotentialTutor(\Rayku\SessionBundle\Entity\SessionTutors $potentialTutors)
+    {
+        $this->potential_tutors[] = $potentialTutors;
+    
+        return $this;
+    }
+
+    /**
+     * Remove potential_tutors
+     *
+     * @param \Rayku\SessionBundle\Entity\SessionTutors $potentialTutors
+     */
+    public function removePotentialTutor(\Rayku\SessionBundle\Entity\SessionTutors $potentialTutors)
+    {
+        $this->potential_tutors->removeElement($potentialTutors);
+    }
+
+    /**
+     * Get potential_tutors
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPotentialTutors()
+    {
+        return $this->potential_tutors;
+    }
+
+    /**
+     * Set selected_tutor
+     *
+     * @param \Rayku\TutorBundle\Entity\Tutor $selectedTutor
+     * @return Session
+     */
+    public function setSelectedTutor(\Rayku\TutorBundle\Entity\Tutor $selectedTutor = null)
+    {
+        $this->selected_tutor = $selectedTutor;
+    
+        return $this;
+    }
+
+    /**
+     * Get selected_tutor
+     *
+     * @return \Rayku\TutorBundle\Entity\Tutor 
+     */
+    public function getSelectedTutor()
+    {
+        return $this->selected_tutor;
     }
 }

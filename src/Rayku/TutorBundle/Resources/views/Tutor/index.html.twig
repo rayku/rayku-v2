@@ -29,8 +29,8 @@
                     <td><a href="{{ path('rayku_tutor_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                     <td>{{ entity.schoolName }}</td>
                     <td>{{ entity.schoolAmount }}</td>
-                    <td>{{ entity.onlineWeb }}</td>
-                    <td>{{ entity.onlineGchat }}</td>
+                    <td>{{ entity.onlineWeb|date('Y-m-d H:i:s') }}</td>
+                    <td>{{ entity.onlineGchat|date('Y-m-d H:i:s') }}</td>
                     <td>{{ entity.rate }}</td>
                     <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>

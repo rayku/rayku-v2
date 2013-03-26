@@ -3,6 +3,7 @@
 namespace Rayku\SessionBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -43,6 +44,57 @@ class SessionController extends Controller
 	 */
 	public function getSessionAction(Session $session)
 	{
+		return $session;
+	}
+	
+	/**
+	 * @ApiDoc(
+	 *   description="Accepts a whiteboard session for a tutor"
+	 * )
+	 * 
+	 * @param \Rayku\SessionBundle\Entity\Session $session
+	 */
+	public function postSessionAcceptAction(Session $session)
+	{
+		$valid = false;
+		$em = $this->getDoctrine()->getManager();
+		$currentTutor = $this->getUser()->getTutor();
+		
+		// Make sure I'm one of the tutors requested for this session
+		foreach($session->getPotentialTutors() as $potentialTutor)
+		{
+			if($potentialTutor->getTutor() == $currentTutor)
+			{
+				$valid = true;
+				$potentialTutor->setTutorReply('replied');
+				$em->persist($potentialTutor);				
+			}
+		}
+		
+		if (!$valid) {
+			throw $this->createNotFoundException('Unable to find Session.');
+		}
+		
+		// Make sure no one else has beat me to this session
+		$selectedTutor = $session->getSelectedTutor();
+		if (!empty($selectedTutor)){
+			$potentialTutor->setTutorReply('missed');
+			$em->persist($potentialTutor);
+			$em->flush();
+			
+			return new Response(json_encode(array(
+				'success' => false, 'message' => 'Someone else accepted this request'))
+			);
+		}
+		
+		$session->setSelectedTutor($currentTutor);
+		$session->setRate($potentialTutor->getRate());
+		$potentialTutor->setTutorReply('accepted');
+		
+		$em->persist($potentialTutor);
+		$em->persist($session);
+		$em->flush();
+		
 		return $session;
 	}
 	

@@ -56,7 +56,7 @@ class SessionTutors
     /**
      * @var \Session
      *
-     * @ORM\ManyToOne(targetEntity="\Rayku\SessionBundle\Entity\Session", inversedBy="tutors", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="\Rayku\SessionBundle\Entity\Session", inversedBy="potential_tutors", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="session_id", referencedColumnName="id")
      * })

@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="rayku_tutor",uniqueConstraints={@ORM\UniqueConstraint(name="user_idx", columns={"user_id"})})
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Tutor
 {
@@ -41,16 +42,16 @@ class Tutor
     private $schoolAmount;
 
     /**
-     * @var boolean
+     * @var \DateTime
      *
-     * @ORM\Column(name="online_web", type="boolean", nullable=true)
+     * @ORM\Column(name="online_web", type="datetime", nullable=true)
      */
     private $onlineWeb;
 
     /**
-     * @var boolean
+     * @var \DateTime
      *
-     * @ORM\Column(name="online_gchat", type="boolean", nullable=true)
+     * @ORM\Column(name="online_gchat", type="datetime", nullable=true)
      */
     private $onlineGchat;
 
@@ -364,5 +365,19 @@ class Tutor
     public function getSubjects()
     {
         return $this->subjects;
+    }
+    
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+    	$this->setUpdatedAt(new \DateTime(date('Y-m-d H:i:s')));
+    
+    	if($this->getCreatedAt() == null)
+    	{
+    		$this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
+    	}
     }
 }

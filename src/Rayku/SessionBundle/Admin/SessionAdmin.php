@@ -26,7 +26,6 @@ class SessionAdmin extends Admin
             ->add('rating')
             ->add('rate')
             ->add('student')
-            ->add('tutors')
             ->add('question')
             ->add('starttime', 'datetime')
             ->add('endtime', 'datetime')

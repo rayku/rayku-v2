@@ -13,7 +13,7 @@ class SessionType extends AbstractType
     {
         $builder
             ->add('question')
-            ->add('recordingId')
+            ->add('subject')
             ->add('tutors', 'collection', array(
             	'type' => new SessionTutorType(),
             	'allow_add' => true,

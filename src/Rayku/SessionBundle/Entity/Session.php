@@ -101,6 +101,18 @@ class Session
      */
     private $student;
     
+    /**
+     * @var \Subject
+     * 
+     * @ORM\ManyToOne(targetEntity="\Rayku\TutorBundle\Entity\Tutor")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="subject_id", referencedColumnName="id")
+     * })
+     * @Assert\Type(type="\Rayku\TutorBundle\Entity\Tutor")
+     * @Assert\Valid
+     */
+    private $subject;
+    
 
     /**
      * @var \RaykuSession
@@ -447,5 +459,28 @@ class Session
     public function getTutors()
     {
         return $this->tutors;
+    }
+
+    /**
+     * Set subject
+     *
+     * @param \Rayku\TutorBundle\Entity\Tutor $subject
+     * @return Session
+     */
+    public function setSubject(\Rayku\TutorBundle\Entity\Tutor $subject = null)
+    {
+        $this->subject = $subject;
+    
+        return $this;
+    }
+
+    /**
+     * Get subject
+     *
+     * @return \Rayku\TutorBundle\Entity\Tutor 
+     */
+    public function getSubject()
+    {
+        return $this->subject;
     }
 }

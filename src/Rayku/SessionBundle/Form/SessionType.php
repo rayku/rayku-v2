@@ -12,15 +12,6 @@ class SessionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('startTime', NULL, array(
-				    'input'  => 'datetime',
-				    'widget' => 'single_text',
-				))
-            ->add('endTime', NULL, array(
-				    'input'  => 'datetime',
-				    'widget' => 'single_text',
-				))
-            ->add('rating')
             ->add('question')
             ->add('recordingId')
             ->add('tutors', 'collection', array(

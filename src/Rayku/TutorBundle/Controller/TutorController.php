@@ -3,6 +3,7 @@
 namespace Rayku\TutorBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
@@ -44,20 +45,35 @@ class TutorController extends Controller
      *
      * @Route("/{id}/show", name="rayku_tutor_show")
      * @Template()
+     * 
+     * @param \Rayku\TutorBundle\Entity\Tutor $tutor
      */
-    public function showAction($id)
+    public function showAction(Tutor $entity)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('RaykuTutorBundle:Tutor')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Tutor entity.');
-        }
-
         return array(
             'entity'      => $entity,
         );
+    }
+    
+    /**
+     * Delete a tutor record
+     * 
+     * @Route("/{id}/delete", name="rayku_tutor_delete")
+     * @SecureParam(name="entity", permissions="DELETE")
+     * 
+     * @param \Rayku\TutorBundle\Entity\Tutor $entity
+     */
+    public function deleteAction(Tutor $entity)
+    {
+    	$em = $this->getDoctrine()->getManager();
+    	$em->remove($entity);
+    	$em->flush();
+    	
+    	return new Response(json_encode(
+    		array('success' => true)), 
+    		200, 
+    		array('Content-Type'=>'application/json')
+    	);
     }
 
     /**
@@ -70,9 +86,12 @@ class TutorController extends Controller
     public function newAction(Request $request)
     {
     	$em = $this->getDoctrine()->getManager();
+    	$em->getFilters()->disable('soft_deleteable');
     	$entity = $em->getRepository('RaykuTutorBundle:Tutor')->findOneByUser($this->getUser());
     	if(!$entity){
     		$entity = new Tutor();
+    	}else{
+    		$entity->setDeletedAt(NULL);
     	}
     	$entity->setUser($this->getUser());
         return $this->processForm($request, $entity);
@@ -125,11 +144,12 @@ class TutorController extends Controller
     public function createAction()
     {
     	$em = $this->getDoctrine()->getManager();
+    	$em->getFilters()->disable('soft_deleteable');
     	$entity = $em->getRepository('RaykuTutorBundle:Tutor')->findOneByUser($this->getUser());
     	if(!$entity){
     		$entity = new Tutor();
-    		$entity->setUser($this->getUser());
     	}
+    	$entity->setUser($this->getUser());
     	
     	$form   = $this->createForm(new TutorType(), $entity);
     

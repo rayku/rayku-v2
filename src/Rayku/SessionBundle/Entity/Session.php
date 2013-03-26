@@ -9,8 +9,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Session
  *
+ * @ORM\Entity(repositoryClass="Rayku\SessionBundle\Entity\SessionRepository")
  * @ORM\Table(name="rayku_session")
- * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
 class Session

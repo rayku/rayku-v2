@@ -3,12 +3,14 @@
 namespace Rayku\TutorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tutor
  *
  * @ORM\Table(name="rayku_tutor",uniqueConstraints={@ORM\UniqueConstraint(name="user_idx", columns={"user_id"})})
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @ORM\Entity
  */
 class Tutor
@@ -75,11 +77,18 @@ class Tutor
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
+    
+    /**
+     * @var \DateTime
+     * 
+     * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
+     */
+    private $deletedAt;
 
     /**
      * @var \User
      *
-     * @ORM\OneToOne(targetEntity="\Rayku\UserBundle\Entity\User")
+     * @ORM\OneToOne(targetEntity="\Rayku\UserBundle\Entity\User", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
@@ -259,6 +268,29 @@ class Tutor
     {
         return $this->updatedAt;
     }
+    
+    /**
+     * Get deletedAt
+     * 
+     * @return \DateTime
+     */
+    public function getDeletedAt()
+    {
+    	return $this->deletedAt;
+    }
+    
+    /**
+     * Set deletedAt
+     * 
+     * @param \DateTime $deletedAt
+     * @return Tutor
+     */
+    public function setDeletedAt($deletedAt)
+    {
+    	$this->deletedAt = $deletedAt;
+    	
+    	return $this;
+    }
 
     /**
      * Set user
@@ -268,6 +300,8 @@ class Tutor
      */
     public function setUser(\Rayku\UserBundle\Entity\User $user = null)
     {
+    	$user->setTutor($this);
+    	
         $this->user = $user;
     
         return $this;

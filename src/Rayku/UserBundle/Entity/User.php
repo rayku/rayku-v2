@@ -37,7 +37,7 @@ class User extends BaseUser
 	/**
 	 * @var \User
 	 *
-	 * @ORM\OneToOne(targetEntity="\Rayku\TutorBundle\Entity\Tutor")
+	 * @ORM\OneToOne(targetEntity="\Rayku\TutorBundle\Entity\Tutor", cascade={"persist"})
 	 * @ORM\JoinColumn(name="tutor_id", referencedColumnName="id")
 	 */
 	private $tutor;

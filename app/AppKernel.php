@@ -80,11 +80,11 @@ class AppKernel extends Kernel
     
     public function getCacheDir()
     {
-    	return '/tmp/cache/rayku/';
+    	return '/tmp/cache/rayku';
     }
     
     public function getLogDir()
     {
-    	return '/var/log/rayku/';
+    	return '/var/log/rayku';
     }
 }

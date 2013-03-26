@@ -97,6 +97,7 @@ class Session
      *   @ORM\JoinColumn(name="student_id", referencedColumnName="id")
      * })
      * @Assert\Type(type="\Rayku\UserBundle\Entity\User")
+     * @Assert\Valid
      */
     private $student;
     

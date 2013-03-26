@@ -38,7 +38,12 @@ class TutorType extends AbstractType
             	'label' => 'What best describes you?',
             	'choices' => $schoolAmountChoices,
             	'required' => true	
-          )
+          ))
+            ->add('subjects', 'entity', array(
+            	'multiple' => true,
+            	'expanded' => true,
+            	'class' => 'Rayku\TutorBundle\Entity\Subject'
+            )
         );
     }
 

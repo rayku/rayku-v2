@@ -92,6 +92,15 @@ class Tutor
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="\Rayku\TutorBundle\Entity\Subject")
+     * @ORM\JoinTable(name="rayku_subject_tutor",
+     *     joinColumns={@ORM\JoinColumn(name="tutor_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="subject_id", referencedColumnName="id")}
+     * )
+     */
+    private $subjects;
 
     public function __toString()
     {
@@ -315,5 +324,45 @@ class Tutor
     public function getUser()
     {
         return $this->user;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->subjects = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add subjects
+     *
+     * @param \Rayku\TutorBundle\Entity\Subject $subjects
+     * @return Tutor
+     */
+    public function addSubject(\Rayku\TutorBundle\Entity\Subject $subjects)
+    {
+        $this->subjects[] = $subjects;
+    
+        return $this;
+    }
+
+    /**
+     * Remove subjects
+     *
+     * @param \Rayku\TutorBundle\Entity\Subject $subjects
+     */
+    public function removeSubject(\Rayku\TutorBundle\Entity\Subject $subjects)
+    {
+        $this->subjects->removeElement($subjects);
+    }
+
+    /**
+     * Get subjects
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSubjects()
+    {
+        return $this->subjects;
     }
 }

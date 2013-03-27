@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * RaykuTutorConnect
  *
- * @ORM\Table(name="rayku_tutor_connect")
+ * @ORM\Table(name="rayku_tutor_connect",uniqueConstraints={@ORM\UniqueConstraint(name="tutor_session_idx", columns={"session_id", "tutor_id"})})
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
@@ -56,7 +56,7 @@ class SessionTutors
     /**
      * @var \Session
      *
-     * @ORM\ManyToOne(targetEntity="\Rayku\SessionBundle\Entity\Session", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="\Rayku\SessionBundle\Entity\Session", inversedBy="potential_tutors", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="session_id", referencedColumnName="id")
      * })

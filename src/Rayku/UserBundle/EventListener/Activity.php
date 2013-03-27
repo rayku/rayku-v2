@@ -33,10 +33,12 @@ class Activity
 		}
 		if($user instanceof User)
 		{
+			$tutor = $user->getTutor();
+			if(!$tutor) return true;
 			//here we can update the user as necessary
-			$user->setOnlineWeb(new \DateTime());
-			$this->em->persist($user);
-			$this->em->flush($user);
+			$tutor->setOnlineWeb(new \DateTime());
+			$this->em->persist($tutor);
+			$this->em->flush($tutor);
 		}
 	}
 }

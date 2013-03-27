@@ -26,7 +26,7 @@ class SessionAdmin extends Admin
             ->add('rating')
             ->add('rate')
             ->add('student')
-            ->add('tutor')
+            ->add('question')
             ->add('starttime', 'datetime')
             ->add('endtime', 'datetime')
 		;
@@ -40,7 +40,6 @@ class SessionAdmin extends Admin
             ->add('rating')
             ->add('rate')
             ->add('student')
-            ->add('tutor')
         ;
     }
     
@@ -49,7 +48,6 @@ class SessionAdmin extends Admin
         $listMapper
         	->addIdentifier('id', null, array('route' => array('name' => 'show')))
         	->add('Student')
-        	->add('Tutor')
         	->add('StartTime', 'datetime')
             ->add('Duration')
             ->add('Rating')

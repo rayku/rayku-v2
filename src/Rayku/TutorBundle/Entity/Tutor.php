@@ -3,13 +3,16 @@
 namespace Rayku\TutorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tutor
  *
  * @ORM\Table(name="rayku_tutor",uniqueConstraints={@ORM\UniqueConstraint(name="user_idx", columns={"user_id"})})
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Tutor
 {
@@ -39,16 +42,16 @@ class Tutor
     private $schoolAmount;
 
     /**
-     * @var boolean
+     * @var \DateTime
      *
-     * @ORM\Column(name="online_web", type="boolean", nullable=true)
+     * @ORM\Column(name="online_web", type="datetime", nullable=true)
      */
     private $onlineWeb;
 
     /**
-     * @var boolean
+     * @var \DateTime
      *
-     * @ORM\Column(name="online_gchat", type="boolean", nullable=true)
+     * @ORM\Column(name="online_gchat", type="datetime", nullable=true)
      */
     private $onlineGchat;
 
@@ -75,14 +78,30 @@ class Tutor
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
+    
+    /**
+     * @var \DateTime
+     * 
+     * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
+     */
+    private $deletedAt;
 
     /**
      * @var \User
      *
-     * @ORM\OneToOne(targetEntity="\Rayku\UserBundle\Entity\User")
+     * @ORM\OneToOne(targetEntity="\Rayku\UserBundle\Entity\User", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="\Rayku\TutorBundle\Entity\Subject")
+     * @ORM\JoinTable(name="rayku_subject_tutor",
+     *     joinColumns={@ORM\JoinColumn(name="tutor_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="subject_id", referencedColumnName="id")}
+     * )
+     */
+    private $subjects;
 
     public function __toString()
     {
@@ -259,6 +278,29 @@ class Tutor
     {
         return $this->updatedAt;
     }
+    
+    /**
+     * Get deletedAt
+     * 
+     * @return \DateTime
+     */
+    public function getDeletedAt()
+    {
+    	return $this->deletedAt;
+    }
+    
+    /**
+     * Set deletedAt
+     * 
+     * @param \DateTime $deletedAt
+     * @return Tutor
+     */
+    public function setDeletedAt($deletedAt)
+    {
+    	$this->deletedAt = $deletedAt;
+    	
+    	return $this;
+    }
 
     /**
      * Set user
@@ -268,6 +310,8 @@ class Tutor
      */
     public function setUser(\Rayku\UserBundle\Entity\User $user = null)
     {
+    	$user->setTutor($this);
+    	
         $this->user = $user;
     
         return $this;
@@ -281,5 +325,59 @@ class Tutor
     public function getUser()
     {
         return $this->user;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->subjects = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add subjects
+     *
+     * @param \Rayku\TutorBundle\Entity\Subject $subjects
+     * @return Tutor
+     */
+    public function addSubject(\Rayku\TutorBundle\Entity\Subject $subjects)
+    {
+        $this->subjects[] = $subjects;
+    
+        return $this;
+    }
+
+    /**
+     * Remove subjects
+     *
+     * @param \Rayku\TutorBundle\Entity\Subject $subjects
+     */
+    public function removeSubject(\Rayku\TutorBundle\Entity\Subject $subjects)
+    {
+        $this->subjects->removeElement($subjects);
+    }
+
+    /**
+     * Get subjects
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSubjects()
+    {
+        return $this->subjects;
+    }
+    
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+    	$this->setUpdatedAt(new \DateTime(date('Y-m-d H:i:s')));
+    
+    	if($this->getCreatedAt() == null)
+    	{
+    		$this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
+    	}
     }
 }

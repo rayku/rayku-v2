@@ -6,11 +6,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Ajax
 {
-	protected $template;
+	protected $serializer;
 	
-	public function __construct($template)
+	public function __construct($kernel)
 	{
-		$this->template = $template;
+		$this->serializer = $kernel->getContainer()->get('jms_serializer');
 	}
 	
 	public function onKernelResponse($event)
@@ -25,14 +25,14 @@ class Ajax
 		$request = $event->getRequest();
 		
 		if ($request->isXmlHttpRequest() && $request->getMethod() == 'POST') {
-			$return['success'] = true;
-			
-			$response = new Response(json_encode($return));
+			$formError = false;
+			$return['success'] = true;			
+			$response = new Response();
 			$response->headers->set('Content-Type', 'application/json');
 			
 			$results = $event->getControllerResult();
 			
-			foreach($results as $result){
+			foreach($results as $key => $result){
 				if($result instanceof \Symfony\Component\Form\Form){
 					foreach($result->getChildren() as $child){
 						$error_message = $child->getErrorsAsString();
@@ -44,9 +44,16 @@ class Ajax
 							$response->setStatusCode(400);
 						}
 					}
+				}else{
+					$return[$key] = $results;
 				}
 			}
-			$response->setContent(json_encode($return));
+			
+			if($formError){
+				$response->setContent($this->serializer->serialize($return, 'json'));
+			}else{
+				$response->setContent($this->serializer->serialize($results, 'json'));
+			}
 			$event->setResponse($response);
 		}
 	}

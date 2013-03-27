@@ -52,12 +52,24 @@
   </div>
   <a class="close-reveal-modal">×</a>
 </div>
+
   
 <script type="text/javascript">
 $(document).ready(function(){
+  var tutor_id;
+  $('#tutorOff').click(function(){
+    $.ajax({
+      type: "POST",
+      url: '/tutor/'+tutor_id+'/delete'
+    }).done(function() {
+      tutor_id = '';
+    });
+  });
+  
   $('#tutoroOn').click(function(){
-      $('#myTutorModal').foundation('reveal', 'open');
-  })
+    $('#myTutorModal').foundation('reveal', 'open');
+  });
+  
   var options = { 
     error: function(response, status, err){
       var responseJson = $.parseJSON(response.responseText);
@@ -66,9 +78,10 @@ $(document).ready(function(){
         $("#"+field).after('<small class="error field_error">'+responseJson.errors[field]+'</small>');
       }
     },
-    success: function(){
+    success: function(response){
       $(".error").removeClass('error');
       $(".field_error").remove();
+      tutor_id = response.entity.id;
     }
   };
   $('#{{ form.name }}').ajaxForm(options)

@@ -137,7 +137,7 @@ ul.submenu-item li a:hover {
 .dashboard{
 	padding:25px 0;
 	width: 960px;
-	min-height: 620px; 
+	min-height: 640px; 
    	height:auto !important; 
 	margin: 0 auto;
 }
@@ -149,7 +149,7 @@ ul.submenu-item li a:hover {
    	height: 500px; 
 	width: 80%;
 }
-.tutor-list, .tutor-header, .ask, .sidebar{
+.tutor-list, .tutor-header, .ask{
 	background: rgba(255, 255, 255, 0.6);
 	box-shadow: 0 0 10px rgba(10, 10, 10, 0.1);
 	border-radius: 3px;
@@ -161,9 +161,16 @@ ul.submenu-item li a:hover {
 	float: left;
 	width:20%;
 }
-.tutor-button{
-	border-bottom:1px solid rgba(221, 221, 221, 1);
-	padding:10px 0px;
+.tutor-sidebar, .tutor-selected{
+	background: rgba(255, 255, 255, 0.6);
+	box-shadow: 0 0 10px rgba(10, 10, 10, 0.1);
+	border-radius: 3px;
+	padding:0px;
+	padding-top: 15px;
+	margin-bottom:10px; 
+}
+.tutor-selected {
+
 }
 #x{
 	height:50px;

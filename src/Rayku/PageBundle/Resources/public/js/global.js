@@ -48,16 +48,62 @@ $(function(){
         e.preventDefault();
         var question = $('input[name="ask"]').val();
         $('p.user-question').html("\"" + question +"\"");
-        $('.footer').animate({
-            'margin-top':'100px'
-        }, 200);
         $('.tutor-header').fadeIn('fast');
         $('.tutor-list').fadeIn('fast');
     });
+    $('#schoolSelect').change(function(){
+        populateLevel();
+    });
 });
+function populateLevel(){
+    var level = $('select[name="school"]').val();
+    var selectedOption = '1';
+
+    var select = $('#level');
+    var options = $('option', select).get();
+    $('#level option:gt(0)').remove();
+
+    if(level == 1){
+        console.log(level);
+        var highschool = {
+            '1':'Grade 1',
+            '2':'Grade 2',
+            '3':'Grade 3',
+            '4':'Grade 4',
+            '5':'Grade 5',
+            '6':'Grade 6',
+            '7':'Grade 7',
+            '8':'Grade 8',
+            '9':'Grade 9',
+            '10':'Grade 10',
+            '11':'Grade 11',
+            '12':'Grade 12'
+        };
+
+        $.each(highschool, function(val, text) {
+            options[options.length] = new Option(text, val);
+        });
+        select.html(options);
+        select.val(selectedOption);
+    }
+    else if(level == 2){
+        console.log(level);
+        var university = {
+            '1':'Year 1',
+            '2':'Year 2',
+            '3':'Year 3',
+            '4':'Year 4'
+        };
+
+        $.each(university, function(val, text) {
+            options[options.length] = new Option(text, val);
+        });
+        select.html(options);
+        select.val(selectedOption);
+    }
+}
 
 $(document).ready(function(){
-
     //Custom checkbox skin
     $('li.checkboxes input').customcheckbox();
     

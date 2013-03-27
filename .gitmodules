@@ -1,0 +1,3 @@
+[submodule "src/Rayku/PageBundle/Resources/public/js/jquery_form"]
+	path = src/Rayku/PageBundle/Resources/public/js/jquery_form
+	url = https://github.com/malsup/form.git

@@ -17,13 +17,13 @@ ln -s /var/rayku/web /var/www
 
 if [ -d "/var/log/rayku" ]; then
     mkdir /var/log/rayku
-    sudo chmod 777 /var/log/rayku
 fi
+sudo chmod 777 /var/log/rayku
 
 if [ -d "/tmp/cache/rayku" ]; then
     mkdir /tmp/cache/rayku
-    sudo chmod 777 /tmp/cache/rayku
 fi
+sudo chmod 777 /tmp/cache/rayku
 
 sudo curl -s https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer

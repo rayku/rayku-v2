@@ -1,14 +1,84 @@
 {% block content %}
-<div class="container">
-    <div class="row dashboard">
-		<h1>Tutor creation</h1>
+<div id="myTutorModal" class="reveal-modal medium">
+  <h2>Complete Your Tutor Profile</h2>
+  <div class="large-12 columns">
+    <p>Before activating your tutor status, please fill out as much as possible to completeyour tutor profile.</p>
+  </div>
+  <div class="large-12 columns">
+    <form action="{{ path('rayku_tutor_save') }}" method="post" {{ form_enctype(form) }} id="{{ form.name }}">
+      <div class="row">
+        <div class="row subjects">
+          <div class="large-12 columns">
+            {{ form_label(form.subjects) }}
+            {{ form_widget(form.subjects) }}
+          </div>
+        </div>
+        <div class="row describes">
+          <div class="large-12 columns">
+            {{ form_label(form.schoolAmount) }}
+            {{ form_widget(form.schoolAmount) }}
+          </div>
+        </div>
 
-		<form action="{{ path('rayku_tutor_save') }}" method="post" {{ form_enctype(form) }}>
-		    {{ form_widget(form) }}
-		    <p>
-		        <button type="submit">Create</button>
-		    </p>
-		</form>
-	</div>
+        <div class="row schoolname">  
+          <div class="large-12 columns">
+            {{ form_label(form.schoolName) }}
+            {{ form_widget(form.schoolName) }}
+          </div>
+        </div> 
+        <div class="row degree">
+          <div class="large-12 columns">
+            {{ form_label(form.degree) }}
+            {{ form_widget(form.degree) }}
+          </div>
+        </div>
+        <div class="row degree">
+          <div class="large-12 columns">
+            {{ form_label(form.rate) }}
+            {{ form_widget(form.rate) }}
+          </div>
+        </div>
+        <div class="row listing-preview">
+          <div class="large-12 columns">
+            <label>Listing Preview</label>
+            <p>(When students search for tutors, you will appear as):</p>
+            <p class="preview">Under Graduate Degree Holder From Ryerson University Economics</p>
+          </div>
+        </div>
+      </div>
+      <input type="submit" class="abutton" value="Save &amp; Activate Tutor Status" name="tutorStatusButton">
+    </form>
+  </div>
+  <a class="close-reveal-modal">×</a>
 </div>
+  
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#tutoroOn').click(function(){
+      $('#myTutorModal').foundation('reveal', 'open');
+  })
+  var options = { 
+    error: function(response, status, err){
+      var responseJson = $.parseJSON(response.responseText);
+      for(field in responseJson.errors){
+        $("label[for='"+field+"']").addClass('error');
+        $("#"+field).after('<small class="error field_error">'+responseJson.errors[field]+'</small>');
+      }
+    },
+    success: function(){
+      $(".error").removeClass('error');
+      $(".field_error").remove();
+    }
+  };
+  $('#{{ form.name }}').ajaxForm(options)
+});
+
+
+</script>
 {% endblock %}
+
+
+
+
+
+

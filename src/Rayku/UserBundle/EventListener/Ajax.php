@@ -26,6 +26,10 @@ class Ajax
 		
 		if ($request->isXmlHttpRequest() && $request->getMethod() == 'POST') {
 			$return['success'] = true;
+			
+			$response = new Response(json_encode($return));
+			$response->headers->set('Content-Type', 'application/json');
+			
 			$results = $event->getControllerResult();
 			
 			foreach($results as $result){
@@ -36,13 +40,13 @@ class Ajax
 							$formError = true;
 							$event->stopPropagation();
 							$return['success'] = false;
-							$return['error'][$child->createView()->get('id')] = $child->getErrorsAsString();
+							$return['errors'][$child->createView()->get('id')] = $child->getErrorsAsString();
+							$response->setStatusCode(400);
 						}
 					}
 				}
 			}
-			$response = new Response(json_encode($return));
-			$response->headers->set('Content-Type', 'application/json');
+			$response->setContent(json_encode($return));
 			$event->setResponse($response);
 		}
 	}

@@ -40,6 +40,14 @@ class Tutor
      * @ORM\Column(name="school_amount", type="string", length=255, nullable=true)
      */
     private $schoolAmount;
+    
+    /**
+     * @var string
+     * 
+     * @Assert\NotBlank
+     * @ORM\Column(name="degree", type="string", length=255, nullable=true)
+     */
+    private $degree;
 
     /**
      * @var \DateTime
@@ -379,5 +387,28 @@ class Tutor
     	{
     		$this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
     	}
+    }
+
+    /**
+     * Set degree
+     *
+     * @param string $degree
+     * @return Tutor
+     */
+    public function setDegree($degree)
+    {
+        $this->degree = $degree;
+    
+        return $this;
+    }
+
+    /**
+     * Get degree
+     *
+     * @return string 
+     */
+    public function getDegree()
+    {
+        return $this->degree;
     }
 }

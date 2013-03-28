@@ -13,8 +13,8 @@
                 <div class="small-12 columns tutor-label">
                     <h5>Tutor</h5>
                     <div class="tutor-switch">
-                        <label><input type="radio" name="toggle" id="tutorOn"><span>On</span></label>
-                        <label><input type="radio" name="toggle" id="tutorOff" checked="checked"><span>Off</span></label>
+                        <label><input type="radio" name="toggle" id="tutorOn" {% if app.user.isTutor %} checked="checked"{% endif %}><span>On</span></label>
+                        <label><input type="radio" name="toggle" id="tutorOff" {% if app.user.isTutor == false %} checked="checked"{% endif %}><span>Off</span></label>
                     </div>
     		    </div>
     		</div>
@@ -312,103 +312,6 @@
   <!--End Tutor List-->
 </div>
 
-<div id="myTutorModal" class="reveal-modal medium">
-  <h2>Complete Your Tutor Profile</h2>
-  <div class="large-12 columns">
-    <p>Before activating your tutor status, please fill out as much as possible to completeyour tutor profile.</p>
-  </div>
-  <div class="large-12 columns">
-    <form class="custom">
-      <div class="row">
-        <div class="row subjects">
-          <div class="large-12 columns">
-            <label>What subjects are you comfortable teaching?</label>
-            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> General Math</label>
-            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> Pre-Algebra</label>
-            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> Geometry</label>
-            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> Algebra</label>
-            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> Trigonometry</label>
-            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> Calculus</label>
-          </div>
-        </div>
+{% render url('rayku_tutor_new') %}
 
-        <div class="row describes">
-          <div class="large-12 columns">
-            <label>What best describes you?</label>
-            <select id="customDropdown1" class="large">
-              <option DISABLED>What describes you</option>
-              <option>Freshman</option>
-              <option>Sophomore</option>
-              <option>Junior</option>
-              <option>Senior</option>
-              <option selected>Under Graduate Degree Holder</option>
-              <option>Masters Sutdent</option>
-              <option>Masters Degree Holder</option>
-              <option>Phd Candidate</option>
-              <option>Phd Degree Holder</option>
-              <option>Teaching Assistant</option>
-              <option>Professor</option>
-              <option>Middle School Teacher</option>
-              <option>High School Teacher</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row schoolname">  
-          <div class="large-12 columns">
-            <label>Schoo Name</label>
-            <input type="text" name="schoolname" placeholder="Ryerson University">
-          </div>
-        </div>
-
-        <div class="row degree">
-          <div class="large-12 columns">
-            <label>Degree</label>
-            <input type="text" name="degree" placeholder="Economics">
-          </div>
-        </div>
-
-        <div class="row listing-preview">
-          <div class="large-12 columns">
-            <label>Listing Preview</label>
-            <p>(When students search for tutors, you will appear as):</p>
-            <p class="preview">Under Graduate Degree Holder From Ryerson University Economics</p>
-          </div>
-        </div>
-      </div>
-      <input type="submit" class="bbutton" value="Save & Activate Tutor Status" name="tutorStatusButton">
-    </form>
-  </div>
-  <a class="close-reveal-modal">&#215;</a>
-</div>
-<div id="turnTutorStatusOff" class="reveal-modal medium">
-    <div class="row">
-        <div class="large-12 columns">
-            <h4>Are you sure you want to turn off your tutor status?</h4>
-        </div>
-    </div>
-    <form>
-        <div class="row">
-            <div class="large-2 push-8 columns">
-                <input type="submit" class="bbutton" value="Yes" name="tutorStatusButton">
-            </div>
-            <div class="large-2 columns">
-                <input type="submit" class="bbutton" value="No" name="tutorStatusButton">
-            </div>
-        </div>
-    </form>
-    <a class="close-reveal-modal">&#215;</a>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){
-  $('#tutorOn').click(function(){
-      console.log('Checked');
-      $('#myTutorModal').foundation('reveal', 'open');
-  })
-  $('#tutorOff').click(function(){
-      console.log('Checked');
-      $('#turnTutorStatusOff').foundation('reveal', 'open');
-  })
-});
-</script>
 {% endblock %}

@@ -188,11 +188,15 @@ function populateLevel(){
 }
 $(window).scroll(function(e){ 
     $el = $('.tutor-selected'); 
+    $tbel = $('#tutorTable thead');
     if ($(this).scrollTop() > 200 && $el.css('position') != 'fixed'){ 
         $('.tutor-selected').addClass('tutor-selected-scroll');
+        
+
     } 
     else if($(this).scrollTop() < 200 && $el.css('position') == 'fixed'){
         $('.tutor-selected').removeClass('tutor-selected-scroll');
+        
     }
 });
 $(document).ready(function(){

@@ -279,6 +279,12 @@ ul.submenu-item li a:hover {
 	top: 60px;
 	width: 15%;
 }
+.thead-scroll{
+	position: fixed;
+	top: 60px;
+	width: 57.8%;
+	z-index: 200;
+}
 .tutor-selected h5{
 	position: relative;
 	top:0;

@@ -495,10 +495,85 @@ a.clear-tutors{
 	margin-right: 5px;
 	font-weight: 500;
 }
+.ask-q{
+	position: absolute;
+	top: -5px;
+	left: -15px;
+	background: rgba(10, 10, 10, 0.7);
+	padding: 6px;
+	padding-bottom: 0;
+}
+.ask-q:before {
+ content: "";
+ position: absolute;
+ display: block;
+ bottom: -1em;
+ border: 1.5em solid transparent;
+ z-index: -1;
+}
+.ask-q:before {
+ left: -2em;
+ border-right-width: 1.5em;
+ border-left-color: transparent;
+}
+.ask-q h5:before{
+ content: "";
+ position: absolute;
+ display: block;
+ border-style: solid;
+ border-color: rgba(10, 10, 10, 0.3) transparent transparent transparent;
+ bottom: -1em;
+}
+.ask-q h5:before {
+ left: 0;
+ border-width: 1em 0 0 1em;
+}
 .ask-q h5{
-	color:rgba(10, 10, 10, 0.7);
+	color:rgba(255, 255, 255, 0.9);
 	padding: 3px 0;
 }
+.ribbon {
+ 	font-size: 15px !important;
+ 	/* This ribbon is based on a 16px font side and a 24px vertical rhythm. I've used em's to position each element for scalability. If you want to use a different font size you may have to play with the position of the ribbon elements */
+    
+	position: relative;
+	left: -15px;
+	background: rgba(10, 10, 10, 0.7);
+	padding: 6px;
+	padding-bottom: 0;
+ 	color: #fff;
+ 	padding:10px; /* Adjust to suit */
+ 	margin-top: 5px;
+ 	margin-bottom: 5px;
+ 	width: 185px;
+
+}
+.ribbon:before{
+ content: "";
+ position: absolute;
+ display: block;
+ bottom: -1em;
+ border: 1.5em solid transparent;
+ z-index: -1;
+}
+.ribbon:before {
+ left: -2em;
+ border-right-width: 1.5em;
+ border-left-color: transparent;
+}
+.ribbon .ribbon-content:before{
+ content: "";
+ position: absolute;
+ display: block;
+ border-style: solid;
+ border-color: rgba(10, 10, 10, 0.3) transparent transparent transparent;
+ bottom: -1em;
+}
+.ribbon .ribbon-content:before {
+ left: 0;
+ border-width: 1em 0 0 1em;
+}
+
 /*Tutor List*/
 .tutor-list{
 	margin: 10px 0;

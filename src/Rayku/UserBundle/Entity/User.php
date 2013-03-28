@@ -62,4 +62,19 @@ class User extends BaseUser
     {
         return $this->tutor;
     }
+    
+    /**
+     * Get isTutor
+     * 
+     * @return boolean
+     */
+    public function getIsTutor()
+    {
+    	try{
+    		$deletedAt = $this->getTutor()->getDeletedAt();
+    	}catch(\Exception $e){
+    		return false;
+    	}
+    	return ($deletedAt == null) ? true : false;
+    }
 }

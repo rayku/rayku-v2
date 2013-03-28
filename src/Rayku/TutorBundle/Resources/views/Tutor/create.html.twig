@@ -1,4 +1,5 @@
 {% block content %}
+
 <div id="myTutorModal" class="reveal-modal medium">
   <h2>Complete Your Tutor Profile</h2>
   <div class="large-12 columns">
@@ -53,20 +54,51 @@
   <a class="close-reveal-modal">×</a>
 </div>
 
+<div id="turnTutorStatusOff" class="reveal-modal medium">
+    <div class="row">
+        <div class="large-12 columns">
+            <h4>Are you sure you want to turn off your tutor status?</h4>
+        </div>
+    </div>
+    <form id="tutorConfirmStatusForm" name="blah">
+        <div class="row">
+            <div class="large-2 push-8 columns">
+                <input type="submit" class="bbutton" value="Yes" name="tutorStatusButton" id="confirmTutorStatusOff">
+            </div>
+            <div class="large-2 columns">
+                <input type="submit" class="bbutton" value="No" name="tutorStatusButton" id="confirmTutorStatusOn">
+            </div>
+        </div>
+    </form>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
   
 <script type="text/javascript">
 $(document).ready(function(){
-  var tutor_id;
+  {% if entity.deletedAt is null and entity.id is not null %}
+    var tutor_id = {{entity.id}};
+  {% else %}
+    var tutor_id;
+  {% endif %}
+
   $('#tutorOff').click(function(){
+      $('#turnTutorStatusOff').foundation('reveal', 'open');
+  })
+  $('#confirmTutorStatusOn').click(function(){
+    $('#turnTutorStatusOff').foundation('reveal', 'close');
+    return false;
+  });
+  $('#confirmTutorStatusOff').click(function(){
     $.ajax({
       type: "POST",
       url: '/tutor/'+tutor_id+'/delete'
     }).done(function() {
       tutor_id = '';
     });
+    $('#turnTutorStatusOff').foundation('reveal', 'close');
+    return false;
   });
-  
-  $('#tutoroOn').click(function(){
+  $('#tutorOn').click(function(){
     $('#myTutorModal').foundation('reveal', 'open');
   });
   
@@ -79,14 +111,16 @@ $(document).ready(function(){
       }
     },
     success: function(response){
+      tutor_id = response.entity.id;
+      console.log(tutor_id);
+      console.log(response.entity.id);
+      $('#myTutorModal').foundation('reveal', 'close');
       $(".error").removeClass('error');
       $(".field_error").remove();
-      tutor_id = response.entity.id;
     }
   };
   $('#{{ form.name }}').ajaxForm(options)
 });
-
 
 </script>
 {% endblock %}

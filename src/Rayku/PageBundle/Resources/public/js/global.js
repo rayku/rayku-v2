@@ -1,4 +1,7 @@
 $(function(){
+    var tutorList = []; //store selected tutors
+    var tutorCount = 0;
+
     //Forgot password on login modal
     $('a.forgot-password').click(function(){
         if($('.login-button').hasClass('disabled')){
@@ -30,76 +33,155 @@ $(function(){
         var category = $('select[name="category"]').val();
         //If the current option is Choose Category, do not show the input box
         if (category == "Choose Category"){
-            $('.question-container').slideUp('fast');
-            $('.ask').css('padding-bottom', '0px');
-            $('.tutor-header').fadeOut('fast');
             $('.tutor-list').fadeOut('fast');
+            $("#selectedTutors li").remove(); //remove selected tutors from ol list
+            tutorList.splice(0, tutorList.length); //empty tutor id list
+            tutorCount = 0; //set tutor count back to 0
+            $('.tutor-selected').fadeOut('fast');
+            $('span.tutor-count').html("0"); // replace tutor count on page with empty string
+            console.log(tutorList);
         }
         else{
-            var placeholder = 'What is your ' + category + ' question?';
+            var placeholder = 'What is your ' + category + ' question? Or view online tutors'; //set placeholder text for ask form
             $('input[name="ask"]').attr('placeholder', placeholder);
-            $('.ask').css('padding-bottom', '15px');
-            $('.question-container').slideDown('fast');
+            $('.question-container').slideDown('fast'); //show input field
         }
     });
 
     //Submit Question
     $('input[name="aSubmit"]').click(function(e){
         e.preventDefault();
-        var question = $('input[name="ask"]').val();
-        $('p.user-question').html("\"" + question +"\"");
-        $('.tutor-header').fadeIn('fast');
+
+        //disable all checkboxes for tutors that are busy
+        $('form#tutorList :input').each(function(){
+            var input = $(this);
+            if($(this).attr("data-tutor-status") == 1){
+                $(this).attr('disabled', true);
+            }
+        });
+        
+        var question = $('input[name="ask"]').val(); //get the question typed by user
+        $('p.user-question').html("\"" + question +"\""); //append question to header div
+        //show hidden divs
         $('.tutor-list').fadeIn('fast');
+        $('.tutor-selected').fadeIn('fast');
+        var institution = $('#schoolSelect option:selected').val();
+        var category = $('select[name="category"]').val();
+        var level;
+        if(institution == "high school"){
+            level = $('select[name="highschool"]').val();
+        }
+        else if(institution == "university"){
+            level = $('select[name="university"]').val();
+        }
+        else{
+            level = "";
+        }
+        console.log(institution + " " + level + " " + category);
     });
-    $('#schoolSelect').change(function(){
-        populateLevel();
+
+    //set all busy tutors to show a red background
+    $('table#tutorTable tr td').each(function(){
+        var column = $(this);
+        console.log(column);
+        if(column.hasClass('busy')){
+            column.find('a').addClass('tutor-busy');
+        }
+    });
+    
+
+    //Tutor Selection
+    $('input[name="tutor"]').on('click', function(){
+            var tutor = $(this); //set tutor to checked/clicked checkbox
+            var tutor_id = $(this).attr('data-tutor-id'); //get the tutor id from the data attribute
+
+            //check if the tutor_id exists in the list of selected tutors
+            if(jQuery.inArray(tutor_id, tutorList) !== -1){
+                //if student deselects a tutor
+                $("#selectedTutors li[data-tutor-id='" + tutor_id + "']").remove(); //remove the li currently showing this tutor
+                tutorList.splice(jQuery.inArray(tutor_id, tutorList), 1); //remove the tutor id from the tutor list
+                //set the checkbox attribute to unchecked
+                $(this).attr('checked', ''); // For IE
+                $(this).checked = false;
+
+                tutorCount--;//decrement the tutor count
+                $('span.tutor-count').html(tutorCount);//append the new count to the page
+                console.log(tutor_id);
+                console.log(tutorList);
+            }
+            else{
+                //if student selects a tutor
+                //set the checkbox attribute to checked
+                $(this).attr('checked', 'checked'); 
+                $(this).checked = true;
+
+                //make a list containing the selected tutors name and id
+                var myTutor = {
+                    'tutor_info':{
+                        'tutor_name': tutor.attr('data-tutor-name'),
+                        'tutor_id': tutor.attr('data-tutor-id')
+                    }   
+                };
+                
+                $.each(myTutor, function(){
+                    //append the selected tutor to the page
+                    var item = '<li data-tutor-id="'+ myTutor.tutor_info['tutor_id'] +'"><a href="#">'+ myTutor.tutor_info['tutor_name'] + '</a></li>';
+                    $('ol#selectedTutors').hide().append(item).fadeIn('slow');
+                    //push the tutors id to the list of tutors id's
+                    tutorList.push(myTutor.tutor_info['tutor_id']);
+                    //increment count of tutors selected
+                    tutorCount++;
+                    //add the count to the page
+                    $('span.tutor-count').html(tutorCount);
+                    console.log(tutorList);
+                });
+            }
+        }
+    );
+
+    //Clear selected tutors
+    $('.clear-tutors').click(function(event){
+        event.preventDefault();
+        tutorCount = 0; //set the selected tutor count back to 0
+        tutorList.splice(0, tutorList.length); //delete all tutors from the tutor list
+        $("#selectedTutors li").remove(); //remove selected tutors from ol list
+        $('input[name="tutor"]').attr('checked', false); //set all checked tutors to unchecked
+        $('span.tutor-count').html("0"); //reset the count on the page
+        console.log(tutorList);
+    });
+
+    //Populate Level select box
+    $('#schoolSelect').on('change', function(){
+        populateLevel(); //call the populate function
     });
 });
 function populateLevel(){
-    var level = $('select[name="school"]').val();
-    var selectedOption = '1';
+    var level = $('select[name="school"]').val(); //determine if highschool or university was selected
 
-    var select = $('#level');
-    var options = $('option', select).get();
-    $('#level option:gt(0)').remove();
-
-    if(level == 1){
+    if(level == 'high school'){
+        //if highschool is selected, show the highschool grade selection list
         console.log(level);
-        var highschool = {
-            '1':'Grade 1',
-            '2':'Grade 2',
-            '3':'Grade 3',
-            '4':'Grade 4',
-            '5':'Grade 5',
-            '6':'Grade 6',
-            '7':'Grade 7',
-            '8':'Grade 8',
-            '9':'Grade 9',
-            '10':'Grade 10',
-            '11':'Grade 11',
-            '12':'Grade 12'
-        };
-
-        $.each(highschool, function(val, text) {
-            options[options.length] = new Option(text, val);
-        });
-        select.html(options);
-        select.val(selectedOption);
+        $('#placeholder').hide();
+        $('#university').hide();
+        $('#highschool').show();
+        $('#university select').attr('disabled', 'disabled');
+        $('#highschool select').removeAttr('disabled');
     }
-    else if(level == 2){
+    else if(level == 'university'){
+        //if university is selected, show the university level selection list
         console.log(level);
-        var university = {
-            '1':'Year 1',
-            '2':'Year 2',
-            '3':'Year 3',
-            '4':'Year 4'
-        };
-
-        $.each(university, function(val, text) {
-            options[options.length] = new Option(text, val);
-        });
-        select.html(options);
-        select.val(selectedOption);
+        $('#placeholder').hide();
+        $('#highschool').hide();
+        $('#university').show();
+        $('#highschool select').attr('disabled', 'disabled');
+        $('#university select').removeAttr('disabled');
+    }
+    else{
+        $('#university').hide();
+        $('#highschool').hide();
+        $('#placeholder').show();
+        $('#university select').attr('disabled', 'disabled');
+        $('#highschool select').attr('disabled', 'disabled');
     }
 }
 

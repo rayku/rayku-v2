@@ -10,103 +10,147 @@
     <!--Sidebar-->
 		<div class="large-3 columns sidebar">
     		<div class="row tutor-sidebar">
-                <div class="small-6 columns">
-                  Tutor
-                </div>
-    		    <div class="small-6 columns">
-                    <div class="switch small">
-                        <input id="tutorOff" name="switch-x" type="radio" checked>
-                        <label for="x" onclick="">Off</label>
-                        <input id="tutoroOn" name="switch-x" type="radio">
-                        <label for="x1" onclick="">On</label>
-                        <span></span>
+                <div class="small-12 columns tutor-label">
+                    <h5>Tutor</h5>
+                    <div class="tutor-switch">
+                        <label><input type="radio" name="toggle" id="tutorOn"><span>On</span></label>
+                        <label><input type="radio" name="toggle" id="tutorOff" checked="checked"><span>Off</span></label>
                     </div>
     		    </div>
     		</div>
+            <div class="row tutor-status-bar">
+                <div class="small-12 columns tutor-status">
+                    <h5>Status <span>Online</span></h5>
+                </div>
+            </div>
 
             <div class="row tutor-selected">
+                <h5><span class="tutor-count">0</span> <span class="tright">Tutors Selected</span> </h5>
                 <div class="small-12 columns">
-                    <h5>Selected Tutors</h5>
-                </div>
-                <div class="small-12 columns">
-                    <ol>
-                        <li>Nick Agopoulos</li>
-                        <li>Flint Ago</li>
-                        <li>Naef Poulos</li>
+                    <ol id="selectedTutors">
                     </ol>
+                    <a href=# class="clear-tutors">Clear All</a>
                 </div>
             </div>
 		</div>
     <!--End Sidebar-->
 
     <!--Main Content-->
-		<div class="large-9 columns main-content">
-      <!--Ask Form-->
-      <div class="row ask">
-        <div class="large-12 columns">
-          <form class="custom">
-            <div class="row">
-              <div class="large-4 columns large-centered help-header">
-                <h5>What do you need help with?</h5>
-              </div>
-              <div class="large-4 columns category">
-                <select id="categorySelect" class="medium" name="category">
-                  <option>Choose Category</option>
-                  <option value="General Math">General Math</option>
-                  <option value="Pre-Algebra">Pre-Algebra</option>
-                  <option value="Geometry">Geometry</option>
-                  <option value="Algebra">Algebra</option>
-                  <option value="Trigonometry">Trigonometry</option>
-                  <option value="Calculus">Calculus</option>
-                  <option value="Statistics">Statistics & Probability</option>
-                  <option value="Advanced Math">Advanced Math</option>
-                </select>
-              </div>
-
-              <div class="large-4 columns school">
-                <select id="schoolSelect" class="medium" name="school">
-                  <option>Choose School</option>
-                  <option value="1">High School</option>
-                  <option value="2">University</option>
-                </select>
-              </div>
-
-              <div class="large-4 columns ">
-                <select id="level" class="medium" name="level">
-                    <option value="Choose">Choose Level</option>
-    
-                </select>
-              </div>
-
-              <div class="large-12 columns question-container">
-                <div class="input-container">
-                  <input type="text" placeholder="" name="ask">
-                </div>
-                <input type="submit" class="abutton" value="Ask" name="aSubmit">
-              </div>
+	<div class="large-9 columns main-content">
+        <!-- User Profile -->
+        <div class="row user-profile">
+            <div class="large-12 columns user-profile-top">
+                <h6>760.00RP</h6>
+                <h5>Student</h5>
             </div>
-          </form>
+
+            <div class="large-3 columns user-profile-image">
+                <img src="{{ asset('bundles/raykupage/images/profile_image_blank.jpg') }}">
+            </div>  
+            <div class="large-9 columns user-profile-info">
+                <ul>
+                    <li><h4>Nick Agopoulos</h4></li>
+                    <li><h5>3rd Year, Undergraduate</h5></li>
+                    <li><h6>Lives in <a>Toronto, Canada</a></h6></li>
+                    <li><span>Email:</span> nick@rayku.com</li>
+                    <li><span>School:</span> Ryerson University</li>
+                    <li><span>Degree:</span> Economics</li>
+                    <li><span>Biography:</span> This is longer content Donec id elit non mi porta gravida at eget metus.</li>
+                </ul>
+                <ul class="user-profile-buttons">
+                    <li><input type="button" class="bbutton" value="Edit Profile"></li>
+                </ul>
+            </div>
+            <!--End Profile Info-->
+            <div class="large-12 columns user-divider">
+            </div>
+            <!--Ask Form-->
+            <div class="large-12 columns ask">
+              <form class="custom">
+                <div class="row">
+                  <div class="large-3 columns ask-q">
+                    <h5>Find suitable tutor for</h5>
+                  </div>
+                  <div class="large-3 columns school">
+                    <select id="schoolSelect" class="medium" name="school">
+                      <option>Choose Institution</option>
+                      <option value="high school" name="selectlevel">High School</option>
+                      <option value="university" name="selectlevel">University</option>
+                    </select>
+                  </div>
+
+                  <div class="large-3 columns institution" id="placeholder">
+                    <select id="instSelect" class="medium" disabled>
+                        <option value="Choose" name="choose" id="choose">Select An Institution</option>
+                    </select>
+                  </div>
+
+                  <div class="large-3 columns institution" id="highschool">
+                    <select name="highschool" class="medium" disabled>
+                        <option value="Choose" name="choose" id="choose">Choose Grade</option>
+                        <option value="grade 1">Grade 1</option>
+                        <option value="grade 2">Grade 2</option>
+                        <option value="grade 3">Grade 3</option>
+                        <option value="grade 4">Grade 4</option>
+                        <option value="grade 5">Grade 5</option>
+                        <option value="grade 6">Grade 6</option>
+                        <option value="grade 7">Grade 7</option>
+                        <option value="grade 8">Grade 8</option>
+                        <option value="grade 9">Grade 9</option>
+                        <option value="grade 10">Grade 10</option>
+                        <option value="grade 11">Grade 11</option>
+                        <option value="grade 12">Grade 12</option>
+                    </select>
+                  </div>
+                  <div class="large-3 columns institution" id="university">
+                    <select name="university" class="medium" disabled>
+                        <option value="Choose" name="choose" id="choose">Choose Year</option>
+                        <option value="year 1">Year 1</option>
+                        <option value="year 2">Year 2</option>
+                        <option value="year 3">Year 3</option>
+                        <option value="year 4">Year 4</option>
+                        <option value="year 5">Year 5</option>
+                    </select>
+                  </div>
+
+                  <div class="large-3 columns category">
+                    <select id="categorySelect" class="medium" name="category">
+                      <option>Choose Category</option>
+                      <option value="General Math">General Math</option>
+                      <option value="Pre-Algebra">Pre-Algebra</option>
+                      <option value="Geometry">Geometry</option>
+                      <option value="Algebra">Algebra</option>
+                      <option value="Trigonometry">Trigonometry</option>
+                      <option value="Calculus">Calculus</option>
+                      <option value="Statistics">Statistics & Probability</option>
+                      <option value="Advanced Math">Advanced Math</option>
+                    </select>
+                  </div>
+
+                  <div class="large-12 columns question-container">
+                    <div class="input-container">
+                      <input type="text" placeholder="What is your question? Or view online tutors" name="ask">
+                    </div>
+                    <input type="submit" class="bbutton" value="View Online Tutors" name="aSubmit">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!--End Ask Form-->
         </div>
-      </div>
-      <!--End Ask Form-->
 
+      
     <!--Tutor List-->
-    <div class="row tutor-header">
-      <div class="large-6 large-centered columns">
-        <h4>Tutors that can help with your question</h4>
-        <p class="user-question"></p>
-      </div>
-    </div>
-
     <div class="row tutor-list">
-      <form>
-        <table>
+      <form id="tutorList">
+        <table id="tutorTable">
           <thead>
             <tr>
               <th>Rank</th>
               <th width="130px">Name</th>
               <th width="470px" class="short-bio">Short Bio</th>
               <th>Rate/Min</th>
+              <th>Status</th>
               <th>Connect</th>
             </tr>
           </thead>
@@ -116,88 +160,84 @@
               <td><a href=#>Nick Agopoulos</a></td>
               <td>Under Graduate Degree Holder From Ryerson University, Economics.</td>
               <td>20.00RP</td>
-              <td><input type="checkbox"></td>
+              <td data-status="online">Online</td>
+              <td><input type="checkbox" name="tutor" data-tutor-id="1" data-tutor-name="Nick Agopoulos"></td>
             </tr>
             <tr>
               <td>2</td>
               <td><a href=#>Flint Ago</a></td>
               <td>Under Graduate Degree Holder From Wilfrid Laurier University, Mathematics</td>
               <td>35.00RP</td>
-              <td><input type="checkbox"></td>
+              <td data-status="online">Online</td>
+              <td><input type="checkbox" name="tutor" data-tutor-id="2" data-tutor-name="Flint Ago"></td>
             </tr>
             <tr>
               <td>3</td>
               <td><a href=#>Naef Poulos</a></td>
               <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
               <td>14.00RP</td>
-              <td><input type="checkbox"></td>
+              <td data-status="online">Online</td>
+              <td><input type="checkbox" name="tutor" data-tutor-id="3" data-tutor-name="Naef Poulos"></td>
             </tr>
             <tr>
               <td>4</td>
               <td><a href=#>Adam Opoulos</a></td>
               <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
               <td>20.00RP</td>
-              <td><input type="checkbox"></td>
+              <td data-status="1" class="busy"><a>Busy</a></td>
+              <td><input type="checkbox" name="tutor" data-tutor-id="4" data-tutor-status="1" data-tutor-name="Adam Opoulos"></td>
             </tr>
             <tr>
               <td>5</td>
               <td><a href=#>Clint Gomez</a></td>
               <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
               <td>35.00RP</td>
-              <td><input type="checkbox"></td>
+              <td data-status="online">Online</td>
+              <td><input type="checkbox" name="tutor" data-tutor-id="5" data-tutor-name="Clint Gomez"></td>
             </tr>
             <tr>
               <td>6</td>
               <td><a href=#>Neal Poul</a></td>
               <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
               <td>14.00RP</td>
-              <td><input type="checkbox"></td>
+              <td data-status="online">Online</td>
+              <td><input type="checkbox" name="tutor" data-tutor-id="6" data-tutor-name="Neal Poul"></td>
             </tr>
             <tr>
               <td>7</td>
-              <td><a href=#>Nick Agopoulos</a></td>
+              <td><a href=#>Nae Poulo</a></td>
               <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-              <td>20.00RP</td>
-              <td><input type="checkbox"></td>
+              <td>14.00RP</td>
+              <td data-status="1" class="busy"><a>Busy</a></td>
+              <td><input type="checkbox" name="tutor" data-tutor-id="7" data-tutor-status="1" data-tutor-name="Nae Poulo"></td>
             </tr>
             <tr>
               <td>8</td>
-              <td><a href=#>Flint Ago</a></td>
+              <td><a href=#>Ada Poulo</a></td>
               <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-              <td>35.00RP</td>
-              <td><input type="checkbox"></td>
+              <td>20.00RP</td>
+              <td data-status="online">Online</td>
+              <td><input type="checkbox" name="tutor" data-tutor-id="8" data-tutor-name="Ada Poulo"></td>
             </tr>
             <tr>
               <td>9</td>
-              <td><a href=#>Naef Poulos</a></td>
+              <td><a href=#>Lint Gomez</a></td>
               <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-              <td>14.00RP</td>
-              <td><input type="checkbox"></td>
+              <td>35.00RP</td>
+              <td data-status="1" class="busy"><a>Busy</a></td>
+              <td><input type="checkbox" name="tutor" data-tutor-id="9" data-tutor-status="1" data-tutor-name="Lint Gomez"></td>
             </tr>
             <tr>
               <td>10</td>
-              <td><a href=#>Adam Opoulos</a></td>
-              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-              <td>20.00RP</td>
-              <td><input type="checkbox"></td>
-            </tr>
-            <tr>
-              <td>11</td>
-              <td><a href=#>Clint Gomez</a></td>
-              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-              <td>35.00RP</td>
-              <td><input type="checkbox"></td>
-            </tr>
-            <tr>
-              <td>12</td>
-              <td><a href=#>Neal Poul</a></td>
+              <td><a href=#>Nea Pou</a></td>
               <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
               <td>14.00RP</td>
-              <td><input type="checkbox"></td>
+              <td data-status="online">Online</td>
+              <td><input type="checkbox" name="tutor" data-tutor-id="10" data-tutor-name="Nea Pou"></td>
             </tr>
           </tbody>
         </table>
-        <input type="submit" class="abutton" value="Connect" name="connectButton">
+        <input type="submit" class="bbutton" value="Connect" name="connectButton">
       </form>
     </div>
   </div>
@@ -268,16 +308,38 @@
           </div>
         </div>
       </div>
-      <input type="submit" class="abutton" value="Save & Activate Tutor Status" name="tutorStatusButton">
+      <input type="submit" class="bbutton" value="Save & Activate Tutor Status" name="tutorStatusButton">
     </form>
   </div>
   <a class="close-reveal-modal">&#215;</a>
 </div>
+<div id="turnTutorStatusOff" class="reveal-modal medium">
+    <div class="row">
+        <div class="large-12 columns">
+            <h4>Are you sure you want to turn off your tutor status?</h4>
+        </div>
+    </div>
+    <form>
+        <div class="row">
+            <div class="large-2 push-8 columns">
+                <input type="submit" class="bbutton" value="Yes" name="tutorStatusButton">
+            </div>
+            <div class="large-2 columns">
+                <input type="submit" class="bbutton" value="No" name="tutorStatusButton">
+            </div>
+        </div>
+    </form>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
 <script type="text/javascript">
 $(document).ready(function(){
-  $('#tutoroOn').click(function(){
+  $('#tutorOn').click(function(){
       console.log('Checked');
       $('#myTutorModal').foundation('reveal', 'open');
+  })
+  $('#tutorOff').click(function(){
+      console.log('Checked');
+      $('#turnTutorStatusOff').foundation('reveal', 'open');
   })
 });
 </script>

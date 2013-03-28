@@ -20,9 +20,11 @@ $(function(){
 
     //Show dropdown navigation
     $('a.logged-in-as').hover(function(){
-            $('div.submenu').slideDown(200, function(){
+        $('div.submenu').show(50, function(){
+                $('a.logged-in-as').css('background', 'rgba(10, 10, 10, 0.4)');
                 $(this).mouseleave(function(){
-                    $(this).slideUp(200);
+                    $(this).hide(10);
+                    $('a.logged-in-as').css('background', 'transparent');
                 }); 
             });
         }

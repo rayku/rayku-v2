@@ -20,7 +20,7 @@ $(function(){
 
     //Show dropdown navigation
     $('a.logged-in-as').hover(function(){
-        $('div.submenu').show(50, function(){
+        $('div.submenu').show(30, function(){
                 $('a.logged-in-as').css('background', 'rgba(10, 10, 10, 0.4)');
                 $(this).mouseleave(function(){
                     $(this).hide(10);

@@ -48,17 +48,82 @@
                 <img src="{{ asset('bundles/raykupage/images/profile_image_blank.jpg') }}">
             </div>  
             <div class="large-9 columns user-profile-info">
-                <ul>
-                    <li><h4>Nick Agopoulos</h4></li>
-                    <li><h5>3rd Year, Undergraduate</h5></li>
-                    <li><h6>Lives in <a>Toronto, Canada</a></h6></li>
-                    <li><span>Email:</span> nick@rayku.com</li>
-                    <li><span>School:</span> Ryerson University</li>
-                    <li><span>Degree:</span> Economics</li>
-                    <li><span>Biography:</span> This is longer content Donec id elit non mi porta gravida at eget metus.</li>
+                <ul class="user-profile-items">
+                    <li>
+                        <a href="#" class="raphael edit-tool">></a>
+                        <form class="user-profile-edit-form">
+                            <label>Name</label>
+                            <input type="text" placeholder="Nick">
+                            <input type="text" placeholder="Agopoulos">
+                            <input type="submit" class="bbutton" value="Save">
+                            <a href=# class="close-edit">x</a>
+                        </form>
+                        <h4><span class="username edit">Nick Agopoulos</span></h4>
+                    </li>
+                    <li>
+                        <a href="#" class="raphael edit-tool">></a>
+                        <form class="user-profile-edit-form">
+                            <label>Education</label>
+                            <input type="text" placeholder="3rd Year">
+                            <input type="text" placeholder="Under Graduate Student">
+                            <input type="submit" class="bbutton" value="Save">
+                            <a href=# class="close-edit">x</a>
+                        </form>
+                        <h5><span class="education edit">3rd Year, Under Graduate Student</span></h5></li>
+                    <li>
+                        <a href="#" class="raphael edit-tool">></a>
+                        <form class="user-profile-edit-form">
+                            <label>Location</label>
+                            <input type="text" placeholder="Toronto">
+                            <input type="text" placeholder="Canada">
+                            <input type="submit" class="bbutton" value="Save">
+                            <a href=# class="close-edit">x</a>
+                        </form>
+                        <h6>Lives in <span class="location edit"><a>Toronto, Canada</a></span></h6>
+                    </li>
+                    <li class="cutoff">
+                        <a href="#" class="raphael edit-tool">></a>
+                        <form class="user-profile-edit-form">
+                            <label>Email</label>
+                            <input type="text" placeholder="nick@rayku.com">
+                            <input type="submit" class="bbutton" value="Save">
+                            <a href=# class="close-edit">x</a>
+                        </form>
+                        <span>Email:</span> <span class="email edit">nick@rayku.com</span>
+                    </li>
+                    <li>
+                        <a href="#" class="raphael edit-tool">></a>
+                        <form class="user-profile-edit-form">
+                            <label>University</label>
+                            <input type="text" placeholder="Ryerson University">
+                            <input type="submit" class="bbutton" value="Save">
+                            <a href=# class="close-edit">x</a>
+                        </form>
+                        <span>School:</span> <span class="university edit">Ryerson University</span>
+                    </li>
+                    <li>
+                        <a href="#" class="raphael edit-tool">></a>
+                        <form class="user-profile-edit-form">
+                            <label>Degree</label>
+                            <input type="text" placeholder="Economics">
+                            <input type="submit" class="bbutton" value="Save">
+                            <a href=# class="close-edit">x</a>
+                        </form>
+                        <span>Degree:</span> <span class="degree edit">Economics</span>
+                    </li>
+                    <li>
+                        <a href="#" class="raphael edit-tool">></a>
+                        <form class="user-profile-edit-form">
+                            <label>Bio</label>
+                            <textarea></textarea>
+                            <input type="submit" class="bbutton" value="Save">
+                            <a href=# class="close-edit">x</a>
+                        </form>
+                        <span>Bio:</span> <span class="biography edit">This is longer content Donec id elit non mi porta gravida at eget metus.</span></li>
                 </ul>
                 <ul class="user-profile-buttons">
-                    <li><a href=# class="bbutton"><span class="raphael">></span>Edit Profile</a></li>
+                    <li><a href=# class="bbutton edit-button"><span class="raphael">></span>Edit Profile</a></li>
+                    <li><a href=# class="bbutton done-button"><span class="raphael">></span>Done Editing</a></li>
                 </ul>
             </div>
             <!--End Profile Info-->

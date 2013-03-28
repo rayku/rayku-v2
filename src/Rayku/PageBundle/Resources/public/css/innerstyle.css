@@ -363,7 +363,7 @@ a.clear-tutors{
 	height: 36px;
 	cursor: pointer;
 	padding: 0 14px;
-	border: 1px solid rgba(0, 101, 173, 1);
+	border: 1px solid rgba(0, 101, 173, 0.7);
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
@@ -381,6 +381,15 @@ a.clear-tutors{
 	background: -ms-linear-gradient(top,  rgba(72,130,175,1) 0%,rgba(29,112,175,1) 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  rgba(72,130,175,1) 0%,rgba(29,112,175,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4882af', endColorstr='#1d70af',GradientType=0 ); /* IE6-8 */
+	box-shadow: none;
+	-webkit-transition: box-shadow ease-in-out 0.4s;
+	-moz-transition: box-shadow ease-in-out 0.4s;
+	-ms-transition: box-shadow ease-in-out 0.4s;
+	-o-transition: box-shadow ease-in-out 0.4s;
+	transition: box-shadow ease-in-out 0.4s;
+}
+.bbutton:hover{
+	box-shadow: inset 0 0 20px rgba(0, 81, 153, 1);
 }
 .help-header h4{
 	padding: 3px;
@@ -446,6 +455,9 @@ a.clear-tutors{
 	padding: 0;
 	margin-left: 0; 
 }
+.user-profile-info ul.user-profile-items li{
+	margin-bottom: 3px;
+}
 .user-profile-info ul li span{
 	font-weight: 600;
 }
@@ -464,6 +476,32 @@ a.clear-tutors{
 .user-profile-info h6{
 	font-size: 13px;
 }
+.user-profile-info .edit-tool{
+	float:left;
+	width: 10px;
+	margin-right: 7px;
+	padding: 0px 5px;
+	padding-bottom: 1px;
+	padding-right: 12px;
+	display: none;
+	z-index: 10;
+}
+.user-profile-info .edit-tool:hover{
+	text-decoration: none;
+	color: inherit;
+}
+.user-profile-info .edit-button{
+	padding:3px 14px;
+	margin-top: -4px;
+	margin-bottom: 2px;
+	height:32px;
+}
+.user-profile-info .done-button{
+	display: none;
+}
+.user-profile-items .cutoff{
+	margin-top: 7px;
+}
 .user-divider{
 	margin: 0;
 	padding: 0;
@@ -477,6 +515,50 @@ a.clear-tutors{
 .user-profile-buttons li a:hover{
 	text-decoration: none;
 	color: #fff;
+}
+.user-profile-info form.user-profile-edit-form {
+	display: none;
+	position: absolute;
+	margin-top: 0px;
+	margin-left: 24px;
+	background: rgba(221, 221, 221, 1);
+	padding:10px;
+	box-shadow: 0 0 5px rgba(10, 10, 10, 0.1);
+	z-index: 9;
+}
+.user-profile-info form.user-profile-edit-form:before{
+	content: "";
+	position: absolute;
+ 	display: block;
+ 	top: 0;
+ 	left:-25px;
+ 	width: 25px;
+ 	border: 10px solid rgba(221, 221, 221, 1);
+ 	box-shadow: -2px 0 4px rgba(10, 10, 10, 0.05);
+ 	z-index: -1;
+}
+form.user-profile-edit-form label{
+	font-weight: 600;
+	font-size: 13px;
+	padding: 3px;
+	padding-top: 0;
+	margin-top: -8px;
+	margin-bottom: 5px;
+}
+form.user-profile-edit-form input[type="text"]{
+	padding:15px 10px;
+}
+form.user-profile-edit-form input[type="submit"]{
+	height: 24px;
+	font-size: 12px;
+}
+form.user-profile-edit-form input{
+	border-radius: 3px; 
+}
+form.user-profile-edit-form a.close-edit{
+	position: absolute;
+	top:2px;
+	right:10px;
 }
 .ask{
 	padding-top:15px;
@@ -502,6 +584,7 @@ a.clear-tutors{
 	background: rgba(10, 10, 10, 0.7);
 	padding: 6px;
 	padding-bottom: 0;
+	box-shadow: 0 0 2px rgba(10, 10, 10, 0.2);
 }
 .ask-q:before {
  content: "";
@@ -546,7 +629,7 @@ a.clear-tutors{
  	margin-top: 5px;
  	margin-bottom: 5px;
  	width: 185px;
-
+ 	box-shadow: 0 0 2px rgba(10, 10, 10, 0.2);
 }
 .ribbon:before{
  content: "";
@@ -556,22 +639,22 @@ a.clear-tutors{
  border: 1.5em solid transparent;
  z-index: -1;
 }
-.ribbon:before {
- left: -2em;
- border-right-width: 1.5em;
- border-left-color: transparent;
+.ribbon:before{
+ 	left: -2em;
+ 	border-right-width: 1.5em;
+ 	border-left-color: transparent;
 }
 .ribbon .ribbon-content:before{
- content: "";
- position: absolute;
- display: block;
- border-style: solid;
- border-color: rgba(10, 10, 10, 0.3) transparent transparent transparent;
- bottom: -1em;
+ 	content: "";
+ 	position: absolute;
+ 	display: block;
+ 	border-style: solid;
+ 	border-color: rgba(10, 10, 10, 0.3) transparent transparent transparent;
+ 	bottom: -1em;
 }
 .ribbon .ribbon-content:before {
- left: 0;
- border-width: 1em 0 0 1em;
+ 	left: 0;
+ 	border-width: 1em 0 0 1em;
 }
 
 /*Tutor List*/
@@ -625,6 +708,9 @@ a.clear-tutors{
 	text-align: center;
 	position: relative;
 	top:7px;
+}
+.tutor-list table tbody tr td:nth-child(2){
+	text-align: left;
 }
 .tutor-list form input[name="connectButton"]{
 	margin:15px auto;

@@ -50,96 +50,6 @@ $(function(){
         }
     });
 
-    //Submit Question
-    $('input[name="aSubmit"]').click(function(e){
-        e.preventDefault();
-
-        //disable all checkboxes for tutors that are busy
-        $('form#tutorList :input').each(function(){
-            var input = $(this);
-            if($(this).attr("data-tutor-status") == 1){
-                $(this).attr('disabled', true);
-            }
-        });
-        
-        var question = $('input[name="ask"]').val(); //get the question typed by user
-        $('p.user-question').html("\"" + question +"\""); //append question to header div
-        //show hidden divs
-        $('.tutor-list').fadeIn('fast');
-        $('.tutor-selected').fadeIn('fast');
-        var institution = $('#schoolSelect option:selected').val();
-        var category = $('select[name="category"]').val();
-        var level;
-        if(institution == "high school"){
-            level = $('select[name="highschool"]').val();
-        }
-        else if(institution == "university"){
-            level = $('select[name="university"]').val();
-        }
-        else{
-            level = "";
-        }
-        console.log(institution + " " + level + " " + category);
-    });
-
-    //set all busy tutors to show a red background
-    $('table#tutorTable tr td').each(function(){
-        var column = $(this);
-        console.log(column);
-        if(column.hasClass('busy')){
-            column.find('a').addClass('tutor-busy');
-        }
-    });
-    
-
-    //Tutor Selection
-    $('input[name="tutor"]').on('click', function(){
-            var tutor = $(this); //set tutor to checked/clicked checkbox
-            var tutor_id = $(this).attr('data-tutor-id'); //get the tutor id from the data attribute
-
-            //check if the tutor_id exists in the list of selected tutors
-            if(jQuery.inArray(tutor_id, tutorList) !== -1){
-                //if student deselects a tutor
-                $("#selectedTutors li[data-tutor-id='" + tutor_id + "']").remove(); //remove the li currently showing this tutor
-                tutorList.splice(jQuery.inArray(tutor_id, tutorList), 1); //remove the tutor id from the tutor list
-                //set the checkbox attribute to unchecked
-                $(this).attr('checked', ''); // For IE
-                $(this).checked = false;
-
-                tutorCount--;//decrement the tutor count
-                $('span.tutor-count').html(tutorCount);//append the new count to the page
-                console.log(tutor_id);
-                console.log(tutorList);
-            }
-            else{
-                //if student selects a tutor
-                //set the checkbox attribute to checked
-                $(this).attr('checked', 'checked'); 
-                $(this).checked = true;
-
-                //make a list containing the selected tutors name and id
-                var myTutor = {
-                    'tutor_info':{
-                        'tutor_name': tutor.attr('data-tutor-name'),
-                        'tutor_id': tutor.attr('data-tutor-id')
-                    }   
-                };
-                
-                $.each(myTutor, function(){
-                    //append the selected tutor to the page
-                    var item = '<li data-tutor-id="'+ myTutor.tutor_info['tutor_id'] +'"><a href="#">'+ myTutor.tutor_info['tutor_name'] + '</a></li>';
-                    $('ol#selectedTutors').hide().append(item).fadeIn('slow');
-                    //push the tutors id to the list of tutors id's
-                    tutorList.push(myTutor.tutor_info['tutor_id']);
-                    //increment count of tutors selected
-                    tutorCount++;
-                    //add the count to the page
-                    $('span.tutor-count').html(tutorCount);
-                    console.log(tutorList);
-                });
-            }
-        }
-    );
 
     //Clear selected tutors
     $('.clear-tutors').click(function(event){
@@ -149,7 +59,6 @@ $(function(){
         $("#selectedTutors li").remove(); //remove selected tutors from ol list
         $('input[name="tutor"]').attr('checked', false); //set all checked tutors to unchecked
         $('span.tutor-count').html("0"); //reset the count on the page
-        console.log(tutorList);
     });
 
     //Populate Level select box

@@ -2,6 +2,8 @@
 
 namespace Rayku\UserBundle\Entity;
 
+use Symfony\Component\Validator\Constraints\True;
+
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Entity\User as BaseUser;
 
@@ -24,7 +26,7 @@ class User extends BaseUser
 	 * @var \User
 	 *
 	 * @ORM\OneToOne(targetEntity="\Rayku\TutorBundle\Entity\Tutor", cascade={"persist"})
-	 * @ORM\JoinColumn(name="tutor_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="tutor_id", referencedColumnName="id", onDelete="SET NULL")
 	 */
 	private $tutor;
 	

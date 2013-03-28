@@ -124,8 +124,6 @@ class TutorController extends Controller
 	    		$acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
 	    		$aclProvider->updateAcl($acl);
     		}
-    	
-    		return $this->redirect($this->generateUrl('rayku_tutor_show', array('id' => $entity->getId())));
     	}
     	
     	return array(

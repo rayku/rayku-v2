@@ -12,8 +12,9 @@ class SessionRepository extends EntityRepository
 		$query = $qb
 			->select(array('s'))
 			->from('\Rayku\SessionBundle\Entity\Session', 'session')
-			->innerJoin('session.tutors', 't')
+			->innerJoin('session.potential_tutors', 't')
 			->where('t.id = :tutorId')
+			->andWhere('session.selected_tutor is NULL')
 			->setParameter('tutorId', $tutor_id)
 			->getQuery();
 		

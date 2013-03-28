@@ -126,7 +126,7 @@ services:
             - { name: kernel.event_listener, event: kernel.controller, method: onCoreController }
     rayku_ajax_listener:
         class: Rayku\UserBundle\EventListener\Ajax
-        arguments: [@templating]
+        arguments: [@kernel]
         tags:
             - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
             - { name: kernel.event_listener, event: kernel.view, method: onKernelView, priority:101 }

@@ -28,17 +28,18 @@ class TutorType extends AbstractType
     	$schoolAmountChoices = array_combine($schoolAmountChoices, $schoolAmountChoices);
 
         $builder
-            ->add('schoolName', NULL, array(
-            	'label' => 'School'		
-            ))
-            ->add('rate', NULL, array(
+        	->add('schoolName', NULL, array(
+        		'label' => 'School Name'		
+        	))
+        	->add('rate', NULL, array(
             	'label' => 'RP/Min'		
             ))
+            ->add('degree')
             ->add('schoolAmount', 'choice', array(
             	'label' => 'What best describes you?',
             	'choices' => $schoolAmountChoices,
             	'required' => true	
-          ))
+           ))
             ->add('subjects', 'entity', array(
             	'multiple' => true,
             	'expanded' => true,

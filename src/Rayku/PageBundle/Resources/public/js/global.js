@@ -186,7 +186,15 @@ function populateLevel(){
         $('#highschool select').attr('disabled', 'disabled');
     }
 }
-
+$(window).scroll(function(e){ 
+    $el = $('.tutor-selected'); 
+    if ($(this).scrollTop() > 200 && $el.css('position') != 'fixed'){ 
+        $('.tutor-selected').addClass('tutor-selected-scroll');
+    } 
+    else if($(this).scrollTop() < 200 && $el.css('position') == 'fixed'){
+        $('.tutor-selected').removeClass('tutor-selected-scroll');
+    }
+});
 $(document).ready(function(){
     //Custom checkbox skin
     $('li.checkboxes input').customcheckbox();

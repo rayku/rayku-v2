@@ -15,7 +15,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\SecureParam;
 use Rayku\TutorBundle\Entity\Tutor;
 use Rayku\TutorBundle\Form\TutorType;
-use Rayku\SessionBundle\Form\SessionTutorType;
+
+use Rayku\SessionBundle\Entity\Session;
+use Rayku\SessionBundle\Entity\SessionTutors;
+use Rayku\SessionBundle\Form\SessionType;
 
 /**
  * Tutor controller.
@@ -35,7 +38,7 @@ class TutorController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('RaykuTutorBundle:Tutor')->findAll();
         
-        $form = $this->createForm(new SessionTutorType());
+        $form = $this->createForm(new SessionType());
 
         return array(
         	'form' => $form->createView(),

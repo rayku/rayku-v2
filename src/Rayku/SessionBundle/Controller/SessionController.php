@@ -162,8 +162,6 @@ class SessionController extends Controller
 	 */
 	public function postSessionAction()
 	{
-		echo '<pre>';
-		die(__LINE__.' '.__FILE__);
 		return $this->processForm(new Session());
 	}
 	

@@ -14,7 +14,7 @@ class SessionType extends AbstractType
         $builder
             ->add('question')
             ->add('subject')
-            ->add('tutors', 'collection', array(
+            ->add('potential_tutors', 'collection', array(
             	'type' => new SessionTutorType(),
             	'allow_add' => true,
             	'by_reference' => false

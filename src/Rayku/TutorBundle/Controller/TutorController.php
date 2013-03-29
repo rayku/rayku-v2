@@ -39,7 +39,6 @@ class TutorController extends Controller
         $entities = $em->getRepository('RaykuTutorBundle:Tutor')->findAll();
         
         $form = $this->createForm(new SessionType());
-
         return array(
         	'form' => $form->createView(),
             'entities' => $entities,

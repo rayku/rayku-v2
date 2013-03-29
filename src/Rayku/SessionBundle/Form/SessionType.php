@@ -2,22 +2,20 @@
 
 namespace Rayku\SessionBundle\Form;
 
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Rayku\SessionBundle\Form\SessionTutorsType;
 
 class SessionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('question')
-            ->add('subject')
+            ->add('question', 'hidden')
             ->add('potential_tutors', 'collection', array(
-            	'type' => new SessionTutorType(),
-            	'allow_add' => true,
-            	'by_reference' => false
+            	'type' => new SessionTutorsType(),
+            	'allow_add' => true
             ))
         ;
     }
@@ -26,7 +24,7 @@ class SessionType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Rayku\SessionBundle\Entity\Session',
-            'csrf_protection'   => false
+        	'csrf_protection' => false
         ));
     }
 

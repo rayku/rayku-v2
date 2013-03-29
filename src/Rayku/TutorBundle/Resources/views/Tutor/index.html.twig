@@ -1,17 +1,6 @@
 {% extends "::empty.html.twig" %}
 
 {% block content %}
-
-<form action="{{ path('post_session') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
-</form>
-
-
-
-
   <h1 class="ribbon">
     <strong class="ribbon-content">Tutor List</strong>
   </h1>
@@ -35,21 +24,16 @@
           <td>{{ tutor.schoolAmount }} From {{ tutor.schoolName }}</td>
           <td>{{ tutor.rate }} RP/min</td>
           <td data-status="online">Online</td>
-          <td><input type="checkbox" name="tutors[tutors][]" value="{{ tutor.id }}" data-tutor-id="{{ tutor.id }}" data-tutor-name="{{ tutor.user }}"></td>
+          <td><input type="checkbox" name="potential_tutors[0][tutor]" value="{{ tutor.id }}" data-tutor-id="{{ tutor.id }}" data-tutor-name="{{ tutor.user }}"></td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
-    <input type="submit" class="bbutton" value="Connect" name="connectButton">
+    <input type="submit" class="bbutton" id="tutorConnect">
   </form>
   
 <script type="text/javascript">
 $(document).ready(function(){    
-    //Connect to selected tutors
-    $('input[name="aSubmit"]').click(function(e){
-    
-    });
-
     //Tutor Selection
     $('input[name="tutor"]').on('click', function(){
     	var tutor = $(this); //set tutor to checked/clicked checkbox

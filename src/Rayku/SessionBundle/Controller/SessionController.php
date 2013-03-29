@@ -173,15 +173,9 @@ class SessionController extends Controller
 		if($form->isValid()){
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($session);
-			
-			//@todo this shouldn't be necessary http://symfony.com/doc/2.1/cookbook/form/form_collections.html
-			foreach($session->getTutors() as $tutor)
-			{
-				$tutor->setSession($session);
-				$em->persist($tutor);
-			}
 			$em->flush();
-			return $session;
+			// @todo put this url in a config somewhere
+			return $this->redirect('http://whiteboard.rayku.com/room/'.$session->getId());
 		}
 		return $form;
 	}

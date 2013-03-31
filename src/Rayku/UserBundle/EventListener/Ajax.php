@@ -23,7 +23,6 @@ class Ajax
 	public function onKernelView($event)
 	{
 		$request = $event->getRequest();
-		
 		if ($request->isXmlHttpRequest() && $request->getMethod() == 'POST') {
 			$formError = false;
 			$return['success'] = true;			

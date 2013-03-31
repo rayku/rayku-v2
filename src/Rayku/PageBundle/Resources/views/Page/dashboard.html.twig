@@ -137,20 +137,25 @@
                     <h5>Find suitable tutor for</h5>
                   </div>
                   <div class="large-3 columns school">
+                    <!--
                     <select id="schoolSelect" class="medium" name="school">
                       <option>Choose Institution</option>
                       <option value="high school" name="selectlevel">High School</option>
                       <option value="university" name="selectlevel">University</option>
                     </select>
+                    //-->
                   </div>
 
                   <div class="large-3 columns institution" id="placeholder">
+                    <!--
                     <select id="instSelect" class="medium" disabled>
                         <option value="Choose" name="choose" id="choose">Select An Institution</option>
                     </select>
+                    //-->
                   </div>
 
                   <div class="large-3 columns institution" id="highschool">
+                    <!--
                     <select name="highschool" class="medium" disabled>
                         <option value="Choose" name="choose" id="choose">Choose Grade</option>
                         <option value="grade 1">Grade 1</option>
@@ -166,8 +171,10 @@
                         <option value="grade 11">Grade 11</option>
                         <option value="grade 12">Grade 12</option>
                     </select>
+                    //-->
                   </div>
                   <div class="large-3 columns institution" id="university">
+                    <!--
                     <select name="university" class="medium" disabled>
                         <option value="Choose" name="choose" id="choose">Choose Year</option>
                         <option value="year 1">Year 1</option>
@@ -176,6 +183,7 @@
                         <option value="year 4">Year 4</option>
                         <option value="year 5">Year 5</option>
                     </select>
+                    //-->
                   </div>
 
                   <div class="large-3 columns category">
@@ -207,106 +215,7 @@
       
     <!--Tutor List-->
     <div class="row tutor-list">
-      <h1 class="ribbon">
-        <strong class="ribbon-content">Tutors Online</strong>
-      </h1>
-      <form id="tutorList">
-        <table id="tutorTable">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th width="130px">Name</th>
-              <th width="470px" class="short-bio">Short Bio</th>
-              <th>Rate/Min</th>
-              <th>Status</th>
-              <th>Connect</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td><a href=#>Nick Agopoulos</a></td>
-              <td>Under Graduate Degree Holder From Ryerson University, Economics.</td>
-              <td>20.00RP</td>
-              <td data-status="online">Online</td>
-              <td><input type="checkbox" name="tutor" data-tutor-id="1" data-tutor-name="Nick Agopoulos"></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td><a href=#>Flint Ago</a></td>
-              <td>Under Graduate Degree Holder From Wilfrid Laurier University, Mathematics</td>
-              <td>35.00RP</td>
-              <td data-status="online">Online</td>
-              <td><input type="checkbox" name="tutor" data-tutor-id="2" data-tutor-name="Flint Ago"></td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td><a href=#>Naef Poulos</a></td>
-              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-              <td>14.00RP</td>
-              <td data-status="online">Online</td>
-              <td><input type="checkbox" name="tutor" data-tutor-id="3" data-tutor-name="Naef Poulos"></td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td><a href=#>Adam Opoulos</a></td>
-              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-              <td>20.00RP</td>
-              <td data-status="1" class="busy"><a>Busy</a></td>
-              <td><input type="checkbox" name="tutor" data-tutor-id="4" data-tutor-status="1" data-tutor-name="Adam Opoulos"></td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td><a href=#>Clint Gomez</a></td>
-              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-              <td>35.00RP</td>
-              <td data-status="online">Online</td>
-              <td><input type="checkbox" name="tutor" data-tutor-id="5" data-tutor-name="Clint Gomez"></td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td><a href=#>Neal Poul</a></td>
-              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-              <td>14.00RP</td>
-              <td data-status="online">Online</td>
-              <td><input type="checkbox" name="tutor" data-tutor-id="6" data-tutor-name="Neal Poul"></td>
-            </tr>
-            <tr>
-              <td>7</td>
-              <td><a href=#>Nae Poulo</a></td>
-              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-              <td>14.00RP</td>
-              <td data-status="1" class="busy"><a>Busy</a></td>
-              <td><input type="checkbox" name="tutor" data-tutor-id="7" data-tutor-status="1" data-tutor-name="Nae Poulo"></td>
-            </tr>
-            <tr>
-              <td>8</td>
-              <td><a href=#>Ada Poulo</a></td>
-              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-              <td>20.00RP</td>
-              <td data-status="online">Online</td>
-              <td><input type="checkbox" name="tutor" data-tutor-id="8" data-tutor-name="Ada Poulo"></td>
-            </tr>
-            <tr>
-              <td>9</td>
-              <td><a href=#>Lint Gomez</a></td>
-              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-              <td>35.00RP</td>
-              <td data-status="1" class="busy"><a>Busy</a></td>
-              <td><input type="checkbox" name="tutor" data-tutor-id="9" data-tutor-status="1" data-tutor-name="Lint Gomez"></td>
-            </tr>
-            <tr>
-              <td>10</td>
-              <td><a href=#>Nea Pou</a></td>
-              <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-              <td>14.00RP</td>
-              <td data-status="online">Online</td>
-              <td><input type="checkbox" name="tutor" data-tutor-id="10" data-tutor-name="Nea Pou"></td>
-            </tr>
-          </tbody>
-        </table>
-        <input type="submit" class="bbutton" value="Connect" name="connectButton">
-      </form>
+     Loading ...
     </div>
   </div>
   <!--End Tutor List-->
@@ -409,6 +318,61 @@ $(document).ready(function(){
       console.log('Checked');
       $('#turnTutorStatusOff').foundation('reveal', 'open');
   })
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+    //Submit Question
+    $('input[name="aSubmit"]').click(function(e){
+    	e.preventDefault();
+    	$('.tutor-list').html('Loading ... ');
+        $.ajax('{{path('rayku_tutor')}}')
+		    .always(function(xhr, status) { 
+				if(status === 'error' || !xhr.responseText){
+					$('.tutor-list').html('There was an error loading tutors');
+				}else{
+					$('.tutor-list').html(xhr.responseText);
+				}
+			});
+        $('.tutor-list').fadeIn('slow');
+        $('.tutor-selected').fadeIn('fast');
+        
+        
+        //disable all checkboxes for tutors that are busy
+        $('form#tutorList :input').each(function(){
+            var input = $(this);
+            if($(this).attr("data-tutor-status") == 1){
+                $(this).attr('disabled', true);
+            }
+        });
+        
+        /*
+        var question = $('input[name="ask"]').val(); //get the question typed by user
+        $('p.user-question').html("\"" + question +"\""); //append question to header div
+        var institution = $('#schoolSelect option:selected').val();
+        var category = $('select[name="category"]').val();
+        var level;
+        if(institution == "high school"){
+            level = $('select[name="highschool"]').val();
+        }
+        else if(institution == "university"){
+            level = $('select[name="university"]').val();
+        }
+        else{
+            level = "";
+        }
+        console.log(institution + " " + level + " " + category);
+        */
+    });
+
+    //set all busy tutors to show a red background
+    $('table#tutorTable tr td').each(function(){
+        var column = $(this);
+        console.log(column);
+        if(column.hasClass('busy')){
+            column.find('a').addClass('tutor-busy');
+        }
+    });
 });
 </script>
 {% endblock %}

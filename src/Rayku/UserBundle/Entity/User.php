@@ -70,8 +70,12 @@ class User extends BaseUser
      */
     public function getIsTutor()
     {
+    	$deletedAt = NULL;
     	try{
-    		$deletedAt = $this->getTutor()->getDeletedAt();
+    		$tutor = $this->getTutor();
+    		if(method_exists($tutor, 'getDeletedAt')){
+	    		$deletedAt = $this->getTutor()->getDeletedAt();
+    		}
     	}catch(\Exception $e){
     		return false;
     	}

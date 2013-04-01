@@ -30,6 +30,13 @@ class User extends BaseUser
 	 */
 	private $tutor;
 	
+	/**
+	 * @var integer
+	 * 
+	 * @ORM\Column(name="points", type="integer", nullable=false)
+	 */
+	private $points;
+	
     /**
      * Get id
      *
@@ -80,5 +87,28 @@ class User extends BaseUser
     		return false;
     	}
     	return ($deletedAt == null) ? true : false;
+    }
+
+    /**
+     * Set points
+     *
+     * @param integer $points
+     * @return User
+     */
+    public function setPoints($points)
+    {
+        $this->points = $points;
+    
+        return $this;
+    }
+
+    /**
+     * Get points
+     *
+     * @return integer 
+     */
+    public function getPoints()
+    {
+        return $this->points;
     }
 }

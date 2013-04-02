@@ -5,6 +5,7 @@ namespace Rayku\UserBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use Rayku\UserBundle\Entity\User;
 use Rayku\UserBundle\Form\UserType;
@@ -24,7 +25,6 @@ class UserController extends Controller
     public function postUserAction(User $user)
     {
     	if($user->getId() !== $this->getUser()->getId()){
-    		die('access denied');
     		throw new AccessDeniedException();
     	}
     	$request = $this->getRequest();

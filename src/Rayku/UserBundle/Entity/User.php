@@ -135,7 +135,7 @@ class User extends BaseUser
     	}catch(\Exception $e){
     		return false;
     	}
-    	return ($deletedAt == null) ? true : false;
+    	return ($deletedAt == null) ? false : true;
     }
 
     /**

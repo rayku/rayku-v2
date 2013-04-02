@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="rayku_tutor",uniqueConstraints={@ORM\UniqueConstraint(name="user_idx", columns={"user_id"})})
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Rayku\TutorBundle\Entity\TutorRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class Tutor

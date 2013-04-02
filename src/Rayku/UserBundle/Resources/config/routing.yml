@@ -1,0 +1,4 @@
+rayku_user_rest:
+    resource: Rayku\UserBundle\Controller\UserController
+    type:     rest
+    prefix:   /

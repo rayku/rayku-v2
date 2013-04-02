@@ -40,7 +40,7 @@
         <!-- User Profile -->
         <div class="row user-profile">
             <div class="large-12 columns user-profile-top">
-                <h6>760.00RP</h6>
+                <h6><a href="#" data-reveal-id="buyPointsModal">{{app.user.points}}RP</a></h6>
                 <h5>Student</h5>
             </div>
 
@@ -320,6 +320,26 @@ $(document).ready(function(){
   })
 });
 </script>
+<div id="buyPointsModal" class="reveal-modal medium">
+	<div class="row">
+		<form action="/paypal.php" method="post">
+			<input type="hidden" name="loginid" value="{{app.user.id}}" />
+			<input type="hidden" name="pack" value="500" />
+			<input type="hidden" name="amount" value="5" />
+			<input type="hidden" name="quantity" value="1" />
+			Buy
+			<select name="points">
+				<option value="500" selected="selected">500</option>
+				<option value="1000">1000</option>
+				<option value="2500">2500</option>
+				<option value="5000">5000</option>
+				<option value="10000">10000</option>
+			</select> for $5.00
+		<input type="submit" name="Buy" />
+		</form>
+	</div>
+</div>
+
 <script type="text/javascript">
 $(document).ready(function(){
     //Submit Question
@@ -345,24 +365,7 @@ $(document).ready(function(){
                 $(this).attr('disabled', true);
             }
         });
-        
-        /*
-        var question = $('input[name="ask"]').val(); //get the question typed by user
-        $('p.user-question').html("\"" + question +"\""); //append question to header div
-        var institution = $('#schoolSelect option:selected').val();
-        var category = $('select[name="category"]').val();
-        var level;
-        if(institution == "high school"){
-            level = $('select[name="highschool"]').val();
-        }
-        else if(institution == "university"){
-            level = $('select[name="university"]').val();
-        }
-        else{
-            level = "";
-        }
-        console.log(institution + " " + level + " " + category);
-        */
+
     });
 
     //set all busy tutors to show a red background

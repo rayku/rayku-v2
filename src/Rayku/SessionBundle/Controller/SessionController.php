@@ -156,6 +156,7 @@ class SessionController extends Controller
 	/**
 	 * @View()
 	 * @ApiDoc(
+	 *   resource=true,
 	 *   description="Create a new session object",
 	 *   input="Rayku\SessionBundle\Form\SessionType"
 	 * )

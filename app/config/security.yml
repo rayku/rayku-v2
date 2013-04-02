@@ -51,6 +51,7 @@ security:
         
         # Todo secure with HMAC
         - { path: ^/session, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/users, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         # Secure rest of the site
         - { path: ^/, roles: ROLE_USER }

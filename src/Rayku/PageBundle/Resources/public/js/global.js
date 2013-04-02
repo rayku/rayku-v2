@@ -20,11 +20,11 @@ $(function(){
 
     //Show dropdown navigation
     $('a.logged-in-as').on('mouseenter', function(){
-        $('div.submenu').show(30, function(){
+        $('div.submenu').slideDown(30, function(){
                 $(this).css('display','block');
                 $('a.logged-in-as').css('background', 'rgba(10, 10, 10, 0.4)');
                 $(this).mouseleave(function(){
-                    $(this).hide(10);
+                    $(this).slideUp(10);
                     $('a.logged-in-as').css('background', 'transparent');
                 }); 
             });
@@ -70,7 +70,6 @@ $(function(){
     //Edit user profile
     $('a.edit-button').on('click',function(event){
         event.preventDefault();
-        //$('ul.user-profile-buttons li').html('<a href="#" class="bbutton done-button"><span class="raphael">></span>Save</a>');
         if($(this).hasClass('edit-button')){
             $(this).hide();
             $('.done-button').show();
@@ -80,7 +79,6 @@ $(function(){
 
     $('a.done-button').on('click', function(event){
         event.preventDefault();
-        console.log('clicked');
         if($(this).hasClass('done-button')){
             $('a.edit-tool').hide(100);
             $(this).hide();
@@ -91,6 +89,7 @@ $(function(){
     $('a.edit-tool').on('click', function(event){
         event.preventDefault();
         console.log('clicked');
+        $(this).siblings('form.user-profile-edit-form').hide(100);
         $(this).next('form.user-profile-edit-form').show(100);
     });
     $('a.close-edit').on('click', function(event){

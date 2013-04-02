@@ -557,8 +557,8 @@ form.user-profile-edit-form input{
 }
 form.user-profile-edit-form a.close-edit{
 	position: absolute;
-	top:2px;
-	right:10px;
+	top:0px;
+	left:-17px;
 }
 .ask{
 	padding-top:15px;

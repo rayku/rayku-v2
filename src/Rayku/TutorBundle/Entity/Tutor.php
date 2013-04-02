@@ -16,6 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Tutor
 {
+	const expire_online = '-10 minutes';
+	
     /**
      * @var integer
      *
@@ -114,6 +116,15 @@ class Tutor
     public function __toString()
     {
     	return $this->getUser()->__toString();
+    }
+    
+    public function getIsOnline()
+    {
+    	$lastOnline = $this->getOnlineWeb();
+    	if($lastOnline instanceof \DateTime && $lastOnline->diff(new \DateTime(self::expire_online))->format('%i') > 0){
+    		return true;
+    	}
+    	return false;
     }
 
     /**

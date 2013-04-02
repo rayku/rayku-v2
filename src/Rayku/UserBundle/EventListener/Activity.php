@@ -31,14 +31,12 @@ class Activity
 		{
 			$user = $this->context->getToken()->getUser();
 		}
-		if($user instanceof User)
+		if($user instanceof User && $user->getIsTutor())
 		{
-			/*
 			$tutor = $user->getTutor();
 			$tutor->setOnlineWeb(new \DateTime());
 			$this->em->persist($tutor);
 			$this->em->flush($tutor);
-			*/
 		}
 	}
 }

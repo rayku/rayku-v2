@@ -18,11 +18,19 @@
                     </div>
     		    </div>
     		</div>
-            <div class="row tutor-status-bar">
-                <div class="small-12 columns tutor-status">
-                    <h5>Status <span>Online</span></h5>
-                </div>
-            </div>
+    		{% if app.user.isTutor %}
+	            <div class="row tutor-status-bar">
+	                <div class="small-12 columns tutor-status">
+	                    <h5>Status <span>
+	                    {% if app.user.tutor.isOnline %}
+	                    	Online
+	                    {% else %}
+	                    	Offline
+	                    {% endif %}
+	                    </span></h5>
+	                </div>
+	            </div>
+	        {% endif %}
 
             <div class="row tutor-selected">
                 <h5><span class="tutor-count">0</span> <span class="tright">Tutor(s) Selected</span> </h5>

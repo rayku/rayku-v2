@@ -26,6 +26,7 @@ class Activity
 	 */
 	public function onCoreController(FilterControllerEvent $event)
 	{
+		return true;
 		$this->em->getFilters()->enable('soft_deleteable');
 		$this->em->clear();
 		$user = NULL;

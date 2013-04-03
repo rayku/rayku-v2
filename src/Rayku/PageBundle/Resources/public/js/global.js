@@ -52,16 +52,6 @@ $(function(){
         }
     });
 
-    //Clear selected tutors
-    $('.clear-tutors').click(function(event){
-        event.preventDefault();
-        tutorCount = 0; //set the selected tutor count back to 0
-        tutorList.splice(0, tutorList.length); //delete all tutors from the tutor list
-        $("#selectedTutors li").remove(); //remove selected tutors from ol list
-        $('input[name="tutor"]').attr('checked', false); //set all checked tutors to unchecked
-        $('span.tutor-count').html("0"); //reset the count on the page
-    });
-
     //Populate level select box
     $('#schoolSelect').on('change', function(){
         populateLevel(); //call the populate function
@@ -77,8 +67,7 @@ $(function(){
         }
     });
 
-    $('a.done-button').on('click', function(event){
-        event.preventDefault();
+    $('.done-button').on('click', function(event){
         if($(this).hasClass('done-button')){
             $('a.edit-tool').hide(100);
             $(this).hide();
@@ -88,7 +77,6 @@ $(function(){
 
     $('a.edit-tool').on('click', function(event){
         event.preventDefault();
-        console.log('clicked');
         $(this).siblings('form.user-profile-edit-form').hide(100);
         $(this).next('form.user-profile-edit-form').show(100);
     });

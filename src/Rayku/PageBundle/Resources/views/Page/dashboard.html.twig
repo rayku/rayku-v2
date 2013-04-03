@@ -170,11 +170,11 @@
             <script>
             $(function(){
                 var change = 0;
+                var valarr = []; //declare an empty array
                 //On submitting each individual form
                 $('form.user-profile-edit-form').on('submit', function(event){
                     event.preventDefault(); //prevent reloading page by clicking submit
                     var current_form_name = $(this).attr('name'); //get the current form name
-                    var valarr = []; //declare an empty array
                     console.log(current_form_name);
 
                     //for each input field with class .form-field within the current form
@@ -182,10 +182,11 @@
                         var field_value = $(this).val(); //get the field value
                         var field_name = $(this).attr('name').split("_"); //get the field name and split it to get the appropriate identifier
 
-                        //set the equivalent input field in master form to the value of the current input field
-                        $('form.user-profile-master-form input[name="'+ field_name[1] +'"]').val(field_value);
-                        valarr.push(field_value); //push the value into an array
-
+                        if(field_value !== ""){
+                            //set the equivalent input field in master form to the value of the current input field
+                            $('form.user-profile-master-form input[name="'+ field_name[1] +'"]').val(field_value);
+                            valarr.push(field_value); //push the value into an array
+                        }
                         //Log to console
                         console.log(field_name);
                         console.log(field_value);
@@ -213,15 +214,15 @@
                         //if input value is not null print it
                         if($(this).val() !== ""){
                             console.log('Value: ' + $(this).val());
-                            change++;
                         }
                     });
+                    
                     //determine if any change was made
-                    if (change > 0){
+                    if (valarr.length > 0){
                         console.log('Changes Were Made');
-                        change = 0;
+                        valarr.splice(0, valarr.length); //empty valarr
                     }
-                    else if(change === 0){
+                    else if(valarr.length === 0){
                         console.log('No Change');
                     }
                 });

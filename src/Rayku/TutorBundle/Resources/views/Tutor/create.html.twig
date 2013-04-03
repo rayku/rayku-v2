@@ -7,7 +7,7 @@
     <p>Before activating your tutor status, please fill out as much as possible to completeyour tutor profile.</p>
   </div>
   <div class="large-12 columns">
-    <form action="{{ path('rayku_tutor_save') }}" method="post" {{ form_enctype(form) }} id="{{ form.name }}">
+    <form class="custom" action="{{ path('rayku_tutor_save') }}" method="post" {{ form_enctype(form) }} id="{{ form.name }}">
       <div class="row">
         <div class="row subjects">
           <div class="large-12 columns">

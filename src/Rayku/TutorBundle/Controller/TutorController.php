@@ -37,7 +37,7 @@ class TutorController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('RaykuTutorBundle:Tutor')->findOnlineTutors(Tutor::expire_online);
-        return array('entities' => $entities,);
+        return array('entities' => $entities);
     }
 
     /**

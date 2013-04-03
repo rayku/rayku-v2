@@ -22,11 +22,7 @@
 	            <div class="row tutor-status-bar">
 	                <div class="small-12 columns tutor-status">
 	                    <h5>Status <span>
-	                    {% if app.user.tutor.isOnline %}
-	                    	Online
-	                    {% else %}
-	                    	Offline
-	                    {% endif %}
+	                    Online
 	                    </span></h5>
 	                </div>
 	            </div>
@@ -54,7 +50,10 @@
             <div class="large-12 columns user-rayku-points">
                 <form class="buy-rayku-points custom" name="buy_rayku_points">
                     <div class="row">
-                        <div class="large-6 large-offset-2 columns">
+                        <div class="large-3 columns ask-q">
+                            <h5>Buy Rayku Points</h5>
+                        </div>
+                        <div class="large-6 columns">
                             <label for="customDropdown1">You have <span class="rpoints">0</span> Rayku Points. Buy Some More.</label>
                             <select id="customDropdown1" class="large">
                                 <option DISABLED>Points</option>
@@ -65,7 +64,7 @@
                                 <option>10000 Points for $100</option>
                             </select>
                         </div>
-                        <div class="large-4 columns">
+                        <div class="large-3 columns">
                             <input type="submit" class="bbutton" value="Buy">
                         </div>
                     </div>
@@ -216,7 +215,7 @@
                             console.log('Value: ' + $(this).val());
                         }
                     });
-                    
+
                     //determine if any change was made
                     if (valarr.length > 0){
                         console.log('Changes Were Made');
@@ -329,105 +328,8 @@
   <!--End Tutor List-->
 </div>
 
-<div id="myTutorModal" class="reveal-modal medium">
-  <h2>Complete Your Tutor Profile</h2>
-  <div class="large-12 columns">
-    <p>Before activating your tutor status, please fill out as much as possible to completeyour tutor profile.</p>
-  </div>
-  <div class="large-12 columns">
-    <form class="custom">
-      <div class="row">
-        <div class="row subjects">
-          <div class="large-12 columns">
-            <label>What subjects are you comfortable teaching?</label>
-            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> General Math</label>
-            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> Pre-Algebra</label>
-            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> Geometry</label>
-            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> Algebra</label>
-            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> Trigonometry</label>
-            <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;"><span class="custom checkbox"></span> Calculus</label>
-          </div>
-        </div>
+{% render url('rayku_tutor_new') %}
 
-        <div class="row describes">
-          <div class="large-12 columns">
-            <label>What best describes you?</label>
-            <select id="customDropdown1" class="large">
-              <option DISABLED>What describes you</option>
-              <option>Freshman</option>
-              <option>Sophomore</option>
-              <option>Junior</option>
-              <option>Senior</option>
-              <option selected>Under Graduate Degree Holder</option>
-              <option>Masters Sutdent</option>
-              <option>Masters Degree Holder</option>
-              <option>Phd Candidate</option>
-              <option>Phd Degree Holder</option>
-              <option>Teaching Assistant</option>
-              <option>Professor</option>
-              <option>Middle School Teacher</option>
-              <option>High School Teacher</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row schoolname">  
-          <div class="large-12 columns">
-            <label>Schoo Name</label>
-            <input type="text" name="schoolname" placeholder="Ryerson University">
-          </div>
-        </div>
-
-        <div class="row degree">
-          <div class="large-12 columns">
-            <label>Degree</label>
-            <input type="text" name="degree" placeholder="Economics">
-          </div>
-        </div>
-
-        <div class="row listing-preview">
-          <div class="large-12 columns">
-            <label>Listing Preview</label>
-            <p>(When students search for tutors, you will appear as):</p>
-            <p class="preview">Under Graduate Degree Holder From Ryerson University Economics</p>
-          </div>
-        </div>
-      </div>
-      <input type="submit" class="bbutton" value="Save & Activate Tutor Status" name="tutorStatusButton">
-    </form>
-  </div>
-  <a class="close-reveal-modal">&#215;</a>
-</div>
-<div id="turnTutorStatusOff" class="reveal-modal medium">
-    <div class="row">
-        <div class="large-12 columns">
-            <h4>Are you sure you want to turn off your tutor status?</h4>
-        </div>
-    </div>
-    <form>
-        <div class="row">
-            <div class="large-2 push-8 columns">
-                <input type="submit" class="bbutton" value="Yes" name="tutorStatusButton">
-            </div>
-            <div class="large-2 columns">
-                <input type="submit" class="bbutton" value="No" name="tutorStatusButton">
-            </div>
-        </div>
-    </form>
-    <a class="close-reveal-modal">&#215;</a>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){
-  $('#tutorOn').click(function(){
-      console.log('Checked');
-      $('#myTutorModal').foundation('reveal', 'open');
-  })
-  $('#tutorOff').click(function(){
-      console.log('Checked');
-      $('#turnTutorStatusOff').foundation('reveal', 'open');
-  })
-});
-</script>
 <div id="buyPointsModal" class="reveal-modal medium">
 	<div class="row">
 		<form action="/paypal.php" method="post">
@@ -451,8 +353,9 @@ $(document).ready(function(){
 <script type="text/javascript">
 $(document).ready(function(){
     //Submit Question
-    $('input[name="aSubmit"]').click(function(e){
-    	e.preventDefault();
+    $('input[name="aSubmit"]').click(function(event){
+    	event.preventDefault();
+         console.log("Hello");
     	$('.tutor-list').html('Loading ... ');
         $.ajax('{{path('rayku_tutor')}}')
 		    .always(function(xhr, status) { 

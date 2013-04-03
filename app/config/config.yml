@@ -51,7 +51,7 @@ doctrine:
                 auto_mapping: true
                 mappings: ~
                 filters:
-                    soft_deleteable:
+                    soft-deleteable:
                         class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                         enabled: true
 

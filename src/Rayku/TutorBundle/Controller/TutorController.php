@@ -36,13 +36,8 @@ class TutorController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('RaykuTutorBundle:Tutor')->findAll();
-        
-        $form = $this->createForm(new SessionType());
-        return array(
-        	'form' => $form->createView(),
-            'entities' => $entities,
-        );
+        $entities = $em->getRepository('RaykuTutorBundle:Tutor')->findOnlineTutors(Tutor::expire_online);
+        return array('entities' => $entities,);
     }
 
     /**
@@ -74,8 +69,8 @@ class TutorController extends Controller
     	$em->remove($entity);
     	$em->flush();
     	
-    	return new Response(json_encode(
-    		array('success' => true)), 
+    	return new Response(
+    		json_encode(array('success' => true)), 
     		200, 
     		array('Content-Type'=>'application/json')
     	);
@@ -87,18 +82,24 @@ class TutorController extends Controller
      * @Route("/save", name="rayku_tutor_save")
      * @Method("POST")
      * @Template("RaykuTutorBundle:Tutor:create.html.twig")
+     * @todo https://github.com/l3pp4rd/DoctrineExtensions/issues/656
      */
     public function newAction(Request $request)
     {
     	$em = $this->getDoctrine()->getManager();
     	$em->getFilters()->disable('soft_deleteable');
+    	$em->clear();
+    	    	
     	$entity = $em->getRepository('RaykuTutorBundle:Tutor')->findOneByUser($this->getUser());
     	if(!$entity){
     		$entity = new Tutor();
     	}else{
     		$entity->setDeletedAt(NULL);
     	}
-    	$entity->setUser($this->getUser());
+    	
+    	// Since we cleared doctrine above need to get a new user entity from the DB 
+    	$user = $em->getRepository('RaykuUserBundle:User')->find($this->getUser()->getId());
+    	$entity->setUser($user);
         return $this->processForm($request, $entity);
     }
     
@@ -111,7 +112,6 @@ class TutorController extends Controller
     	if ($form->isValid()) {
     		$em = $this->getDoctrine()->getManager();
     		$em->persist($entity);
-	    	$em->persist($this->getUser());
     		$em->flush();
     		
     		if($new){
@@ -136,7 +136,7 @@ class TutorController extends Controller
     		'form'   => $form,
     	);
     }
-
+    
     /**
      * Displays a form to create a new Tutor entity.
      *
@@ -148,6 +148,8 @@ class TutorController extends Controller
     {
     	$em = $this->getDoctrine()->getManager();
     	$em->getFilters()->disable('soft_deleteable');
+    	$em->clear();
+    	
     	$entity = $em->getRepository('RaykuTutorBundle:Tutor')->findOneByUser($this->getUser());
     	if(!$entity){
     		$entity = new Tutor();

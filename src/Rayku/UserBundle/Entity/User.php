@@ -26,7 +26,7 @@ class User extends BaseUser
 	 * @var \User
 	 *
 	 * @ORM\OneToOne(targetEntity="\Rayku\TutorBundle\Entity\Tutor", cascade={"persist"})
-	 * @ORM\JoinColumn(name="tutor_id", referencedColumnName="id", onDelete="SET NULL")
+	 * @ORM\JoinColumn(name="tutor_id", referencedColumnName="id")
 	 */
 	private $tutor;
 	
@@ -35,7 +35,7 @@ class User extends BaseUser
 	 * 
 	 * @ORM\Column(name="points", type="integer", nullable=false)
 	 */
-	private $points;
+	private $points = 0;
 	
 	/**
 	 * @var string
@@ -135,7 +135,7 @@ class User extends BaseUser
     	}catch(\Exception $e){
     		return false;
     	}
-    	return ($deletedAt == null) ? true : false;
+    	return ($deletedAt == null) ? false : true;
     }
 
     /**

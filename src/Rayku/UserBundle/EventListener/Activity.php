@@ -26,12 +26,14 @@ class Activity
 	 */
 	public function onCoreController(FilterControllerEvent $event)
 	{
+		$this->em->getFilters()->enable('soft_deleteable');
+		$this->em->clear();
 		$user = NULL;
 		if($this->context->getToken())
 		{
 			$user = $this->context->getToken()->getUser();
 		}
-		if($user instanceof User && $user->getIsTutor())
+		if($user instanceof User && $user->getIsTutor() && null === $user->getTutor()->getDeletedAt())
 		{
 			$tutor = $user->getTutor();
 			$tutor->setOnlineWeb(new \DateTime());

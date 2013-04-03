@@ -82,6 +82,7 @@ class TutorController extends Controller
      * @Route("/save", name="rayku_tutor_save")
      * @Method("POST")
      * @Template("RaykuTutorBundle:Tutor:create.html.twig")
+     * @todo https://github.com/l3pp4rd/DoctrineExtensions/issues/656
      */
     public function newAction(Request $request)
     {
@@ -96,7 +97,9 @@ class TutorController extends Controller
     		$entity->setDeletedAt(NULL);
     	}
     	
-    	$entity->setUser($this->getUser());
+    	// Since we cleared doctrine above need to get a new user entity from the DB 
+    	$user = $em->getRepository('RaykuUserBundle:User')->find($this->getUser()->getId());
+    	$entity->setUser($user);
         return $this->processForm($request, $entity);
     }
     
@@ -109,7 +112,6 @@ class TutorController extends Controller
     	if ($form->isValid()) {
     		$em = $this->getDoctrine()->getManager();
     		$em->persist($entity);
-	    	$em->persist($this->getUser());
     		$em->flush();
     		
     		if($new){

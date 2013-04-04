@@ -27,6 +27,9 @@ class SessionController extends Controller
 	 */
 	public function getSessionsAction()
 	{
+		if(!$this->getUser()->getIsTutor()){
+			return array();
+		}
 		$em = $this->getDoctrine()->getManager();
 		$sessions = $em->getRepository('RaykuSessionBundle:Session')->findAllActiveByTutor($this->getUser()->getTutor()->getId());
 		
@@ -174,9 +177,14 @@ class SessionController extends Controller
 		if($form->isValid()){
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($session);
+			// @todo shouldn't be necessary
+			foreach($session->getPotentialTutors() as $potentialTutor){
+				$potentialTutor->setSession($session);
+				$em->persist($potentialTutor);
+			}
 			$em->flush();
 			// @todo put this url in a config somewhere
-			return $this->redirect('http://whiteboard.rayku.com/room/'.$session->getId());
+			return $this->redirect('http://whiteboard.rayku.com/room/'.$session->getId().'/student');
 		}
 		return $form;
 	}

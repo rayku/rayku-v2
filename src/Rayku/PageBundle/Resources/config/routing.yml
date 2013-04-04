@@ -3,6 +3,12 @@ rayku_page_homepage:
     defaults:
         _controller: RaykuPageBundle:Page:index
 
+rayku_register_confirmed:
+    pattern: /register/confirmed
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'RaykuPageBundle:Page:dashboard.html.twig'
+
 rayku_page_dashboard:
     pattern: /dashboard
     defaults: 

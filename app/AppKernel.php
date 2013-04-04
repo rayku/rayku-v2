@@ -8,7 +8,7 @@ class AppKernel extends Kernel
     public function init()
     {
         // Please read http://symfony.com/doc/2.0/book/installation.html#configuration-and-setup
-        umask(0002);
+        umask(0000);
 
         parent::init();
     }
@@ -80,7 +80,7 @@ class AppKernel extends Kernel
     
     public function getCacheDir()
     {
-    	return '/tmp/cache/rayku';
+    	return '/tmp/cache/rayku/'.$this->environment;
     }
     
     public function getLogDir()

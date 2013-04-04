@@ -129,9 +129,10 @@ class User extends BaseUser
     	$deletedAt = NULL;
     	try{
     		$tutor = $this->getTutor();
-    		if(method_exists($tutor, 'getDeletedAt')){
-	    		$deletedAt = $this->getTutor()->getDeletedAt();
+    		if(!method_exists($tutor, 'getDeletedAt')){
+    			return false;
     		}
+    		$deletedAt = $this->getTutor()->getDeletedAt();
     	}catch(\Exception $e){
     		return false;
     	}

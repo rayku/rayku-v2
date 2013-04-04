@@ -176,7 +176,7 @@ class SessionController extends Controller
 			$em->persist($session);
 			$em->flush();
 			// @todo put this url in a config somewhere
-			return $this->redirect('http://whiteboard.rayku.com/room/'.$session->getId());
+			return $this->redirect('http://whiteboard.rayku.com/room/'.$session->getId().'/student');
 		}
 		return $form;
 	}

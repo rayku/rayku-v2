@@ -44,7 +44,7 @@
           <div class="large-12 columns">
             <label>Listing Preview</label>
             <p>(When students search for tutors, you will appear as):</p>
-            <p class="preview">Under Graduate Degree Holder From Ryerson University Economics</p>
+            <p class="preview"><span class="schoolAmount">Under Graduate Degree Holder</span> From <span class="schoolName">Ryerson University</span> - Economics</p>
           </div>
         </div>
       </div>
@@ -54,6 +54,11 @@
   </div>
   <a class="close-reveal-modal">×</a>
 </div>
+<script>
+$('a.current').on('change', function(){
+  $('.schoolAmount').html($(this).val());
+});
+</script>
 
 <div id="turnTutorStatusOff" class="reveal-modal medium">
     <div class="row">

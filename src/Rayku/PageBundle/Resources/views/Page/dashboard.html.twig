@@ -13,8 +13,8 @@
                 <div class="small-12 columns tutor-label">
                     <h5>Tutor</h5>
                     <div class="tutor-switch">
-                        <label><input type="radio" name="toggle" id="tutorOn"><span>On</span></label>
-                        <label><input type="radio" name="toggle" id="tutorOff" checked="checked"><span>Off</span></label>
+                        <label><input type="radio" name="toggle" id="tutorOn" {% if app.user.isTutor %} checked="checked"{% endif %}><span>On</span></label>
+                        <label><input type="radio" name="toggle" id="tutorOff" {% if app.user.isTutor == false %} checked="checked"{% endif %}><span>Off</span></label>
                     </div>
     		    </div>
     		</div>

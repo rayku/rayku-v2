@@ -27,7 +27,7 @@ class SessionController extends Controller
 	 */
 	public function getSessionsAction()
 	{
-		if(!$this->getUser()->isTutor()){
+		if(!$this->getUser()->getIsTutor()){
 			return array();
 		}
 		$em = $this->getDoctrine()->getManager();

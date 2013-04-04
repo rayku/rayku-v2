@@ -5,6 +5,7 @@ namespace Rayku\UserBundle\EventListener;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Bundle\DoctrineBundle\Registry as Doctrine;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Rayku\UserBundle\Entity\User;
 
 class Activity
@@ -26,7 +27,7 @@ class Activity
 	 */
 	public function onCoreController(FilterControllerEvent $event)
 	{
-		if(!$event->getRequest()->isMethod('GET')){
+		if(!$event->getRequest()->isMethod('GET') || HttpKernelInterface::MASTER_REQUEST != $event->getRequestType()){
 			return true;
 		}
 		$user = NULL;
@@ -36,7 +37,6 @@ class Activity
 		}
 		if($user instanceof User && $user->getIsTutor() && null === $user->getTutor()->getDeletedAt())
 		{
-			$this->em->clear();
 			$tutor = $this->em->getRepository('RaykuTutorBundle:Tutor')->findOneByUser($user);
 			$tutor->setOnlineWeb(new \DateTime());
 			$this->em->persist($tutor);

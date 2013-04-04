@@ -16,8 +16,15 @@
 	        <script src="{{ asset('bundles/raykupage/js/vendor/custom.modernizr.js') }}"></script>
 	        <script src="{{ asset('bundles/raykupage/js/global.js') }}" type="text/javascript"></script>
 		    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,600" rel="stylesheet" type="text/css" />
-		    {% if app.user and app.user.isTutor %}
+		    {% if app.user %}
 		    	<script src="{{ asset('bundles/raykupage/js/jquery_poll/lib/jquery.smart-poll.js') }}"></script>
+		    	<script type="text/javascript">
+					$.poll(10000, function(retry){
+					  $.get('{{ path('get_sessions') }}', function(response, status){
+					    console.log(response);
+					  })
+					})
+		    	</script>
 		    {% endif %}
 		{% endblock %}
 	</head>

@@ -1,5 +1,5 @@
 rayku_page_import:
-    resource: "@RaykuPageBundle/Resources/config/routing/routing.yml"
+    resource: "@RaykuPageBundle/Resources/config/routing.yml"
 
 rayku_session_import:
     resource: "@RaykuSessionBundle/Resources/config/routing.yml"

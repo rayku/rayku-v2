@@ -63,7 +63,7 @@ header #logo {
 
 header nav {
 	float: right;
-	margin: 17px -10px 0 0;
+	margin: 0px -10px 0 0;
 }
 
 header nav a{
@@ -77,7 +77,7 @@ header nav a{
 header nav a.logged-in-as{
 	padding-bottom: 15px;
 	color: rgba(221, 221, 221, 1);
-	margin-left: 7px;
+	margin-left: 0px;
 
 }
 header nav a.logged-in-as:hover{
@@ -90,6 +90,40 @@ header nav a.rayku-points:hover{
 	color:rgba(0, 0, 0, 1);
 	text-decoration: none;
 	text-shadow: 0px 0px 5px rgba(10, 10, 10, 0.3);
+}
+header nav a.notification{
+	font-size: 28px; 
+	padding:12px 5px;
+	color: rgba(221, 221, 221, 1);
+}
+header nav a.notification span.raphael{
+	position: relative;
+	top:6px;
+	left:8px;
+}
+header nav a.notification span.notif-count{
+	font-size: 10px;
+	position: relative;
+	top:-7px;
+	left: -7px;
+	background: #ff3019; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ff3019 0%, #cf0404 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff3019), color-stop(100%,#cf0404)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #ff3019 0%,#cf0404 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #ff3019 0%,#cf0404 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #ff3019 0%,#cf0404 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #ff3019 0%,#cf0404 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 ); /* IE6-9 */
+	border-radius: 3px;
+	padding: 1px 3px;
+	padding-top: 0;
+	box-shadow: 0 0 2px rgba(10, 10, 10, 0.5);
+}
+header nav a.notification:hover{
+	color:rgba(255, 255, 255, 1);
+	text-decoration: none;
+	background: rgba(10, 10, 10, 0.4);
+	box-shadow: inset 0 0 5px rgba(5, 5, 5, 1);
 }
 .inside {
 	width: 960px;
@@ -108,8 +142,8 @@ header nav a.rayku-points:hover{
 /*Submenu*/
 .submenu{
 	position: absolute;
-	width:150px;
-	margin-left: 7px;
+	width:130px;
+	margin-left: 52px;
 	display: none;
 	z-index: 640;
 }
@@ -122,7 +156,7 @@ header nav a.rayku-points:hover{
 
 ul.submenu-item{
 	position: relative;
-	top:15px;
+	top:11px;
 	background: rgba(10, 10, 10, 0.9);
 	list-style-type: none;
 	box-shadow: 0 0 8px rgba(10, 10, 10, 0.2);
@@ -334,22 +368,26 @@ a.clear-tutors{
 	height: 36px;
 	cursor: pointer;
 	padding: 0 14px;
-	border: 1px solid #000;
+	border: 1px solid rgba(206, 0, 0, 1);
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 	-moz-background-clip: padding;
 	-webkit-background-clip: padding-box;
-	background-clip: padding-box;
-	background-color: #000;
-	-moz-box-shadow: 0 1px 0 rgba(255,255,255,.1), inset 0 2px 1px rgba(255,255,255,.25), inset 0 0 3px rgba(255,255,255,.4);
-	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.1), inset 0 2px 1px rgba(255,255,255,.25), inset 0 0 3px rgba(255,255,255,.4);
-	box-shadow: 0 1px 0 rgba(255,255,255,.1), inset 0 2px 1px rgba(255,255,255,.25), inset 0 0 3px rgba(255,255,255,.4);
-	background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0iaGF0MCIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giIHgxPSI1MCUiIHkxPSIxMDAlIiB4Mj0iNTAlIiB5Mj0iLTEuNDIxMDg1NDcxNTIwMmUtMTQlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQ3N2YwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2FiYzkwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgIDwvbGluZWFyR3JhZGllbnQ+Cgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idXJsKCNoYXQwKSIgLz4KPC9zdmc+);
-	background-image: -moz-linear-gradient(bottom, #477f00 0%, #abc900 100%);
-	background-image: -o-linear-gradient(bottom, #477f00 0%, #abc900 100%);
-	background-image: -webkit-linear-gradient(bottom, #477f00 0%, #abc900 100%);
-	background-image: linear-gradient(bottom, #477f00 0%, #abc900 100%);
+	background: #ff3019; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ff3019 0%, #cf0404 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff3019), color-stop(100%,#cf0404)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #ff3019 0%,#cf0404 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #ff3019 0%,#cf0404 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #ff3019 0%,#cf0404 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #ff3019 0%,#cf0404 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 ); /* IE6-9 */
+	box-shadow: none;
+	-webkit-transition: box-shadow ease-in-out 0.4s;
+	-moz-transition: box-shadow ease-in-out 0.4s;
+	-ms-transition: box-shadow ease-in-out 0.4s;
+	-o-transition: box-shadow ease-in-out 0.4s;
+	transition: box-shadow ease-in-out 0.4s;
 }
 .bbutton{
 	display: block;
@@ -387,6 +425,9 @@ a.clear-tutors{
 	-ms-transition: box-shadow ease-in-out 0.4s;
 	-o-transition: box-shadow ease-in-out 0.4s;
 	transition: box-shadow ease-in-out 0.4s;
+}
+.abutton:hover{
+	box-shadow: inset 0 0 20px rgba(206, 0, 0, 1);
 }
 .bbutton:hover{
 	box-shadow: inset 0 0 20px rgba(0, 81, 153, 1);
@@ -772,8 +813,7 @@ form.user-profile-master-form input[type="text"]{
 }
 .tutor-list table tbody tr td:first-child, .tutor-list table tbody tr td:last-child, .tutor-list table tbody tr td:nth-last-child(2), .tutor-list table tbody tr td:nth-last-child(3), .tutor-list table tbody tr td:nth-child(2){
 	text-align: center;
-	position: relative;
-	top:7px;
+	
 }
 .tutor-list table tbody tr td:nth-child(2){
 	text-align: left;
@@ -861,4 +901,40 @@ footer.footer:after {
 /*Footer*/
 input{
 	font-weight: 500;
+}
+.connectNotif h2{
+	border-bottom: 1px solid rgba(221, 221, 221, 1);
+	padding-bottom: 15px;
+}
+.connectNotifImage img{
+	width: 200px;
+}
+.connectNotifRow{
+	border-bottom: 1px solid rgba(221, 221, 221, 1);
+	padding: 0px;
+	margin-top: 10px;
+}
+
+.connectNotifInfo ul{
+	position: relative;
+	top:5px;
+	list-style-type: none;
+}
+.connectNotifInfo ul li:first-child{
+	color:rgba(0, 0, 150, 1);
+	font-weight: 600;
+}
+a.accept, a.decline{
+	position: relative;
+	top:10px;
+	padding: 4px 7px;
+	font-size: 12px;
+	font-weight: 600;
+	height:26px;
+	border-radius: 0px;
+	text-align: center;
+}
+a.accept:hover, a.decline:hover{
+	text-decoration: none;
+	color: rgba(255, 255, 255, 1);
 }

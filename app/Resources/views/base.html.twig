@@ -29,6 +29,7 @@
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <a href="{{ path('rayku_page_dashboard') }}" id="logo"><img src="{{asset('bundles/raykupage/images/logo.png')}}" alt="" /></a>
             	<nav>
+                <a href=# class="notification" data-reveal-id="connectNotifModal"><span class="raphael">[</span><span class="notif-count">3</span></a>
                 <a href=# class="logged-in-as">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a> 
                 <div class="submenu">
                     <ul class="submenu-item">

@@ -44,6 +44,9 @@ class TutorType extends AbstractType
             	'multiple' => true,
             	'expanded' => true,
             	'class' => 'Rayku\TutorBundle\Entity\Subject'
+            ))
+            ->add('gtalk_email', NULL, array(
+            	'label' => 'Connect Your Google Talk'
             )
         );
     }

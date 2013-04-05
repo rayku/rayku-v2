@@ -62,6 +62,20 @@ class Tutor
     /**
      * @var \DateTime
      *
+     * @ORM\Column(name="online_gtalk", type="datetime", nullable=true)
+     */
+    private $onlineGtalk;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="gtalk_email", type="string", length=255, nullable=true)
+     */
+    private $gtalk_email;
+    
+    /**
+     * @var \DateTime
+     *
      * @ORM\Column(name="online_gchat", type="datetime", nullable=true)
      */
     private $onlineGchat;
@@ -422,5 +436,51 @@ class Tutor
     public function getDegree()
     {
         return $this->degree;
+    }
+
+    /**
+     * Set onlineGtalk
+     *
+     * @param \DateTime $onlineGtalk
+     * @return Tutor
+     */
+    public function setOnlineGtalk($onlineGtalk)
+    {
+        $this->onlineGtalk = $onlineGtalk;
+    
+        return $this;
+    }
+
+    /**
+     * Get onlineGtalk
+     *
+     * @return \DateTime 
+     */
+    public function getOnlineGtalk()
+    {
+        return $this->onlineGtalk;
+    }
+
+    /**
+     * Set gtalk_email
+     *
+     * @param string $gtalkEmail
+     * @return Tutor
+     */
+    public function setGtalkEmail($gtalkEmail)
+    {
+        $this->gtalk_email = $gtalkEmail;
+    
+        return $this;
+    }
+
+    /**
+     * Get gtalk_email
+     *
+     * @return string 
+     */
+    public function getGtalkEmail()
+    {
+        return $this->gtalk_email;
     }
 }

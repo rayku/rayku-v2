@@ -55,7 +55,8 @@
         "willdurand/faker-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "dev-master",
         "kriswallsmith/assetic": "1.1.*@dev",
-        "nelmio/api-doc-bundle": "@dev"
+        "nelmio/api-doc-bundle": "@dev",
+        "guzzle/guzzle": "*"
     },
 
     "require-dev": {

@@ -131,6 +131,11 @@ class TutorController extends Controller
     		}
     	}
     	
+    	if(null !== $entity->getGtalkEmail()){
+    		require_once $this->get('kernel')->getRootDir() .'/../bin/BotServiceProvider.class.php';
+	    	\BotServiceProvider::createFor('http://10.180.146.105:8892/add/'.$entity->getGtalkEmail())->getContent();
+    	}
+    	
     	return array(
     		'entity' => $entity,
     		'form'   => $form,

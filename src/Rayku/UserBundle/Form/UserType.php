@@ -11,12 +11,10 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
             ->add('first_name')
             ->add('last_name')
             ->add('school')
             ->add('grade')
-            ->add('school_type')
             ->add('degree')
             ->add('bio')
         ;
@@ -26,7 +24,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Rayku\UserBundle\Entity\User',
-        	'csrf_protection' => false
+        	'csrf_protection' => true
         ));
     }
 

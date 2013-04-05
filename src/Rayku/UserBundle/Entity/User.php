@@ -3,6 +3,7 @@
 namespace Rayku\UserBundle\Entity;
 
 use Symfony\Component\Validator\Constraints\True;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Entity\User as BaseUser;
@@ -40,51 +41,50 @@ class User extends BaseUser
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="fname", type="string", length=255, nullable=true)
+	 * @ORM\Column(name="fname", type="string", length=255, nullable=false)
+	 * @Assert\NotBlank()
 	 */
-	private $first_name;
+	private $first_name = 'First Name';
 	
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="lname", type="string", length=255, nullable=true)
+	 * @ORM\Column(name="lname", type="string", length=255, nullable=false)
+	 * @Assert\NotBlank()
 	 */
-	private $last_name;
+	private $last_name = 'Last Name';
 	
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="school", type="string", length=255, nullable=true)
+	 * @ORM\Column(name="school", type="string", length=255, nullable=false)
+	 * @Assert\NotBlank()
 	 */
-	private $school;
+	private $school = 'School';
 	
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="school_year", type="string", length=255, nullable=true)
+	 * @ORM\Column(name="school_year", type="string", length=255, nullable=false)
+	 * @Assert\NotBlank()
 	 */
-	private $grade;
+	private $grade = 'Year / Grade or Type of Degree';
 	
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="school_type", type="string", length=255, nullable=true)
+	 * @ORM\Column(name="degree", type="string", length=255, nullable=false)
+	 * @Assert\NotBlank()
 	 */
-	private $school_type;
+	private $degree = 'Degree';
 	
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="degree", type="string", length=255, nullable=true)
+	 * @ORM\Column(name="about", type="string", length=255, nullable=false)
+	 * @Assert\NotBlank()
 	 */
-	private $degree;
-	
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="about", type="string", length=255, nullable=true)
-	 */
-	private $bio;
+	private $bio = 'Short Bio';
 	
     /**
      * Get id
@@ -252,29 +252,6 @@ class User extends BaseUser
     public function getGrade()
     {
         return $this->grade;
-    }
-
-    /**
-     * Set school_type
-     *
-     * @param string $schoolType
-     * @return User
-     */
-    public function setSchoolType($schoolType)
-    {
-        $this->school_type = $schoolType;
-    
-        return $this;
-    }
-
-    /**
-     * Get school_type
-     *
-     * @return string 
-     */
-    public function getSchoolType()
-    {
-        return $this->school_type;
     }
 
     /**

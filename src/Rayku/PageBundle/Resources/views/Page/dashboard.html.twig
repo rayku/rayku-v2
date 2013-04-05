@@ -79,53 +79,32 @@
                         <a href="#" class="raphael edit-tool">></a>
                         <form class="user-profile-edit-form" name="name">
                             <label>Name</label>
-                            <input type="text" placeholder="Nick" name="current_firstname" class="form-field">
-                            <input type="text" placeholder="Agopoulos" name="current_lastname" class="form-field">
+                            <input type="text" placeholder="First Name" name="current_first_name" class="form-field">
+                            <input type="text" placeholder="Last Name" name="current_last_name" class="form-field">
                             <input type="submit" class="bbutton" value="Save">
                             <a href=# class="close-edit">x</a>
                         </form>
-                        <h4><span class="name edit">Nick Agopoulos</span></h4>
+                        <h4><span class="name edit">{{ app.user.firstname }} {{ app.user.lastname }}</span></h4>
                     </li>
                     <li>
                         <a href="#" class="raphael edit-tool">></a>
                         <form class="user-profile-edit-form" name="education">
                             <label>Education</label>
-                            <input type="text" placeholder="3rd Year" name="current_year" class="form-field">
-                            <input type="text" placeholder="Under Graduate Student" name="current_level" class="form-field">
+                            <input type="text" placeholder="Year of Study or Degree Attained" name="current_grade" class="form-field">
                             <input type="submit" class="bbutton" value="Save">
                             <a href=# class="close-edit">x</a>
                         </form>
-                        <h5><span class="education edit">3rd Year, Under Graduate Student</span></h5></li>
-                    <li>
-                        <a href="#" class="raphael edit-tool">></a>
-                        <form class="user-profile-edit-form" name="location">
-                            <label>Location</label>
-                            <input type="text" placeholder="Toronto" name="current_city" class="form-field">
-                            <input type="text" placeholder="Canada" name="current_country" class="form-field">
-                            <input type="submit" class="bbutton" value="Save">
-                            <a href=# class="close-edit">x</a>
-                        </form>
-                        <h6>Lives in <span class="location edit"><a>Toronto, Canada</a></span></h6>
-                    </li>
-                    <li class="cutoff">
-                        <a href="#" class="raphael edit-tool">></a>
-                        <form class="user-profile-edit-form" name="email">
-                            <label>Email</label>
-                            <input type="text" placeholder="nick@rayku.com" name="current_email" class="form-field">
-                            <input type="submit" class="bbutton" value="Save">
-                            <a href=# class="close-edit">x</a>
-                        </form>
-                        <span>Email:</span> <span class="email edit">nick@rayku.com</span>
+                        <h5><span class="education edit">{{ app.user.grade }}</span></h5>
                     </li>
                     <li>
                         <a href="#" class="raphael edit-tool">></a>
-                        <form class="user-profile-edit-form" name="university">
+                        <form class="user-profile-edit-form" name="school">
                             <label>University</label>
-                            <input type="text" placeholder="Ryerson University" name="current_university" class="form-field">
+                            <input type="text" placeholder="Ryerson University" name="current_school" class="form-field">
                             <input type="submit" class="bbutton" value="Save">
                             <a href=# class="close-edit">x</a>
                         </form>
-                        <span>School:</span> <span class="university edit">Ryerson University</span>
+                        <span>School:</span> <span class="school edit">{{ app.user.school }}</span>
                     </li>
                     <li>
                         <a href="#" class="raphael edit-tool">></a>
@@ -135,32 +114,29 @@
                             <input type="submit" class="bbutton" value="Save">
                             <a href=# class="close-edit">x</a>
                         </form>
-                        <span>Degree:</span> <span class="degree edit">Economics</span>
+                        <span>Degree:</span> <span class="degree edit">{{ app.user.degree }}</span>
                     </li>
                     <li>
                         <a href="#" class="raphael edit-tool">></a>
-                        <form class="user-profile-edit-form" name="biography">
+                        <form class="user-profile-edit-form" name="bio">
                             <label>Bio</label>
-                            <textarea class="form-field" name="current_biography"></textarea>
+                            <textarea class="form-field" name="current_bio">{{ app.user.bio }}</textarea>
                             <input type="submit" class="bbutton" value="Save">
                             <a href=# class="close-edit">x</a>
                         </form>
-                        <span>Bio:</span> <span class="biography edit">This is longer content Donec id elit non mi porta gravida at eget metus.</span></li>
+                        <span>Bio:</span> <span class="biography edit">{{ app.user.bio }}</span></li>
                 </ul>
                 <ul class="user-profile-buttons">
                     <li><a href=# class="bbutton edit-button"><span class="raphael">></span>Edit Profile</a></li>
                     <li>
-                      <form name="master-form" class="user-profile-master-form">
-                        <input type="text" name="firstname">
-                        <input type="text" name="lastname">
-                        <input type="text" name="year">
-                        <input type="text" name="level">
-                        <input type="text" name="city">
-                        <input type="text" name="country">
-                        <input type="text" name="email">
-                        <input type="text" name="university">
-                        <input type="text" name="degree">
-                        <input type="text" name="biography">
+                      <form name="master-form" method="post" class="user-profile-master-form" action="{{ path('post_user', {'user': app.user.id }) }}">
+                        {{ form_widget(userform.first_name) }}
+                        {{ form_widget(userform.last_name) }}
+                        {{ form_widget(userform.school) }}
+                        {{ form_widget(userform.grade) }}
+                        {{ form_widget(userform.degree) }}
+                        {{ form_widget(userform.bio) }}
+                        {{ form_rest(userform) }}
                         <input type="submit" value="Done Editing" class="bbutton done-button">
                       </form>
                     </li>
@@ -174,22 +150,17 @@
                 $('form.user-profile-edit-form').on('submit', function(event){
                     event.preventDefault(); //prevent reloading page by clicking submit
                     var current_form_name = $(this).attr('name'); //get the current form name
-                    console.log(current_form_name);
 
                     //for each input field with class .form-field within the current form
                     $('form[name="'+current_form_name+'"] .form-field').each(function(){
                         var field_value = $(this).val(); //get the field value
-                        var field_name = $(this).attr('name').split("_"); //get the field name and split it to get the appropriate identifier
+                        var field_name = $(this).attr('name').replace("current_", ""); //get the field name and split it to get the appropriate identifier
 
                         if(field_value !== ""){
                             //set the equivalent input field in master form to the value of the current input field
-                            $('form.user-profile-master-form input[name="'+ field_name[1] +'"]').val(field_value);
+                            $('form.user-profile-master-form input[name="'+ field_name +'"]').val(field_value);
                             valarr.push(field_value); //push the value into an array
                         }
-                        //Log to console
-                        console.log(field_name);
-                        console.log(field_value);
-                        console.log('New Value:' + $('form.user-profile-master-form input[name="'+ field_name[1] +'"]').val());
                     });
 
                     // To display on the page if the form had one or more fields
@@ -201,29 +172,13 @@
                     }
                     //Hide the current form
                     $(this).hide(100);
+                    valarr = [];
                     return false;
                 });
 
                 //When done profile editing, submit the form. Should be done via Ajax
-                $('form.user-profile-master-form').on('submit', function(event){
-                    event.preventDefault(); //prevent reloading page by clicking submit
-
-                    //For each input of type 'text' within the form, get their value and print it out
-                    $('form.user-profile-master-form input[type="text"]').each(function(){
-                        //if input value is not null print it
-                        if($(this).val() !== ""){
-                            console.log('Value: ' + $(this).val());
-                        }
-                    });
-
-                    //determine if any change was made
-                    if (valarr.length > 0){
-                        console.log('Changes Were Made');
-                        valarr.splice(0, valarr.length); //empty valarr
-                    }
-                    else if(valarr.length === 0){
-                        console.log('No Change');
-                    }
+                $('form.user-profile-master-form').ajaxForm(function() { 
+                	valarr = [];
                 });
 
                 //slide down rayku points form
@@ -355,7 +310,6 @@ $(document).ready(function(){
     //Submit Question
     $('input[name="aSubmit"]').click(function(event){
     	event.preventDefault();
-         console.log("Hello");
     	$('.tutor-list').html('Loading ... ');
         $.ajax('{{path('rayku_tutor')}}')
 		    .always(function(xhr, status) { 
@@ -382,7 +336,6 @@ $(document).ready(function(){
     //set all busy tutors to show a red background
     $('table#tutorTable tr td').each(function(){
         var column = $(this);
-        console.log(column);
         if(column.hasClass('busy')){
             column.find('a').addClass('tutor-busy');
         }

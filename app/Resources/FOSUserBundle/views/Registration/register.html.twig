@@ -1,4 +1,4 @@
-{% extends app.request.attributes.get('_route') == '_internal' ? "::empty.html.twig" : "::base.html.twig" %}
+{% extends "::base.html.twig" %}
 
 {% block body %}
 	{% if app.request.attributes.get('_route') == '_internal' %}

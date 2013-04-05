@@ -68,7 +68,7 @@ class User extends BaseUser
 	 * @ORM\Column(name="school_year", type="string", length=255, nullable=false)
 	 * @Assert\NotBlank()
 	 */
-	private $grade = 'Year / Grade or Type of Degree';
+	private $grade = 'Level of Education';
 	
 	/**
 	 * @var string

@@ -233,6 +233,13 @@
                 });
             });
             </script>
+            <script type="text/javascript">
+                $.poll(10000, function(retry){
+                  $.get('{{ path('get_sessions') }}', function(response, status){
+                    console.log(response);
+                  })
+                })
+            </script>
             <!--End Profile Info-->
             <div class="large-12 columns user-divider">
             </div>

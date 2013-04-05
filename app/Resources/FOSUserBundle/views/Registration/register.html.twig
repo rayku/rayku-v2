@@ -37,6 +37,10 @@
 			</div>
 		</form>
 	{% else %}
+		{% block stylesheets %}
+			{{ parent() }}
+			<link href="{{ asset('bundles/raykupage/css/style.css') }}" type="text/css" rel="stylesheet" media="screen" />
+		{% endblock %} 
         <div class="form-box signup-box fade-in">
 			<a href="/" class="logo"></a>
 			<form action="#">

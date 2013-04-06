@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Session
 {
+	const expire_session = '-10 minutes';
     /**
      * @var integer
      *

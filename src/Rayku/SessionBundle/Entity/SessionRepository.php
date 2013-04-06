@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityRepository;
 
 class SessionRepository extends EntityRepository
 {
-	public function findAllActiveByTutor($tutor_id)
+	public function findAllActiveByTutor($tutor_id, $expire_session)
 	{
 		$qb = $this->createQueryBuilder('s');
 		$query = $qb
@@ -15,8 +15,13 @@ class SessionRepository extends EntityRepository
 			->innerJoin('session.potential_tutors', 't')
 			->where('t.tutor = :tutorId')
 			->andWhere('session.selected_tutor is NULL')
+			->andWhere('s.createdAt > :expire_session')
 			->setParameter('tutorId', $tutor_id)
+			->setParameter('expire_session', date('Y-m-d H:i:s', strtotime($expire_session)))
 			->getQuery();
+		
+		return $query->getResult();
+		
 		
 		try{
 			return $query->getResult();

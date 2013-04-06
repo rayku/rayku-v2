@@ -85,8 +85,9 @@ class SessionController extends Controller
 			$em->persist($potentialTutor);
 			$em->flush();
 			
-			return new Response(json_encode(array(
-				'success' => false, 'message' => 'Someone else accepted this request'))
+			return array(
+				'success' => false, 
+				'message' => 'Someone else accepted this request'
 			);
 		}
 		
@@ -98,7 +99,10 @@ class SessionController extends Controller
 		$em->persist($session);
 		$em->flush();
 		
-		return $session;
+		return array(
+			'success' => true,
+			'redirect' => 'http://whiteboard.rayku.com/room/'.$session->getId().'/tutor'
+		);
 	}
 	
 	/**

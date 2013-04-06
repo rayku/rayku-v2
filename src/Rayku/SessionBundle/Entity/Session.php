@@ -67,7 +67,7 @@ class Session
      *
      * @ORM\Column(name="question", type="string", length=1000, nullable=true)
      */
-    private $question;
+    private $question = 'To be discussed';
 
     /**
      * @var integer
@@ -111,7 +111,7 @@ class Session
     /**
      * @var \Tutor
      * 
-     * @ORM\OneToOne(targetEntity="\Rayku\TutorBundle\Entity\Tutor")
+     * @ORM\ManyToOne(targetEntity="\Rayku\TutorBundle\Entity\Tutor")
      * @ORM\JoinColumn(name="selected_tutor_id", referencedColumnName="id")
      */
     private $selected_tutor;

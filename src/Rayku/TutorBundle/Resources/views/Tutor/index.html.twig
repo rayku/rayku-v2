@@ -5,6 +5,10 @@
     <strong class="ribbon-content">Tutor List</strong>
   </h1>
   <form action="{{path('post_session')}}" method="post">
+  	<script type="text/javascript">
+  		$('#question').val($('#base_question').val());
+  	</script>
+  	<input type="hidden" value="" name="question" id="question" />
     <table id="tutorTable">
       <thead>
         <tr>

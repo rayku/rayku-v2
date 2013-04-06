@@ -189,13 +189,6 @@
                 });
             });
             </script>
-            <script type="text/javascript">
-                $.poll(10000, function(retry){
-                  $.get('{{ path('get_sessions') }}', function(response, status){
-                    console.log(response);
-                  })
-                })
-            </script>
             <!--End Profile Info-->
             <div class="large-12 columns user-divider">
             </div>
@@ -272,7 +265,7 @@
 
                   <div class="large-12 columns question-container">
                     <div class="input-container">
-                      <input type="text" placeholder="What is your question? Or view online tutors" name="ask">
+                      <input type="text" placeholder="What is your question? Or view online tutors" name="ask" id="base_question">
                     </div>
                     <input type="submit" class="bbutton" value="View Online Tutors" name="aSubmit">
                   </div>
@@ -295,58 +288,28 @@
 
 <div id="connectNotifModal" class="reveal-modal large connectNotif">
     <h2>Notifications</h2>
-	<div class="row connectNotifRow">
+    <a class="close-reveal-modal">&#215;</a>
+	<div class="row connectNotifRow" style="display:none" id="connectRow_id_">
         <div class="large-1 columns connectNotifImage">
             <img src="http://placehold.it/1100x1100">
         </div>
         <div class="large-7 columns connectNotifInfo">
             <ul>
-                <li>John Doe</li>
-                <li>Question Goes Here</li>
+                <li>_name_</li>
+                <li>_question_</li>
             </ul>
         </div>
         <div class="large-2 columns">
-            <a href=# class="bbutton accept">Confirm</a>
+        	<form method="post" action="{{ path('post_session_accept', {'session': '_id_'}) }}" class="post_session_accept">
+        		<button type="submit" name="Confirm" class="bbutton accept">Accept</button>
+            </form>
         </div>
         <div class="large-2 columns">
-            <a href=# class="abutton decline">Decline</a>
+        	<form method="post" action="{{ path('post_session_accept', {'session': '_id_'}) }}">
+        		<button type="submit" name="Decline" class="abutton decline">Decline</button>
+        	</form>
         </div>
 	</div>
-    <div class="row connectNotifRow">
-        <div class="large-1 columns connectNotifImage">
-            <img src="{{ asset('bundles/raykupage/images/profile_image_blank.jpg') }}">
-        </div>
-        <div class="large-7 columns connectNotifInfo">
-            <ul>
-                <li>Jane Doe</li>
-                <li>Question Goes Here</li>
-            </ul>
-        </div>
-        <div class="large-2 columns">
-            <a href=# class="bbutton accept">Confirm</a>
-        </div>
-        <div class="large-2 columns">
-            <a href=# class="abutton decline">Decline</a>
-        </div>
-    </div>
-    <div class="row connectNotifRow">
-        <div class="large-1 columns connectNotifImage">
-            <img src="{{ asset('bundles/raykupage/images/profile_image_blank.jpg') }}">
-        </div>
-        <div class="large-7 columns connectNotifInfo">
-            <ul>
-                <li>Kenny Smith</li>
-                <li>Question Goes Here</li>
-            </ul>
-        </div>
-        <div class="large-2 columns">
-            <a href=# class="bbutton accept">Confirm</a>
-        </div>
-        <div class="large-2 columns">
-            <a href=# class="abutton decline">Decline</a>
-        </div>
-    </div>
-    <a class="close-reveal-modal">&#215;</a>
 </div>
 
 <script type="text/javascript">
@@ -396,4 +359,39 @@ $(document).ready(function(){
     });
 });
 </script>
+{% endblock %}
+
+{% block head %}
+	{{ parent() }}
+	{% if app.user %}
+		<script src="{{ asset('bundles/raykupage/js/jquery_poll/lib/jquery.smart-poll.js') }}"></script>
+		<script type="text/javascript">
+		$.poll(5000, function(retry){
+			$.get('{{ path('get_sessions') }}', function(response, status){
+				jQuery.each(response, function() {
+					var current_messages = parseInt($('.notif-count').html());
+					$('.notif-count').html(response.length);
+					var template = $('#connectRow_id_').prop("outerHTML");
+					template = template.replace('_name_', this.student.first_name+' '+this.student.last_name);
+					template = template.replace('_question_', this.question);
+					template = template.replace(/_id_/g, this.id);
+					$('#connectNotifModal').append(template);
+					$('#connectRow'+this.id).show();
+					if(response.length > current_messages){
+						$('#connectNotifModal').foundation('reveal', 'open');
+					}
+					$('.post_session_accept').ajaxForm(function(response) { 
+						if(response.success){
+							window.location.href = response.redirect;
+						}else if(response.success !== false){
+							alert(response.message);
+						}else{
+							alert('an unknown error has occured');
+						}
+					})
+				})
+			})
+		})
+		</script>
+	{% endif %}
 {% endblock %}

@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * RaykuTutorConnect
  *
- * @ORM\Table(name="rayku_tutor_connect",uniqueConstraints={@ORM\UniqueConstraint(name="tutor_session_idx", columns={"session_id", "tutor_id"})})
+ * @ORM\Table(name="rayku_tutor_connect")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */

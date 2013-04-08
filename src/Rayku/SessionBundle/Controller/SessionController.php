@@ -65,6 +65,7 @@ class SessionController extends Controller
 			throw $this->createNotFoundException('Unable to find Session.');
 		}else{
 			$potentialTutor->setTutorReply('rejected');
+			$em = $this->getDoctrine()->getManager();
 			$em->persist($potentialTutor);
 			$em->flush();
 		}

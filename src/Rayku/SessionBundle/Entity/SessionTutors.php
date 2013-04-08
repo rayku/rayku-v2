@@ -227,7 +227,7 @@ class SessionTutors
     }
     
     /**
-     * @ORM\Prepersist
+     * @ORM\PrePersist
      */
     public function updateTutorData()
     {

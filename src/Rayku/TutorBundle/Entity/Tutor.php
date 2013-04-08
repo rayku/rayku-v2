@@ -130,7 +130,14 @@ class Tutor
 
     public function __toString()
     {
-    	return $this->getUser()->__toString();
+    	$return = '';
+    	try{
+	    	$return = $this->getUser()->__toString();
+    	}catch(\Exception $e){
+    		return '';
+    	}
+    	
+    	return $return;
     }
     
     public function getIsOnline()

@@ -15,6 +15,7 @@ class SessionRepository extends EntityRepository
 			->innerJoin('session.potential_tutors', 't')
 			->where('t.tutor = :tutorId')
 			->andWhere('session.selected_tutor is NULL')
+			->andWhere('session.endTime is NULL')
 			->andWhere('s.createdAt > :expire_session')
 			->setParameter('tutorId', $tutor_id)
 			->setParameter('expire_session', date('Y-m-d H:i:s', strtotime($expire_session)))

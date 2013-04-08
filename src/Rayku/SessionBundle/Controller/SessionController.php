@@ -120,7 +120,7 @@ class SessionController extends Controller
 			);
 		}
 		
-		$session->setSelectedTutor($currentTutor);
+		$session->setSelectedTutor($potentialTutor->getTutor());
 		$session->setRate($potentialTutor->getRate());
 		$potentialTutor->setTutorReply('accepted');
 		

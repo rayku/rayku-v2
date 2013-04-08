@@ -7,6 +7,7 @@
 
 {% block content %}
 <div class="dashboard">
+    <a href=# class="notification" data-reveal-id="rateTutorModal">Rate Tutor</a>
     <!--Sidebar-->
 		<div class="large-3 columns sidebar">
     		<div class="row tutor-sidebar">
@@ -41,6 +42,7 @@
 
     <!--Main Content-->
 	<div class="large-9 columns main-content">
+        
         <!-- User Profile -->
         <div class="row user-profile">
             <div class="large-12 columns user-profile-top">
@@ -312,7 +314,37 @@
 	</div>
 </div>
 
+<div id="rateTutorModal" class="reveal-modal medium rateTutor">
+    <div class="row">
+        <div class="large-12 columns">
+            <h3>Rate Your Tutor</h3>
+        </div>
+    </div>
+    <div class="large-12 columns rate-tutors">
+        <form class="rate-tutors custom" name="rate-tutors" action="/paypal.php" method="post">
+            <div class="row">
+                <div class="large-9 columns">
+                    <label for="rateTutor">Tutor's Name</label>
+                    <select id="rateTutor" class="medium" name="amount">
+                        <option DISABLED>Rating</option>
+                        <option value="1">Poor</option>
+                        <option value="2">Average</option>
+                        <option value="3">Good</option>
+                        <option value="4">Very Good</option>
+                        <option value="5">Excellent</option>
+                    </select>
+                </div>
+                <div class="large-3 columns">
+                    <input type="hidden" name="loginid" value="{{ app.user.id }}" />
+                    <input type="submit" class="bbutton" value="Rate">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script type="text/javascript">
+//DO NOT BREAK THIS JAVASCRIPT UP
 $(document).ready(function(){
     //Submit Question
     $('input[name="aSubmit"]').click(function(event){

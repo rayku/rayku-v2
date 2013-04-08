@@ -3,7 +3,7 @@ security:
         connection: default
     encoders:
         "FOS\UserBundle\Entity\User":
-            algorithm: sha512
+            algorithm: sha1
             encode_as_base64: false
             iterations: 1
 

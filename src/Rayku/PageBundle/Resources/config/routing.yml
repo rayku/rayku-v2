@@ -1,3 +1,13 @@
+rayku_session_rate:
+    pattern: /session/{id}/rate
+    defaults:
+        _controller: RaykuPageBundle:Page:dashboard
+    
+    
+blog_show:
+    pattern:   /blog/{slug}
+    defaults:  { _controller: AcmeBlogBundle:Blog:show }
+
 rayku_page_homepage:
     pattern:  /
     defaults:

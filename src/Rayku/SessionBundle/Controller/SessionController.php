@@ -11,6 +11,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Rayku\SessionBundle\Entity\Session;
 use Rayku\SessionBundle\Entity\SessionTutors;
 use Rayku\SessionBundle\Form\SessionType;
+use Rayku\SessionBundle\Form\RateSessionType;
 
 /**
  * RestSession controller.
@@ -188,6 +189,33 @@ class SessionController extends Controller
 		$em->flush();
 			
 		return $session;
+	}
+
+	/**
+	 * @View
+	 * @ApiDoc(
+	 *   description="Rate a session",
+	 *   input="Rayku\SessionBundle\Form\RateSession"
+	 * )
+	 * @param \Rayku\SessionBundle\Entity\Session $session
+	 */
+	public function postSessionRateAction(Session $session)
+	{
+		$form = $this->createForm(new RateSessionType(), $session)->bind($this->getRequest());
+	
+		if($form->isValid()){
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($session);
+			// @todo shouldn't be necessary
+			foreach($session->getPotentialTutors() as $potentialTutor){
+				$potentialTutor->setSession($session);
+				$em->persist($potentialTutor);
+			}
+			$em->flush();
+			// @todo put this url in a config somewhere
+			return $session;
+		}
+		return $form;
 	}
 	
 	/**

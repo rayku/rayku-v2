@@ -4,6 +4,8 @@ namespace Rayku\PageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Rayku\UserBundle\Form\UserType;
+use Rayku\SessionBundle\Form\RateSessionType;
+use Rayku\SessionBundle\Entity\Session;
 
 /**
  * Page controller.
@@ -19,12 +21,22 @@ class PageController extends Controller
 		return $this->render('RaykuPageBundle:Page:home.html.twig');
 	}
 	
-	public function dashboardAction()
+	public function dashboardAction($id = NULL)
 	{
 		$userEditForm = $this->createForm(new UserType(), $this->getUser());
 		
-		return $this->render('RaykuPageBundle:Page:dashboard.html.twig', array(
-			'userform' => $userEditForm->createView()
-		));
-	}
+		$view['userform'] = $userEditForm->createView();
+		
+		if(isset($id)){
+			$em = $this->getDoctrine()->getManager();
+			$session = $em->getRepository('RaykuSessionBundle:Session')->find($id);
+			if(null === $session->getRating()){
+				$sessionRateForm = $this->createForm(new RateSessionType(), $session);
+				$view['session'] = $session;
+				$view['ratesessionform'] = $sessionRateForm->createView();
+			}
+		}
+		
+		return $this->render('RaykuPageBundle:Page:dashboard.html.twig', $view);
+	}	
 }

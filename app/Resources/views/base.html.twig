@@ -30,10 +30,6 @@
                 <a href=# class="logged-in-as">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a> 
                 <div class="submenu">
                     <ul class="submenu-item">
-                        <li><a href=#><span class="raphael">`</span>Settings</a></li>
-                        <li><a href=#><span class="raphael">L</span>View Profile</a></li>
-                        <li><a href=#><span class="raphael">></span>Edit Profile</a></li>
-                        <li class="divider"></li>
                         <li><a class="logout" href="{{ path('fos_user_security_logout') }}"><span class="raphael">v</span>{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
                     </ul>
                 </div>

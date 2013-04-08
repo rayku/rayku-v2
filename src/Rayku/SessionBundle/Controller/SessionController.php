@@ -52,12 +52,27 @@ class SessionController extends Controller
 	
 	/**
 	 * @ApiDoc(
-	 *   description="Accepts a whiteboard session for a tutor"
+	 *   description="Deny a whiteboard session request"
 	 * )
 	 * 
 	 * @param \Rayku\SessionBundle\Entity\Session $session
 	 */
-	public function postSessionAcceptAction(Session $session)
+	public function postSessionDenyAction(Session $session)
+	{
+		$valid = $this->validateTutorRequested($session);
+		
+		if (!$valid) {
+			throw $this->createNotFoundException('Unable to find Session.');
+		}else{
+			$potentialTutor->setTutorReply('rejected');
+			$em->persist($potentialTutor);
+			$em->flush();
+		}
+		
+		return array('success' => true);
+	}
+	
+	private function validateTutorRequested(Session $session)
 	{
 		$valid = false;
 		$em = $this->getDoctrine()->getManager();
@@ -68,14 +83,29 @@ class SessionController extends Controller
 		{
 			if($potentialTutor->getTutor() == $currentTutor)
 			{
-				$valid = true;
-				$potentialTutor->setTutorReply('replied');
-				$em->persist($potentialTutor);				
+				return $potentialTutor;
 			}
 		}
+		return $valid;
+	}
+	
+	/**
+	 * @ApiDoc(
+	 *   description="Accepts a whiteboard session for a tutor"
+	 * )
+	 * 
+	 * @param \Rayku\SessionBundle\Entity\Session $session
+	 */
+	public function postSessionAcceptAction(Session $session)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$valid = $this->validateTutorRequested($session);
 		
 		if (!$valid) {
 			throw $this->createNotFoundException('Unable to find Session.');
+		}else{
+			$potentialTutor->setTutorReply('replied');
+			$em->persist($potentialTutor);
 		}
 		
 		// Make sure no one else has beat me to this session

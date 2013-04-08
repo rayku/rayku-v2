@@ -305,7 +305,7 @@
             </form>
         </div>
         <div class="large-2 columns">
-        	<form method="post" action="{{ path('post_session_accept', {'session': '_id_'}) }}">
+        	<form method="post" action="{{ path('post_session_deny', {'session': '_id_'}) }}">
         		<button type="submit" name="Decline" class="abutton decline">Decline</button>
         	</form>
         </div>
@@ -390,6 +390,7 @@ $(document).ready(function(){
 						}
 					})
 				})
+				retry();
 			})
 		})
 		</script>

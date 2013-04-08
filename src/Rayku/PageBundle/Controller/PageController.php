@@ -27,10 +27,15 @@ class PageController extends Controller
 		
 		$view['userform'] = $userEditForm->createView();
 		
+		/*
+		 * @todo move logic to the model layer
+		 * @todo proper error messages to the user
+		 * @todo allow tutors to rate the session
+		 */
 		if(isset($id)){
 			$em = $this->getDoctrine()->getManager();
 			$session = $em->getRepository('RaykuSessionBundle:Session')->find($id);
-			if(null === $session->getRating()){
+			if(null === $session->getRating() && $session->getStudent() == $this->getUser()){
 				$sessionRateForm = $this->createForm(new RateSessionType(), $session);
 				$view['session'] = $session;
 				$view['ratesessionform'] = $sessionRateForm->createView();

@@ -181,11 +181,21 @@ class SessionController extends Controller
 		$currentDate = new \DateTime(date('Y-m-d H:i:s'));
 		$duration = $currentDate->diff($session->getStartTime());
 		
-		$session->setDuration($duration->days * 24 * 60);
+		// @todo should this move to the model or a event?
+		$minutes = $duration->days * 24 * 60;
+		$minutes += $duration->h * 60;
+		$minutes += $duration->i;
+		
+		$session->setDuration($minutes);
 		$session->setEndTime($currentDate);
+		$points = $minutes * $session->getRate();
+		$tutor = $session->getSelectedTutor()->getUser()->addPoints($points);
+		$student = $session->getStudent()->subtractPoints($points);
 		
 		$em = $this->getDoctrine()->getManager();
 		$em->persist($session);
+		$em->persist($tutor);
+		$em->persist($student);
 		$em->flush();
 			
 		return $session;

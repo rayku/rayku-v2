@@ -324,7 +324,6 @@
         <form id="rateTutorForm" class="custom" name="rate-tutor" action="{{ path('post_session_rate', {'session': session.id}) }}" method="post">
             <div class="row">
                 <div class="large-9 columns">
-                
                     <label for="rateTutor">{{ session.selectedtutor }}</label>
                     {{ form_widget(ratesessionform.rating) }}
                     {{ form_rest(ratesessionform) }}

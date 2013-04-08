@@ -96,6 +96,20 @@ class User extends BaseUser
         return $this->id;
     }
     
+    public function addPoints($points)
+    {
+    	$this->setPoints($this->getPoints() + $points);
+    	
+    	return $this;
+    }
+    
+    public function subtractPoints($points)
+    {
+    	$this->setPoints($this->getPoints() - $points);
+    	 
+    	return $this;
+    }
+    
     /**
      * Set tutor
      *

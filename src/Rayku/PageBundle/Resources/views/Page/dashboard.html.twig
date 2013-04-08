@@ -47,7 +47,7 @@
         <div class="row user-profile">
             <div class="large-12 columns user-profile-top">
                 <h6><a href="#" title="Buy Rayku Points" class="rayku-points">{{app.user.points}}RP</a></h6>
-                <h5>Student</h5>
+                <h5>{{ app.user.username }}</h5>
             </div>
             <div class="large-12 columns user-rayku-points">
                 <form class="buy-rayku-points custom" name="buy_rayku_points" action="/paypal.php" method="post">

@@ -74,7 +74,6 @@ class SessionController extends Controller
 	
 	private function validateTutorRequested(Session $session)
 	{
-		$valid = false;
 		$em = $this->getDoctrine()->getManager();
 		$currentTutor = $this->getUser()->getTutor();
 		
@@ -86,7 +85,7 @@ class SessionController extends Controller
 				return $potentialTutor;
 			}
 		}
-		return $valid;
+		return false;
 	}
 	
 	/**
@@ -99,9 +98,9 @@ class SessionController extends Controller
 	public function postSessionAcceptAction(Session $session)
 	{
 		$em = $this->getDoctrine()->getManager();
-		$valid = $this->validateTutorRequested($session);
+		$potentialTutor = $this->validateTutorRequested($session);
 		
-		if (!$valid) {
+		if (!$potentialTutor) {
 			throw $this->createNotFoundException('Unable to find Session.');
 		}else{
 			$potentialTutor->setTutorReply('replied');

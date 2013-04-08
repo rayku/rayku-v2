@@ -5,6 +5,23 @@
 	<link href="{{ asset('bundles/raykupage/css/style.css') }}" type="text/css" rel="stylesheet" media="screen" />
 {% endblock %}
 
+{% block header %}
+<header>
+    <div class="inside">
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <a href="{{ path('rayku_page_dashboard') }}" id="logo"><img src="{{asset('bundles/raykupage/images/logo.png')}}" alt="" /></a>
+        {% else %}
+        	<a href="{{ path('rayku_page_homepage') }}" id="logo"><img src="{{asset('bundles/raykupage/images/logo.png')}}" alt="" /></a>
+            <nav>
+                <a href="#" class="ask-login-button" data-reveal-id="loginModal">Login</a>
+                <a href="{% block signuplink %}{{ path('fos_user_registration_register') }}{% endblock %}" class="signup-user">Signup</a>
+                <a href="{{ path('rayku_page_become_a_tutor') }}">Become a Tutor</a>
+            </nav>
+        {% endif %}
+    </div>
+</header>
+{% endblock %}
+
 {% block content %}
 <div id="timeline">
 	<div class="inside">
@@ -194,7 +211,7 @@
 </div>
 
 <div id="contact-us">
-	<div id="map_canvas"></div>
+	<a name="contact" />
 	<div class="contact-info">
 		<h3>Get in touch with us!</h3>
 		<p>Rayku is based in Toronto, Canada.</p>

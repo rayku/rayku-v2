@@ -55,8 +55,8 @@
 		<nav class="right">
 			<a href="{{ path('rayku_page_about') }}">About</a>
 			<a href="#">Jobs</a>
-			<a href="#">Contact Us</a>
-			<a href="#">Legal</a>
+			<a href="{{ path('rayku_page_about') }}#contact">Contact Us</a>
+			<a href="{{ path('rayku_legal_page') }}">Legal</a>
 		</nav>
 		<div class="clear"></div>
 		</div>
@@ -92,5 +92,8 @@
         </script>
     {% endblock %}
     {% endblock body %}
+    
+    {% include "::GoogleAnalytics.html.twig" %}
+    
     </body>
 </html>

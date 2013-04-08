@@ -19,6 +19,12 @@ rayku_page_about:
       _controller: FrameworkBundle:Template:template
       template: 'RaykuPageBundle:Page:about.html.twig'
 
+rayku_legal_page:
+    pattern: /legal
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'RaykuPageBundle:Page:legal.html.twig'
+
 rayku_page_become_a_tutor:
     pattern: /become-a-tutor
     defaults: 

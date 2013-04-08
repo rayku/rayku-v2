@@ -3,7 +3,7 @@ security:
         connection: default
     encoders:
         "FOS\UserBundle\Entity\User":
-            algorithm: sha512
+            algorithm: sha1
             encode_as_base64: false
             iterations: 1
 
@@ -13,7 +13,7 @@ security:
 
     providers:
         fos_userbundle:
-            id: fos_user.user_manager
+            id: fos_user.user_provider.username_email
 
     firewalls:
         # Disabling the security for the web debug toolbar, the profiler and Assetic.
@@ -47,6 +47,7 @@ security:
         # Non-secure part of site
         - { path: ^/about$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/become-a-tutor$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/legal$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, role: IS_AUTHENTICATED_ANONYMOUSLY }
         
         # Todo secure with HMAC

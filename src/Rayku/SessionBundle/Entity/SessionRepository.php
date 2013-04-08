@@ -14,6 +14,7 @@ class SessionRepository extends EntityRepository
 			->from('\Rayku\SessionBundle\Entity\Session', 'session')
 			->innerJoin('session.potential_tutors', 't')
 			->where('t.tutor = :tutorId')
+			->andWhere('t.tutorReply = \'pending\'')
 			->andWhere('session.selected_tutor is NULL')
 			->andWhere('session.endTime is NULL')
 			->andWhere('s.createdAt > :expire_session')

@@ -54,16 +54,18 @@
 		<p class="copy left">Copyright 2013 Rayku Corp. All rights reserved | Questions? 1-888-98RAYKU</p>
 		<nav class="right">
 			<a href="{{ path('rayku_page_about') }}">About</a>
-			<a href="#">Jobs</a>
-			<a href="#">Contact Us</a>
-			<a href="#">Legal</a>
+			{% if not app.user %}
+				<a href="{{ path('rayku_page_become_a_tutor') }}">Jobs</a>
+			{% endif %}
+			<a href="{{ path('rayku_page_about') }}#contact">Contact Us</a>
+			<a href="{{ path('rayku_legal_page') }}">Legal</a>
 		</nav>
 		<div class="clear"></div>
 		</div>
     </footer>
     {% endblock %}
 
-	{% if is_granted("IS_AUTHENTICATED_ANONYMOUSLY") %}	
+	{% if is_granted("IS_AUTHENTICATED_ANONYMOUSLY") %}
 		{% render "FOSUserBundle:Security:login" %}
 	{% endif %}
 
@@ -92,5 +94,8 @@
         </script>
     {% endblock %}
     {% endblock body %}
+    
+    {% include "::GoogleAnalytics.html.twig" %}
+    
     </body>
 </html>

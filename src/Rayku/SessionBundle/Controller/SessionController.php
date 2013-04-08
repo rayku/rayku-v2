@@ -59,9 +59,9 @@ class SessionController extends Controller
 	 */
 	public function postSessionDenyAction(Session $session)
 	{
-		$valid = $this->validateTutorRequested($session);
+		$potentialTutor = $this->validateTutorRequested($session);
 		
-		if (!$valid) {
+		if (!$potentialTutor) {
 			throw $this->createNotFoundException('Unable to find Session.');
 		}else{
 			$potentialTutor->setTutorReply('rejected');

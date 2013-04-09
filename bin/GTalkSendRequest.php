@@ -7,7 +7,7 @@ $dsn = 'mysql:dbname=rayku_v2;host=db1.p.rayku.com';
 $user = 'rayku_db';
 $password = 'UthmCRtaum34qpGL';
 
-$query = "
+$sql = "
 	SELECT * 
 	FROM rayku_v2.rayku_session s
 	INNER JOIN rayku_v2.rayku_tutor_connect c ON c.session_id = c.id
@@ -20,7 +20,7 @@ $query = "
 	AND t.online_gtalk > '".date('Y-m-d H:i:s', strtotime($expire_session))."'
 ";
 
-echo $query;
+echo $sql;
 
 try {
 	$dbh = new PDO($dsn, $user, $password);

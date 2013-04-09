@@ -20,8 +20,8 @@ $(function(){
     //Show settings
     $('.settings').on('click', function(){
         $('.user-profile').fadeOut('fast');
+        $('.tutor-list').fadeOut('fast');
         $('.user-settings').delay(500).fadeIn('slow');
-        
     });
 
     //Show home

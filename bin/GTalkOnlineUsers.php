@@ -19,13 +19,14 @@ if(empty($gtalkEmails)){
 $query = "
 	UPDATE rayku_tutor 
 	SET online_gtalk = '".date("Y-m-d H:i:s")."' 
-	WHERE gtalk_email IN (".implode(',',$gtalkEmails).")
+	WHERE gtalk_email IN ('".implode('\',\'',$gtalkEmails)."')
 	LIMIT ".count($gtalkEmails);
 
-$dsn = 'mysql:dbname=rayku_v2;host=localhost';
-$user = 'root';
-$password = 'abc123';
+$dsn = 'mysql:dbname=rayku_v2;host=db1.p.rayku.com';
+$user = 'rayku_db';
+$password = 'UthmCRtaum34qpGL';
 
+echo 'found '.count($gtalkEmails).' online';
 try {
 	$dbh = new PDO($dsn, $user, $password);
 } catch (PDOException $e) {

@@ -216,13 +216,7 @@ class SessionController extends Controller
 		if($form->isValid()){
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($session);
-			// @todo shouldn't be necessary
-			foreach($session->getPotentialTutors() as $potentialTutor){
-				$potentialTutor->setSession($session);
-				$em->persist($potentialTutor);
-			}
 			$em->flush();
-			// @todo put this url in a config somewhere
 			return $session;
 		}
 		return $form;

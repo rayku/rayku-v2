@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Rayku\UserBundle\Form\UserType;
 use Rayku\SessionBundle\Form\RateSessionType;
 use Rayku\SessionBundle\Entity\Session;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Page controller.
@@ -23,6 +24,9 @@ class PageController extends Controller
 	
 	public function dashboardAction($id = NULL)
 	{
+		if(false === $this->get('security.context')->isGranted('ROLE_USER')){
+			throw new AccessDeniedException();
+		}
 		$userEditForm = $this->createForm(new UserType(), $this->getUser());
 		
 		$view['userform'] = $userEditForm->createView();

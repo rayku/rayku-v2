@@ -30,7 +30,7 @@ try {
 }
 
 
-foreach ($conn->query($sql) as $row) {
+foreach ($dbh->query($sql) as $row) {
 	$message = 'A student has requested a tutoring session with you on http://www.rayku.com';
 	BotServiceProvider::createFor('http://10.180.146.105:8892/msg/'.$row['gtalk_email'].'/'.$message)->getContent();
 	$update = "UPDATE rayku_v2.rayku_tutor_connect c SET tutor_reply = 'contacted gtalk' WHERE c.id = ".$row['c.id']." limit 1";

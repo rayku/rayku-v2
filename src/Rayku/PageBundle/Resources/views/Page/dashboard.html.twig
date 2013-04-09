@@ -402,7 +402,7 @@ $(document).ready(function(){
 	{% if app.user %}
 		<script src="{{ asset('bundles/raykupage/js/jquery_poll/lib/jquery.smart-poll.js') }}"></script>
 		<script type="text/javascript">
-		$.poll(5000, function(retry){
+		window.setInterval(function(){
 			$.get('{{ path('get_sessions') }}', function(response, status){
 				jQuery.each(response, function() {
 					var current_messages = parseInt($('.notif-count').html());
@@ -426,9 +426,8 @@ $(document).ready(function(){
 						}
 					})
 				})
-				retry(5000);
 			})
-		})
+		}, 5000);
 		</script>
 	{% endif %}
 {% endblock %}

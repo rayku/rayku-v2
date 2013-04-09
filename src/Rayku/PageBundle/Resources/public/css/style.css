@@ -367,6 +367,7 @@ header nav a:hover {
 .inside {
 	width: 960px;
 	margin: 0 auto;
+	padding-top: 0;
 }
 
 .inside.static {
@@ -380,7 +381,7 @@ header nav a:hover {
 }
 
 #intro .inside {
-	padding: 80px 0 0 0;
+	padding: 50px 0 0 0;
 }
 
 #intro .left,

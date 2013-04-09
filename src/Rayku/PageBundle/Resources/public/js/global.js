@@ -17,20 +17,26 @@ $(function(){
             $('.login-button').attr('disabled', true);
         }
     });
+    //Show settings
+    $('.settings').on('click', function(){
+        $('.user-profile').fadeOut('fast');
+        $('.user-settings').delay(500).fadeIn('slow');
+        
+    });
 
+    //Show home
+    $('.home').on('click', function(){
+        $('.user-settings').fadeOut('fast');
+        $('.user-profile').delay(500).fadeIn('slow');
+    });
     //Show dropdown navigation
-    $('a.logged-in-as').on('mouseenter', function(){
-        $('div.submenu').slideDown(30, function(){
-                $(this).css('display','block');
-                $('a.logged-in-as').css('background', 'rgba(10, 10, 10, 0.4)');
-                $(this).mouseleave(function(){
-                    $(this).slideUp(10);
-                    $('a.logged-in-as').css('background', 'transparent');
-                }); 
-            });
-        return false;
+    $('a.logged-in-as').on('click',function(){
+            $('div.submenu').slideToggle(30);
         }
     );
+    $('.submenu').on('mouseleave', function(){
+        $(this).slideUp(30);
+    });
 
     //Category Select
     $('#categorySelect').change(function() {

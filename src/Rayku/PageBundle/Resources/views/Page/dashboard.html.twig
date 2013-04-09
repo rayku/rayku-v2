@@ -41,7 +41,79 @@
 
     <!--Main Content-->
 	<div class="large-9 columns main-content">
-        
+        <!--User Settings-->    
+        <div class="row user-settings">
+            <div class="large-12 columns user-settings-top">
+                <h5>{{ app.user.username }}</h5>
+            </div>
+            <div class="large-3 columns ask-q">
+                <h5>Settings</h5>
+            </div>
+            <div class="large-9 columns settings">
+                <form class="user-setting">
+                    <div class="row">
+                        <div class="large-3 columns">
+                            <label>Change Email</label>
+                        </div>
+                        <div class="large-8 columns">
+                            <input type="text" placeholder="john@example.com">
+                        </div>
+                        <div class="large-1 columns">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-3 columns">
+                            <label>Change Username</label>
+                        </div>
+                        <div class="large-8 columns">
+                            <input type="text" placeholder="Username">
+                        </div>
+                        <div class="large-1 columns">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-3 columns">
+                            <label>Old Password</label>
+                        </div>
+                        <div class="large-8 columns">
+                            <input type="password" placeholder="Old Password">
+                        </div>
+                        <div class="large-1 columns">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-3 columns">
+                            <label>New Password</label>
+                        </div>
+                        <div class="large-8 columns">
+                            <input type="password" placeholder="New Password">
+                        </div>
+                        <div class="large-1 columns">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-3 columns">
+                            <label>Confirm Password</label>
+                        </div>
+                        <div class="large-8 columns">
+                            <input type="password" placeholder="Confirm New Password">
+                        </div>
+                        <div class="large-1 columns">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-1 large-centered columns">
+                        <input type="submit" class="bbutton" value="Save Settings">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <!-- User Profile -->
         <div class="row user-profile">
             <div class="large-12 columns user-profile-top">

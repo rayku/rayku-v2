@@ -10,6 +10,7 @@ class TutorRepository extends EntityRepository
 	{
 		$query = $this->createQueryBuilder('t')
 			->where('t.onlineWeb > :expire_online')
+			->orWhere('t.onlineGtalk > :expire_online')
 			->setParameter('expire_online', date("Y-m-d H:i:s", strtotime($expire_online)))
 			->getQuery();
 		

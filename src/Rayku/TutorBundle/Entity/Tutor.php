@@ -72,13 +72,6 @@ class Tutor
      * @ORM\Column(name="gtalk_email", type="string", length=255, nullable=true)
      */
     private $gtalk_email;
-    
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="online_gchat", type="datetime", nullable=true)
-     */
-    private $onlineGchat;
 
     /**
      * @var float
@@ -226,29 +219,6 @@ class Tutor
     public function getOnlineWeb()
     {
         return $this->onlineWeb;
-    }
-
-    /**
-     * Set onlineGchat
-     *
-     * @param boolean $onlineGchat
-     * @return Tutor
-     */
-    public function setOnlineGchat($onlineGchat)
-    {
-        $this->onlineGchat = $onlineGchat;
-    
-        return $this;
-    }
-
-    /**
-     * Get onlineGchat
-     *
-     * @return boolean 
-     */
-    public function getOnlineGchat()
-    {
-        return $this->onlineGchat;
     }
 
     /**

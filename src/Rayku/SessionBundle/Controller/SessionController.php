@@ -132,7 +132,7 @@ class SessionController extends Controller
 		
 		return array(
 			'success' => true,
-			'redirect' => 'http://w2-qa.rayku.com/room/'.$session->getId().'/tutor'
+			'redirect' => 'http://whiteboard.rayku.com/room/'.$session->getId().'/tutor'
 		);
 	}
 	
@@ -256,7 +256,7 @@ class SessionController extends Controller
 			}
 			$em->flush();
 			// @todo put this url in a config somewhere
-			return $this->redirect('http://w2-qa.rayku.com/room/'.$session->getId().'/student');
+			return $this->redirect('http://whiteboard.rayku.com/room/'.$session->getId().'/student');
 		}
 		return $form;
 	}

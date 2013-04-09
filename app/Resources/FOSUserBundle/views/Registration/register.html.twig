@@ -41,6 +41,9 @@
 			{{ parent() }}
 			<link href="{{ asset('bundles/raykupage/css/style.css') }}" type="text/css" rel="stylesheet" media="screen" />
 		{% endblock %} 
+		{% block javascripts %}
+		    {{ parent() }}
+    	{% endblock %}
         <div class="form-box signup-box fade-in">
 			<a href="{{ path('rayku_page_homepage') }}" class="logo"></a>
 			<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">

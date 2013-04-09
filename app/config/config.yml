@@ -13,6 +13,10 @@ framework:
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] }
     default_locale:  %locale%
+    session:
+        default_locale: %locale%
+        lifetime:       36000
+        auto_start:     true
     session: ~
 
 # Twig Configuration

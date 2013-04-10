@@ -2,6 +2,10 @@
 
 require_once 'BotServiceProvider.class.php';
 
+$dsn = 'mysql:dbname=rayku_v2;host=db1.p.rayku.com';
+$user = 'rayku_db';
+$password = 'UthmCRtaum34qpGL';
+
 $gtalkEmails = array();
 $gtalkUsersJSON = json_decode(BotServiceProvider::createFor("http://10.180.146.105:8892/onlines")->getContent());
 
@@ -16,15 +20,11 @@ if(empty($gtalkEmails)){
 	return true;
 }
 
-$query = "
+$sql = "
 	UPDATE rayku_tutor 
 	SET online_gtalk = '".date("Y-m-d H:i:s")."' 
 	WHERE gtalk_email IN ('".implode('\',\'',$gtalkEmails)."')
 	LIMIT ".count($gtalkEmails);
-
-$dsn = 'mysql:dbname=rayku_v2;host=db1.p.rayku.com';
-$user = 'rayku_db';
-$password = 'UthmCRtaum34qpGL';
 
 echo 'found '.count($gtalkEmails).' online';
 try {
@@ -33,5 +33,3 @@ try {
 	echo 'Connection failed: ' . $e->getMessage();
 	return false;
 }
-
-$dbh->exec($query);

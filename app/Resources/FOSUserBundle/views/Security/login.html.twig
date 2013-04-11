@@ -2,11 +2,17 @@
 
 {% block content %}
 <div id="loginModal" class="reveal-modal medium">
-    <div class="login-modal-header">
+    <div class="row login-modal-header">
         <img src="{{asset('/bundles/raykupage/images/logo.png')}}" alt="rayku">
         <a class="close-reveal-modal">&#215;</a>
     </div>
     <div class="row login-form">
+        <div class="row login-modal-error">
+            <div class="large-12 columns">
+                <p><strong>Please re-enter your email and password</strong><br>
+                The password you entered is incorrect. Please try again.</p>
+            </div>
+        </div>
         <form action="{{ path("fos_user_security_check") }}" method="post">
         	<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />        
             <div class="row">

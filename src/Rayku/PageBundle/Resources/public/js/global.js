@@ -1,7 +1,9 @@
 $(function(){
     var tutorList = []; //store selected tutors
     var tutorCount = 0;
-
+    var $settings = $('.user-settings');
+    var $profile = $('.user-profile');
+    
     //Forgot password on login modal
     $('a.forgot-password').click(function(){
         if($('.login-button').hasClass('disabled')){
@@ -19,15 +21,16 @@ $(function(){
     });
     //Show settings
     $('.settings').on('click', function(){
-        $('.user-profile').fadeOut('fast');
+        $profile.fadeOut('fast');
         $('.tutor-list').fadeOut('fast');
-        $('.user-settings').delay(500).fadeIn('slow');
+        $settings.delay(500).fadeIn('slow');
     });
 
     //Show home
     $('.home').on('click', function(){
-        $('.user-settings').fadeOut('fast');
-        $('.user-profile').delay(500).fadeIn('slow');
+        
+        $settings.fadeOut('fast');
+        $profile.delay(500).fadeIn('slow');
     });
     //Show dropdown navigation
     $('a.logged-in-as').on('click',function(){
@@ -91,6 +94,7 @@ $(function(){
         $('form.user-profile-edit-form').hide(100);
     })
 });
+
 function populateLevel(){
     var level = $('select[name="school"]').val(); //determine if highschool or university was selected
 
@@ -120,6 +124,8 @@ function populateLevel(){
         $('#highschool select').attr('disabled', 'disabled');
     }
 }
+
+//stick tutor select to top of the page on scroll
 $(window).scroll(function(e){ 
     $el = $('.tutor-selected'); 
     $tbel = $('#tutorTable thead');

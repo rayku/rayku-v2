@@ -110,10 +110,19 @@ $(document).ready(function(){
     $('#turnTutorStatusOff').foundation('reveal', 'close');
     return false;
   });
-  $('#tutorOn').click(function(){
-    $('#myTutorModal').foundation('reveal', 'open');
+  $('#tutorOn').click(function(event){
+    event.preventDefault();
+    var $this = $(this);
+
+    $('#myTutorModal').foundation('reveal', 'open')
+                      .one("close", function(){
+                        console.log("it was closed");
+                        $('#{{form.name}}').one('submit', function(){
+                          $this.attr("checked", true);
+                        });
+                      });
   });
-  
+
   var options = { 
     error: function(response, status, err){
       var responseJson = $.parseJSON(response.responseText);

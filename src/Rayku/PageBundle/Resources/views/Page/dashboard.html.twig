@@ -401,6 +401,34 @@ $(document).ready(function(){
 {% block head %}
 	{{ parent() }}
 	{% if app.user %}
-
+		<script src="{{ asset('bundles/raykupage/js/jquery_poll/lib/jquery.smart-poll.js') }}"></script>
+		<script type="text/javascript">
+		window.setInterval(function(){
+			$.get('{{ path('get_sessions') }}', function(response, status){
+				jQuery.each(response, function() {
+					var current_messages = parseInt($('.notif-count').html());
+					$('.notif-count').html(response.length);
+					var template = $('#connectRow_id_').prop("outerHTML");
+					template = template.replace('_name_', this.student.first_name+' '+this.student.last_name);
+					template = template.replace('_question_', this.question);
+					template = template.replace(/_id_/g, this.id);
+					$('#connectNotifModal').append(template);
+					$('#connectRow'+this.id).show();
+					if(response.length > current_messages){
+						$('#connectNotifModal').foundation('reveal', 'open');
+					}
+					$('.post_session_accept').ajaxForm(function(response) { 
+						if(response.success){
+							window.location.href = response.redirect;
+						}else if(response.success !== false){
+							alert(response.message);
+						}else{
+							alert('an unknown error has occured');
+						}
+					})
+				})
+			})
+		}, 5000);
+		</script>
 	{% endif %}
 {% endblock %}

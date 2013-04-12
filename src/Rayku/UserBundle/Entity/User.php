@@ -150,7 +150,7 @@ class User extends BaseUser
     	}catch(\Exception $e){
     		return false;
     	}
-    	return ($deletedAt == null) ? true : false;
+    	return ($deletedAt == null && null !== $this->getTutor()->getId()) ? true : false;
     }
 
     /**

@@ -205,7 +205,7 @@ ul.submenu-item li a:hover {
    	height: 500px; 
 	width: 80%;
 }
-.tutor-list, .user-profile, .user-settings{
+.tutor-list, .user-profile, .user-settings, .public-profile-sections{
 	background: rgba(255, 255, 255, 0.6);
 	box-shadow: 0 0 10px rgba(10, 10, 10, 0.1);
 
@@ -239,12 +239,12 @@ ul.submenu-item li a:hover {
     overflow:auto;
     float:right;
 }
-.tutor-switch label {
+.tutor-switch a {
     float:left;
     width:3em;
 }
 
-.tutor-switch label span {
+.tutor-switch a span {
     text-align:center;
     padding:5px 5px;
     display:block;
@@ -261,7 +261,7 @@ ul.submenu-item li a:hover {
 	transition: background-image ease-in-out 0.3s;
 }
 
-.tutor-switch input:checked + span {
+.isTutorBg {
 	background: rgb(72,130,175); /* Old browsers */
 	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
 	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQ4ODJhZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxZDcwYWYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
@@ -273,6 +273,9 @@ ul.submenu-item li a:hover {
 	background: linear-gradient(to bottom,  rgba(72,130,175,1) 0%,rgba(29,112,175,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4882af', endColorstr='#1d70af',GradientType=0 ); /* IE6-8 */
     color:#F7F7F7;
+}
+.notTutorBg{
+	background: transparent;
 }
 .tutor-status-bar{
 	padding: 0 5px;
@@ -519,12 +522,16 @@ form.user-setting label{
 	padding: 7px;
 	float: right;
 }
-form.user-setting input[type="text"], form.user-setting input[type="password"]{
+form.user-setting input[type="text"], form.user-setting input[type="password"], form.user-setting textarea{
 	box-shadow: inset 0 0 6px rgba(100, 100, 100, 0.3);
 	border:1px solid rgba(200, 200, 200, 0.5);
 	border-radius: 3px;
 	height: 40px;
 	padding: 10px;
+}
+form.user-setting textarea{
+	resize:none;
+	height: 100px;
 }
 form.user-setting input[type="submit"]{
 	
@@ -1025,4 +1032,34 @@ a.accept, a.decline{
 a.accept:hover, a.decline:hover{
 	text-decoration: none;
 	color: rgba(255, 255, 255, 1);
+}
+
+
+/*********************************
+TUTOR PUBLIC PROFILE
+**********************************/
+.public-profile-sections{
+	float:left;
+	margin: 10px 0;
+	padding:15px 0px;
+	padding-bottom: 0;
+}
+.public-profile-sections span.tutor-rating{
+	float:right;
+}
+.public-profile-sections .reviews h6{
+	font-size: 14px;
+	font-weight: 500;
+}
+.public-profile-sections .reviews ul{
+	list-style-type: none;
+}
+.public-profile-sections .reviews ul li{
+	border-bottom: 1px dotted rgba(221, 221, 221, 1);
+}
+.public-profile-sections .reviews ul li:last-child{
+	border-bottom: none;
+}
+.public-profile-sections .about, .public-profile-sections .reviews, .public-profile-sections .contact, .section-container{
+	border: none;
 }

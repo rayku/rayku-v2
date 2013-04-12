@@ -13,8 +13,8 @@
                 <div class="small-12 columns tutor-label">
                     <h5>Tutor</h5>
                     <div class="tutor-switch">
-                        <label><input type="radio" name="toggle" id="tutorOn" {% if app.user.isTutor %} checked="checked"{% endif %}><span>On</span></label>
-                        <label><input type="radio" name="toggle" id="tutorOff" {% if app.user.isTutor == false %} checked="checked"{% endif %}><span>Off</span></label>
+                        <a href=# name="toggle" id="tutorOn" data="{% if app.user.isTutor %}isTutor{% endif %}"><span>On</span></a>
+                        <a href=# name="toggle" id="tutorOff" data="{% if app.user.isTutor == false %}notTutor{% endif %}"><span>Off</span></a>
                     </div>
     		    </div>
     		</div>
@@ -107,6 +107,17 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="large-3 columns">
+                            <label>Biography</label>
+                        </div>
+                        <div class="large-8 columns">
+                            <textarea></textarea>
+                        </div>
+                        <div class="large-1 columns">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="large-1 large-centered columns">
                         <input type="submit" class="bbutton" value="Save Settings">
                         </div>
@@ -190,15 +201,18 @@
                         </form>
                         <span>Degree:</span> <span class="degree edit">{{ app.user.degree }}</span>
                     </li>
+                    {% if app.user.isTutor %}
                     <li>
                         <a href="#" class="raphael edit-tool">></a>
                         <form class="user-profile-edit-form" name="bio">
-                            <label>Bio</label>
+                            <label>Specialty</label>
                             <textarea class="form-field" name="current_bio">{{ app.user.bio }}</textarea>
                             <input type="submit" class="bbutton" value="Save">
                             <a href=# class="close-edit">x</a>
                         </form>
-                        <span>Bio:</span> <span class="bio edit">{{ app.user.bio }}</span></li>
+                        <span>Specialty:</span> <span class="bio edit">{{ app.user.bio }}</span>
+                    </li>
+                    {% endif %}
                 </ul>
                 <ul class="user-profile-buttons">
                     <li><a href=# class="bbutton edit-button"><span class="raphael">></span>Edit Profile</a></li>
@@ -356,7 +370,7 @@
   </div>
   <!--End Tutor List-->
 </div>
-
+<a href=# data-reveal-id="rateTutorModal">REVEAL</a>
 {% render url('rayku_tutor_new') %}
 
 <div id="connectNotifModal" class="reveal-modal large connectNotif">
@@ -385,6 +399,36 @@
 	</div>
 </div>
 
+<div id="rateTutorModal" class="reveal-modal medium rateTutor">
+    <div class="row">
+        <div class="large-12 columns">
+            <h3>Rate Your Tutor</h3>
+        </div>
+    </div>
+    <div class="large-12 columns rate-tutors">
+        <form id="rateTutorForm" class="custom" name="rate-tutor"  method="post">
+            <div class="row">
+                <div class="large-12 columns">
+                    <label for="rateTutor"></label>
+                    
+                </div>
+                <div class="large-12 columns">
+                    <form>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>Write Review</label>
+                                <textarea placeholder="small-12.columns">Write a tutor review</textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="large-3 columns">
+                    <input type="submit" class="bbutton" value="Rate">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 {% if ratesessionform is defined %}
 <div id="rateTutorModal" class="reveal-modal medium rateTutor">
     <div class="row">

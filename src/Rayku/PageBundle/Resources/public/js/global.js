@@ -28,10 +28,10 @@ $(function(){
 
     //Show home
     $('.home').on('click', function(){
-        
         $settings.fadeOut('fast');
         $profile.delay(500).fadeIn('slow');
     });
+    
     //Show dropdown navigation
     $('a.logged-in-as').on('click',function(){
             $('div.submenu').slideToggle(30);

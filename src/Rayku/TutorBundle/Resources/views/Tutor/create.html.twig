@@ -55,7 +55,7 @@
         </div>
       </div>
       {{ form_rest(form) }}
-      <input type="submit" class="bbutton" value="Save &amp; Activate Tutor Status" name="tutorStatusButton">
+      <input type="submit" class="bbutton" value="Save &amp; Activate Tutor Status" name="tutorStatusButton" id="submitTutorStatus">
     </form>
   </div>
   <a class="close-reveal-modal">×</a>
@@ -93,9 +93,38 @@ $(document).ready(function(){
     var tutor_id;
   {% endif %}
 
-  $('#tutorOff').click(function(){
-      $('#turnTutorStatusOff').foundation('reveal', 'open');
-  })
+    if($("#tutorOn").attr("data") === "isTutor"){
+        $("#tutorOn").addClass("isTutorBg");
+    }
+    else{
+        $("#tutorOn").removeClass("notTutorBg");
+    }
+    if($("#tutorOff").attr("data") === "notTutor"){
+        $("#tutorOff").addClass("isTutorBg");
+    }
+    else{
+        $("#tutorOff").removeClass("notTutorBg");
+    }
+
+
+
+    $('#submitTutorStatus').on('submit', function(){
+        $("#tutorOff").attr("data", "");
+        $("#tutorOn").removeClass("isTutorBg");
+
+        $("#tutorOn").attr("data", "isTutor");
+        $("#tutorOn").addClass("isTutorBg");
+    });
+
+    $('#confirmTutorStatusOff').on('submit', function(){
+        $("#tutorOn").attr("data", "");
+        $("#tutorOn").removeClass("isTutorBg");
+
+        $("#tutorOff").attr("data", "notTutor");
+        $("#tutorOn").addClass("isTutorBg");
+    });
+
+
   $('#confirmTutorStatusOn').click(function(){
     $('#turnTutorStatusOff').foundation('reveal', 'close');
     return false;
@@ -103,24 +132,33 @@ $(document).ready(function(){
   $('#confirmTutorStatusOff').click(function(){
     $.ajax({
       type: "POST",
-      url: '/tutor/'+tutor_id+'/delete'
+      url: '/app_dev.php/tutor/'+tutor_id+'/delete'
     }).done(function() {
       tutor_id = '';
     });
     $('#turnTutorStatusOff').foundation('reveal', 'close');
     return false;
   });
+
+  $('#tutorOff').on('click', function(){
+    var $this = $(this);
+    
+    if($this.attr("data") === "notTutor"){
+
+    }
+    else{
+        $("#turnTutorStatusOff").foundation('reveal', 'open');
+    }
+  });
   $('#tutorOn').click(function(event){
     event.preventDefault();
     var $this = $(this);
+    if($this.attr("data") === "isTutor"){
 
-    $('#myTutorModal').foundation('reveal', 'open')
-                      .one("close", function(){
-                        console.log("it was closed");
-                        $('#{{form.name}}').one('submit', function(){
-                          $this.attr("checked", true);
-                        });
-                      });
+    }
+    else{
+        $('#myTutorModal').foundation('reveal', 'open');
+    }
   });
 
   var options = { 

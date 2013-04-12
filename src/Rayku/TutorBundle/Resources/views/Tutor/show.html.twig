@@ -1,62 +1,161 @@
 {% extends "::base.html.twig" %}
+
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('bundles/raykupage/css/innerstyle.css') }}" type="text/css" rel="stylesheet" media="screen" />
 {% endblock %}
+
 {% block content %}
-<div class="container">
-    <div class="row dashboard">
-        <h1>Tutor</h1>
+<div class="dashboard">
+    <!--Sidebar-->
+    <div class="large-3 columns sidebar">
+        <div class="row tutor-sidebar">
+            <div class="small-12 columns tutor-label">
+                <ul>
+                    <li>
+                        <span>Sessions:</span> <span class="bio edit">436</span>
+                    </li>
+                    <li>
+                        <span>Tutor Since:</span> <span class="bio edit">{{ entity.createdAt|date('Y-m-d H:i:s') }}</span>
+                    </li>
+                    <li>
+                        <span>Last Seen:</span> <span class="bio edit">{{ entity.onlineWeb|date('Y-m-d H:i:s') }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {% if app.user.isTutor %}
+            <div class="row tutor-status-bar">
+                <div class="small-12 columns tutor-status">
+                    <h5>Status <span>
+                    Online
+                    </span></h5>
+                </div>
+            </div>
+        {% endif %}
 
-        <table class="record_properties">
-            <tbody>
-                <tr>
-                    <th>Id</th>
-                    <td>{{ entity.id }}</td>
-                </tr>
-                <tr>
-                    <th>Schoolname</th>
-                    <td>{{ entity.schoolName }}</td>
-                </tr>
-                <tr>
-                    <th>Schoolamount</th>
-                    <td>{{ entity.schoolAmount }}</td>
-                </tr>
-                <tr>
-                    <th>Onlineweb</th>
-                    <td>{{ entity.onlineWeb|date('Y-m-d H:i:s') }}</td>
-                </tr>
-                <tr>
-                    <th>Onlinegchat</th>
-                    <td>{{ entity.onlineGchat|date('Y-m-d H:i:s') }}</td>
-                </tr>
-                <tr>
-                    <th>Rate</th>
-                    <td>{{ entity.rate }}</td>
-                </tr>
-                <tr>
-                    <th>Createdat</th>
-                    <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
-                </tr>
-                <tr>
-                    <th>Updatedat</th>
-                    <td>{{ entity.updatedAt|date('Y-m-d H:i:s') }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="row tutor-selected">
+            <h5><span class="tutor-count">0</span> <span class="tright">Tutor(s) Selected</span> </h5>
+            <div class="small-12 columns">
+                <ol id="selectedTutors">
+                </ol>
+                <a href=# class="clear-tutors">Clear All</a>
+            </div>
+        </div>
+    </div>
+<!--End Sidebar-->
+<!-- User Profile -->
+    <div class="row user-profile">
+        <div class="large-12 columns user-profile-top">
+            <h6><a href="#" title="Buy Rayku Points" class="rayku-points">{{app.user.points}}RP</a></h6>
+            <h5>{{ app.user.username }}</h5>
+        </div>
+        <div class="large-3 columns user-profile-image">
+            <img src="{{ asset('bundles/raykupage/images/profile_image_blank.jpg') }}">
+        </div>  
+        <div class="large-9 columns user-profile-info">
+            <ul class="user-profile-items">
+                <li>
+                    <h4><span class="name edit">{{ app.user.firstname }} {{ app.user.lastname }}</span> <span class="tutor-rating">4.3</span></h4>
+                </li>
+                <li>
+                    <h5><span class="education edit">{{ app.user.grade }}</span></h5>
+                </li>
+                <li>
+                    <span><strong>School:</strong></span> <span class="school edit">{{ app.user.school }}</span>
+                </li>
+                <li>
+                    <span>Degree:</span> <span class="degree edit">{{ app.user.degree }}</span>
+                </li>
+                <li>
+                    <span>Specialty:</span> <span class="bio edit">{{ app.user.bio }}</span>
+                </li>
+                
+                <li>
+                    <span>Rate:</span> <span class="bio edit">{{ entity.rate }} RP/Min</span>
+                </li>
+            </ul>
+        </div>
+        <!--End Profile Info-->
+        <div class="large-12 columns user-divider">
+        </div>
+        <!--Ask Form-->
+            <div class="large-12 columns ask">
+              <form class="custom">
+                <div class="row">
+                    <div class="large-3 columns ask-q">
+                        <h5>Tutor Profile</h5>
+                    </div>
+                </div>
+              </form>
+            </div>
+            <!--End Ask Form-->
+    </div>
 
-        <ul class="record_actions">
-            <li>
-                <a href="{{ path('rayku_tutor') }}">
-                    Back to the list
-                </a>
-            </li>
-            <li>
-                <a href="{{ path('rayku_tutor_edit', { 'id': entity.id }) }}">
-                    Edit
-                </a>
-            </li>
-        </ul>
+    <div class="row public-profile-sections">
+        <div class="large-12 columns">
+            <div class="section-container tabs" data-section="tabs">
+                <section class="about">
+                    <p class="title" data-section-title><a href="#panel1">About Me</a></p>
+                    <div class="content" data-slug="panel1" data-section-content>
+                        <p>Section 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </section>
+                <section class="reviews">
+                    <p class="title" data-section-title><a href="#panel2">Reviews</a></p>
+                    <div class="content" data-slug="panel2" data-section-content>
+                        <ul>
+                            <li>
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <h6>Fran Ken Stein Says</h6>
+                                    </div>
+                                    <div class="large-12 columns">
+                                        <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <h6>Nick Agopoulos Says</h6>
+                                    </div>
+                                    <div class="large-12 columns">
+                                        <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <div data-section-region class="section contact">
+                    <p class="title" data-section-title><a href="#panel3">Contact Me</a></p>
+                    <div class="content" data-slug="panel3" data-section-content>
+                        <form>
+                            <div class="row collapse">
+                                <div class="large-2 columns">
+                                    <label class="inline">Your Name</label>
+                                </div>
+                                <div class="large-10 columns">
+                                    <input type="text" id="yourName" placeholder="Jane Smith">
+                                </div>
+                            </div>
+                            <div class="row collapse">
+                                <div class="large-2 columns">
+                                    <label class="inline"> Your Email</label>
+                                </div>
+                                <div class="large-10 columns">
+                                    <input type="text" id="yourEmail" placeholder="jane@smithco.com">
+                                </div>
+                            </div>
+                            <label>Message</label>
+                            <textarea rows="4" placeholder="Want to set up a lesson? Send {{ app.user.firstname }} a note about what you you need help with and set up a time to meet."></textarea>
+                            <button type="submit" class="radius button">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

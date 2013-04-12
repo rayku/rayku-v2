@@ -12,7 +12,7 @@ class RateSessionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
     	$builder->add('rating', 'choice', array(
-        	'choices' => array('poor', 'average', 'good', 'very good', 'excellent')	,
+        	'choices' => array('poor', 'satisfactory', 'average', 'good', 'excellent')	,
         	'required' => true,
     		'attr' => array('class' => 'medium')
     	));

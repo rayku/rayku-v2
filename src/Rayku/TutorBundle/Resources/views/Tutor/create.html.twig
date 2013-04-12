@@ -133,8 +133,6 @@ $(document).ready(function(){
     },
     success: function(response){
       tutor_id = response.entity.id;
-      console.log(tutor_id);
-      console.log(response.entity.id);
       $('#myTutorModal').foundation('reveal', 'close');
       $(".error").removeClass('error');
       $(".field_error").remove();

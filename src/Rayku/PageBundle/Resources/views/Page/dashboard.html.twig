@@ -42,78 +42,7 @@
     <!--Main Content-->
 	<div class="large-9 columns main-content">
         <!--User Settings-->    
-        <div class="row user-settings">
-            <div class="large-12 columns user-settings-top">
-                <h5>{{ app.user.username }}</h5>
-            </div>
-            <div class="large-3 columns ask-q">
-                <h5>Settings</h5>
-            </div>
-            <div class="large-9 columns settings">
-                <form class="user-setting">
-                    <div class="row">
-                        <div class="large-3 columns">
-                            <label>Change Email</label>
-                        </div>
-                        <div class="large-8 columns">
-                            <input type="text" placeholder="john@example.com">
-                        </div>
-                        <div class="large-1 columns">
-                            &nbsp;
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="large-3 columns">
-                            <label>Change Username</label>
-                        </div>
-                        <div class="large-8 columns">
-                            <input type="text" placeholder="Username">
-                        </div>
-                        <div class="large-1 columns">
-                            &nbsp;
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="large-3 columns">
-                            <label>Old Password</label>
-                        </div>
-                        <div class="large-8 columns">
-                            <input type="password" placeholder="Old Password">
-                        </div>
-                        <div class="large-1 columns">
-                            &nbsp;
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="large-3 columns">
-                            <label>New Password</label>
-                        </div>
-                        <div class="large-8 columns">
-                            <input type="password" placeholder="New Password">
-                        </div>
-                        <div class="large-1 columns">
-                            &nbsp;
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="large-3 columns">
-                            <label>Confirm Password</label>
-                        </div>
-                        <div class="large-8 columns">
-                            <input type="password" placeholder="Confirm New Password">
-                        </div>
-                        <div class="large-1 columns">
-                            &nbsp;
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="large-1 large-centered columns">
-                        <input type="submit" class="bbutton" value="Save Settings">
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+        {% include 'RaykuPageBundle:Page:settings.html.twig' with {'usersettingform': usersettingform} %}
         <!-- User Profile -->
         <div class="row user-profile">
             <div class="large-12 columns user-profile-top">
@@ -472,34 +401,6 @@ $(document).ready(function(){
 {% block head %}
 	{{ parent() }}
 	{% if app.user %}
-		<script src="{{ asset('bundles/raykupage/js/jquery_poll/lib/jquery.smart-poll.js') }}"></script>
-		<script type="text/javascript">
-		window.setInterval(function(){
-			$.get('{{ path('get_sessions') }}', function(response, status){
-				jQuery.each(response, function() {
-					var current_messages = parseInt($('.notif-count').html());
-					$('.notif-count').html(response.length);
-					var template = $('#connectRow_id_').prop("outerHTML");
-					template = template.replace('_name_', this.student.first_name+' '+this.student.last_name);
-					template = template.replace('_question_', this.question);
-					template = template.replace(/_id_/g, this.id);
-					$('#connectNotifModal').append(template);
-					$('#connectRow'+this.id).show();
-					if(response.length > current_messages){
-						$('#connectNotifModal').foundation('reveal', 'open');
-					}
-					$('.post_session_accept').ajaxForm(function(response) { 
-						if(response.success){
-							window.location.href = response.redirect;
-						}else if(response.success !== false){
-							alert(response.message);
-						}else{
-							alert('an unknown error has occured');
-						}
-					})
-				})
-			})
-		}, 5000);
-		</script>
+
 	{% endif %}
 {% endblock %}

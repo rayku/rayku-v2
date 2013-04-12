@@ -4,6 +4,7 @@ namespace Rayku\PageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Rayku\UserBundle\Form\UserType;
+use Rayku\UserBundle\Form\UserSettingType;
 use Rayku\SessionBundle\Form\RateSessionType;
 use Rayku\SessionBundle\Entity\Session;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -27,9 +28,12 @@ class PageController extends Controller
 		if(false === $this->get('security.context')->isGranted('ROLE_USER')){
 			throw new AccessDeniedException();
 		}
-		$userEditForm = $this->createForm(new UserType(), $this->getUser());
 		
+		$userEditForm = $this->createForm(new UserType(), $this->getUser());
 		$view['userform'] = $userEditForm->createView();
+		
+		$userSettingForm = $this->createForm(new UserSettingType(), $this->getUser());
+		$view['usersettingform'] = $userSettingForm->createView();
 		
 		/*
 		 * @todo move logic to the model layer

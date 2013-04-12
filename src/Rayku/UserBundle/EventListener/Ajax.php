@@ -7,10 +7,12 @@ use Symfony\Component\HttpFoundation\Response;
 class Ajax
 {
 	protected $serializer;
+	protected $translator;
 	
-	public function __construct($kernel)
+	public function __construct($kernel, $translator)
 	{
 		$this->serializer = $kernel->getContainer()->get('jms_serializer');
+		$this->translator = $translator;
 	}
 	
 	public function onKernelResponse($event)
@@ -34,12 +36,17 @@ class Ajax
 			foreach($results as $key => $result){
 				if($result instanceof \Symfony\Component\Form\Form){
 					foreach($result->getChildren() as $child){
-						$error_message = $child->getErrorsAsString();
-						if(!empty($error_message)){
+						// @todo properly iterate subchildren
+						if(array() !== $child->getChildren()){
+							$children = $child->getChildren();
+							$child = array_shift($children);
+						}
+						$errors = $child->getErrors();
+						foreach($errors as $error){
 							$formError = true;
 							$event->stopPropagation();
 							$return['success'] = false;
-							$return['errors'][$child->createView()->get('id')] = $child->getErrorsAsString();
+							$return['errors'][$child->createView()->get('id')] = $this->translator->trans($error->getMessage(), array(), 'validators');
 							$response->setStatusCode(400);
 						}
 					}
@@ -47,7 +54,6 @@ class Ajax
 					$return[$key] = $results;
 				}
 			}
-			
 			if($formError){
 				$response->setContent($this->serializer->serialize($return, 'json'));
 			}else{

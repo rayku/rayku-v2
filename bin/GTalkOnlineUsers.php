@@ -33,3 +33,6 @@ try {
 	echo 'Connection failed: ' . $e->getMessage();
 	return false;
 }
+
+echo $sql;
+$dbh->exec($sql);

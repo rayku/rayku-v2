@@ -141,7 +141,7 @@ header nav a.notification:hover{
 /*Submenu*/
 .submenu{
 	position: absolute;
-	width:150px;
+	width:175px;
 	margin-left: 52px;
 	display: none;
 	z-index: 640;

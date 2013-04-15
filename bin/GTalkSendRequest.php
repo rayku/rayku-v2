@@ -10,7 +10,7 @@ $password = 'UthmCRtaum34qpGL';
 $sql = "
 	SELECT * 
 	FROM rayku_v2.rayku_session s
-	INNER JOIN rayku_v2.rayku_tutor_connect c ON c.session_id = c.id
+	INNER JOIN rayku_v2.rayku_tutor_connect c ON c.session_id = s.id
 	INNER JOIN rayku_v2.rayku_tutor t ON t.id = c.tutor_id
 	WHERE s.end_time IS NULL
 	AND s.selected_tutor_id IS NULL
@@ -31,6 +31,7 @@ try {
 
 
 foreach ($dbh->query($sql) as $row) {
+	echo 'request sent to '.$row['gtalk_email'];
 	$message = 'A student has requested a tutoring session with you on http://www.rayku.com';
 	BotServiceProvider::createFor('http://10.180.146.105:8892/msg/'.$row['gtalk_email'].'/'.$message)->getContent();
 	$update = "UPDATE rayku_v2.rayku_tutor_connect c SET tutor_reply = 'contacted gtalk' WHERE c.id = ".$row['c.id']." limit 1";

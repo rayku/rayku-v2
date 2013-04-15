@@ -22,7 +22,7 @@ if(empty($gtalkEmails)){
 
 $sql = "
 	UPDATE rayku_tutor 
-	SET online_gtalk = '".date("Y-m-d H:i:s")."' 
+	SET online_gtalk = NOW() 
 	WHERE gtalk_email IN ('".implode('\',\'',$gtalkEmails)."')
 	LIMIT ".count($gtalkEmails);
 

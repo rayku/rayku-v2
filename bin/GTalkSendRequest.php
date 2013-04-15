@@ -16,8 +16,8 @@ $sql = "
 	AND s.selected_tutor_id IS NULL
 	AND c.tutor_reply = 'pending'
 	AND t.gtalk_email IS NOT NULL
-	AND s.created_at > '".date('Y-m-d H:i:s', strtotime($expire_session))."'
-	AND t.online_gtalk > '".date('Y-m-d H:i:s', strtotime($expire_session))."'
+	AND TIME_TO_SEC(TIMEDIFF(s.created_at, NOW())) > '-360'
+	AND TIME_TO_SEC(TIMEDIFF(t.online_gtalk, NOW())) > '-360'
 ";
 
 echo $sql;

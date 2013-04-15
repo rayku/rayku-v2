@@ -307,7 +307,7 @@
             </form>
         </div>
         <div class="large-2 columns">
-        	<form method="post" action="{{ path('post_session_deny', {'session': '_id_'}) }}">
+        	<form method="post" action="{{ path('post_session_deny', {'session': '_id_'}) }}" class="post_session_deny">
         		<button type="submit" name="Decline" class="abutton decline">Decline</button>
         	</form>
         </div>
@@ -425,6 +425,11 @@ $(document).ready(function(){
 						}else{
 							alert('an unknown error has occured');
 						}
+					})
+					$('.post_session_deny').ajaxForm(function(response) {
+					    if(response.success){
+					        $('#connectNotifModal').foundation('reveal', 'close');
+					    }
 					})
 				})
 			})

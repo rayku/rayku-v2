@@ -34,8 +34,7 @@ foreach ($dbh->query($sql) as $row) {
 	echo 'request sent to '.$row['gtalk_email'];
 	$message = 'A student has requested a tutoring session with you on http://www.rayku.com';
 	var_dump(BotServiceProvider::createFor('http://10.180.146.105:8892/msg/'.$row['gtalk_email'].'/'.$message)->getContent());
-	var_dump($row);
-	//$update = "UPDATE rayku_v2.rayku_tutor_connect c SET tutor_reply = 'contacted gtalk' WHERE c.id = ".$row['c.id']." limit 1";
+	$update = "UPDATE rayku_v2.rayku_tutor_connect c SET tutor_reply = 'contacted gtalk' WHERE session_id = ".$row['session_id']." AND tutor_id = ".$row['tutor_id']." limit 1";
 	//$dbh->exec($update);
 }
 

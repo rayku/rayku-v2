@@ -7,8 +7,7 @@
     $(document).ready(function(){
         //Detect if browser is I.E.
         if ( $.browser.msie ) {
-            alert( $.browser.version );
-            $('body').html('<div class="">Rayku works best in Google Chrome and Mozilla Firefox.</div>');
+            $('body').html('<div data-alert class="alert-box">Rayku works best in Google Chrome and Mozilla Firefox. <a href="#" class="close">&times;</a></div>');
         }
     });
     </script>

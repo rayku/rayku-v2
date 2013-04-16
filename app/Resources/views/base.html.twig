@@ -31,7 +31,9 @@
                 <div class="submenu" id="submenu">
                     <ul class="submenu-item">
                         <li><a class="home" href=#><span class="raphael">L</span>Home</a></li>
+                        {% if app.user.isTutor %}
                         <li><a class="practice" href="http://whiteboard.rayku.com/standalone" target="_blank"><span class="raphael">b</span>Practice Whiteboard</a></li>
+                        {% endif %}
                         <li><a class="broadcast" href=#><span class="raphael">Æ</span>Broadcast Session</a></li>
                         <li><a class="settings" href=#><span class="raphael">`</span>Settings</a></li>
                         <li><a class="logout" href="{{ path('fos_user_security_logout') }}"><span class="raphael">v</span>{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>

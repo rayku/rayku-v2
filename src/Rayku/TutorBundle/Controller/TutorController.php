@@ -43,13 +43,21 @@ class TutorController extends Controller
     /**
      * Finds and displays a Tutor entity.
      *
-     * @Route("/{id}/show", name="rayku_tutor_show")
+     * @Route("/{username}", name="rayku_tutor_show")
      * @Template()
      * 
      * @param \Rayku\TutorBundle\Entity\Tutor $tutor
      */
-    public function showAction(Tutor $entity)
+    public function showAction($username)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('RaykuUserBundle:User')->findOneByUsername($username)->getTutor();
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Tutor entity.');
+        }
+
         return array(
             'entity'      => $entity,
         );

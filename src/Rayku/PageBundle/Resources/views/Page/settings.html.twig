@@ -6,7 +6,7 @@
         <h5>Settings</h5>
     </div>
     <div class="large-9 columns settings">
-        <form id="usersettingsForm" class="user-setting" method="POST" action="{{ path('post_user_profile', {'user': app.user.id}) }}">
+        <form id="usersettingsForm" class="user-setting" method="POST" action="{{ path('post_users_profile', {'user': app.user.id}) }}">
             <div class="row">
                 <div class="large-3 columns">
                     <label>Change Email</label>

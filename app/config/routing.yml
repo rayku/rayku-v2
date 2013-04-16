@@ -2,10 +2,7 @@ rayku_page_import:
     resource: "@RaykuPageBundle/Resources/config/routing.yml"
 
 rayku_session_import:
-    resource: "@RaykuSessionBundle/Resources/config/routing.yml"
-
-rayku_user_import:
-    resource: "@RaykuUserBundle/Resources/config/routing.yml"
+    resource: "@RaykuApiBundle/Resources/config/routing.yml"
 
 rayku_tutor:
     resource: "@RaykuTutorBundle/Controller/"

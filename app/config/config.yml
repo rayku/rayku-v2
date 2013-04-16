@@ -2,7 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: fos_user.yml }
-    - { resource: @RaykuSessionBundle/Resources/config/admin.xml }
+    - { resource: @RaykuApiBundle/Resources/config/admin.xml }
 
 framework:
     translator: ~

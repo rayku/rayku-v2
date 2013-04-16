@@ -13,12 +13,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\SecureParam;
-use Rayku\TutorBundle\Entity\Tutor;
-use Rayku\TutorBundle\Form\TutorType;
+use Rayku\ApiBundle\Entity\Tutor;
+use Rayku\ApiBundle\Form\TutorType;
 
-use Rayku\SessionBundle\Entity\Session;
-use Rayku\SessionBundle\Entity\SessionTutors;
-use Rayku\SessionBundle\Form\SessionType;
+use Rayku\ApiBundle\Entity\Session;
+use Rayku\ApiBundle\Entity\SessionTutors;
+use Rayku\ApiBundle\Form\SessionType;
 
 /**
  * Tutor controller.
@@ -28,25 +28,16 @@ use Rayku\SessionBundle\Form\SessionType;
 class TutorController extends Controller
 {
     /**
-     * Lists all Tutor entities.
-     *
-     * @Route("/", name="rayku_tutor")
-     * @Template()
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('RaykuTutorBundle:Tutor')->findOnlineTutors(Tutor::expire_online);
-        return array('entities' => $entities);
-    }
-
-    /**
      * Finds and displays a Tutor entity.
      *
+<<<<<<< HEAD
      * @Route("/{username}/public", name="rayku_tutor_show")
+=======
+     * @Route("/{username}/show", name="rayku_tutor_show")
+>>>>>>> Refactor bundle structure
      * @Template()
      * 
-     * @param \Rayku\TutorBundle\Entity\Tutor $tutor
+     * @param \Rayku\ApiBundle\Entity\Tutor $tutor
      */
     public function showAction($username)
     {
@@ -72,93 +63,6 @@ class TutorController extends Controller
     }
     
     /**
-     * Delete a tutor record
-     * 
-     * @Route("/{id}/delete", name="rayku_tutor_delete")
-     * @SecureParam(name="entity", permissions="DELETE")
-     * 
-     * @param \Rayku\TutorBundle\Entity\Tutor $entity
-     */
-    public function deleteAction(Tutor $entity)
-    {
-    	$em = $this->getDoctrine()->getManager();
-    	$em->remove($entity);
-    	$em->flush();
-    	
-    	return new Response(
-    		json_encode(array('success' => true)), 
-    		200, 
-    		array('Content-Type'=>'application/json')
-    	);
-    }
-
-    /**
-     * Creates a new Tutor entity.
-     *
-     * @Route("/save", name="rayku_tutor_save")
-     * @Method("POST")
-     * @Template("RaykuTutorBundle:Tutor:create.html.twig")
-     * @todo https://github.com/l3pp4rd/DoctrineExtensions/issues/656
-     */
-    public function newAction(Request $request)
-    {
-    	$em = $this->getDoctrine()->getManager();
-    	$em->getFilters()->disable('soft_deleteable');
-    	$em->clear();
-    	    	
-    	$entity = $em->getRepository('RaykuTutorBundle:Tutor')->findOneByUser($this->getUser());
-    	if(!$entity){
-    		$entity = new Tutor();
-    	}else{
-    		$entity->setDeletedAt(NULL);
-    	}
-    	
-    	// Since we cleared doctrine above need to get a new user entity from the DB 
-    	$user = $em->getRepository('RaykuUserBundle:User')->find($this->getUser()->getId());
-    	$entity->setUser($user);
-        return $this->processForm($request, $entity);
-    }
-    
-    private function processForm(Request $request, Tutor $entity)
-    {
-    	$new = (null === $entity->getId()) ? true : false;
-    	$form = $this->createForm(new TutorType(), $entity);
-    	$form->bind($request);
-    	
-    	if ($form->isValid()) {
-    		$em = $this->getDoctrine()->getManager();
-    		$em->persist($entity);
-    		$em->flush();
-    		
-    		if($new){
-	    		// creating the ACL
-	    		$aclProvider = $this->get('security.acl.provider');
-	    		$objectIdentity = ObjectIdentity::fromDomainObject($entity);
-	    		$acl = $aclProvider->createAcl($objectIdentity);
-	    		
-	    		// retrieving the security identity of the currently logged-in user
-	    		$securityContext = $this->get('security.context');
-	    		$user = $securityContext->getToken()->getUser();
-	    		$securityIdentity = UserSecurityIdentity::fromAccount($user);
-	    		
-	    		// grant owner access
-	    		$acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
-	    		$aclProvider->updateAcl($acl);
-    		}
-    	}
-    	
-    	if(null !== $entity->getGtalkEmail()){
-    		require_once $this->get('kernel')->getRootDir() .'/../bin/BotServiceProvider.class.php';
-	    	\BotServiceProvider::createFor('http://10.180.146.105:8892/add/'.$entity->getGtalkEmail())->getContent();
-    	}
-    	
-    	return array(
-    		'entity' => $entity,
-    		'form'   => $form,
-    	);
-    }
-    
-    /**
      * Displays a form to create a new Tutor entity.
      *
      * @Route("/new", name="rayku_tutor_new")
@@ -171,7 +75,7 @@ class TutorController extends Controller
     	$em->getFilters()->disable('soft_deleteable');
     	$em->clear();
     	
-    	$entity = $em->getRepository('RaykuTutorBundle:Tutor')->findOneByUser($this->getUser());
+    	$entity = $em->getRepository('RaykuApiBundle:Tutor')->findOneByUser($this->getUser());
     	if(!$entity){
     		$entity = new Tutor();
     	}

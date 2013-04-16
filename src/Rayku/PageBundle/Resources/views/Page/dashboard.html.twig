@@ -146,7 +146,7 @@
                 <ul class="user-profile-buttons">
                     <li><a href=# class="bbutton edit-button"><span class="raphael">></span>Edit Profile</a></li>
                     <li>
-                      <form name="master-form" method="post" class="user-profile-master-form" action="{{ path('post_user', {'user': app.user.id }) }}">
+                      <form name="master-form" method="post" class="user-profile-master-form" action="{{ path('post_users', {'user': app.user.id }) }}">
                         {{ form_widget(userform.first_name) }}
                         {{ form_widget(userform.last_name) }}
                         {{ form_widget(userform.school) }}
@@ -380,7 +380,7 @@ $(document).ready(function(){
     $('input[name="aSubmit"]').click(function(event){
     	event.preventDefault();
     	$('.tutor-list').html('Loading ... ');
-        $.ajax('{{path('rayku_tutor')}}')
+        $.ajax('{{path('get_tutors')}}')
 		    .always(function(xhr, status) { 
 				if(status === 'error' || !xhr.responseText){
 					$('.tutor-list').html('There was an error loading tutors');

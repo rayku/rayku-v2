@@ -8,6 +8,7 @@
 
     "require": {
         "php": ">=5.3.3",
+        "phpunit/phpunit": "3.7.*",
 
         "twig/twig": "1.12.*",
         "twig/extensions": "1.0.*@dev",

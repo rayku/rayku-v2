@@ -654,6 +654,9 @@ form.buy-rayku-points input[type="submit"]{
 	margin-top: -9px;
 	margin-right: 7px;
 }
+a.public-tutor-link:hover{
+	text-decoration: none;
+}
 .user-profile-info h4, .user-profile-info h5, .user-profile-info h6{
 	line-height: 15px;
 	color: rgba(10, 10, 10, 0.7);
@@ -1070,12 +1073,16 @@ TUTOR PUBLIC PROFILE
 .public-profile-sections .about, .public-profile-sections .reviews, .public-profile-sections .contact, .section-container{
 	border: none;
 }
-.profile-sidebar h6{
-	font-size: 12px;
-	font-weight: 500;
-}
 .profile-sidebar ul{
 	list-style-type: none;
-	padding: 10px;
+	padding: 0 10px;
 	margin-left: 0;
+}
+.profile-sidebar ul li{
+	margin-left: 0;
+	padding: 10px 0;
+	border-bottom: 1px dotted rgba(221, 221, 221, 1);
+}
+.profile-sidebar ul li:last-child{
+	border-bottom: none;
 }

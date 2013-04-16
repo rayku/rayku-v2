@@ -11,16 +11,15 @@
         <div class="large-3 columns sidebar">
             <div class="row tutor-sidebar">
                 <div class="small-12 columns tutor-label profile-sidebar">
-                    <h6>Frequently Asked Questions</h6>
                     <ul>
                         <li>
-                            <span class="labels">Sessions</span><br> <span class="bio edit">436</span>
+                            <span class="labels">Tutor Since </span> <span class="bio edit">{{ entity.createdAt|date('Y-m-d') }}</span>
                         </li>
                         <li>
-                            <span class="labels">Tutor Since:</span> <span class="bio edit">{{ entity.createdAt|date('Y-m-d H:i:s') }}</span>
+                            <span class="labels">436</span><span class="bio edit"> Tutoring Sessions</span>
                         </li>
                         <li>
-                            <span class="labels">Last Seen:</span> <span class="bio edit">{{ entity.onlineWeb|date('Y-m-d H:i:s') }}</span>
+                            <span class="labels">Last Online</span> <span class="bio edit">{{ entity.onlineWeb|date('Y-m-d H:i:s') }}</span>
                         </li>
                     </ul>
                 </div>

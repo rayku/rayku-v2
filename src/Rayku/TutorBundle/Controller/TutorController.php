@@ -50,7 +50,7 @@ class TutorController extends Controller
      */
     public function showAction($username)
     {
-        //TO DO - check if user requested is a tutor, display public profile if isTutor, else redirect to Dashboard
+        //check if user requested is a tutor, display public profile if isTutor, else redirect to Dashboard
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('RaykuUserBundle:User')->findOneByUsername($username);
         if(!$user){

@@ -1,0 +1,96 @@
+<div class="row user-settings">
+    <div class="large-12 columns user-settings-top">
+        <h5>{{ app.user.username }}</h5>
+    </div>
+    <div class="large-3 columns ask-q">
+        <h5>Settings</h5>
+    </div>
+    <div class="large-9 columns settings">
+        <form id="usersettingsForm" class="user-setting" method="POST" action="{{ path('post_user_profile', {'user': app.user.id}) }}">
+            <div class="row">
+                <div class="large-3 columns">
+                    <label>Change Email</label>
+                </div>
+                <div class="large-8 columns">
+                    {{ form_widget(usersettingform.email) }}
+                </div>
+                <div class="large-1 columns">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-3 columns">
+                    <label>Change Username</label>
+                </div>
+                <div class="large-8 columns">
+                    {{ form_widget(usersettingform.username) }}
+                </div>
+                <div class="large-1 columns">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-3 columns">
+                    <label>Old Password</label>
+                </div>
+                <div class="large-8 columns">
+                	{{ form_widget(usersettingform.current_password, { 'attr': {'placeholder': 'Current Password'} }) }}
+                </div>
+                <div class="large-1 columns">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-3 columns">
+                    <label>New Password</label>
+                </div>
+                <div class="large-8 columns">
+					{{ form_widget(usersettingform.plainPassword.first, { 'attr': {'placeholder': 'New Password'} }) }}
+                </div>
+                <div class="large-1 columns">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-3 columns">
+                    <label>Confirm Password</label>
+                </div>
+                <div class="large-8 columns">
+					{{ form_widget(usersettingform.plainPassword.second, { 'attr': {'placeholder': 'Password Again'} }) }}
+                </div>
+                <div class="large-1 columns">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+            	{{ form_rest(usersettingform) }}
+                <div class="large-1 large-centered columns">
+                <input type="submit" class="bbutton" value="Save Settings">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  var options = {
+    beforeSubmit: function(){
+      $(".error").removeClass('error');
+      $(".field_error").remove();
+    },
+    error: function(response, status, err){
+      var responseJson = $.parseJSON(response.responseText);
+      for(field in responseJson.errors){
+        $("label[for='"+field+"']").addClass('error');
+        $("#"+field).after('<small class="error field_error">'+responseJson.errors[field]+'</small>');
+      }
+    },
+    success: function(response){
+      console.log('success');
+      $('.home').click();
+    }
+  };
+  $('#usersettingsForm').ajaxForm(options);
+})
+</script>

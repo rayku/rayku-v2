@@ -10,10 +10,12 @@ $gtalkEmails = array();
 $gtalkUsersJSON = json_decode(BotServiceProvider::createFor("http://10.180.146.105:8892/onlines")->getContent());
 
 foreach ($gtalkUsersJSON as $gtalkUserId => $status) {
-	$parts = explode('/', $gtalkUserId);
-	if (trim($parts[0]) != '') {
-		$gtalkEmails[] = trim($parts[0]);
-	}
+        $parts = explode('/', $gtalkUserId);
+        if(strpos($parts[1],'gmail') !== false || strpos($parts[1],'Talk') !== false){
+		if (trim($parts[0]) != '') {
+			$gtalkEmails[] = trim($parts[0]);
+		}
+        }
 }
 
 if(empty($gtalkEmails)){
@@ -22,7 +24,7 @@ if(empty($gtalkEmails)){
 
 $sql = "
 	UPDATE rayku_tutor 
-	SET online_gtalk = '".date("Y-m-d H:i:s")."' 
+	SET online_gtalk = NOW() 
 	WHERE gtalk_email IN ('".implode('\',\'',$gtalkEmails)."')
 	LIMIT ".count($gtalkEmails);
 
@@ -33,3 +35,6 @@ try {
 	echo 'Connection failed: ' . $e->getMessage();
 	return false;
 }
+
+echo $sql;
+$dbh->exec($sql);

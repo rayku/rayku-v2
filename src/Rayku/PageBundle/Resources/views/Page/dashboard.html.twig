@@ -3,6 +3,15 @@
 {% block stylesheets %}
 	{{ parent() }}
 	<link href="{{ asset('bundles/raykupage/css/innerstyle.css') }}" type="text/css" rel="stylesheet" media="screen" />
+    <script>
+    $(document).ready(function(){
+        //Detect if browser is I.E.
+        if ( $.browser.msie ) {
+            alert( $.browser.version );
+            $('body').html('<div class="">Rayku works best in Google Chrome and Mozilla Firefox.</div>');
+        }
+    });
+    </script>
 {% endblock %}
 
 {% block content %}
@@ -370,7 +379,6 @@
   </div>
   <!--End Tutor List-->
 </div>
-<a href=# data-reveal-id="rateTutorModal">REVEAL</a>
 {% render url('rayku_tutor_new') %}
 
 <div id="connectNotifModal" class="reveal-modal large connectNotif">
@@ -399,36 +407,6 @@
 	</div>
 </div>
 
-<div id="rateTutorModal" class="reveal-modal medium rateTutor">
-    <div class="row">
-        <div class="large-12 columns">
-            <h3>Rate Your Tutor</h3>
-        </div>
-    </div>
-    <div class="large-12 columns rate-tutors">
-        <form id="rateTutorForm" class="custom" name="rate-tutor"  method="post">
-            <div class="row">
-                <div class="large-12 columns">
-                    <label for="rateTutor"></label>
-                    
-                </div>
-                <div class="large-12 columns">
-                    <form>
-                        <div class="row">
-                            <div class="large-12 columns">
-                                <label>Write Review</label>
-                                <textarea placeholder="small-12.columns">Write a tutor review</textarea>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="large-3 columns">
-                    <input type="submit" class="bbutton" value="Rate">
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
 {% if ratesessionform is defined %}
 <div id="rateTutorModal" class="reveal-modal medium rateTutor">
     <div class="row">
@@ -443,6 +421,18 @@
                     <label for="rateTutor">{{ session.selectedtutor }}</label>
                     {{ form_widget(ratesessionform.rating) }}
                     {{ form_rest(ratesessionform) }}
+                </div>
+
+                <!--// Attach to a review table on DB //-->
+                <div class="large-12 columns">
+                    <form>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>Write Review</label>
+                                <textarea placeholder="small-12.columns">Write a tutor review</textarea>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="large-3 columns">
                     <input type="submit" class="bbutton" value="Rate">

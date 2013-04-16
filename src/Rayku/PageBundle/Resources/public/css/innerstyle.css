@@ -141,7 +141,7 @@ header nav a.notification:hover{
 /*Submenu*/
 .submenu{
 	position: absolute;
-	width:150px;
+	width:175px;
 	margin-left: 52px;
 	display: none;
 	z-index: 640;
@@ -1050,16 +1050,32 @@ TUTOR PUBLIC PROFILE
 .public-profile-sections .reviews h6{
 	font-size: 14px;
 	font-weight: 500;
+	margin-bottom: 3px;
 }
 .public-profile-sections .reviews ul{
 	list-style-type: none;
+	margin-left: 0px;
+	padding: 10px;
 }
 .public-profile-sections .reviews ul li{
 	border-bottom: 1px dotted rgba(221, 221, 221, 1);
+	margin-bottom: 10px;
 }
 .public-profile-sections .reviews ul li:last-child{
 	border-bottom: none;
 }
+.public-profile-sections .reviews ul li p{
+	padding-right: 10px;
+}
 .public-profile-sections .about, .public-profile-sections .reviews, .public-profile-sections .contact, .section-container{
 	border: none;
+}
+.profile-sidebar h6{
+	font-size: 12px;
+	font-weight: 500;
+}
+.profile-sidebar ul{
+	list-style-type: none;
+	padding: 10px;
+	margin-left: 0;
 }

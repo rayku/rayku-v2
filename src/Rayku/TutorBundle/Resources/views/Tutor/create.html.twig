@@ -107,24 +107,6 @@ $(document).ready(function(){
     }
 
 
-
-    $('#submitTutorStatus').on('submit', function(){
-        $("#tutorOff").attr("data", "");
-        $("#tutorOn").removeClass("isTutorBg");
-
-        $("#tutorOn").attr("data", "isTutor");
-        $("#tutorOn").addClass("isTutorBg");
-    });
-
-    $('#confirmTutorStatusOff').on('submit', function(){
-        $("#tutorOn").attr("data", "");
-        $("#tutorOn").removeClass("isTutorBg");
-
-        $("#tutorOff").attr("data", "notTutor");
-        $("#tutorOn").addClass("isTutorBg");
-    });
-
-
   $('#confirmTutorStatusOn').click(function(){
     $('#turnTutorStatusOff').foundation('reveal', 'close');
     return false;
@@ -136,34 +118,24 @@ $(document).ready(function(){
     }).done(function() {
       tutor_id = '';
     });
+    $("#tutorOff").addClass("isTutorBg");
+    $("#tutorOn").removeClass("isTutorBg");
     $('#turnTutorStatusOff').foundation('reveal', 'close');
     return false;
   });
 
   $('#tutorOff').on('click', function(){
-    var $this = $(this);
-    
-    if($this.attr("data") === "notTutor"){
-
-    }
-    else{
-        $("#turnTutorStatusOff").foundation('reveal', 'open');
-    }
+    event.preventDefault();
+    $("#turnTutorStatusOff").foundation('reveal', 'open');
   });
+  
   $('#tutorOn').click(function(event){
     event.preventDefault();
-    var $this = $(this);
-    if($this.attr("data") === "isTutor"){
-
-    }
-    else{
-        $('#myTutorModal').foundation('reveal', 'open');
-    }
+    $('#myTutorModal').foundation('reveal', 'open');
   });
 
   var options = { 
     error: function(response, status, err){
-      console.log('error');
       var responseJson = $.parseJSON(response.responseText);
       for(field in responseJson.errors){
         $("label[for='"+field+"']").addClass('error');
@@ -171,11 +143,12 @@ $(document).ready(function(){
       }
     },
     success: function(response){
-      console.log('success');
       tutor_id = response.entity.id;
       $('#myTutorModal').foundation('reveal', 'close');
       $(".error").removeClass('error');
       $(".field_error").remove();
+      $("#tutorOn").addClass("isTutorBg");
+      $("#tutorOff").removeClass("isTutorBg");
     }
   };
   $('#tutor_save_form').ajaxForm(options)

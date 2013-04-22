@@ -69,6 +69,7 @@ class Tutor
     /**
      * @var string
      *
+     * @Assert\Email
      * @ORM\Column(name="gtalk_email", type="string", length=255, nullable=true)
      */
     private $gtalk_email;

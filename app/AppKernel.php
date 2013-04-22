@@ -47,9 +47,6 @@ class AppKernel extends Kernel
         	new Sonata\AdminBundle\SonataAdminBundle(),
         	new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
 
-            // CMF Integration
-            new Symfony\Cmf\Bundle\RoutingExtraBundle\SymfonyCmfRoutingExtraBundle(),
-
             // Enable this if you want to audit backend action
             new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
             

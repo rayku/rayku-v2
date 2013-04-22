@@ -1,13 +1,13 @@
+rayku_tutor:
+    resource: "@RaykuTutorBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 rayku_page_import:
     resource: "@RaykuPageBundle/Resources/config/routing.yml"
 
 rayku_session_import:
     resource: "@RaykuApiBundle/Resources/config/routing.yml"
-
-rayku_tutor:
-    resource: "@RaykuTutorBundle/Controller/"
-    type:     annotation
-    prefix:   /
 
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"

@@ -35,9 +35,9 @@ class Activity
 		{
 			$user = $this->context->getToken()->getUser();
 		}
-		if($user instanceof User && $user->getIsTutor() && null === $user->getTutor()->getDeletedAt())
+		if(method_exists($user, 'getIsTutor') && $user->getIsTutor() && null === $user->getTutor()->getDeletedAt())
 		{
-			$tutor = $this->em->getRepository('RaykuTutorBundle:Tutor')->findOneByUser($user);
+			$tutor = $this->em->getRepository('RaykuApiBundle:Tutor')->findOneByUser($user);
 			$tutor->setOnlineWeb(new \DateTime());
 			$this->em->persist($tutor);
 			$this->em->flush($tutor);

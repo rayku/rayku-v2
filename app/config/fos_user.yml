@@ -5,3 +5,6 @@ fos_user:
     db_driver:      orm # can be orm or odm
     firewall_name:  main
     user_class:     Rayku\ApiBundle\Entity\User
+    registration:
+        form:
+            type:   rayku_user_registration

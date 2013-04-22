@@ -13,6 +13,7 @@ use FOS\UserBundle\Entity\User as BaseUser;
  *
  * @ORM\Table(name="fos_user_user",uniqueConstraints={@ORM\UniqueConstraint(name="tutor_idx", columns={"tutor_id"})})
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class User extends BaseUser
 {
@@ -85,6 +86,18 @@ class User extends BaseUser
 	 * @Assert\NotBlank()
 	 */
 	private $bio = 'Short Bio';
+	
+	/**
+	 * @var \Coupon
+	 *
+	 * @ORM\ManyToOne(targetEntity="\Rayku\ApiBundle\Entity\Coupon")
+	 * @ORM\JoinColumns({
+	 *   @ORM\JoinColumn(name="coupon_id", referencedColumnName="id")
+	 * })
+	 * @Assert\Type(type="\Rayku\ApiBundle\Entity\Coupon")
+	 * @Assert\Valid
+	 */
+	private $coupon;
 	
     /**
      * Get id
@@ -312,5 +325,49 @@ class User extends BaseUser
     public function getBio()
     {
         return $this->bio;
+    }
+
+    /**
+     * Set coupon
+     *
+     * @param \Rayku\ApiBundle\Entity\Coupon $coupon
+     * @return User
+     */
+    public function setCoupon(\Rayku\ApiBundle\Entity\Coupon $coupon = null)
+    {
+        $this->coupon = $coupon;
+    
+        return $this;
+    }
+
+    /**
+     * Get coupon
+     *
+     * @return \Rayku\ApiBundle\Entity\Coupon 
+     */
+    public function getCoupon()
+    {
+        return $this->coupon;
+    }
+    
+    /**
+     * @ORM\PrePersist
+     */
+    public function registerWithCouponCode()
+    {
+    	if(null === $this->getId() && null !== $this->getCoupon()){
+    		$expirationCount = $this->getCoupon()->getExpirationCount();
+    		$expirationDate = $this->getCoupon()->getExpirationDate();
+    		
+    		if(
+    			(null !== $this->getCoupon()->getExpirationCount() && $this->getCoupon()->getExpirationCount() > $this->getCoupon()->getUsed()) || 
+    			(!empty($expirationDate) && $expirationDate < new \DateTime(date('Y-m-d H:i:s')))
+    		){
+		    	$this->setPoints($this->getCoupon()->getCredit());
+    			$this->setCoupon($this->getCoupon()->incrementUsed());
+    		}
+    	}
+    	
+    	return $this;
     }
 }

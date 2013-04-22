@@ -27,14 +27,25 @@ use Rayku\ApiBundle\Form\SessionType;
  */
 class TutorController extends Controller
 {
+	
+	/**
+	 * Lists all Tutor entities.
+	 *
+	 * @Route("/", name="rayku_tutor")
+	 * @Template()
+	 * @todo deprecate in lieu of api get tutor
+	 */
+	public function indexAction()
+	{
+		$em = $this->getDoctrine()->getManager();
+		$entities = $em->getRepository('RaykuApiBundle:Tutor')->findOnlineTutors(Tutor::expire_online);
+		return array('entities' => $entities);
+	}
+	
     /**
      * Finds and displays a Tutor entity.
      *
-<<<<<<< HEAD
      * @Route("/{username}/public", name="rayku_tutor_show")
-=======
-     * @Route("/{username}/show", name="rayku_tutor_show")
->>>>>>> Refactor bundle structure
      * @Template()
      * 
      * @param \Rayku\ApiBundle\Entity\Tutor $tutor
@@ -43,14 +54,14 @@ class TutorController extends Controller
     {
         //check if user requested is a tutor, display public profile if isTutor, else redirect to Dashboard
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('RaykuUserBundle:User')->findOneByUsername($username);
+        $user = $em->getRepository('RaykuApiBundle:User')->findOneByUsername($username);
         if(!$user){
             return $this->redirect($this->generateUrl('rayku_page_dashboard'));
         }
         if(!$user->getIsTutor()){
             return $this->redirect($this->generateUrl('rayku_page_dashboard'));
         }
-        $entity = $em->getRepository('RaykuUserBundle:User')->findOneByUsername($username)->getTutor();
+        $entity = $em->getRepository('RaykuApiBundle:User')->findOneByUsername($username)->getTutor();
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Tutor entity.');

@@ -24,12 +24,7 @@ class PageController extends Controller
 	}
 	
 	public function dashboardAction($id = NULL)
-	{
-
-
-
-
-		
+	{	
 		if(false === $this->get('security.context')->isGranted('ROLE_USER')){
 			throw new AccessDeniedException();
 		}

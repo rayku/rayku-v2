@@ -29,6 +29,7 @@ class CouponAdmin extends Admin
             ->add('expirationCount')
             ->add('expirationDate')
             ->add('createdAt', 'datetime')
+            ->add('updatedAt', 'datetime')
 		;
 	}
 	
@@ -38,6 +39,7 @@ class CouponAdmin extends Admin
         $datagridMapper
             ->add('coupon')
             ->add('credit')
+            ->add('used')
             ->add('expirationCount')
             ->add('expirationDate')
         ;
@@ -49,10 +51,11 @@ class CouponAdmin extends Admin
         	->addIdentifier('id', null, array('route' => array('name' => 'show')))
             ->add('coupon')
             ->add('credit')
+            ->add('used')
             ->add('expirationCount')
             ->add('expirationDate')
-            ->add('starttime', 'datetime')
-            ->add('endtime', 'datetime')
+            ->add('createdAt', 'datetime')
+            ->add('updatedAt', 'datetime')
         ;
     }
 }

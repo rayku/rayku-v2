@@ -41,7 +41,10 @@
         </div>
     <!--End Sidebar-->
     <div class="large-9 columns main-content">
-    <!-- User Profile -->
+    	<!--User Settings-->  
+    	{% include 'RaykuPageBundle:Page:settings.html.twig' with {'usersettingform': usersettingform} %}
+    	
+    	<!-- User Profile -->
         <div class="row user-profile">
             <div class="large-12 columns user-profile-top">
                 <h5>{{ entity.user.username }}</h5>

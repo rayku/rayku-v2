@@ -13,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\SecureParam;
+use Rayku\ApiBundle\Form\UserSettingType;
 use Rayku\ApiBundle\Entity\Tutor;
 use Rayku\ApiBundle\Form\TutorType;
 
@@ -62,6 +63,8 @@ class TutorController extends Controller
             return $this->redirect($this->generateUrl('rayku_page_dashboard'));
         }
         $entity = $em->getRepository('RaykuApiBundle:User')->findOneByUsername($username)->getTutor();
+        
+        $userSettingForm = $this->createForm(new UserSettingType(), $this->getUser());
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Tutor entity.');
@@ -69,6 +72,7 @@ class TutorController extends Controller
         else{
             return array(
                 'entity'      => $entity,
+            	'usersettingform' => $userSettingForm->createView()
             );
         }
     }

@@ -49,7 +49,7 @@ security:
         - { path: ^/become-a-tutor$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/legal$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/tutor/*/public, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/tutor/.+/public, role: IS_AUTHENTICATED_ANONYMOUSLY }
         
         # Todo secure with HMAC
         - { path: ^/session, role: IS_AUTHENTICATED_ANONYMOUSLY }

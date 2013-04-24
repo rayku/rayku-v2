@@ -3,14 +3,6 @@
 {% block stylesheets %}
 	{{ parent() }}
 	<link href="{{ asset('bundles/raykupage/css/innerstyle.css') }}" type="text/css" rel="stylesheet" media="screen" />
-    <script>
-    $(document).ready(function(){
-        //Detect if browser is I.E.
-        if ( $.browser.msie ) {
-            $('body').html('<div data-alert class="alert-box">Rayku works best in Google Chrome and Mozilla Firefox. <a href="#" class="close">&times;</a></div>');
-        }
-    });
-    </script>
 {% endblock %}
 
 {% block content %}
@@ -139,7 +131,7 @@
                         <span>Specialty:</span> <span class="bio edit">{{ app.user.bio }}</span>
                     </li>
                     <li>
-                         <span class="tutor edit"><a class="public-tutor-link" href="{{ path('rayku_page_homepage') }}/tutor/{{ app.user.username }}/public"><span class="raphael">7</span>Tutor Public Profile</a></span>
+                         <span class="tutor edit"><a class="public-tutor-link" href="{{ path('rayku_page_homepage') }}tutor/{{ app.user.username }}/public"><span class="raphael">7</span>Tutor Public Profile</a></span>
                     </li>
                     {% endif %}
                 </ul>
@@ -408,16 +400,6 @@ $(document).ready(function(){
         if(column.hasClass('busy')){
             column.find('a').addClass('tutor-busy');
         }
-    });
-
-    //Clear selected tutors
-    $('.clear-tutors').click(function(event){
-        event.preventDefault();
-        tutorCount = 0; //set the selected tutor count back to 0
-        tutorList.splice(0, tutorList.length); //delete all tutors from the tutor list
-        $("#selectedTutors li").remove(); //remove selected tutors from ol list
-        $('input[name="tutor"]').attr('checked', false); //set all checked tutors to unchecked
-        $('span.tutor-count').html("0"); //reset the count on the page
     });
 });
 </script>

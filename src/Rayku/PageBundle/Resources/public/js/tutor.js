@@ -1,41 +1,3 @@
-{% extends "::empty.html.twig" %}
-
-{% block content %}
-  <h1 class="ribbon">
-    <strong class="ribbon-content">Tutor List</strong>
-  </h1>
-  <form action="{{path('post_session')}}" method="post" class="custom">
-  	<script type="text/javascript">
-  		$('#question').val($('#base_question').val());
-  	</script>
-  	<input type="hidden" value="" name="question" id="question" />
-    <table id="tutorTable">
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th width="130px">Name</th>
-          <th width="470px" class="short-bio">Short Bio</th>
-          <th>Rate/Min</th>
-          <th>Status</th>
-          <th>Connect</th>
-        </tr>
-      </thead>
-      <tbody>
-      	{% for tutor in entities %}
-        <tr>
-          <td>{{ loop.index }}</td>
-          <td>{{ tutor.user.firstname }} {{ tutor.user.lastname }}</td>
-          <td>{{ tutor.schoolAmount }} From {{ tutor.schoolName }}</td>
-          <td>{{ tutor.rate }} RP/min</td>
-          <td data-status="online">Online</td>
-          <td><input type="checkbox" class="tutor-check" name="potential_tutors[0][tutor]" value="{{ tutor.id }}" data-tutor-id="{{ tutor.id }}" data-tutor-name="{{ tutor.user.firstname }} {{ tutor.user.lastname }}"></td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <input type="submit" class="bbutton" id="tutorConnect">
-  </form>
-  <script>
 $(document).ready(function(){
   	var tutorList = []; //store selected tutors
     var tutorCount = 0;
@@ -90,9 +52,7 @@ $(document).ready(function(){
         tutorCount = 0; //set the selected tutor count back to 0
         tutorList.splice(0, tutorList.length); //delete all tutors from the tutor list
         $("#selectedTutors li").remove(); //remove selected tutors from ol list
-        $('.tutor-check').attr('checked', false); //set all checked tutors to unchecked
+        $('input[name="tutor"]').attr('checked', false); //set all checked tutors to unchecked
         $('span.tutor-count').html("0"); //reset the count on the page
     });
 });
- </script>
-{% endblock %}

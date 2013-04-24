@@ -232,7 +232,7 @@ class User extends BaseUser
      */
     public function getLastName()
     {
-        return $this->last_name;
+        return ($this->last_name == 'Last Name') ? '' : $this->last_name;
     }
 
     /**

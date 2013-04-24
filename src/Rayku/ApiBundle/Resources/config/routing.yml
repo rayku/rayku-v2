@@ -1,0 +1,11 @@
+rayku_user_rest:
+    resource: Rayku\ApiBundle\Controller\UserController
+    type:     rest
+
+rayku_tutor_rest:
+    resource: Rayku\ApiBundle\Controller\TutorController
+    type:     rest
+
+rayku_session_rest:
+    resource: Rayku\ApiBundle\Controller\SessionController
+    type:     rest

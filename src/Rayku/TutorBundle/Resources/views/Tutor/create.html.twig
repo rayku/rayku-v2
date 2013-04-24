@@ -7,7 +7,7 @@
     <p>Before activating your tutor status, please fill out as much as possible to completeyour tutor profile.</p>
   </div>
   <div class="large-12 columns">
-    <form class="custom" action="{{ path('rayku_tutor_save') }}" method="post" {{ form_enctype(form) }} id="{{ form.name }}">
+    <form class="custom" action="{{ path('post_tutors') }}" method="post" {{ form_enctype(form) }} id="tutor_save_form">
       <div class="row">
         <div class="row subjects">
           <div class="large-12 columns">
@@ -55,7 +55,7 @@
         </div>
       </div>
       {{ form_rest(form) }}
-      <input type="submit" class="bbutton" value="Save &amp; Activate Tutor Status" name="tutorStatusButton" id="submitTutorStatus">
+      <input type="submit" class="bbutton" value="Save &amp; Activate Tutor Status" id="submitTutorStatus">
     </form>
   </div>
   <a class="close-reveal-modal">×</a>
@@ -107,58 +107,31 @@ $(document).ready(function(){
     }
 
 
-
-    $('#submitTutorStatus').on('submit', function(){
-        $("#tutorOff").attr("data", "");
-        $("#tutorOn").removeClass("isTutorBg");
-
-        $("#tutorOn").attr("data", "isTutor");
-        $("#tutorOn").addClass("isTutorBg");
-    });
-
-    $('#confirmTutorStatusOff').on('submit', function(){
-        $("#tutorOn").attr("data", "");
-        $("#tutorOn").removeClass("isTutorBg");
-
-        $("#tutorOff").attr("data", "notTutor");
-        $("#tutorOn").addClass("isTutorBg");
-    });
-
-
   $('#confirmTutorStatusOn').click(function(){
     $('#turnTutorStatusOff').foundation('reveal', 'close');
     return false;
   });
   $('#confirmTutorStatusOff').click(function(){
     $.ajax({
-      type: "POST",
-      url: '/app_dev.php/tutor/'+tutor_id+'/delete'
+      type: "DELETE",
+      url: '/app_dev.php/tutors/'+tutor_id
     }).done(function() {
       tutor_id = '';
     });
+    $("#tutorOff").addClass("isTutorBg");
+    $("#tutorOn").removeClass("isTutorBg");
     $('#turnTutorStatusOff').foundation('reveal', 'close');
     return false;
   });
 
   $('#tutorOff').on('click', function(){
-    var $this = $(this);
-    
-    if($this.attr("data") === "notTutor"){
-
-    }
-    else{
-        $("#turnTutorStatusOff").foundation('reveal', 'open');
-    }
+    event.preventDefault();
+    $("#turnTutorStatusOff").foundation('reveal', 'open');
   });
+  
   $('#tutorOn').click(function(event){
     event.preventDefault();
-    var $this = $(this);
-    if($this.attr("data") === "isTutor"){
-
-    }
-    else{
-        $('#myTutorModal').foundation('reveal', 'open');
-    }
+    $('#myTutorModal').foundation('reveal', 'open');
   });
 
   var options = { 
@@ -174,9 +147,11 @@ $(document).ready(function(){
       $('#myTutorModal').foundation('reveal', 'close');
       $(".error").removeClass('error');
       $(".field_error").remove();
+      $("#tutorOn").addClass("isTutorBg");
+      $("#tutorOff").removeClass("isTutorBg");
     }
   };
-  $('#{{ form.name }}').ajaxForm(options)
+  $('#tutor_save_form').ajaxForm(options)
 });
 
 </script>

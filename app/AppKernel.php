@@ -47,9 +47,6 @@ class AppKernel extends Kernel
         	new Sonata\AdminBundle\SonataAdminBundle(),
         	new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
 
-            // CMF Integration
-            new Symfony\Cmf\Bundle\RoutingExtraBundle\SymfonyCmfRoutingExtraBundle(),
-
             // Enable this if you want to audit backend action
             new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
             
@@ -57,9 +54,9 @@ class AppKernel extends Kernel
         	
         	// Rayku
         	new Rayku\TutorBundle\RaykuTutorBundle(),
-            new Rayku\UserBundle\RaykuUserBundle(),
             new Rayku\PageBundle\RaykuPageBundle(),
-        	new Rayku\SessionBundle\RaykuSessionBundle(),
+            new Rayku\ApiBundle\RaykuApiBundle(),
+        	new Rayku\UserBundle\RaykuUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

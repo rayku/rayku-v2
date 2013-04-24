@@ -25,7 +25,10 @@ class Ajax
 	public function onKernelView($event)
 	{
 		$request = $event->getRequest();
-		if ($request->isXmlHttpRequest() && $request->getMethod() == 'POST') {
+		if (
+			($request->getMethod() == 'POST' || $request->getMethod() == 'PATCH') &&
+			($request->isXmlHttpRequest() || strpos($request->headers->get('referer'), '/api/doc') !== false)
+		){
 			$formError = false;
 			$return['success'] = true;			
 			$response = new Response();

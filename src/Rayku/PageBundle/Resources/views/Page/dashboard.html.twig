@@ -43,6 +43,7 @@
 	<div class="large-9 columns main-content">
         <!--User Settings-->    
         {% include 'RaykuPageBundle:Page:settings.html.twig' with {'usersettingform': usersettingform} %}
+        
         <!-- User Profile -->
         <div class="row user-profile">
             <div class="large-12 columns user-profile-top">
@@ -131,14 +132,14 @@
                         <span>Specialty:</span> <span class="bio edit">{{ app.user.bio }}</span>
                     </li>
                     <li>
-                         <span class="tutor edit"><a class="public-tutor-link" href="{{ path('rayku_page_homepage') }}tutor/{{ app.user.username }}/public"><span class="raphael">7</span>Tutor Public Profile</a></span>
+                         <span class="tutor edit"><a class="public-tutor-link" href="{{ path('rayku_tutor_show', { 'username': app.user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></span>
                     </li>
                     {% endif %}
                 </ul>
                 <ul class="user-profile-buttons">
                     <li><a href=# class="bbutton edit-button"><span class="raphael">></span>Edit Profile</a></li>
                     <li>
-                      <form name="master-form" method="post" class="user-profile-master-form" action="{{ path('post_user', {'user': app.user.id }) }}">
+                      <form name="master-form" method="post" class="user-profile-master-form" action="{{ path('post_users', {'user': app.user.id }) }}">
                         {{ form_widget(userform.first_name) }}
                         {{ form_widget(userform.last_name) }}
                         {{ form_widget(userform.school) }}
@@ -293,31 +294,7 @@
 </div>
 {% render url('rayku_tutor_new') %}
 
-<div id="connectNotifModal" class="reveal-modal large connectNotif">
-    <h2>Notifications</h2>
-    <a class="close-reveal-modal">&#215;</a>
-	<div class="row connectNotifRow" style="display:none" id="connectRow_id_">
-        <div class="large-1 columns connectNotifImage">
-            <img src="http://placehold.it/1100x1100">
-        </div>
-        <div class="large-7 columns connectNotifInfo">
-            <ul>
-                <li>_name_</li>
-                <li>_question_</li>
-            </ul>
-        </div>
-        <div class="large-2 columns">
-        	<form method="post" action="{{ path('post_session_accept', {'session': '_id_'}) }}" class="post_session_accept">
-        		<button type="submit" name="Confirm" class="bbutton accept">Accept</button>
-            </form>
-        </div>
-        <div class="large-2 columns">
-        	<form method="post" action="{{ path('post_session_deny', {'session': '_id_'}) }}" class="post_session_deny">
-        		<button type="submit" name="Decline" class="abutton decline">Decline</button>
-        	</form>
-        </div>
-	</div>
-</div>
+{% include 'RaykuPageBundle:Page:notification-modal.html.twig' %}
 
 {% if ratesessionform is defined %}
 <div id="rateTutorModal" class="reveal-modal medium rateTutor">

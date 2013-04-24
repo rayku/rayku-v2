@@ -2,7 +2,9 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: fos_user.yml }
-    - { resource: @RaykuSessionBundle/Resources/config/admin.xml }
+    - { resource: @RaykuApiBundle/Resources/config/admin_session.xml }
+    - { resource: @RaykuApiBundle/Resources/config/admin_subject.xml }
+    - { resource: @RaykuApiBundle/Resources/config/admin_coupon.xml }
 
 framework:
     translator: ~
@@ -140,6 +142,11 @@ services:
             - { name: doctrine.event_subscriber, connection: default }
         calls:
             - [ setAnnotationReader, [ @annotation_reader ] ]
+    rayku_user.type.coupon_code_selector:
+        class: Rayku\UserBundle\Form\Type\CouponCodeType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: coupon_code }
 
 jms_security_extra:
     expressions: true

@@ -3,10 +3,10 @@
 namespace Rayku\PageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Rayku\UserBundle\Form\UserType;
-use Rayku\UserBundle\Form\UserSettingType;
-use Rayku\SessionBundle\Form\RateSessionType;
-use Rayku\SessionBundle\Entity\Session;
+use Rayku\ApiBundle\Form\UserType;
+use Rayku\ApiBundle\Form\UserSettingType;
+use Rayku\ApiBundle\Form\RateSessionType;
+use Rayku\ApiBundle\Entity\Session;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -24,7 +24,7 @@ class PageController extends Controller
 	}
 	
 	public function dashboardAction($id = NULL)
-	{	
+	{
 		if(false === $this->get('security.context')->isGranted('ROLE_USER')){
 			throw new AccessDeniedException();
 		}
@@ -42,7 +42,7 @@ class PageController extends Controller
 		 */
 		if(isset($id)){
 			$em = $this->getDoctrine()->getManager();
-			$session = $em->getRepository('RaykuSessionBundle:Session')->find($id);
+			$session = $em->getRepository('RaykuApiBundle:Session')->find($id);
 			if(null === $session->getRating() && $session->getStudent() == $this->getUser()){
 				$sessionRateForm = $this->createForm(new RateSessionType(), $session);
 				$view['session'] = $session;

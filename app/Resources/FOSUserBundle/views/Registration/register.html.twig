@@ -21,11 +21,11 @@
 			      	</div>
 			      	<div class="large-6 columns">
 			      		{{ form_errors(form.plainPassword) }}
-			        	{{ form_widget(form.plainPassword.first, { 'attr': {'placeholder': 'Password'} }) }}
+			        	{{ form_widget(form.plainPassword, { 'attr': {'placeholder': 'Password'} }) }}
 			      	</div>
 			      	<div class="large-6 columns">
-			        	<!--{{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': 'Confirm Password'} }) }}-->
-			        	<input type="text" id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" placeholder="Coupon Code (Optional)">
+			      		{{ form_errors(form.coupon) }}
+			        	{{ form_widget(form.coupon, { 'attr': {'placeholder': 'Coupon Code (Optional)'} }) }}
 			      	</div>
 			    	<div class="large-6 columns terms">
 			    		By clicking Create Account you are indicating that you have read and agree to the <strong>Terms & Conditions</strong>
@@ -56,10 +56,10 @@
 						{{ form_row(form.email) }}
 					</li>
 					<li>
-						{{ form_row(form.plainPassword.first) }}
+						{{ form_row(form.plainPassword) }}
 					</li>
 					<li>
-						{{ form_row(form.plainPassword.second) }}
+						{{ form_row(form.coupon) }}
 					</li>
 					<li class="left align_right">
 						By clicking Get Started you agree to the <a href="#">Terms & Conditions</a>

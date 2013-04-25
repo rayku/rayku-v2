@@ -18,13 +18,11 @@ $sql = "
 	WHERE s.end_time IS NULL
 	AND s.selected_tutor_id IS NULL
 	AND t.gtalk_email IS NOT NULL
-
-";/*
 	AND c.tutor_reply = 'pending'
 	AND TIME_TO_SEC(TIMEDIFF(s.created_at, NOW())) > '-360'
 	AND TIME_TO_SEC(TIMEDIFF(t.online_gtalk, NOW())) > '-360'
-	*/
-
+	";
+	
 try {
 	$dbh = new PDO($dsn, $user, $password);
 } catch (PDOException $e) {

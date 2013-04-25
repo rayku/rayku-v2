@@ -6,10 +6,6 @@ $dsn = 'mysql:dbname=rayku_v2;host=db1.p.rayku.com';
 $user = 'rayku_db';
 $password = 'UthmCRtaum34qpGL';
 
-$dsn = 'mysql:dbname=rayku_v2;host=localhost';
-$user = 'root';
-$password = 'abc123';
-
 $sql = "
 	SELECT * 
 	FROM rayku_v2.rayku_session s

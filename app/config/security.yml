@@ -21,9 +21,10 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        # This firewall is used to handle the public login area
-        # This part is handled by the FOS User Bundle
         main:
+            jmikola_auto_login:
+                auto_login_user_provider: rayku.auto_login_user_provider
+                #token_param: al
             pattern:      .*
             context:        user
             form_login:

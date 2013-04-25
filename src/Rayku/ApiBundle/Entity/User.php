@@ -98,6 +98,21 @@ class User extends BaseUser
 	 */
 	private $coupon;
 	
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="auto_login", type="string", length=255, nullable=true)
+	 */
+	private $autoLogin;
+	
+
+	/**
+	 * @var \DateTime
+	 * 
+	 * @ORM\Column(name="auto_login_expire", type="datetime", nullable=true)
+	 */
+	protected $autoLoginExpire;
+	
     /**
      * Get id
      *
@@ -368,5 +383,65 @@ class User extends BaseUser
     	}
     	
     	return $this;
+    }
+    
+    public function clearAutoLogin()
+    {
+    	$this->setAutoLogin(NULL);
+    	$this->setAutoLoginExpire(NULL);
+    }
+    
+    public function createAutoLogin()
+    {
+    	$this->setAutoLogin(uniqid($this->getId(),true));
+    	$this->setAutoLoginExpire(new DateTime(strtotime('+10 minutes')));
+    	
+    	return $this;
+    }
+
+    /**
+     * Set autoLogin
+     *
+     * @param string $autoLogin
+     * @return User
+     */
+    public function setAutoLogin($autoLogin)
+    {
+        $this->autoLogin = $autoLogin;
+    
+        return $this;
+    }
+
+    /**
+     * Get autoLogin
+     *
+     * @return string 
+     */
+    public function getAutoLogin()
+    {
+        return $this->autoLogin;
+    }
+
+    /**
+     * Set autoLoginExpire
+     *
+     * @param \DateTime $autoLoginExpire
+     * @return User
+     */
+    public function setAutoLoginExpire($autoLoginExpire)
+    {
+        $this->autoLoginExpire = $autoLoginExpire;
+    
+        return $this;
+    }
+
+    /**
+     * Get autoLoginExpire
+     *
+     * @return \DateTime 
+     */
+    public function getAutoLoginExpire()
+    {
+        return $this->autoLoginExpire;
     }
 }

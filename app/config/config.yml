@@ -125,6 +125,9 @@ jms_serializer:
                 path: "@RaykuUserBundle/Resources/config/serializer/fos"
 
 services:
+    rayku.auto_login_user_provider:
+        class: Rayku\UserBundle\Security\AutoLoginUserProvider
+        arguments: [@doctrine]
     rayku_onlineweb_listener:
         class: Rayku\UserBundle\EventListener\Activity
         arguments: [@security.context, @doctrine]

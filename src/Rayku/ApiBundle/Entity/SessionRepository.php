@@ -20,10 +20,7 @@ class SessionRepository extends EntityRepository
 			->andWhere('s.createdAt > :expire_session')
 			->setParameter('tutorId', $tutor_id)
 			->setParameter('expire_session', date('Y-m-d H:i:s', strtotime($expire_session)))
-			->getQuery();
-		
-		return $query->getResult();
-		
+			->getQuery();		
 		
 		try{
 			return $query->getResult();

@@ -2,10 +2,13 @@
 
 require_once 'BotServiceProvider.class.php';
 
-$expire_session = '-15 minutes';
 $dsn = 'mysql:dbname=rayku_v2;host=db1.p.rayku.com';
 $user = 'rayku_db';
 $password = 'UthmCRtaum34qpGL';
+
+$dsn = 'mysql:dbname=rayku_v2;host=localhost';
+$user = 'root';
+$password = 'abc123';
 
 $sql = "
 	SELECT * 
@@ -14,11 +17,13 @@ $sql = "
 	INNER JOIN rayku_v2.rayku_tutor t ON t.id = c.tutor_id
 	WHERE s.end_time IS NULL
 	AND s.selected_tutor_id IS NULL
-	AND c.tutor_reply = 'pending'
 	AND t.gtalk_email IS NOT NULL
+
+";/*
+	AND c.tutor_reply = 'pending'
 	AND TIME_TO_SEC(TIMEDIFF(s.created_at, NOW())) > '-360'
 	AND TIME_TO_SEC(TIMEDIFF(t.online_gtalk, NOW())) > '-360'
-";
+	*/
 
 try {
 	$dbh = new PDO($dsn, $user, $password);
@@ -27,10 +32,14 @@ try {
 	return false;
 }
 
-
+echo $sql;
 foreach ($dbh->query($sql) as $row) {
 	echo 'request sent to '.$row['gtalk_email'];
-	$message = rawurlencode('A student has requested a tutoring session with you on www.rayku.com');
+	$auto_login = uniqid($row['session_id'],true);
+	$update = "UPDATE rayku_v2.fos_user_user t SET auto_login = '".$auto_login."', auto_login_expire = '".date('Y-m-d H:i:s', strtotime("+10 minutes"))."' WHERE tutor_id = ".$row['tutor_id']." limit 1";
+	$dbh->exec($update);
+	
+	$message = rawurlencode('A student has requested a tutoring session with you on www.rayku.com/?_al='.$auto_login);
 	var_dump(BotServiceProvider::createFor('http://10.180.146.105:8892/msg/'.$row['gtalk_email'].'/'.$message)->getContent());
 	$update = "UPDATE rayku_v2.rayku_tutor_connect c SET tutor_reply = 'contacted gtalk' WHERE session_id = ".$row['session_id']." AND tutor_id = ".$row['tutor_id']." limit 1";
 	$dbh->exec($update);

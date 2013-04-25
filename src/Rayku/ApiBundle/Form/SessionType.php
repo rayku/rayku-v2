@@ -12,7 +12,7 @@ class SessionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('question', 'hidden')
+            ->add('question', 'hidden', array('required' => false))
             ->add('potential_tutors', 'collection', array(
             	'type' => new SessionTutorsType(),
             	'allow_add' => true

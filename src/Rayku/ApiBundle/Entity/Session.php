@@ -84,7 +84,6 @@ class Session
      *   @ORM\JoinColumn(name="student_id", referencedColumnName="id")
      * })
      * @Assert\Type(type="\Rayku\ApiBundle\Entity\User")
-     * @Assert\Valid
      */
     private $student;
     
@@ -263,7 +262,9 @@ class Session
      */
     public function setQuestion($question)
     {
-        $this->question = $question;
+    	if(!empty($question)){
+	        $this->question = $question;
+    	}
     
         return $this;
     }

@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use FOS\RestBundle\Controller\Annotations\View;
 
 use Rayku\ApiBundle\Entity\User;
 use Rayku\ApiBundle\Form\UserType;
@@ -24,6 +25,22 @@ class UserController extends Controller
 	public function getUsersAction()
 	{
 		
+	}
+	
+
+	/**
+	 * @View()
+	 * @ApiDoc(
+	 *   statusCodes={
+	 *     200="Returned when successful"
+	 *   },
+	 *   description="Get a user record",
+	 *   output="Rayku\ApiBundle\Entity\User"
+	 * )
+	 */
+	public function getUserAction(User $entity)
+	{
+		return $entity;
 	}
 	
 	/**

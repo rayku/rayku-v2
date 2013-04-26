@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraints\True;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Entity\User as BaseUser;
+use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 
 /**
  * User

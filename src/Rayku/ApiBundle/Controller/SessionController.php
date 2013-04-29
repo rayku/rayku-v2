@@ -32,6 +32,7 @@ class SessionController extends Controller
 			return array();
 		}
 		$em = $this->getDoctrine()->getManager();
+		$em->clear();
 		$sessions = $em->getRepository('RaykuApiBundle:Session')->findAllActiveByTutor($this->getUser()->getTutor()->getId(), Session::expire_session);
 		
 		return $sessions;

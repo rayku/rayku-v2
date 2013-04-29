@@ -84,8 +84,10 @@ sonata_block:
         sonata.block.service.rss:
 
 sonata_admin:
-    title:      Sonata Project
+    title:      Rayku Admin
     title_logo: /bundles/sonataadmin/logo_title.png
+    security:
+        handler: sonata.admin.security.handler.role
     templates:
         # default global templates
         layout:  SonataAdminBundle::standard_layout.html.twig
@@ -155,7 +157,7 @@ jms_security_extra:
     expressions: true
 
 sonata_user:
-    security_acl: true
+    #security_acl: true
     manager_type: orm
     class:
         user:  Rayku\ApiBundle\Entity\User

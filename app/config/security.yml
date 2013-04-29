@@ -1,6 +1,6 @@
 security:
-    acl:
-        connection: default
+    #acl:
+        #connection: default
     encoders:
         "FOS\UserBundle\Entity\User":
             algorithm: sha1
@@ -8,10 +8,8 @@ security:
             iterations: 1
 
     role_hierarchy:
-        ROLE_ADMIN:       [ROLE_USER, ROLE_SONATA_ADMIN]
+        ROLE_ADMIN:       [ROLE_USER]
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-        SONATA:
-            - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT  # if you are using acl then this line must be commented
 
     providers:
         fos_userbundle:
@@ -39,6 +37,7 @@ security:
 
             anonymous:    true
         main:
+            switch_user: true
             jmikola_auto_login:
                 auto_login_user_provider: rayku.auto_login_user_provider
                 #token_param: al
@@ -69,12 +68,12 @@ security:
         - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/api, role: ROLE_ADMIN }
 
         # Non-secure part of site
         - { path: ^/about$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/become-a-tutor$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/legal$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/tutor/.+/public, role: IS_AUTHENTICATED_ANONYMOUSLY }
         
         # Todo secure with HMAC

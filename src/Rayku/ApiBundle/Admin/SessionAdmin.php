@@ -22,13 +22,16 @@ class SessionAdmin extends Admin
 	protected function configureShowFields(ShowMapper $showMapper)
 	{
 		$showMapper
+			->add('id')
             ->add('duration')
             ->add('rating')
             ->add('rate')
             ->add('student')
+            ->add('selected_tutor')
             ->add('question')
             ->add('starttime', 'datetime')
             ->add('endtime', 'datetime')
+            ->add('potential_tutors', 'many_to_one')
 		;
 	}
 	
@@ -53,6 +56,7 @@ class SessionAdmin extends Admin
             ->add('Rating')
             ->add('Rate')
            	->add('Question')
+           	->add('CreatedAt', 'datetime')
         ;
     }
 }

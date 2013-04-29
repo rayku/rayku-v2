@@ -77,6 +77,10 @@ class SessionTutors
      */
     private $tutor;
 
+    public function __toString()
+    {
+    	return $this->getTutor()->__toString();
+    }
 
     /**
      * Get id

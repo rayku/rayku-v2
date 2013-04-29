@@ -129,6 +129,11 @@ class Session
      */
     private $updatedAt;
     
+    public function __toString()
+    {
+    	return $this->getId().' '.$this->getCreatedAt()->format('Y-m-d H:i:s');
+    }
+    
     /**
      * Get id
      *

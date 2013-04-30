@@ -24,3 +24,6 @@ assetic:
 
 bazinga_faker:
     orm: doctrine
+
+swiftmailer:
+    disable_delivery: true

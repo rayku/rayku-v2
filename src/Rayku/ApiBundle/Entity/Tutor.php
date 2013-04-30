@@ -83,6 +83,14 @@ class Tutor
      * @ORM\Column(name="rate", type="float", nullable=true)
      */
     private $rate;
+    
+    /**
+     * @var \DateTime
+     * 
+     * This field marks when a tutor was last "busy".
+     * @ORM\Column(name="busy", type="datetime", nullable=true)
+     */
+    private $busy;
 
     /**
      * @var \DateTime
@@ -460,5 +468,28 @@ class Tutor
     public function getGtalkEmail()
     {
         return $this->gtalk_email;
+    }
+
+    /**
+     * Set busy
+     *
+     * @param \DateTime $busy
+     * @return Tutor
+     */
+    public function setBusy($busy)
+    {
+        $this->busy = $busy;
+    
+        return $this;
+    }
+
+    /**
+     * Get busy
+     *
+     * @return \DateTime 
+     */
+    public function getBusy()
+    {
+        return $this->busy;
     }
 }

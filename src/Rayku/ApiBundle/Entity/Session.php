@@ -401,6 +401,40 @@ class Session
     
     /**
      * @ORM\PrePersist
+     */
+    public function setUsersBusy()
+    {
+    	$this->updatedTimestamps();
+    	
+    	$busy = new \DateTime();
+    	$notBusy = new \DateTime(self::expire_session);
+    	
+    	$student = $this->getStudent()->getTutor();
+    	if($this->getId() == null){ // New Session mark student as busy
+    		$student->setBusy($busy);
+    	}else if($this->getStartTime() === null && $this->getEndTime() === null && $this->getCreatedAt() > new \DateTime(self::expire_session)){ // Old expired session
+    		$student->setBusy($notBusy);
+    		if(!is_null($tutor)) $tutor->setBusy($notBusy);
+    	}else if($this->getStartTime() !== null && $this->getEndTime() === null){ // Active session with a start and no end
+    		$student->setBusy($busy);
+    		if(!is_null($tutor)) $tutor->setBusy($busy);    		
+    	}else if($this->getStartTime() !== null && $this->getEndTime() !== null){ // Session that was started and ended
+    		$student->setBusy($notBusy);
+    		if(!is_null($tutor)) $tutor->setBusy($notBusy);    		
+    	}
+    	
+    	// Mark tutors that don't respond to tutoring requests as busy
+    	$busy->modify('+40 minutes');
+    	
+    	foreach($this->getPotentialTutors() as $potential_tutor)
+    	{
+    		$potential_tutor->getTutor()->setBusy($busy);
+    	}
+    	
+    	return $this;
+    }
+    
+    /**
      * @ORM\PreUpdate
      */
     public function updatedTimestamps()
@@ -411,7 +445,10 @@ class Session
     	{
     		$this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
     	}
+    	
+    	return $this;
     }
+    
     /**
      * Constructor
      */
@@ -449,9 +486,9 @@ class Session
      * @param \Rayku\ApiBundle\Entity\SessionTutors $potentialTutors
      * @return Session
      */
-    public function addPotentialTutor(\Rayku\ApiBundle\Entity\SessionTutors $potentialTutors)
+    public function addPotentialTutor(\Rayku\ApiBundle\Entity\SessionTutors $potentialTutor)
     {
-        $this->potential_tutors[] = $potentialTutors;
+	    $this->potential_tutors[] = $potentialTutor->setSession($this);
     
         return $this;
     }

@@ -5,8 +5,13 @@ fos_user:
     db_driver:      orm # can be orm or odm
     firewall_name:  main
     user_class:     Rayku\ApiBundle\Entity\User
+    from_email:
+        address:  noreply@rayku.com
+        sender_name: Rayku
     group:
         group_class: Rayku\ApiBundle\Entity\Group
     registration:
+        confirmation:
+            enabled:  true
         form:
             type:   rayku_user_registration

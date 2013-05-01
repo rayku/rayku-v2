@@ -424,14 +424,25 @@ class Session
     
     /**
      * @ORM\PrePersist
+     * @todo emit and catch a end session event
      */
     public function setUsersBusy()
     {
     	$this->updatedTimestamps();
     	
     	$busy = new \DateTime();
+    	
+    	// Mark tutors that don't respond to tutoring requests as busy
+    	$busy->modify('+40 minutes');
+    	foreach($this->getPotentialTutors() as $potential_tutor)
+    	{
+    		$potential_tutor->getTutor()->setBusy($busy);
+    	}
+    	
+    	$busy = new \DateTime();
     	$notBusy = new \DateTime(self::expire_session);
     	
+    	$tutor = $this->getSelectedTutor();
     	$student = $this->getStudent()->getTutor();
     	if($this->getId() == null){ // New Session mark student as busy
     		$student->setBusy($busy);
@@ -444,14 +455,6 @@ class Session
     	}else if($this->getStartTime() !== null && $this->getEndTime() !== null){ // Session that was started and ended
     		$student->setBusy($notBusy);
     		if(!is_null($tutor)) $tutor->setBusy($notBusy);    		
-    	}
-    	
-    	// Mark tutors that don't respond to tutoring requests as busy
-    	$busy->modify('+40 minutes');
-    	
-    	foreach($this->getPotentialTutors() as $potential_tutor)
-    	{
-    		$potential_tutor->getTutor()->setBusy($busy);
     	}
     	
     	return $this;

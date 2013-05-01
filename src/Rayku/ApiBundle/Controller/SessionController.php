@@ -32,7 +32,6 @@ class SessionController extends Controller
 			return array();
 		}
 		$em = $this->getDoctrine()->getManager();
-		$em->clear();
 		$sessions = $em->getRepository('RaykuApiBundle:Session')->findAllActiveByTutor($this->getUser()->getTutor()->getId(), Session::expire_session);
 		
 		return $sessions;
@@ -174,8 +173,7 @@ class SessionController extends Controller
 	 */
 	public function postSessionEndAction(Session $session)
 	{
-		$endTime = $session->getEndTime();
-		if(isset($endTime)){
+		if(null === $session->getEndTime()){
 			return $session;
 		}
 		
@@ -212,6 +210,11 @@ class SessionController extends Controller
 	 */
 	public function postSessionRateAction(Session $session)
 	{
+		if($session->getStudent() !== $this->getUser()){
+			throw new AccessDeniedException();
+		}
+		
+		$session = $this->postSessionEndAction($session);
 		$form = $this->createForm(new RateSessionType(), $session)->bind($this->getRequest());
 	
 		if($form->isValid()){

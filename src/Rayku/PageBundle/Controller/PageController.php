@@ -46,7 +46,7 @@ class PageController extends Controller
 			if(null === $session->getRating() && $session->getStudent() == $this->getUser()){
 				if(null === $session->getEndTime()){
 					//@todo emit and catch a end session event
-					$session->endNow();
+					$session = $session->endNow();
 					$em = $this->getDoctrine()->getManager();
 					$em->persist($session);
 					$em->persist($session->getStudent());

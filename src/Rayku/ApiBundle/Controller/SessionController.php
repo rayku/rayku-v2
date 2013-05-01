@@ -173,23 +173,7 @@ class SessionController extends Controller
 	 */
 	public function postSessionEndAction(Session $session)
 	{
-		if(null === $session->getEndTime()){
-			return $session;
-		}
-		
-		$currentDate = new \DateTime(date('Y-m-d H:i:s'));
-		$duration = $currentDate->diff($session->getStartTime());
-		
-		// @todo should this move to the model or a event?
-		$minutes = $duration->days * 24 * 60;
-		$minutes += $duration->h * 60;
-		$minutes += $duration->i;
-		
-		$session->setDuration($minutes);
-		$session->setEndTime($currentDate);
-		$points = $minutes * $session->getRate();
-		$tutor = $session->getSelectedTutor()->getUser()->addPoints($points);
-		$student = $session->getStudent()->subtractPoints($points);
+		$session->endNow();
 		
 		$em = $this->getDoctrine()->getManager();
 		$em->persist($session);

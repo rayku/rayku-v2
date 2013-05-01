@@ -44,6 +44,12 @@ class PageController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$session = $em->getRepository('RaykuApiBundle:Session')->find($id);
 			if(null === $session->getRating() && $session->getStudent() == $this->getUser()){
+				if(null === $session->getEndTime()){
+					$session->endNow();
+					$em = $this->getDoctrine()->getManager();
+					$em->persist($session);
+					$em->flush();
+				}
 				$sessionRateForm = $this->createForm(new RateSessionType(), $session);
 				$view['session'] = $session;
 				$view['ratesessionform'] = $sessionRateForm->createView();

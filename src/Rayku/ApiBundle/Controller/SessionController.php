@@ -244,6 +244,7 @@ class SessionController extends Controller
 		if($form->isValid()){
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($session);
+			$em->flush();
 			// @todo put this url in a config somewhere
 			return $this->redirect('http://whiteboard.rayku.com/room/'.$session->getId().'/student');
 		}

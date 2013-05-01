@@ -9,6 +9,7 @@ class TutorRepository extends EntityRepository
 	public function findOnlineTutors($expire_online)
 	{
 		$query = $this->createQueryBuilder('t')
+			->select('t', 'u')
 			->where('t.onlineWeb > :expire_online')
 			->andWhere('t.busy < :expire_online')
 			->join('t.user', 'u')

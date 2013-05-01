@@ -401,7 +401,7 @@ class Session
     
     public function endNow()
     {
-    	if(null === $this->getEndTime()){
+    	if(null !== $this->getEndTime()){
     		return $this;
     	}
     	
@@ -418,12 +418,14 @@ class Session
     	$points = $minutes * $this->getRate();
     	$this->getSelectedTutor()->getUser()->addPoints($points);
     	$this->getStudent()->subtractPoints($points);
+    	$this->setUsersBusy();
     	
     	return $this;
     }
     
     /**
      * @ORM\PrePersist
+     * @ORM\PreUpdate
      * @todo emit and catch a end session event
      */
     public function setUsersBusy()
@@ -460,9 +462,6 @@ class Session
     	return $this;
     }
     
-    /**
-     * @ORM\PreUpdate
-     */
     public function updatedTimestamps()
     {
     	$this->setUpdatedAt(new \DateTime(date('Y-m-d H:i:s')));

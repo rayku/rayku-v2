@@ -174,16 +174,15 @@ class SessionController extends Controller
 	 *     200="Returned when successful"
 	 *   }
 	 * )
+	 * @todo emit and catch a end session event
 	 * @param \Rayku\ApiBundle\Entity\Session $session
 	 */
 	public function postSessionEndAction(Session $session)
 	{
-		$session->endNow();
+		$session = $session->endNow();
 		
 		$em = $this->getDoctrine()->getManager();
 		$em->persist($session);
-		$em->persist($tutor);
-		$em->persist($student);
 		$em->flush();
 			
 		return $session;

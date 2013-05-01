@@ -399,6 +399,29 @@ class Session
         return $this->updatedAt;
     }
     
+    public function endNow()
+    {
+    	if(null === $this->getEndTime()){
+    		return $this;
+    	}
+    	
+    	$currentDate = new \DateTime(date('Y-m-d H:i:s'));
+    	$duration = $currentDate->diff($this->getStartTime());
+    	
+    	// @todo should this move to the model or a event?
+    	$minutes = $duration->days * 24 * 60;
+    	$minutes += $duration->h * 60;
+    	$minutes += $duration->i;
+    	
+    	$this->setDuration($minutes);
+    	$this->setEndTime($currentDate);
+    	$points = $minutes * $this->getRate();
+    	$this->getSelectedTutor()->getUser()->addPoints($points);
+    	$this->getStudent()->subtractPoints($points);
+    	
+    	return $this;
+    }
+    
     /**
      * @todo emit and catch a end session event
      */

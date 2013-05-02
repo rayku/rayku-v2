@@ -447,15 +447,15 @@ class Session
     	$tutor = $this->getSelectedTutor();
     	$student = $this->getStudent()->getTutor();
     	if($this->getId() == null){ // New Session mark student as busy
-    		$student->setBusy($busy);
+    		if(!is_null($student)) $student->setBusy($busy);
     	}else if($this->getStartTime() === null && $this->getEndTime() === null && $this->getCreatedAt() > new \DateTime(self::expire_session)){ // Old expired session
-    		$student->setBusy($notBusy);
+    		if(!is_null($student)) $student->setBusy($notBusy);
     		if(!is_null($tutor)) $tutor->setBusy($notBusy);
     	}else if($this->getStartTime() !== null && $this->getEndTime() === null){ // Active session with a start and no end
-    		$student->setBusy($busy);
+    		if(!is_null($student)) $student->setBusy($busy);
     		if(!is_null($tutor)) $tutor->setBusy($busy);    		
     	}else if($this->getStartTime() !== null && $this->getEndTime() !== null){ // Session that was started and ended
-    		$student->setBusy($notBusy);
+    		if(!is_null($student)) $student->setBusy($notBusy);
     		if(!is_null($tutor)) $tutor->setBusy($notBusy);    		
     	}
     	

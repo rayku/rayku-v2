@@ -39,7 +39,7 @@ class TutorController extends Controller
 	public function indexAction()
 	{
 		$em = $this->getDoctrine()->getManager();
-		$entities = $em->getRepository('RaykuApiBundle:Tutor')->findOnlineTutors(Tutor::expire_online);
+		$entities = $em->getRepository('RaykuApiBundle:Tutor')->findOnlineTutors(Tutor::expire_online, $this->getUser()->getId());
 		return array('entities' => $entities);
 	}
 	

@@ -32,7 +32,7 @@ class TutorType extends AbstractType
         		'label' => 'School Name'		
         	))
         	->add('rate', NULL, array(
-            	'label' => 'RP/Min'		
+            	'label' => 'RP/Min $1 = 100 RP'		
             ))
             ->add('degree')
             ->add('schoolAmount', 'choice', array(

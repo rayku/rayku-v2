@@ -26,7 +26,7 @@
           <td>{{ loop.index }}</td>
           <td>{{ tutor.user.firstname }} {{ tutor.user.lastname }}</td>
           <td>{{ tutor.schoolAmount }} From {{ tutor.schoolName }}</td>
-          <td>{{ tutor.rate }} RP/min</td>
+          <td>{{ tutor.rate }} RP/min ($1 = 100 RP)</td>
           <td data-status="online">Online</td>
           <td><input type="checkbox" class="tutor-check" name="potential_tutors[0][tutor]" value="{{ tutor.id }}" data-tutor-id="{{ tutor.id }}" data-tutor-name="{{ tutor.user.firstname }} {{ tutor.user.lastname }}"></td>
         </tr>

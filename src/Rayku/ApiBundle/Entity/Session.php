@@ -400,14 +400,23 @@ class Session
     }
     
     /**
-     * @ORM\PrePersist
+     * @todo emit and catch a end session event
      */
     public function setUsersBusy()
     {
-    	$this->updatedTimestamps();
+    	// Mark tutors that don't respond to tutoring requests as busy
+    	$busy = new \DateTime('+40 minutes');
+    	$notBusy = new \DateTime(self::expire_session);
+    	foreach($this->getPotentialTutors() as $potential_tutor)
+    	{
+    		if(in_array($potential_tutor->getTutorReply(), array('pending', 'contacted gtalk', 'accepted'))){
+	    		$potential_tutor->getTutor()->setBusy($busy);
+    		}else{
+    			$potential_tutor->getTutor()->setBusy($notBusy);
+    		}
+    	}
     	
     	$busy = new \DateTime();
-    	$notBusy = new \DateTime(self::expire_session);
     	
     	$student = $this->getStudent()->getTutor();
     	if($this->getId() == null){ // New Session mark student as busy
@@ -417,10 +426,10 @@ class Session
     		if(!is_null($tutor)) $tutor->setBusy($notBusy);
     	}else if($this->getStartTime() !== null && $this->getEndTime() === null){ // Active session with a start and no end
     		$student->setBusy($busy);
-    		if(!is_null($tutor)) $tutor->setBusy($busy);    		
+    		if(!is_null($tutor)) $tutor->setBusy($busy);
     	}else if($this->getStartTime() !== null && $this->getEndTime() !== null){ // Session that was started and ended
     		$student->setBusy($notBusy);
-    		if(!is_null($tutor)) $tutor->setBusy($notBusy);    		
+    		if(!is_null($tutor)) $tutor->setBusy($notBusy);
     	}
     	
     	// Mark tutors that don't respond to tutoring requests as busy
@@ -435,7 +444,9 @@ class Session
     }
     
     /**
+     * @ORM\PrePersist
      * @ORM\PreUpdate
+     * @return \Rayku\ApiBundle\Entity\Session
      */
     public function updatedTimestamps()
     {

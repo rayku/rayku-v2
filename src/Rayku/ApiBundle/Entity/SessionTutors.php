@@ -100,7 +100,19 @@ class SessionTutors
      */
     public function setTutorReply($tutorReply)
     {
-        $this->tutorReply = $tutorReply;
+    	// @todo move these to a static contant
+    	$validOptions = array(
+    		'pending',
+    		'contacted gtalk',
+    		'missed',
+    		'replied',
+    		'rejected',
+    		'accepted'
+    	);
+    	
+    	if(in_array($tutorReply, $validOptions)){
+	        $this->tutorReply = $tutorReply;
+    	}
     
         return $this;
     }

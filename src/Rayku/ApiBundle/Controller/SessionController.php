@@ -179,7 +179,7 @@ class SessionController extends Controller
 	 */
 	public function postSessionEndAction(Session $session)
 	{
-		$session = $session->endNow();
+		$session->endNow();
 		
 		$em = $this->getDoctrine()->getManager();
 		$em->persist($session);

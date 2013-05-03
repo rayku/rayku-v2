@@ -405,8 +405,11 @@ class Session
     		return $this;
     	}
     	
+    	$duration = 0;
     	$currentDate = new \DateTime(date('Y-m-d H:i:s'));
-    	$duration = $currentDate->diff($this->getStartTime());
+    	if(null === $this->getStartTime()){
+	    	$duration = $currentDate->diff($this->getStartTime());
+    	}
     	
     	// @todo should this move to the model or a event?
     	$minutes = $duration->days * 24 * 60;

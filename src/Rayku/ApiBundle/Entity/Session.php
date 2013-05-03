@@ -451,7 +451,10 @@ class Session
     	$busy->modify('+40 minutes');
     	foreach($this->getPotentialTutors() as $potential_tutor)
     	{
-    		$potential_tutor->getTutor()->setBusy($busy);
+    		$potential_tutor = new SessionTutors();
+    		if(in_array($potential_tutor->getTutorReply(), array('contacted gtalk', 'pending'))){
+    			$potential_tutor->getTutor()->setBusy($busy);
+    		}
     	}
     	
     	$busy = new \DateTime();

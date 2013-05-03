@@ -50,9 +50,11 @@ class PageController extends Controller
 			{
 				if(null === $session->getEndTime()){
 					//@todo emit and catch a end session event
-					$session = $session->endNow();
+					$session->endNow();
 					$em = $this->getDoctrine()->getManager();
 					$em->persist($session);
+					$em->persist($session->getStudent());
+					$em->persist($session->getSelectedTutor());
 					$em->flush();
 				}
 				$sessionRateForm = $this->createForm(new RateSessionType(), $session);

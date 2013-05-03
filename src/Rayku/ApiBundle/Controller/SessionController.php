@@ -66,6 +66,7 @@ class SessionController extends Controller
 			throw $this->createNotFoundException('Unable to find Session.');
 		}else{
 			$potentialTutor->setTutorReply('rejected');
+			$potentialTutor->getTutor()->setBusy(new \DateTime());
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($potentialTutor);
 			$em->flush();
@@ -106,6 +107,7 @@ class SessionController extends Controller
 			throw $this->createNotFoundException('Unable to find Session.');
 		}else{
 			$potentialTutor->setTutorReply('replied');
+			$potentialTutor->getTutor()->setBusy(new \DateTime());
 			$em->persist($potentialTutor);
 		}
 		
@@ -233,6 +235,10 @@ class SessionController extends Controller
 		$form = $this->createForm(new SessionType(), $session)->bind($this->getRequest());
 		
 		if($form->isValid()){
+			echo '<pre>';
+			\Doctrine\Common\Util\Debug::dump($session);
+			\Doctrine\Common\Util\Debug::dump($session->getPotentialTutors());
+			die(__LINE__.' '.__FILE__);
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($session);
 			$em->flush();

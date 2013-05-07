@@ -12,6 +12,11 @@ rayku_page_homepage:
     pattern:  /
     defaults:
         _controller: RaykuPageBundle:Page:index
+        
+rayku_page_homepage_minimized_funnel:
+    pattern:  /ask
+    defaults:
+        _controller: RaykuPageBundle:Page:index
 
 rayku_register_confirmed:
     pattern: /register/confirmed

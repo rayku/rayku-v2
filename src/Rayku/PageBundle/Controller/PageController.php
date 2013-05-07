@@ -3,10 +3,12 @@
 namespace Rayku\PageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Session\Session as PHPSession;
 use Rayku\ApiBundle\Form\UserType;
 use Rayku\ApiBundle\Form\UserSettingType;
 use Rayku\ApiBundle\Form\RateSessionType;
 use Rayku\ApiBundle\Entity\Session;
+use Rayku\ApiBundle\Entity\User;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -25,8 +27,13 @@ class PageController extends Controller
 	
 	public function dashboardAction($id = NULL)
 	{
-		if(false === $this->get('security.context')->isGranted('ROLE_USER')){
+		if($this->getRequest()->isMethod('POST')){
+			$view['user'] = new User();
+			$this->get('session')->set('question', $this->getRequest()->get('question'));
+		}else if(false === $this->get('security.context')->isGranted('ROLE_USER')){
 			throw new AccessDeniedException();
+		}else{
+			$view['user'] = $this->getUser();
 		}
 		
 		$userEditForm = $this->createForm(new UserType(), $this->getUser());

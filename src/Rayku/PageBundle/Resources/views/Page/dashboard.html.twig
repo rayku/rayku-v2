@@ -63,12 +63,12 @@
                 <div class="small-12 columns tutor-label">
                     <h5>Tutor</h5>
                     <div class="tutor-switch">
-                        <a href=# name="toggle" id="tutorOn" data="{% if app.user.isTutor %}isTutor{% endif %}"><span>On</span></a>
-                        <a href=# name="toggle" id="tutorOff" data="{% if app.user.isTutor == false %}notTutor{% endif %}"><span>Off</span></a>
+                        <a href=# name="toggle" id="tutorOn" data="{% if user.isTutor %}isTutor{% endif %}"><span>On</span></a>
+                        <a href=# name="toggle" id="tutorOff" data="{% if user.isTutor == false %}notTutor{% endif %}"><span>Off</span></a>
                     </div>
     		    </div>
     		</div>
-    		{% if app.user.isTutor %}
+    		{% if user.isTutor %}
 	            <div class="row tutor-status-bar">
 	                <div class="small-12 columns tutor-status">
 	                    <h5>Status <span>
@@ -93,13 +93,15 @@
     <!--Main Content-->
 	<div class="large-9 columns main-content">
         <!--User Settings-->    
-        {% include 'RaykuPageBundle:Page:settings.html.twig' with {'usersettingform': usersettingform} %}
+        {% if user.id %}
+	        {% include 'RaykuPageBundle:Page:settings.html.twig' with {'usersettingform': usersettingform} %}
+	    {% endif %}
         
         <!-- User Profile -->
         <div class="row user-profile">
             <div class="large-12 columns user-profile-top">
-                <h6><a href="#" title="Buy Rayku Points" class="rayku-points">{{app.user.points}}RP</a></h6>
-                <h5>{{ app.user.username }}</h5>
+                <h6><a href="#" title="Buy Rayku Points" class="rayku-points">{{user.points}}RP</a></h6>
+                <h5>{{ user.username }}</h5>
             </div>
             <div class="large-12 columns user-rayku-points">
                 <form class="buy-rayku-points custom" name="buy_rayku_points" action="/paypal.php" method="post">
@@ -119,7 +121,7 @@
                             </select>
                         </div>
                         <div class="large-3 columns">
-                        	<input type="hidden" name="loginid" value="{{ app.user.id }}" />
+                        	<input type="hidden" name="loginid" value="{{ user.id }}" />
                             <input type="submit" class="bbutton" value="Buy">
                         </div>
                     </div>
@@ -134,63 +136,63 @@
                         <a href="#" class="raphael edit-tool">></a>
                         <form class="user-profile-edit-form" name="name">
                             <label>Name</label>
-                            <input type="text" placeholder="{{ app.user.firstname }}" name="current_first_name" class="form-field">
-                            <input type="text" placeholder="{{ app.user.lastname }}" name="current_last_name" class="form-field">
+                            <input type="text" placeholder="{{ user.firstname }}" name="current_first_name" class="form-field">
+                            <input type="text" placeholder="{{ user.lastname }}" name="current_last_name" class="form-field">
                             <input type="submit" class="bbutton" value="Save">
                             <a href=# class="close-edit">x</a>
                         </form>
-                        <h4><span class="name edit">{{ app.user.firstname }} {{ app.user.lastname }}</span></h4>
+                        <h4><span class="name edit">{{ user.firstname }} {{ user.lastname }}</span></h4>
                     </li>
                     <li>
                         <a href="#" class="raphael edit-tool">></a>
                         <form class="user-profile-edit-form" name="education">
                             <label>Education</label>
-                            <input type="text" placeholder="{{ app.user.grade }}" name="current_grade" class="form-field">
+                            <input type="text" placeholder="{{ user.grade }}" name="current_grade" class="form-field">
                             <input type="submit" class="bbutton" value="Save">
                             <a href=# class="close-edit">x</a>
                         </form>
-                        <h5><span class="education edit">{{ app.user.grade }}</span></h5>
+                        <h5><span class="education edit">{{ user.grade }}</span></h5>
                     </li>
                     <li>
                         <a href="#" class="raphael edit-tool">></a>
                         <form class="user-profile-edit-form" name="school">
                             <label>University</label>
-                            <input type="text" placeholder="{{ app.user.school }}" name="current_school" class="form-field">
+                            <input type="text" placeholder="{{ user.school }}" name="current_school" class="form-field">
                             <input type="submit" class="bbutton" value="Save">
                             <a href=# class="close-edit">x</a>
                         </form>
-                        <span>School:</span> <span class="school edit">{{ app.user.school }}</span>
+                        <span>School:</span> <span class="school edit">{{ user.school }}</span>
                     </li>
                     <li>
                         <a href="#" class="raphael edit-tool">></a>
                         <form class="user-profile-edit-form" name="degree">
                             <label>Degree</label>
-                            <input type="text" placeholder="{{ app.user.degree }}" name="current_degree" class="form-field">
+                            <input type="text" placeholder="{{ user.degree }}" name="current_degree" class="form-field">
                             <input type="submit" class="bbutton" value="Save">
                             <a href=# class="close-edit">x</a>
                         </form>
-                        <span>Degree:</span> <span class="degree edit">{{ app.user.degree }}</span>
+                        <span>Degree:</span> <span class="degree edit">{{ user.degree }}</span>
                     </li>
-                    {% if app.user.isTutor %}
+                    {% if user.isTutor %}
                     <li>
                         <a href="#" class="raphael edit-tool">></a>
                         <form class="user-profile-edit-form" name="bio">
                             <label>Specialty</label>
-                            <textarea class="form-field" name="current_bio">{{ app.user.bio }}</textarea>
+                            <textarea class="form-field" name="current_bio">{{ user.bio }}</textarea>
                             <input type="submit" class="bbutton" value="Save">
                             <a href=# class="close-edit">x</a>
                         </form>
-                        <span>Specialty:</span> <span class="bio edit">{{ app.user.bio }}</span>
+                        <span>Specialty:</span> <span class="bio edit">{{ user.bio }}</span>
                     </li>
                     <li>
-                         <span class="tutor edit"><a class="public-tutor-link" href="{{ path('rayku_tutor_show', { 'username': app.user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></span>
+                         <span class="tutor edit"><a class="public-tutor-link" href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></span>
                     </li>
                     {% endif %}
                 </ul>
                 <ul class="user-profile-buttons">
                     <li><a href=# class="bbutton edit-button"><span class="raphael">></span>Edit Profile</a></li>
                     <li>
-                      <form name="master-form" method="post" class="user-profile-master-form" action="{{ path('post_users', {'user': app.user.id }) }}">
+                      <form name="master-form" method="post" class="user-profile-master-form" action="{{ path('post_users', {'user': user.id }) }}">
                         {{ form_widget(userform.first_name) }}
                         {{ form_widget(userform.last_name) }}
                         {{ form_widget(userform.school) }}
@@ -341,9 +343,17 @@
   </div>
   <!--End Tutor List-->
 </div>
-{% render url('rayku_tutor_new') %}
+{% if user.id %}
+	{% render url('rayku_tutor_new') %}
 
-{% include 'RaykuPageBundle:Page:notification-modal.html.twig' %}
+	{% include 'RaykuPageBundle:Page:notification-modal.html.twig' %}
+{% else %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#regModal').foundation('reveal', 'open');
+		});
+	</script>
+{% endif %}
 
 {% if ratesessionform is defined %}
 <div id="referFriend" class="reveal-modal medium">
@@ -356,7 +366,7 @@
 		<div class="large-12 columns">
 			You can get extra Rayku Points by inviting your friends to try out Rayku. If a friend uses your invitation to sign up for an account you will receive 200 Rayku Points and your friend receives 500 Rayku points.</br><br/>
 			
-			http://www.rayku.com/?refcode={{ app.user.referralCode }}
+			http://www.rayku.com/?refcode={{ user.referralCode }}
 		</div>
 	</div>
 </div>

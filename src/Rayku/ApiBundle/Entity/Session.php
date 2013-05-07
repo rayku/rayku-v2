@@ -31,7 +31,7 @@ class Session
      * @ORM\Column(name="start_time", type="datetime", nullable=true)
      * @Assert\DateTime()
      */
-    private $startTime;
+    private $start_time;
 
     /**
      * @var \DateTime
@@ -39,7 +39,7 @@ class Session
      * @ORM\Column(name="end_time", type="datetime", nullable=true)
      * @Assert\DateTime()
      */
-    private $endTime;
+    private $end_time;
 
     /**
      * @var integer
@@ -152,7 +152,7 @@ class Session
      */
     public function setStartTime($startTime)
     {
-        $this->startTime = $startTime;
+        $this->start_time = $startTime;
     
         return $this;
     }
@@ -164,7 +164,7 @@ class Session
      */
     public function getStartTime()
     {
-        return $this->startTime;
+        return $this->start_time;
     }
 
     /**
@@ -175,7 +175,7 @@ class Session
      */
     public function setEndTime($endTime)
     {
-        $this->endTime = $endTime;
+        $this->end_time = $endTime;
     
         return $this;
     }
@@ -187,7 +187,7 @@ class Session
      */
     public function getEndTime()
     {
-        return $this->endTime;
+        return $this->end_time;
     }
 
     /**

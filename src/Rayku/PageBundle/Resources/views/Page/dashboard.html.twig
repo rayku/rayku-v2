@@ -295,6 +295,21 @@
 {% include 'RaykuPageBundle:Page:notification-modal.html.twig' %}
 
 {% if ratesessionform is defined %}
+<div id="referFriend" class="reveal-modal medium">
+    <div class="row">
+        <div class="large-12 columns">
+            <h3>Refer a Friend</h3>
+        </div>
+    </div>
+    <div class="row">
+		<div class="large-12 columns">
+			You can get extra Rayku Points by inviting your friends to try out Rayku. If a friend uses your invitation to sign up for an account you will receive 200 Rayku Points and your friend receives 500 Rayku points.</br><br/>
+			
+			http://www.rayku.com/?refcode={{ app.user.referralCode }}
+		</div>
+	</div>
+</div>
+
 <div id="rateTutorModal" class="reveal-modal medium rateTutor">
     <div class="row">
         <div class="large-12 columns">
@@ -332,8 +347,12 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#rateTutorModal').foundation('reveal', 'open');
-    $('#rateTutorForm').ajaxForm(function() { 
-    	 $('#rateTutorModal').foundation('reveal', 'close');
+    $('#rateTutorForm').ajaxForm(function() {
+    	if($('select#rating').find(":selected").val() > 3){
+    		$('#referFriend').foundation('reveal', 'open')    	
+    	}else{
+	    	$('#rateTutorModal').foundation('reveal', 'close');
+	    }
 	});
 });
 </script>

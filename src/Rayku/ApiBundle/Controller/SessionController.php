@@ -235,10 +235,6 @@ class SessionController extends Controller
 		$form = $this->createForm(new SessionType(), $session)->bind($this->getRequest());
 		
 		if($form->isValid()){
-			echo '<pre>';
-			\Doctrine\Common\Util\Debug::dump($session);
-			\Doctrine\Common\Util\Debug::dump($session->getPotentialTutors());
-			die(__LINE__.' '.__FILE__);
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($session);
 			$em->flush();

@@ -9,6 +9,31 @@
             <tag name="form.type" alias="rayku_user_registration" />
             <argument>%fos_user.model.user.class%</argument>
         </service>
+        
+        <service id="rayku_user.registration.form.handler.registration" class="Rayku\UserBundle\Form\Handler\RegistrationFormHandler" scope="request" public="false">
+            <argument type="service" id="fos_user.registration.form" />
+            <argument type="service" id="request" />
+            <argument type="service" id="fos_user.user_manager" />
+            <argument type="service" id="fos_user.mailer" />
+            <argument type="service" id="fos_user.util.token_generator" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%rayku_referral.listener.kernel.cookie_param_code%</argument>
+            <argument>%rayku_referral.listener.kernel.cookie_param_ip%</argument>
+            <argument>%rayku_referral.listener.kernel.cookie_param_date%</argument>
+            <argument>%rayku_referral.listener.kernel.cookie_param_referer%</argument>
+            <argument>%rayku_referral.listener.kernel.reward_referrer%</argument>
+            <argument>%rayku_referral.listener.kernel.reward_referral%</argument>
+        </service>
 
+        <service id="rayku_referral.listener.kernel" class="Rayku\UserBundle\EventListener\Referral">
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="2147483647" />
+            <argument>%rayku_referral.listener.kernel.query_param_name%</argument>
+            <argument>%rayku_referral.listener.kernel.cookie_param_code%</argument>
+            <argument>%rayku_referral.listener.kernel.cookie_param_ip%</argument>
+            <argument>%rayku_referral.listener.kernel.cookie_param_date%</argument>
+            <argument>%rayku_referral.listener.kernel.cookie_param_referer%</argument>
+            <argument type="service" id="fos_user.user_manager" />
+        </service>
+        
     </services>
 </container>

@@ -23,3 +23,11 @@ parameters:
 
     # Sonata User Options
     sonata_user.google_authenticator.server:  demo.sonata-project.org
+    
+    rayku_referral.listener.kernel.query_param_name: refcode
+    rayku_referral.listener.kernel.cookie_param_code: code
+    rayku_referral.listener.kernel.cookie_param_ip: ip
+    rayku_referral.listener.kernel.cookie_param_date: date
+    rayku_referral.listener.kernel.cookie_param_referer: referrer
+    rayku_referral.listener.kernel.reward_referrer: 200
+    rayku_referral.listener.kernel.reward_referral: 500

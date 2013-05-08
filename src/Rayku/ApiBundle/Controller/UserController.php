@@ -10,6 +10,7 @@ use FOS\RestBundle\Controller\Annotations\View;
 
 use Rayku\ApiBundle\Entity\User;
 use Rayku\ApiBundle\Form\UserType;
+use Rayku\ApiBundle\Form\UserSettingType;
 
 /**
  * User controller.

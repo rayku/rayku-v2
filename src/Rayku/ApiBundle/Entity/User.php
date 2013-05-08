@@ -91,33 +91,6 @@ class User extends BaseUser
 	
 	/**
 	 * @var string
-	 * 
-	 * @ORM\Column(name="referral_code", type="string", length=255, nullable=true)
-	 */
-	private $referral_code;
-	
-	/**
-	 * @var string
-	 * 
-	 * @ORM\Column(name="referral_ip_address", type="string", length=255, nullable=true)
-	 */
-	private $referral_ip_address;
-	
-	/**
-	 * @var \DateTime
-	 *
-	 * @ORM\Column(name="referral_date", type="datetime", nullable=true)
-	 */
-	protected $referral_date;
-	
-	/**
-     * @ORM\ManyToOne(targetEntity="\Rayku\ApiBundle\Entity\User")
-     * @ORM\JoinColumn(name="referral_referer", referencedColumnName="id", nullable=true)
-	 */
-	private $referral_referer;
-	
-	/**
-	 * @var string
 	 *
 	 * @ORM\Column(name="school", type="string", length=255, nullable=false)
 	 * @Assert\NotBlank()

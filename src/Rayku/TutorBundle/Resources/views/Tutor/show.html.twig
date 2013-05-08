@@ -42,7 +42,9 @@
     <!--End Sidebar-->
     <div class="large-9 columns main-content">
     	<!--User Settings-->  
-    	{% include 'RaykuPageBundle:Page:settings.html.twig' with {'usersettingform': usersettingform} %}
+    	{% if app.user %}
+	    	{% include 'RaykuPageBundle:Page:settings.html.twig' with {'usersettingform': usersettingform} %}
+	    {% endif %}
     	
     	<!-- User Profile -->
         <div class="row user-profile">

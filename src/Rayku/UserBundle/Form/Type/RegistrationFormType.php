@@ -14,6 +14,7 @@ class RegistrationFormType extends BaseType
 		$builder->add('coupon', 'coupon_code', array('required' => false));
 		$builder->remove('plainPassword');
 		$builder->add('plainPassword', 'password', array('label' => 'Password'));
+		$builder->add('signup_question', NULL, array('required' => false));
 	}
 	
 	public function getName()

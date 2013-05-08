@@ -3,10 +3,14 @@
 namespace Rayku\PageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Session\Session as PHPSession;
 use Rayku\ApiBundle\Form\UserType;
 use Rayku\ApiBundle\Form\UserSettingType;
 use Rayku\ApiBundle\Form\RateSessionType;
 use Rayku\ApiBundle\Entity\Session;
+use Rayku\ApiBundle\Entity\User;
+use Rayku\ApiBundle\Entity\Tutor;
+use Rayku\ApiBundle\Entity\SessionTutors;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -23,10 +27,40 @@ class PageController extends Controller
 		return $this->render('RaykuPageBundle:Page:home.html.twig');
 	}
 	
+	public function autoConnectSessionAction()
+	{
+		// @todo refactor to use REST api GET /tutors
+		$em = $this->getDoctrine()->getManager();
+		$tutors = $em->getRepository('RaykuApiBundle:Tutor')->findOnlineTutors(Tutor::expire_online, $this->getUser()->getId());
+	
+		if(empty($tutors)){
+			return $this->forward('RaykuPageBundle:Page:dashboard');
+		}
+		// @todo refactor to use REST api POST /sessions
+		$session = new Session();
+		$session->setQuestion($this->getUser()->getSignupQuestion());
+		$session->setStudent($this->getUser());
+		foreach($tutors as $tutor){
+			$potentialTutor = new SessionTutors();
+			$potentialTutor->setTutor($tutor);
+			$session->addPotentialTutor($potentialTutor);
+		}
+	
+		$em->persist($session);
+		$em->flush();
+	
+		return $this->redirect('http://whiteboard.rayku.com/room/'.$session->getId().'/student');
+	}
+	
 	public function dashboardAction($id = NULL)
 	{
-		if(false === $this->get('security.context')->isGranted('ROLE_USER')){
+		if($this->getRequest()->isMethod('POST')){
+			$view['user'] = new User();
+			$this->get('session')->set('question', $this->getRequest()->get('question'));
+		}else if(false === $this->get('security.context')->isGranted('ROLE_USER')){
 			throw new AccessDeniedException();
+		}else{
+			$view['user'] = $this->getUser();
 		}
 		
 		$userEditForm = $this->createForm(new UserType(), $this->getUser());
@@ -39,22 +73,20 @@ class PageController extends Controller
 		 * @todo move logic to the model layer
 		 * @todo proper error messages to the user
 		 * @todo allow tutors to rate the session
+		 * @todo move to repository class out of controller
 		 */
 		if(isset($id)){
 			$em = $this->getDoctrine()->getManager();
 			$session = $em->getRepository('RaykuApiBundle:Session')->find($id);
 			if(
 				null === $session->getRating() && 
-				$session->getStudent() == $this->getUser() &&
-				null !== $session->getStartTime())
+				$session->getStudent() == $this->getUser())
 			{
 				if(null === $session->getEndTime()){
-					//@todo emit and catch a end session event
 					$session->endNow();
-					$em = $this->getDoctrine()->getManager();
 					$em->persist($session);
 					$em->persist($session->getStudent());
-					$em->persist($session->getSelectedTutor());
+					if(null !== $session->getSelectedTutor()) $em->persist($session->getSelectedTutor());
 					$em->flush();
 				}
 				$sessionRateForm = $this->createForm(new RateSessionType(), $session);

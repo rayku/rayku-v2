@@ -428,7 +428,7 @@ header nav a:hover {
 	width: 100%;
 }
 
-#intro .left form input.ask {
+#intro .left form input.ask, #intro .left form input.question {
 	background: rgba(0,0,0,0.45);
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;

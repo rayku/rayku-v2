@@ -18,6 +18,7 @@ use Rayku\ApiBundle\Form\RateSessionType;
  */
 class SessionController extends Controller
 {
+	
 	/**
 	 * @ApiDoc(
 	 *   description="Get active sessions for a tutor",

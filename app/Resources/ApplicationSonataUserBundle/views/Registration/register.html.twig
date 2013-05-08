@@ -5,9 +5,9 @@
 	{% if app.request.attributes.get('_route') == '_internal' %}
 		<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
 			<p>
-				<input type="text" class="ask" placeholder="Describe what you need help with..." />
+				{{ form_widget(form.signup_question, { 'attr': {'placeholder': 'Describe what you need help with...', 'class': 'ask' } }) }}
 				{{ form_errors(form) }}
-				<input type="submit" value="Ask" />
+				<input type="submit" value="Ask" name="question" />
 			</p>
 			<div id="signup-ask">
 				<div class="head"><a href="#" class="close ask-login-button">x</a><span>Please provide account information in order to continue</span> <a href="#" data-reveal-id="loginModal" class="right ask-login-button">Already have an account</a><div class="clear"></div></div>

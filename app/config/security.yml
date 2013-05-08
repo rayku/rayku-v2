@@ -71,7 +71,9 @@ security:
         - { path: ^/api, role: ROLE_ADMIN }
 
         # Non-secure part of site
+        - { path: ^/ask$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/about$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/dashboard$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/become-a-tutor$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/legal$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/tutor/.+/public, role: IS_AUTHENTICATED_ANONYMOUSLY }

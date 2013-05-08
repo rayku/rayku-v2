@@ -1095,3 +1095,38 @@ TUTOR PUBLIC PROFILE
 .profile-sidebar ul li:last-child{
 	border-bottom: none;
 }
+
+form.registration-form label{
+	font-size: 13px;
+	margin-bottom: 5px; 
+}
+form.registration-form input[type="text"], form.registration-form input[type="password"]{
+	padding: 10px;
+	height: 40px;
+	border-radius: 3px;
+}
+.registration-header{
+	position: absolute;
+	left:0;
+	top:0;
+	height: 60px;
+	background: rgba(221, 221, 221, 0.5);
+	width: 100%;
+	text-align: center;
+	margin-bottom: 15px;
+	border-bottom: 1px solid rgba(221, 221, 221, 0.5);
+}
+.registration-header h2{
+	font-weight: 500;
+	margin-top: 18px;
+	color: #1a6aaf;
+}
+.registration-body{
+	margin-top:50px;
+}
+.registration-footer input[type="submit"]{
+	position: relative;
+	left:-35px;
+	margin-top: 15px;
+	margin-bottom: 10px;
+}

@@ -50,7 +50,7 @@
                 <h5>{{ entity.user.username }}</h5>
             </div>
             <div class="large-3 columns user-profile-image">
-                <img src="{{ entity.user.imagePath }}">
+                <img src="{{ entity.user.imagePath }}" style="height:150px">
             </div>  
             <div class="large-9 columns user-profile-info">
                 <ul class="user-profile-items">
@@ -66,10 +66,6 @@
                     <li>
                         <span class="degree edit">{{ entity.user.degree }}</span>
                     </li>
-                    <li>
-                        <span>Specializes in </span> <span class="bio edit">{{ entity.user.bio }}</span>
-                    </li>
-                    
                     <li>
                         <span>Charges a rate of </span> <span class="bio edit">{{ entity.rate }} RP/Min</span>
                     </li>
@@ -105,7 +101,7 @@
                     <section class="about">
                         <p class="title" data-section-title><a href="#panel1">About Me</a></p>
                         <div class="content" data-slug="panel1" data-section-content>
-                            <p>Section 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            <p>{{ entity.user.bio }}</p>
                         </div>
                     </section>
                     <section class="reviews">

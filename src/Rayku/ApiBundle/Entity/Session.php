@@ -438,6 +438,7 @@ class Session
     	$this->updatedTimestamps();
     	
     	$busy = new \DateTime();
+        $notBusy = new \DateTime(self::expire_session);
     	
     	// If a tutor accepted the session mark everyone as available otherwise mark tutors that don't respond to tutoring requests as busy
     	if(null === $this->getSelectedTutor()){
@@ -453,7 +454,6 @@ class Session
     	}
     	
     	$busy = new \DateTime();
-    	$notBusy = new \DateTime(self::expire_session);
     	
     	$tutor = $this->getSelectedTutor();
     	$student = ($this->getStudent()->getIsTutor()) ? $this->getStudent()->getTutor() : NULL;

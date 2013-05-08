@@ -57,6 +57,40 @@ class User extends BaseUser
 	
 	/**
 	 * @var string
+	 * 
+	 * @ORM\Column(name="referral_code", type="string", length=255, nullable=true)
+	 */
+	private $referral_code;
+	
+	/**
+	 * @var string
+	 * 
+	 * @ORM\Column(name="referral_ip_address", type="string", length=255, nullable=true)
+	 */
+	private $referral_ip_address;
+	
+	/**
+	 * @var \DateTime
+	 *
+	 * @ORM\Column(name="referral_date", type="datetime", nullable=true)
+	 */
+	protected $referral_date;
+	
+	/**
+     * @ORM\ManyToOne(targetEntity="\Rayku\ApiBundle\Entity\User")
+     * @ORM\JoinColumn(name="referral_referer", referencedColumnName="id", nullable=true)
+	 */
+	private $referral_referer;
+	
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="signup_question", type="string", length=255, nullable=true)
+	 */
+	private $signup_question;
+	
+	/**
+	 * @var string
 	 *
 	 * @ORM\Column(name="school", type="string", length=255, nullable=false)
 	 * @Assert\NotBlank()
@@ -105,7 +139,6 @@ class User extends BaseUser
 	 */
 	private $autoLogin;
 	
-
 	/**
 	 * @var \DateTime
 	 * 
@@ -367,6 +400,22 @@ class User extends BaseUser
     /**
      * @ORM\PrePersist
      */
+    public function prePersist()
+    {
+    	$this
+    		->registerWithCouponCode()
+    		->initReferralCode();
+    	
+    	return parent::prePersist();
+    }
+    
+    public function initReferralCode()
+    {
+    	$this->setReferralCode(base64_encode(uniqid('rayku', true)));
+    	
+    	return $this;
+    }
+    
     public function registerWithCouponCode()
     {
     	if(null === $this->getId() && null !== $this->getCoupon()){
@@ -443,5 +492,120 @@ class User extends BaseUser
     public function getAutoLoginExpire()
     {
         return $this->autoLoginExpire;
+    }
+    
+    /**
+     * Set referral_code
+     *
+     * @param string $referralCode
+     * @return User
+     */
+    public function setReferralCode($referralCode)
+    {
+        $this->referral_code = $referralCode;
+    
+        return $this;
+    }
+
+    /**
+     * Get referral_code
+     *
+     * @return string 
+     */
+    public function getReferralCode()
+    {
+        return $this->referral_code;
+    }
+
+    /**
+     * Set referral_ip_address
+     *
+     * @param string $referralIpAddress
+     * @return User
+     */
+    public function setReferralIpAddress($referralIpAddress)
+    {
+        $this->referral_ip_address = $referralIpAddress;
+    
+        return $this;
+    }
+
+    /**
+     * Get referral_ip_address
+     *
+     * @return string 
+     */
+    public function getReferralIpAddress()
+    {
+        return $this->referral_ip_address;
+    }
+
+    /**
+     * Set referral_referer
+     *
+     * @param string $referralReferer
+     * @return User
+     */
+    public function setReferralReferer($referralReferer)
+    {
+        $this->referral_referer = $referralReferer;
+    
+        return $this;
+    }
+
+    /**
+     * Get referral_referer
+     *
+     * @return string 
+     */
+    public function getReferralReferer()
+    {
+        return $this->referral_referer;
+    }
+    
+    /**
+     * Set referral_date
+     *
+     * @param \DateTime $referralDate
+     * @return User
+     */
+    public function setReferralDate($referralDate)
+    {
+        $this->referral_date = $referralDate;
+    
+        return $this;
+    }
+
+    /**
+     * Get referral_date
+     *
+     * @return \DateTime 
+     */
+    public function getReferralDate()
+    {
+        return $this->referral_date;
+    }
+    
+    /**
+     * Set signup_question
+     *
+     * @param string $signupQuestion
+     * @return User
+     */
+    public function setSignupQuestion($signupQuestion)
+    {
+        $this->signup_question = $signupQuestion;
+    
+        return $this;
+    }
+
+    /**
+     * Get signup_question
+     *
+     * @return string 
+     */
+    public function getSignupQuestion()
+    {
+        return $this->signup_question;
     }
 }

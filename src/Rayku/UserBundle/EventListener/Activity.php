@@ -6,6 +6,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Bundle\DoctrineBundle\Registry as Doctrine;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpKernel\HttpKernel;
 use Rayku\UserBundle\Entity\User;
 
 class Activity
@@ -27,6 +28,9 @@ class Activity
 	 */
 	public function onCoreController(FilterControllerEvent $event)
 	{
+		if(HttpKernel::MASTER_REQUEST != $event->getRequestType()){
+			return true;
+		}
 		if(!$event->getRequest()->isMethod('GET') || HttpKernelInterface::MASTER_REQUEST != $event->getRequestType()){
 			return true;
 		}

@@ -14,7 +14,16 @@
 				<h1>Instant Homework Help</h1>
 				<h2>Connect with a live online tutor, over a beautiful &amp; interactive whiteboard, whenever you need help. Your first session is free!</h2>
 				
-				{% render "FOSUserBundle:Registration:register" %}
+				{% if app.request.attributes.get('_route') == 'rayku_page_homepage' %}
+					{% render "FOSUserBundle:Registration:register" %}
+				{% else %}
+					<form action="{{ path('rayku_page_dashboard') }}" method="POST">
+						<p>
+							<input type="text" class="question" name="question" placeholder="Describe what you need help with..." />
+							<input type="submit" value="Ask" />
+						</p>
+					</form>
+				{% endif %}
 				
 				<p class="seen-on">
 					As seen on: <img src="{{asset('bundles/raykupage/images/seen_on.png')}}" alt="" />

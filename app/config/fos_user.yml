@@ -11,7 +11,8 @@ fos_user:
     group:
         group_class: Rayku\ApiBundle\Entity\Group
     registration:
-        confirmation:
-            enabled:  true
+        #confirmation:
+            #enabled:  true
         form:
             type:   rayku_user_registration
+            handler: rayku_user.registration.form.handler.registration

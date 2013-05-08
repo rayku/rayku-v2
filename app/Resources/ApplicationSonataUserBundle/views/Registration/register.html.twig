@@ -1,12 +1,13 @@
-{% extends "::base.html.twig" %}
+{% extends app.request.attributes.get('_route') == '_internal' ? "::empty.html.twig" : "::base.html.twig" %}
 
 {% block body %}
+	<script src="//cdn.optimizely.com/js/226930245.js"></script>
 	{% if app.request.attributes.get('_route') == '_internal' %}
 		<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
 			<p>
-				<input type="text" class="ask" placeholder="Describe what you need help with..." />
+				{{ form_widget(form.signup_question, { 'attr': {'placeholder': 'Describe what you need help with...', 'class': 'ask' } }) }}
 				{{ form_errors(form) }}
-				<input type="submit" value="Ask" />
+				<input type="submit" value="Ask" name="question" />
 			</p>
 			<div id="signup-ask">
 				<div class="head"><a href="#" class="close ask-login-button">x</a><span>Please provide account information in order to continue</span> <a href="#" data-reveal-id="loginModal" class="right ask-login-button">Already have an account</a><div class="clear"></div></div>
@@ -42,9 +43,6 @@
 			{{ parent() }}
 			<link href="{{ asset('bundles/raykupage/css/style.css') }}" type="text/css" rel="stylesheet" media="screen" />
 		{% endblock %} 
-		{% block javascripts %}
-		    {{ parent() }}
-    	{% endblock %}
         <div class="form-box signup-box fade-in">
 			<a href="{{ path('rayku_page_homepage') }}" class="logo"></a>
 			<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
@@ -77,4 +75,10 @@
 			{% render "FOSUserBundle:Security:login" %}
 		{% endif %}
 	{% endif %}
+	
+	{% block javascripts %}
+		{{ parent() }}
+		
+		{% include "::ClickTale.html.twig" %}
+	{% endblock %}
 {% endblock %}

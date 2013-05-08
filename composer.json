@@ -45,7 +45,7 @@
         "sonata-project/doctrine-orm-admin-bundle": "2.1.*@dev",
 
         "friendsofsymfony/user-bundle": "*",
-        "friendsofsymfony/rest-bundle": "*",
+        "friendsofsymfony/rest-bundle": "0.11.*",
         "friendsofsymfony/rest": "*",
 
         "simplethings/entity-audit-bundle": "dev-master",

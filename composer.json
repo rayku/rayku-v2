@@ -54,7 +54,7 @@
         "kriswallsmith/assetic": "1.1.*@dev",
         "nelmio/api-doc-bundle": "@dev",
         "guzzle/guzzle": "*",
-        "jmikola/auto-login-bundle": "dev-master",
+        "jmikola/auto-login-bundle": "dev-master"
     },
 
     "require-dev": {

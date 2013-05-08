@@ -57,6 +57,13 @@ class User extends BaseUser
 	
 	/**
 	 * @var string
+	 *
+	 * @ORM\Column(name="signup_question", type="string", length=255, nullable=true)
+	 */
+	private $signup_question;
+	
+	/**
+	 * @var string
 	 * 
 	 * @ORM\Column(name="referral_code", type="string", length=255, nullable=true)
 	 */
@@ -577,5 +584,28 @@ class User extends BaseUser
     public function getReferralDate()
     {
         return $this->referral_date;
+    }
+    
+    /**
+     * Set signup_question
+     *
+     * @param string $signupQuestion
+     * @return User
+     */
+    public function setSignupQuestion($signupQuestion)
+    {
+        $this->signup_question = $signupQuestion;
+    
+        return $this;
+    }
+
+    /**
+     * Get signup_question
+     *
+     * @return string 
+     */
+    public function getSignupQuestion()
+    {
+        return $this->signup_question;
     }
 }

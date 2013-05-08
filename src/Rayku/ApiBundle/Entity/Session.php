@@ -405,22 +405,24 @@ class Session
     		return $this;
     	}
     	
+    	$minutes = 0;
     	$duration = 0;
     	$currentDate = new \DateTime(date('Y-m-d H:i:s'));
-    	if(null === $this->getStartTime()){
+    	if(null !== $this->getStartTime()){
 	    	$duration = $currentDate->diff($this->getStartTime());
+	    	$minutes = $duration->days * 24 * 60;
+	    	$minutes += $duration->h * 60;
+	    	$minutes += $duration->i;
     	}
-    	
-    	// @todo should this move to the model or a event?
-    	$minutes = $duration->days * 24 * 60;
-    	$minutes += $duration->h * 60;
-    	$minutes += $duration->i;
     	
     	$this->setDuration($minutes);
     	$this->setEndTime($currentDate);
     	$points = $minutes * $this->getRate();
-    	$this->getSelectedTutor()->getUser()->addPoints($points);
-    	$this->getStudent()->subtractPoints($points);
+    	
+    	if(null !== $this->getSelectedTutor()){
+	    	$this->getSelectedTutor()->getUser()->addPoints($points);
+	    	$this->getStudent()->subtractPoints($points);
+    	}
     	$this->setUsersBusy();
     	
     	return $this;
@@ -438,7 +440,7 @@ class Session
     	$notBusy = new \DateTime(self::expire_session);
     	foreach($this->getPotentialTutors() as $potential_tutor)
     	{
-    		if(in_array($potential_tutor->getTutorReply(), array('pending', 'contacted gtalk', 'accepted'))){
+    		if(in_array($potential_tutor->getTutorReply(), array('pending', 'contacted gtalk'))){
 	    		$potential_tutor->getTutor()->setBusy($busy);
     		}else{
     			$potential_tutor->getTutor()->setBusy($notBusy);
@@ -446,22 +448,10 @@ class Session
     	}
     	
     	$busy = new \DateTime();
-    	
-    	// Mark tutors that don't respond to tutoring requests as busy
-    	$busy->modify('+40 minutes');
-    	foreach($this->getPotentialTutors() as $potential_tutor)
-    	{
-    		$potential_tutor = new SessionTutors();
-    		if(in_array($potential_tutor->getTutorReply(), array('contacted gtalk', 'pending'))){
-    			$potential_tutor->getTutor()->setBusy($busy);
-    		}
-    	}
-    	
-    	$busy = new \DateTime();
     	$notBusy = new \DateTime(self::expire_session);
     	
     	$tutor = $this->getSelectedTutor();
-    	$student = $this->getStudent()->getTutor();
+    	$student = ($this->getStudent()->getIsTutor()) ? $this->getStudent()->getTutor() : NULL;
     	if($this->getId() == null){ // New Session mark student as busy
     		if(!is_null($student)) $student->setBusy($busy);
     	}else if($this->getStartTime() === null && $this->getEndTime() === null && $this->getCreatedAt() > new \DateTime(self::expire_session)){ // Old expired session
@@ -478,6 +468,10 @@ class Session
     	return $this;
     }
     
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
     public function updatedTimestamps()
     {
     	$this->setUpdatedAt(new \DateTime(date('Y-m-d H:i:s')));

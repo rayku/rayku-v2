@@ -7,9 +7,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Guzzle\Http\Client;
 
 use Rayku\ApiBundle\Entity\Session;
 use Rayku\ApiBundle\Entity\SessionTutors;
+use Rayku\ApiBundle\Entity\Tutor;
 use Rayku\ApiBundle\Form\SessionType;
 use Rayku\ApiBundle\Form\RateSessionType;
 
@@ -18,6 +20,7 @@ use Rayku\ApiBundle\Form\RateSessionType;
  */
 class SessionController extends Controller
 {
+	
 	/**
 	 * @ApiDoc(
 	 *   description="Get active sessions for a tutor",

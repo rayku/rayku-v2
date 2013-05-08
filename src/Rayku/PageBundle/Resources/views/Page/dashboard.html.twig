@@ -176,12 +176,12 @@
                     <li>
                         <a href="#" class="raphael edit-tool">></a>
                         <form class="user-profile-edit-form" name="bio">
-                            <label>Specialty</label>
+                            <label>About</label>
                             <textarea class="form-field" name="current_bio">{{ user.bio }}</textarea>
                             <input type="submit" class="bbutton" value="Save">
                             <a href=# class="close-edit">x</a>
                         </form>
-                        <span>Specialty:</span> <span class="bio edit">{{ user.bio }}</span>
+                        <span>About:</span> <span class="bio edit">{{ user.bio }}</span>
                     </li>
                     <li>
                          <span class="tutor edit"><a class="public-tutor-link" href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></span>

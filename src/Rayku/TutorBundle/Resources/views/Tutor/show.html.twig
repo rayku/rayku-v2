@@ -50,12 +50,12 @@
                 <h5>{{ entity.user.username }}</h5>
             </div>
             <div class="large-3 columns user-profile-image">
-                <img src="{{ asset('bundles/raykupage/images/profile_image_blank.jpg') }}">
+                <img src="http://m.c.lnkd.licdn.com/mpr/mpr/shrink_200_200/p/1/000/190/285/1e98960.jpg">
             </div>  
             <div class="large-9 columns user-profile-info">
                 <ul class="user-profile-items">
                     <li>
-                        <h4><span class="name edit">{{ entity.user.firstname }} {{ entity.user.lastname }}</span> <span class="tutor-rating">4.3</span></h4>
+                        <h4><span class="name edit">{{ entity.user.firstname }} {{ entity.user.lastname }}</span></h4>
                     </li>
                     <li>
                         <h5><span class="education edit">{{ entity.user.grade }}</span></h5>
@@ -72,6 +72,11 @@
                     
                     <li>
                         <span>Charges a rate of </span> <span class="bio edit">{{ entity.rate }} RP/Min</span>
+                    </li>
+                    <li>
+                        <div class="rating">
+                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -93,7 +98,7 @@
         
         {% include 'RaykuPageBundle:Page:notification-modal.html.twig' %}
 
-		<!--
+		
         <div class="row public-profile-sections">
             <div class="large-12 columns">
                 <div class="section-container tabs" data-section="tabs">
@@ -158,7 +163,7 @@
                     </div>
                 </div>
             </div>
-        </div>//-->
+        </div>
         </div>
     </div>
 {% endblock %}

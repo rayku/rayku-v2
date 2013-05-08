@@ -60,5 +60,5 @@ class PageController extends Controller
 		}
 		
 		return $this->render('RaykuPageBundle:Page:dashboard.html.twig', $view);
-	}	
+	}
 }

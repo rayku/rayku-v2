@@ -50,7 +50,7 @@
                 <h5>{{ entity.user.username }}</h5>
             </div>
             <div class="large-3 columns user-profile-image">
-                <img src="{{ entity.user.imagePath }}" style="height:150px">
+                <img src="{{ entity.user.imagePath }}" style="height:200px">
             </div>  
             <div class="large-9 columns user-profile-info">
                 <ul class="user-profile-items">
@@ -108,26 +108,18 @@
                         <p class="title" data-section-title><a href="#panel2">Reviews</a></p>
                         <div class="content" data-slug="panel2" data-section-content>
                             <ul>
-                                <li>
+                                {% for review in entity.user.tutor.reviews %}
+                                    <li>
                                     <div class="row">
                                         <div class="large-12 columns">
-                                            <h6>Fran Ken Stein Says</h6>
+                                            <h6>{{ review.reviewer }} Says</h6>
                                         </div>
                                         <div class="large-12 columns">
-                                            <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+                                            <p>"{{ review.review }}"</p>
                                         </div>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="large-12 columns">
-                                            <h6>Nick Agopoulos Says</h6>
-                                        </div>
-                                        <div class="large-12 columns">
-                                            <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
-                                        </div>
-                                    </div>
-                                </li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </section>

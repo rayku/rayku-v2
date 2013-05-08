@@ -356,27 +356,26 @@
 
 {% if ratesessionform is defined %}
 	<div id="referFriend" class="reveal-modal medium">
-	    <div class="row">
-	        <div class="large-12 columns">
-	            <h3>Refer a Friend</h3>
-	        </div>
-	    </div>
-	    <div class="row">
+		<div class="row registration-header">
+        	<h2>Refer a Friend</h2>
+		</div>
+	    <div class="row registration-body">
 			<div class="large-12 columns">
 				You can get extra Rayku Points by inviting your friends to try out Rayku. If a friend uses your invitation to sign up for an account you will receive 200 Rayku Points and your friend receives 500 Rayku points.</br><br/>
 				
-				http://www.rayku.com/?refcode={{ user.referralCode }}
+				<input type="text" value="http://www.rayku.com/?refcode={{ user.referralCode }}" /><br /><br />
+
+				<a href="#"><img src="https://secure.citizensforethics.org/page/-/images/buttons/btn_fb_55px.gif" /></a>
 			</div>
 		</div>
 		<a class="close-reveal-modal">×</a>
 	</div>
 	
 	<div id="rateTutorModal" class="reveal-modal medium rateTutor">
-	    <div class="row">
-	        <div class="large-12 columns">
-	            <h3>Rate Your Tutor</h3>
-	        </div>
-	    </div>
+		<div class="row registration-header">
+        	<h2>Rate Your Tutor</h2>
+		</div>
+		<div class="row registration-body">
 	    <div class="large-12 columns rate-tutors">
 	        <form id="rateTutorForm" class="custom" name="rate-tutor" action="{{ path('post_session_rate', {'session': session.id}) }}" method="post">
 	            <div class="row">
@@ -402,7 +401,7 @@
 	                </div>
 	            </div>
 	        </form>
-	    </div>
+	    </div></div>
 	</div>
 	
 	<script type="text/javascript">

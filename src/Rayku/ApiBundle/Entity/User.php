@@ -33,6 +33,11 @@ class User extends BaseUser
 	private $tutor;
 	
 	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $image_path;
+	
+	/**
 	 * @var integer
 	 * 
 	 * @ORM\Column(name="points", type="integer", nullable=false)
@@ -607,5 +612,28 @@ class User extends BaseUser
     public function getSignupQuestion()
     {
         return $this->signup_question;
+    }
+    
+    /**
+     * Set image_path
+     *
+     * @param string $imagePath
+     * @return User
+     */
+    public function setImagePath($imagePath)
+    {
+        $this->image_path = $imagePath;
+    
+        return $this;
+    }
+
+    /**
+     * Get image_path
+     *
+     * @return string 
+     */
+    public function getImagePath()
+    {
+        return $this->image_path;
     }
 }

@@ -92,6 +92,12 @@ class Tutor
      * @ORM\Column(name="busy", type="datetime", nullable=true)
      */
     private $busy;
+    
+
+    /**
+     * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Review", mappedBy="tutor")
+     **/
+    private $reviews;
 
     /**
      * @var \DateTime
@@ -517,5 +523,38 @@ class Tutor
     public function getBusy()
     {
         return $this->busy;
+    }
+
+    /**
+     * Add reviews
+     *
+     * @param \Rayku\ApiBundle\Entity\Review $reviews
+     * @return Tutor
+     */
+    public function addReview(\Rayku\ApiBundle\Entity\Review $reviews)
+    {
+        $this->reviews[] = $reviews;
+    
+        return $this;
+    }
+
+    /**
+     * Remove reviews
+     *
+     * @param \Rayku\ApiBundle\Entity\Review $reviews
+     */
+    public function removeReview(\Rayku\ApiBundle\Entity\Review $reviews)
+    {
+        $this->reviews->removeElement($reviews);
+    }
+
+    /**
+     * Get reviews
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
     }
 }

@@ -439,8 +439,10 @@ class Session
     	
     	$busy = new \DateTime();
     	
-    	// Mark tutors that don't respond to tutoring requests as busy
-    	$busy->modify('+40 minutes');
+    	// If a tutor accepted the session mark everyone as available otherwise mark tutors that don't respond to tutoring requests as busy
+    	if(null === $this->getSelectedTutor()){
+	    	$busy->modify('+10 minutes');
+    	}
     	foreach($this->getPotentialTutors() as $potential_tutor)
     	{
     		if(in_array($potential_tutor->getTutorReply(), array('pending', 'contacted gtalk'))){

@@ -1100,7 +1100,7 @@ form.registration-form label{
 	font-size: 13px;
 	margin-bottom: 5px; 
 }
-form.registration-form input[type="text"], form.registration-form input[type="password"]{
+form.registration-form input{
 	padding: 10px;
 	height: 40px;
 	border-radius: 3px;

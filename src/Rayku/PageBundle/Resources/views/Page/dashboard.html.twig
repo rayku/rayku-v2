@@ -7,55 +7,14 @@
 
 {% block content %}
 <div class="dashboard">
-    <div id="regModal" class="reveal-modal medium">
-        <div class="row registration-header">
-            <h2>Signup to get started with Rayku</h2>
-        </div>
-        <div class="row registration-body">
-            <form class="custom registration-form">
-                <div class="row">
-                    <div class="large-6 columns">
-                        <label>First Name</label>
-                        <input type="text" placeholder="John">
-                    </div>
-                    <div class="large-6 columns">
-                        <label>Last Name</label>
-                        <input type="text" placeholder="Smith">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-12 columns">
-                        <label>Username</label>
-                        <input type="text" placeholder="Username">
-                    </div>
-                    <div class="large-12 columns">
-                        <label>Email</label>
-                        <input type="text" placeholder="John@example.com">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-6 columns">
-                        <label>Password</label>
-                        <input type="password">
-                    </div>
-                    <div class="large-6 columns">
-                        <label>Confirm Password</label>
-                        <input type="password">
-                    </div>
-                </div>
-                <div class="row registration-check">
-                    <div class="large-12 columns">
-                        <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;" CHECKED><span class="custom checkbox checked"></span> I agree to the <a href=#>Terms of Service</a> and <a href=#>Privacy Policy</a></label>
-                    </div>
-                </div>
-                <div class="row registration-footer">
-                    <div class="large-3 large-offset-8 columns">
-                        <input type="submit" class="bbutton" value="Create your account">
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+	{% if user.id is defined %}
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#regModal').foundation('reveal', 'open');
+			});
+		</script>
+		{% include 'RaykuPageBundle:Page:registration_modal.html.twig' with {'form': registrationform} %}
+	{% endif %}
     <!--Sidebar-->
 		<div class="large-3 columns sidebar">
     		<div class="row tutor-sidebar">
@@ -346,12 +305,6 @@
 	{% render url('rayku_tutor_new') %}
 
 	{% include 'RaykuPageBundle:Page:notification-modal.html.twig' %}
-{% else %}
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('#regModal').foundation('reveal', 'open');
-		});
-	</script>
 {% endif %}
 
 {% if ratesessionform is defined %}

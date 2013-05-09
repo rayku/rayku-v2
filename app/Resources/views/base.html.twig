@@ -30,6 +30,9 @@
 		{% endblock %}
 	</head>
 	<body>
+	<!-- Optimizely // -->
+	<script src="//cdn.optimizely.com/js/226930245.js"></script>
+	
 	{% block body %}
     {% block header %}
     <header>
@@ -110,6 +113,9 @@
         <script>
             $(document).foundation();
         </script>
+        
+        {% include "::ClickTale.html.twig" %}
+        
     {% endblock %}
     {% endblock body %}
     

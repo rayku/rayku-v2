@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Session\Session as PHPSession;
 use Rayku\ApiBundle\Form\UserType;
 use Rayku\ApiBundle\Form\UserSettingType;
 use Rayku\ApiBundle\Form\RateSessionType;
+use Rayku\UserBundle\Form\Type\RegistrationAndProfileFormType;
 use Rayku\ApiBundle\Entity\Session;
 use Rayku\ApiBundle\Entity\User;
 use Rayku\ApiBundle\Entity\Tutor;
@@ -54,8 +55,10 @@ class PageController extends Controller
 	
 	public function dashboardAction($id = NULL)
 	{
-		if($this->getRequest()->isMethod('POST')){
-			$view['user'] = new User();
+		if($this->getRequest()->isMethod('POST') && null == $this->getUser()){
+			$user = new User();
+			$view['user'] = $user;
+			$view['registrationform'] = $this->createForm(new RegistrationAndProfileFormType(get_class($user)))->createView();
 			$this->get('session')->set('question', $this->getRequest()->get('question'));
 		}else if(false === $this->get('security.context')->isGranted('ROLE_USER')){
 			throw new AccessDeniedException();

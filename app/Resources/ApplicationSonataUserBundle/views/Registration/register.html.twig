@@ -1,7 +1,6 @@
 {% extends app.request.attributes.get('_route') == '_internal' ? "::empty.html.twig" : "::base.html.twig" %}
 
 {% block body %}
-	<script src="//cdn.optimizely.com/js/226930245.js"></script>
 	{% if app.request.attributes.get('_route') == '_internal' %}
 		<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
 			<p>
@@ -81,7 +80,5 @@
 	
 	{% block javascripts %}
 		{{ parent() }}
-		
-		{% include "::ClickTale.html.twig" %}
 	{% endblock %}
 {% endblock %}

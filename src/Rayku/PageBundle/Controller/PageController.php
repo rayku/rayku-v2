@@ -57,9 +57,10 @@ class PageController extends Controller
 	{
 		if($this->getRequest()->isMethod('POST') && null == $this->getUser()){
 			$user = new User();
+			$user->setSignupQuestion($this->getRequest()->get('question'));
+			$user->setFirstName('');
 			$view['user'] = $user;
-			$view['registrationform'] = $this->createForm(new RegistrationAndProfileFormType(get_class($user)))->createView();
-			$this->get('session')->set('question', $this->getRequest()->get('question'));
+			$view['registrationform'] = $this->createForm(new RegistrationAndProfileFormType(get_class($user)), $user)->createView();
 		}else if(false === $this->get('security.context')->isGranted('ROLE_USER')){
 			throw new AccessDeniedException();
 		}else{

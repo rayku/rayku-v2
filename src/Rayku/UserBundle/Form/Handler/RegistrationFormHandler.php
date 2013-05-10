@@ -73,8 +73,20 @@ class RegistrationFormHandler extends BaseHandler
         $this->referralReferralReward = $referralreferralReward;
         $this->em = $em;
     }
+    
+    public function setForm(FormInterface $form)
+    {
+    	$this->form = $form;
+    	
+    	return $this;
+    }
 
 	protected function onSuccess(UserInterface $user, $confirmation)
+	{
+		$this->processReferral($user, $confirmation);
+	}
+	
+	public function processReferral(UserInterface $user, $confirmation)
 	{
 		if($user instanceof \Rayku\ApiBundle\Entity\User){
 			// Setting parent user

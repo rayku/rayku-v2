@@ -1,0 +1,67 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#regModal').foundation('reveal', 'open');
+		var options = { 
+			error: function(response, status, err){
+				var responseJson = $.parseJSON(response.responseText);
+					for(field in responseJson.errors){
+						$("label[for='"+field+"']").addClass('error');
+						$("#"+field).after('<small class="error field_error">'+responseJson.errors[field]+'</small>');
+					}
+				},
+			success: function(response){
+				window.location.replace(response.redirect);
+			}
+		};
+		$('#user_register_form').ajaxForm(options)
+		
+	});
+</script>
+
+
+<div id="regModal" class="reveal-modal medium">
+    <div class="row registration-header">
+        <h2>Signup to get started with Rayku</h2>
+    </div>
+    <div class="row registration-body">
+        <form action="{{ path('post_users_registration') }}" {{ form_enctype(form) }} method="POST" class="custom registration-form" id="user_register_form">
+            <div class="row">
+                <div class="large-6 columns">
+                    {{ form_row(form.first_name) }}
+                </div>
+                <div class="large-6 columns">
+					{{ form_row(form.last_name) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+					{{ form_row(form.username) }}
+                </div>
+                <div class="large-12 columns">
+					{{ form_row(form.email) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-6 columns">
+                    {{ form_row(form.plainPassword.first) }}
+                </div>
+                <div class="large-6 columns">
+					{{ form_row(form.plainPassword.second) }}
+                </div>
+            </div>
+            <!--
+            <div class="row registration-check">
+                <div class="large-12 columns">
+                    <label for="checkbox1"><input name="checkbox1" type="checkbox" id="checkbox1" style="display:none;" CHECKED><span class="custom checkbox checked"></span> I agree to the <a href=#>Terms of Service</a> and <a href=#>Privacy Policy</a></label>
+                </div>
+            </div>
+            //-->
+            <div class="row registration-footer">
+                <div class="large-3 large-offset-8 columns">
+                	{{ form_rest(form) }}
+                    <input type="submit" class="bbutton" value="Create your account">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

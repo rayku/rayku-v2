@@ -26,7 +26,7 @@ class SessionType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Rayku\ApiBundle\Entity\Session',
         	'csrf_protection' => false
-        ));
+       ));
     }
 
     public function getName()

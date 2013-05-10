@@ -156,8 +156,3 @@ services:
 jms_security_extra:
     expressions: true
 
-sonata_user:
-    security_acl: false
-    manager_type: orm
-    class:
-        user:  Rayku\ApiBundle\Entity\User

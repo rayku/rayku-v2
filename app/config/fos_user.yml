@@ -8,8 +8,8 @@ fos_user:
     from_email:
         address:  noreply@rayku.com
         sender_name: Rayku
-    group:
-        group_class: Rayku\ApiBundle\Entity\Group
+    #group:
+        #group_class: Rayku\ApiBundle\Entity\Group
     registration:
         #confirmation:
             #enabled:  true

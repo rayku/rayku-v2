@@ -48,9 +48,7 @@ class AppKernel extends Kernel
         	new Sonata\jQueryBundle\SonatajQueryBundle(),
         	new Sonata\AdminBundle\SonataAdminBundle(),
         	new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
-        	new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
         	new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
-        	new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
 
             // Enable this if you want to audit backend action
             new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),

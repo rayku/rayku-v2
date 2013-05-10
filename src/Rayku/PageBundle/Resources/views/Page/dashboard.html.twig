@@ -7,12 +7,7 @@
 
 {% block content %}
 <div class="dashboard">
-	{% if user.id is defined %}
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$('#regModal').foundation('reveal', 'open');
-			});
-		</script>
+	{% if user.id is null %}
 		{% include 'RaykuPageBundle:Page:registration_modal.html.twig' with {'form': registrationform} %}
 	{% endif %}
     <!--Sidebar-->

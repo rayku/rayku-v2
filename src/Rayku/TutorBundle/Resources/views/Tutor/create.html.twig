@@ -2,19 +2,23 @@
 
 {% block content %}
 <div id="myTutorModal" class="reveal-modal medium">
-  <h2>Complete Your Tutor Profile</h2>
-  <div class="large-12 columns">
+  <div class="row registration-header">
+    <h2>Tutor Profile</h2>
+  </div>
+  <div class="row registration-body">
     <p>Before activating your tutor status, please fill out as much as possible to completeyour tutor profile.</p>
   </div>
   <div class="large-12 columns">
     <form class="custom" action="{{ path('post_tutors') }}" method="post" {{ form_enctype(form) }} id="tutor_save_form">
       <div class="row">
+        <!-- todo fix foundation radio button select
         <div class="row subjects">
           <div class="large-12 columns">
-            {{ form_label(form.subjects) }}
+            {{ form_label(form.subjects) }}	
             {{ form_widget(form.subjects) }}
           </div>
         </div>
+        //-->
         <div class="row describes">
           <div class="large-12 columns">
             {{ form_label(form.schoolAmount) }}
@@ -46,8 +50,17 @@
             {{ form_widget(form.gtalk_email) }}
           </div>
         </div>
+        <div class="row degree">
+          <div class="large-12 columns">
+            <label style="width:110px; float:left; height:1px" for="visible" class="required hast-tip" data-tooltip 
+            	title="You can only be connected with directly through your tutor profile page">Direct Connect Only
+            </label>
+            {{ form_widget(form.direct_connect, { 'attr': {"data-customforms": "disabled"} }) }}
+          </div>
+        </div>
         <div class="row listing-preview">
           <div class="large-12 columns">
+          	<br />
             <label>Listing Preview</label>
             <p>(When students search for tutors, you will appear as):</p>
             <p class="preview"><span class="schoolAmount">Under Graduate Degree Holder</span> From <span class="schoolName">Ryerson University</span> - Economics</p>

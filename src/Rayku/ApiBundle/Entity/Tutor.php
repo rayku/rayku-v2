@@ -30,6 +30,13 @@ class Tutor
     private $id;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="direct_connect_only", type="boolean")
+     */
+    private $direct_connect;
+    
+    /**
      * @var string
      *
      * @Assert\NotBlank
@@ -556,5 +563,28 @@ class Tutor
     public function getReviews()
     {
         return $this->reviews;
+    }
+
+    /**
+     * Set direct_connect
+     *
+     * @param boolean $directConnect
+     * @return Tutor
+     */
+    public function setDirectConnect($directConnect)
+    {
+        $this->direct_connect = $directConnect;
+    
+        return $this;
+    }
+
+    /**
+     * Get direct_connect
+     *
+     * @return boolean 
+     */
+    public function getDirectConnect()
+    {
+        return $this->direct_connect;
     }
 }

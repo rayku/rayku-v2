@@ -82,12 +82,12 @@ class UserController extends Controller
 	 */
 	public function getUsersAction()
 	{
-		throw new Exception('not implemented');
+		throw new \Exception('not implemented');
 	}
 	
 
 	/**
-	 * @View()
+	 * @View(serializerGroups={"user.view"})
 	 * @ApiDoc(
 	 *   statusCodes={
 	 *     200="Returned when successful"

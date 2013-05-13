@@ -4,6 +4,8 @@ namespace Rayku\ApiBundle\Entity;
 
 use Symfony\Component\Validator\Constraints\True;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use JMS\Serializer\Annotation as Serializer;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
@@ -14,6 +16,9 @@ use Sonata\UserBundle\Entity\BaseUser as BaseUser;
  * @ORM\Table(name="fos_user_user",uniqueConstraints={@ORM\UniqueConstraint(name="tutor_idx", columns={"tutor_id"})})
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
+ * @Serializer\AccessorOrder("alphabetical")
+ * @UniqueEntity(fields={"username"}, groups={"registration"}, message="This username has been taken")
+ * @UniqueEntity(fields={"email"}, groups={"registration"}, message="This email address has already been registered")
  */
 class User extends BaseUser
 {
@@ -21,6 +26,7 @@ class User extends BaseUser
 	 * @ORM\Id
 	 * @ORM\Column(type="integer")
 	 * @ORM\GeneratedValue(strategy="AUTO")
+	 * @Serializer\Groups({"list", "user.view"})
 	 */
 	protected $id;
 	
@@ -29,6 +35,7 @@ class User extends BaseUser
 	 *
 	 * @ORM\OneToOne(targetEntity="\Rayku\ApiBundle\Entity\Tutor", cascade={"persist"})
 	 * @ORM\JoinColumn(name="tutor_id", referencedColumnName="id")
+	 * @Serializer\Groups({"user.view"})
 	 */
 	private $tutor;
 	
@@ -39,7 +46,6 @@ class User extends BaseUser
 	
 	/**
 	 * @var integer
-	 * 
 	 * @ORM\Column(name="points", type="integer", nullable=false)
 	 */
 	private $points = 500;
@@ -49,6 +55,7 @@ class User extends BaseUser
 	 *
 	 * @ORM\Column(name="fname", type="string", length=255, nullable=false)
 	 * @Assert\NotBlank(groups={"registration"})
+	 * @Serializer\Groups({"list", "user.view"})
 	 */
 	private $first_name = 'First Name';
 	
@@ -57,6 +64,7 @@ class User extends BaseUser
 	 *
 	 * @ORM\Column(name="lname", type="string", length=255, nullable=false)
 	 * @Assert\NotBlank(groups={"registration"})
+	 * @Serializer\Groups({"list", "user.view"})
 	 */
 	private $last_name = 'Last Name';
 	
@@ -64,6 +72,7 @@ class User extends BaseUser
 	 * @var string
 	 * 
 	 * @ORM\Column(name="referral_code", type="string", length=255, nullable=true)
+	 * @Serializer\Groups({"user.view"})
 	 */
 	private $referral_code;
 	
@@ -91,6 +100,7 @@ class User extends BaseUser
 	 * @var string
 	 *
 	 * @ORM\Column(name="signup_question", type="string", length=255, nullable=true)
+	 * @Serializer\Groups({"user.view"})
 	 */
 	private $signup_question;
 	
@@ -99,6 +109,7 @@ class User extends BaseUser
 	 *
 	 * @ORM\Column(name="school", type="string", length=255, nullable=false)
 	 * @Assert\NotBlank()
+	 * @Serializer\Groups({"user.view"})
 	 */
 	private $school = 'School';
 	
@@ -107,6 +118,7 @@ class User extends BaseUser
 	 *
 	 * @ORM\Column(name="school_year", type="string", length=255, nullable=false)
 	 * @Assert\NotBlank()
+	 * @Serializer\Groups({"user.view"})
 	 */
 	private $grade = 'Level of Education';
 	
@@ -115,6 +127,7 @@ class User extends BaseUser
 	 *
 	 * @ORM\Column(name="degree", type="string", length=255, nullable=false)
 	 * @Assert\NotBlank()
+	 * @Serializer\Groups({"user.view"})
 	 */
 	private $degree = 'Degree';
 	
@@ -123,6 +136,7 @@ class User extends BaseUser
 	 *
 	 * @ORM\Column(name="about", type="string", length=255, nullable=false)
 	 * @Assert\NotBlank()
+	 * @Serializer\Groups({"user.view"})
 	 */
 	private $bio = 'Short Bio';
 	

@@ -47,6 +47,10 @@ class TutorType extends AbstractType
             ))
             ->add('gtalk_email', NULL, array(
             	'label' => 'Connect Your Google Talk'
+            ))
+            ->add('direct_connect', NULL, array(
+            	'label' => 'Direct Connect Only',
+            	'required' => false
             )
         );
     }

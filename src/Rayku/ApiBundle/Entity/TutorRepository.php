@@ -23,9 +23,11 @@ class TutorRepository extends EntityRepository
 				$qb->expr()->lt('t.busy', ':expire_online'),
 				't.busy IS NULL'
 			))
+			->andWhere('t.direct_connect = :direct_connect')
 			->andWhere('t.user <> :user_id')
 			->setParameter('expire_online', date("Y-m-d H:i:s", strtotime($expire_online)))
 			->setParameter('user_id', $user_id)
+			->setParameter('direct_connect', 0)
 			->getQuery();
 		
 		return $query->getResult();

@@ -129,14 +129,14 @@
         }).end();
       };
 
-      objPos(tip, (target.offset().top + this.outerHeight(target) + 10), 'auto', 'auto', target.offset().left, width);
+      objPos(tip, (target.offset().top + this.outerHeight(target) - 15), 'auto', 'auto', target.offset().left, width);
 
       if ($(window).width() < 767) {
-        objPos(tip, (target.offset().top + this.outerHeight(target) + 10), 'auto', 'auto', 12.5, $(this.scope).width());
+        objPos(tip, (target.offset().top + this.outerHeight(target) - 15), 'auto', 'auto', 12.5, $(this.scope).width());
         tip.addClass('tip-override');
         objPos(nub, -nubHeight, 'auto', 'auto', target.offset().left);
       } else {
-        objPos(tip, (target.offset().top + this.outerHeight(target) + 10), 'auto', 'auto', target.offset().left, width);
+        objPos(tip, (target.offset().top + this.outerHeight(target) - 15), 'auto', 'auto', target.offset().left, width);
         tip.removeClass('tip-override');
         if (classes && classes.indexOf('tip-top') > -1) {
           objPos(tip, (target.offset().top - this.outerHeight(tip)), 'auto', 'auto', target.offset().left, width)

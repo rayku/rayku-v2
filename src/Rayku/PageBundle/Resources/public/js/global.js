@@ -33,7 +33,7 @@ $(function(){
     });
     
     //Show dropdown navigation
-    $('a.logged-in-as').on('click',function(){
+    $('a.logged-in-as').on('mouseenter',function(){
             $('div.submenu').slideToggle(30);
         }
     );

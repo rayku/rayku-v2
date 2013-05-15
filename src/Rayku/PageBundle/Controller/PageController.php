@@ -50,11 +50,12 @@ class PageController extends Controller
 		$em->persist($session);
 		$em->flush();
 	
-		return $this->redirect('http://whiteboard.rayku.com/room/'.$session->getId().'/student');
+		return $this->redirect($this->container->getParameter('whiteboard_url').'/room/'.$session->getId().'/student');
 	}
 	
 	public function dashboardAction($id = NULL)
 	{
+		//\Doctrine\Common\Util\Debug::dump($this->container->parameters);
 		if($this->getRequest()->isMethod('POST') && null == $this->getUser()){
 			$user = new User();
 			$user->setSignupQuestion($this->getRequest()->get('question'));

@@ -1,4 +1,6 @@
 parameters:
+    whiteboard_url:    http://whiteboard.rayku.local:8080
+
     database_driver:   pdo_mysql
     database_host:     localhost
     database_name:     rayku_v2
@@ -6,9 +8,9 @@ parameters:
     database_password: abc123
 
     mailer_transport:   smtp
-    mailer_host:        localhost
-    mailer_user:
-    mailer_password:
+    mailer_host:        smtp.sendgrid.net
+    mailer_user:        rayku
+    mailer_password:    bghtyu123
 
     locale:             en
 

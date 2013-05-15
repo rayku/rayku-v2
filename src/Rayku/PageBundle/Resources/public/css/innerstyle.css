@@ -44,11 +44,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#565656', end
 	-webkit-box-shadow:0px 0px 10px rgba(10, 10, 10, 0.5);
 	-moz-box-shadow:0px 0px 10px rgba(10, 10, 10, 0.5);
 	box-shadow:0px 0px 10px rgba(10, 10, 10, 0.5);
-	z-index: 1;
+	z-index: 2040;
 	position: fixed;
 	top:0;
 	left: 0;
 	width: 100%;
+}
+.header-bg{
+	background: rgb(86,86,86); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(86,86,86,1) 0%, rgba(33,33,33,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(86,86,86,1)), color-stop(100%,rgba(33,33,33,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(86,86,86,1) 0%,rgba(33,33,33,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(86,86,86,1) 0%,rgba(33,33,33,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(86,86,86,1) 0%,rgba(33,33,33,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(86,86,86,1) 0%,rgba(33,33,33,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#565656', endColorstr='#212121',GradientType=0 ); /* IE6-9 */
 }
 
 .home header {
@@ -82,11 +92,6 @@ header nav a{
 	-o-transition: all ease-in-out 0.4s;
 	transition: all ease-in-out 0.4s;
 }
-header nav a.logged-in-as{
-	padding-bottom: 15px;
-	color: rgba(221, 221, 221, 1);
-	margin-left: 0px;
-}
 
 header nav a.logged-in-as {
     
@@ -116,8 +121,11 @@ header nav a.logged-in-as {
     font-size:12px;
     font-weight:500;
     padding:6px 20px;
+    padding-left: 15px;
+    padding-bottom: 9px;
+    margin-top: 12px;
     text-decoration:none;
-    
+    width:175px;
     text-shadow:0px 1px 0px #ffffff;
     
 }
@@ -137,12 +145,24 @@ header nav a.logged-in-as:active {
     position:relative;
     top:1px;
 }
+.arrow-down {
+	width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 5px solid rgba(121, 121, 121, 1);
+	position: relative;
+	margin-top: -9px;
+	margin-left: 138px;
+}
 header nav a.rayku-points:hover{
 	color:rgba(0, 0, 0, 1);
 	text-decoration: none;
 	text-shadow: 0px 0px 5px rgba(10, 10, 10, 0.3);
 }
 header nav a.notification{
+	position: relative;
+	top:-7px;
 	font-size: 28px; 
 	padding:12px 5px;
 	color: rgba(221, 221, 221, 1);
@@ -204,12 +224,12 @@ header nav a.notification:hover{
 
 ul.submenu-item{
 	position: relative;
-	top:11px;
+	top:3px;
 	background: rgba(255, 255, 255, 1);
 	list-style-type: none;
 	box-shadow: 0 0 8px rgba(10, 10, 10, 0.2);
 	padding:0;
-	padding-bottom: 10px;
+	padding-bottom: 5px;
 	border-bottom-left-radius: 3px;
 	border-bottom-right-radius: 3px;
 }
@@ -1181,4 +1201,51 @@ form.registration-form input{
 .rating > span:hover ~ span:before {
    content: "\2605";
    position: absolute;
+}
+
+/* ADDITIONAL STYLES */ 
+a.direct-connect{
+	margin-top: 4px;
+	height: 26px;
+}
+a.direct-connect:hover{
+	text-decoration: none;
+	color: #fff;
+}
+
+#whiteboard{
+	position: absolute;
+	top:-50px;
+	left:0;
+	margin: 0;
+	padding: 0;
+	display: none;
+	width: 100%;
+	min-height: 100%; 
+   	height:auto !important; 
+   	overflow: hidden;
+   	z-index: 1040;
+}
+#whiteboard iframe{
+	width: 100%;
+	min-height: 100%; 
+   	height:auto !important; 
+}
+
+#whiteboard-header{
+	position: absolute;
+	top:5px;
+	left:45px;
+	z-index: 1040;
+}
+#whiteboard-header a.bbutton{
+	height: 26px;
+}
+#whiteboard-header a{
+	font-size: 12px;
+	padding:4px;
+}
+#whiteboard-header a:hover{
+	text-decoration: none;
+	color:#fff;
 }

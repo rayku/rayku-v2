@@ -137,7 +137,7 @@ class SessionController extends Controller
 		
 		return array(
 			'success' => true,
-			'redirect' => 'http://whiteboard.rayku.com/room/'.$session->getId().'/tutor'
+			'redirect' => $this->container->getParameter('whiteboard_url').'/room/'.$session->getId().'/tutor'
 		);
 	}
 	
@@ -239,8 +239,7 @@ class SessionController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($session);
 			$em->flush();
-			return array('success' => true, 'redirect' => 'http://whiteboard.rayku.com/room/'.$session->getId().'/student');
-			return $this->redirect('http://whiteboard.rayku.com/room/'.$session->getId().'/student');
+			return array('success' => true, 'redirect' => $this->redirect($this->container->getParameter('whiteboard_url').'/room/'.$session->getId().'/student');
 		}
 		return $form;
 	}

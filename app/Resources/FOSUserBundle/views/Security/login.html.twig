@@ -40,11 +40,11 @@
     <div class="login-modal-divider1">
     </div>
     <div class="row forgot-email-form">
-        <form action="" method="post">
+        <form action="{{ path('fos_user_resetting_send_email') }}" method="post">
             <div class="row">
                 <div class="large-12 columns">
                     <label class="login-label">Forgot Password</label>
-                    <input class="login-input" type="text" placeholder="Enter your e-mail and we'll send it along..." required>
+                    <input class="login-input" name="username" type="text" placeholder="Enter your Username" required>
                     <input type="submit" class="abutton submit-button"/>
                 </div>
             </div>

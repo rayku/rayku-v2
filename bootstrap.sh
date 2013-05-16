@@ -16,17 +16,25 @@ fi
 ln -s /var/rayku/web /var/www
 
 if [ -d "/var/log/rayku" ]; then
-    mkdir /var/log/rayku
+    sudo mkdir /var/log/rayku
+    sudo chmod 777 /var/log/rayku
 fi
-sudo chmod 777 /var/log/rayku
 
 if [ -d "/tmp/cache/rayku" ]; then
-    mkdir /tmp/cache/rayku
+    sudo mkdir /tmp/cache/rayku
+    sudo chmod 777 /tmp/cache/rayku
 fi
-sudo chmod 777 /tmp/cache/rayku
+
+sudo cp /var/rayku/default /etc/apache2/sites-available
+sudo a2enmod rewrite
+sudo service apache2 restart
 
 sudo curl -s https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 cd /var/rayku; COMPOSER_PROCESS_TIMEOUT=2400 composer -v update
 cd /var/rayku; php app/console doctrine:database:create
+if [ ! -f "~/dataimportdone" ]; then
+	mysql -u root -pabc123 rayku_v2 < /var/rayku/rayku.dump.sql
+	touch ~/dataimportdone
+fi
 cd /var/rayku; php app/console doctrine:schema:update --force

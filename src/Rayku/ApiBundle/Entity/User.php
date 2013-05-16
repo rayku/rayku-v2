@@ -6,6 +6,7 @@ use Symfony\Component\Validator\Constraints\True;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
@@ -38,11 +39,6 @@ class User extends BaseUser
 	 * @Serializer\Groups({"user.view"})
 	 */
 	private $tutor;
-	
-	/**
-	 * @ORM\Column(type="string", length=255, nullable=true)
-	 */
-	private $image_path;
 	
 	/**
 	 * @var integer
@@ -164,6 +160,92 @@ class User extends BaseUser
 	 * @ORM\Column(name="auto_login_expire", type="datetime", nullable=true)
 	 */
 	protected $autoLoginExpire;
+	
+	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $path;
+	
+	/**
+	 * @Assert\File(maxSize="6000000")
+	 */
+	private $file;
+	
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+        // check if we have an old image path
+        if (isset($this->path)) {
+            // store the old name to delete after the update
+            $this->temp = $this->path;
+            $this->path = null;
+        } else {
+            $this->path = 'initial';
+        }
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+    	if (null !== $this->getFile()) {
+    		// do whatever you want to generate a unique name
+    		$filename = sha1(uniqid(mt_rand(), true));
+    		$this->path = $filename.'.'.$this->getFile()->guessExtension();
+    	}
+    }
+    
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+    	if (null === $this->getFile()) {
+    		return;
+    	}
+    
+    	// if there is an error when moving the file, an exception will
+    	// be automatically thrown by move(). This will properly prevent
+    	// the entity from being persisted to the database on error
+    	$this->getFile()->move($this->getUploadRootDir(), $this->path);
+    
+    	// check if we have an old image
+    	if (isset($this->temp)) {
+    		// delete the old image
+    		unlink($this->getUploadRootDir().'/'.$this->temp);
+    		// clear the temp image path
+    		$this->temp = null;
+    	}
+    	$this->file = null;
+    }
+    
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload()
+    {
+    	if ($file = $this->getAbsolutePath()) {
+    		unlink($file);
+    	}
+    }
+    
+	/**
+	 * Get file.
+	 *
+	 * @return UploadedFile
+	 */
+	public function getFile()
+	{
+		return $this->file;
+	}
 	
     /**
      * Get id
@@ -628,26 +710,54 @@ class User extends BaseUser
         return $this->signup_question;
     }
     
+    public function getAbsolutePath()
+    {
+    	return null === $this->getPath()
+    		? null
+    		: $this->getUploadRootDir().'/'.$this->getPath();
+    }
+    
+    public function getWebPath()
+    {
+    	return null === $this->getPath()
+    		? null
+    		: $this->getUploadDir().'/'.$this->getPath();
+    }
+    
+    protected function getUploadRootDir()
+    {
+    	// the absolute directory path where uploaded
+    	// documents should be saved
+    	return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+    
+    protected function getUploadDir()
+    {
+    	// get rid of the __DIR__ so it doesn't screw up
+    	// when displaying uploaded doc/image in the view.
+    	return 'uploads/users';
+    }
+
     /**
-     * Set image_path
+     * Set path
      *
-     * @param string $imagePath
+     * @param string $path
      * @return User
      */
-    public function setImagePath($imagePath)
+    public function setPath($path)
     {
-        $this->image_path = $imagePath;
+        $this->path = $path;
     
         return $this;
     }
 
     /**
-     * Get image_path
+     * Get path
      *
      * @return string 
      */
-    public function getImagePath()
+    public function getPath()
     {
-        return $this->image_path;
+        return $this->path;
     }
 }

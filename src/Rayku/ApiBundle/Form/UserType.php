@@ -17,6 +17,7 @@ class UserType extends AbstractType
             ->add('grade')
             ->add('degree')
             ->add('bio')
+            ->add('file')
         ;
     }
 

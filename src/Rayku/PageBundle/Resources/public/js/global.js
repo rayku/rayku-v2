@@ -73,6 +73,7 @@ $(function(){
             $(this).hide();
             $('.done-button').show();
             $('a.edit-tool').show(100);
+            $('.picture-upload').show(100);
         }
     });
 
@@ -80,6 +81,7 @@ $(function(){
         if($(this).hasClass('done-button')){
             $('a.edit-tool').hide(100);
             $(this).hide();
+            $('.picture-upload').hide(100);
             $('.edit-button').show();
         }
     });
@@ -88,6 +90,7 @@ $(function(){
         event.preventDefault();
         $(this).siblings('form.user-profile-edit-form').hide(100);
         $(this).next('form.user-profile-edit-form').show(100);
+        $('.picture-upload').show(100);
     });
     $('a.close-edit').on('click', function(event){
         event.preventDefault();

@@ -81,7 +81,7 @@
                 </form>
             </div>
             <div class="large-3 columns user-profile-image">
-                <img src="{{ user.imagePath }}" style="height:200px">
+                <img src="/{{ user.webPath }}" style="height:200px">
             </div>  
             <div class="large-9 columns user-profile-info">
                 <ul class="user-profile-items">
@@ -127,37 +127,49 @@
                         <span>Degree:</span> <span class="degree edit">{{ user.degree }}</span>
                     </li>
                     {% if user.isTutor %}
-                    <li>
-                        <a href="#" class="raphael edit-tool">></a>
-                        <form class="user-profile-edit-form" name="bio">
-                            <label>About</label>
-                            <textarea class="form-field" name="current_bio">{{ user.bio }}</textarea>
-                            <input type="submit" class="bbutton" value="Save">
-                            <a href=# class="close-edit">x</a>
-                        </form>
-                        <span>About:</span> <span class="bio edit">{{ user.bio }}</span>
-                    </li>
-                    <li>
-                         <span class="tutor edit"><a class="public-tutor-link" href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></span>
-                    </li>
+	                    <li>
+	                        <a href="#" class="raphael edit-tool">></a>
+	                        <form class="user-profile-edit-form" name="bio">
+	                            <label>About</label>
+	                            <textarea class="form-field" name="current_bio">{{ user.bio }}</textarea>
+	                            <input type="submit" class="bbutton" value="Save">
+	                            <a href=# class="close-edit">x</a>
+	                        </form>
+	                        <span>About:</span> <span class="bio edit">{{ user.bio }}</span>
+	                    </li>
+	                    <li>
+	                         <span class="tutor edit"><a class="public-tutor-link" href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></span>
+	                    </li>
                     {% endif %}
                 </ul>
                 <ul class="user-profile-buttons">
                     <li><a href=# class="bbutton edit-button"><span class="raphael">></span>Edit Profile</a></li>
                     <li>
-                      <form name="master-form" method="post" class="user-profile-master-form" action="{{ path('post_users', {'user': user.id }) }}">
+                      <form name="master-form" method="post" class="user-profile-master-form" action="{{ path('post_users', {'user': user.id }) }}" {{ form_enctype(userform) }}>
                         {{ form_widget(userform.first_name) }}
                         {{ form_widget(userform.last_name) }}
                         {{ form_widget(userform.school) }}
                         {{ form_widget(userform.grade) }}
                         {{ form_widget(userform.degree) }}
                         {{ form_widget(userform.bio) }}
-                        {{ form_rest(userform) }}
+                        <div class="picture-upload" style="display:none; position:absolute; left:-390px">
+	                        {{ form_widget(userform.file, { 'attr' : { 'style':'visibility:hidden' } }) }}
+	                        <input type="button" id="photo-upload" value="Upload Photo!" class="bbutton" />
+	                        <script type="text/javascript">
+	                        	$(function(){
+	                        		$('#photo-upload').click(function(){
+	                        			$('#file').click();
+	                        		});
+	                        	})
+	                        </script>
+	                    </div>
+    	                {{ form_rest(userform) }}
                         <input type="submit" value="Done Editing" class="bbutton done-button">
                       </form>
                     </li>
                 </ul>
             </div>
+            
             <script>
             $(function(){
                 var change = 0;
@@ -299,7 +311,7 @@
 {% if user.id %}
 	{% render url('rayku_tutor_new') %}
 
-	{% include 'RaykuPageBundle:Page:notification-modal.html.twig' %}
+	{% include 'RaykuPageBundle:Page:notification_modal.html.twig' %}
 {% endif %}
 
 {% if ratesessionform is defined %}

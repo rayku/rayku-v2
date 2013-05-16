@@ -26,7 +26,7 @@ twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
     globals:
-        whiteboard_url: http://whiteboard.rayku.local
+        whiteboard_url: %whiteboard_url%
 
 # Assetic Configuration
 assetic:

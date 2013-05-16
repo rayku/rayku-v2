@@ -1213,7 +1213,7 @@ a.direct-connect:hover{
 	color: #fff;
 }
 
-#whiteboard{
+#whiteboard2{
 	position: absolute;
 	top:-50px;
 	left:0;
@@ -1226,7 +1226,7 @@ a.direct-connect:hover{
    	overflow: hidden;
    	z-index: 1040;
 }
-#whiteboard iframe{
+#whiteboard2 iframe{
 	width: 100%;
 	min-height: 100%; 
    	height:auto !important; 

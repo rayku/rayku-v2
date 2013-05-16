@@ -6,7 +6,7 @@
 			<p>
 				{{ form_widget(form.signup_question, { 'attr': {'placeholder': 'Describe what you need help with...', 'class': 'ask' } }) }}
 				{{ form_errors(form) }}
-				<input type="submit" value="Ask" name="question" />
+				<input type="submit" value="Ask" name="question" class="bbutton" />
 			</p>
 			<div id="signup-ask">
 				<div class="head"><a href="#" class="close ask-login-button">x</a><span>Please provide account information in order to continue</span> <a href="#" data-reveal-id="loginModal" class="right ask-login-button">Already have an account</a><div class="clear"></div></div>
@@ -32,7 +32,7 @@
 			    	</div>
 			    	<div class="large-6 columns submit">
 			    		{{ form_rest(form) }}
-			    		<input type="submit" value="Create an account and ask" />
+			    		<input type="submit" value="Create an account and ask" class="bbutton" />
 			    	</div>
 			    </div>
 			</div>
@@ -66,7 +66,7 @@
 					</li>
 					<li class="right submit">
 						{{ form_rest(form) }}
-						<input type="submit" value="Get Started" />
+						<input type="submit" value="Get Started"  class="bbutton" />
 					</li>
 				</ul>
 				<div class="clear"></div>

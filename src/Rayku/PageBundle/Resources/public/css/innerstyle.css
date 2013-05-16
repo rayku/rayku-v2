@@ -145,6 +145,17 @@ header nav a.logged-in-as:active {
     position:relative;
     top:1px;
 }
+.arrow-up {
+	width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid rgba(255, 255, 255, 1);
+	position: relative;
+	margin-top: -9px;
+	margin-bottom: 0px;
+	margin-left: 79px;
+}
 .arrow-down {
 	width: 0; 
 	height: 0; 
@@ -211,9 +222,10 @@ header nav a.notification:hover{
 .submenu{
 	position: absolute;
 	width:175px;
+	margin-top: 4px;
 	margin-left: 52px;
 	display: none;
-	z-index: 640;
+	z-index: 1;
 }
 .submenu-triangle { 
 	position: absolute;
@@ -224,14 +236,13 @@ header nav a.notification:hover{
 
 ul.submenu-item{
 	position: relative;
-	top:3px;
+	top:0px;
 	background: rgba(255, 255, 255, 1);
 	list-style-type: none;
 	box-shadow: 0 0 8px rgba(10, 10, 10, 0.2);
-	padding:0;
-	padding-bottom: 5px;
-	border-bottom-left-radius: 3px;
-	border-bottom-right-radius: 3px;
+	padding:5px 0px;
+	border-radius: 3px;
+	border-radius: 3px;
 }
 
 ul.submenu-item li{
@@ -1249,3 +1260,39 @@ a.direct-connect:hover{
 	text-decoration: none;
 	color:#fff;
 }
+
+/*Firefox Specific*/
+@-moz-document url-prefix() {
+	header nav a.notification{
+		position: relative;
+		top:0px;
+		font-size: 28px; 
+		padding:12px 5px;
+		color: rgba(221, 221, 221, 1);
+	}
+	.arrow-up {
+		width: 0; 
+		height: 0; 
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+		border-bottom: 5px solid rgba(255, 255, 255, 1);
+		position: relative;
+		margin-top: -9px;
+		margin-bottom: 0px;
+		margin-left: 79px;
+	}
+	.submenu{
+		margin-top: 12px;
+	}
+    ul.submenu-item{
+		position: relative;
+		top:0px;
+		background: rgba(255, 255, 255, 1);
+		list-style-type: none;
+		box-shadow: 0 0 8px rgba(10, 10, 10, 0.2);
+		padding:5px 0px;
+		border-bottom-left-radius: 3px;
+		border-bottom-right-radius: 3px;
+	}
+	.rating {
+		margin-left: 0;

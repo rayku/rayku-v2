@@ -34,7 +34,7 @@
         <div id="whiteboard-header">
             <a href=# class="logged-in-as bbutton home">Back Home</a>
         </div>
-        <iframe src="http://whiteboard.rayku.com/standalone" seamless></iframe>
+        <iframe src="http://whiteboard.rayku.local:8080/standalone" seamless></iframe>
     </div>
     <div class="container">
 	<!-- Optimizely // -->
@@ -49,7 +49,9 @@
             	<nav>
                 <a href=# class="notification" data-reveal-id="connectNotifModal"><span class="raphael">[</span><span class="notif-count">0</span></a>
                 <a href=# class="logged-in-as"><span class="liau">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</span> <div class="arrow-down"></div></a> 
+                
                 <div class="submenu" id="submenu">
+                    <div class="arrow-up"></div>
                     <ul class="submenu-item">
                         <li><a class="home" href=#><span class="raphael">L</span>Home</a></li>
                         {% if app.user.isTutor %}
@@ -57,7 +59,7 @@
                         {% endif %}
                         <li><a class="broadcast" href=#><span class="raphael">Æ</span>Broadcast Session</a></li>
                         <li><a class="settings" href=#><span class="raphael">`</span>Settings</a></li>
-                        <li><a class="whiteboard" href=#><span class="raphael">`</span>Show Whiteboard</a></li>
+                        <li><a class="whiteboard" href=#><span class="raphael">`</span>Go To Whiteboard</a></li>
                         <li><a class="logout" href="{{ path('fos_user_security_logout') }}"><span class="raphael">v</span>{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
                     </ul>
                 </div>

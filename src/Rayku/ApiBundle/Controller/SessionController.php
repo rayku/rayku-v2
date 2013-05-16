@@ -239,7 +239,7 @@ class SessionController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($session);
 			$em->flush();
-			return array('success' => true, 'redirect' => $this->redirect($this->container->getParameter('whiteboard_url').'/room/'.$session->getId().'/student');
+			return array('success' => true, 'redirect' => $this->container->getParameter('whiteboard_url').'/room/'.$session->getId().'/student');
 		}
 		return $form;
 	}

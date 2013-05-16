@@ -9,7 +9,7 @@
         <form id="usersettingsForm" class="user-setting" method="POST" action="{{ path('post_users_profile', {'user': app.user.id}) }}">
             <div class="row">
                 <div class="large-3 columns">
-                    <label>Change Email</label>
+                    <label>Email</label>
                 </div>
                 <div class="large-8 columns">
                     {{ form_widget(usersettingform.email) }}
@@ -20,7 +20,7 @@
             </div>
             <div class="row">
                 <div class="large-3 columns">
-                    <label>Change Username</label>
+                    <label>Username</label>
                 </div>
                 <div class="large-8 columns">
                     {{ form_widget(usersettingform.username) }}

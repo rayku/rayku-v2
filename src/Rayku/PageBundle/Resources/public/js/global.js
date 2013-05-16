@@ -10,7 +10,7 @@ $(function(){
         });
         $('body').css('overflow', 'hidden');
         $('.main-header').fadeOut('fast');
-        $('#whiteboard').fadeIn('slow');
+        $('#whiteboard2').fadeIn('slow');
     });
     
     //Forgot password on login modal
@@ -40,7 +40,7 @@ $(function(){
         $settings.fadeOut('fast');
         $profile.delay(500).fadeIn('slow');
         $('.main-header').fadeIn('slow');
-        $('#whiteboard').fadeOut('slow');
+        $('#whiteboard2').fadeOut('slow');
         $('body').css('overflow', 'auto');
     });
     

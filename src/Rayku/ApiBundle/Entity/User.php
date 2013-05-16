@@ -728,7 +728,7 @@ class User extends BaseUser
     {
     	// the absolute directory path where uploaded
     	// documents should be saved
-    	return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    	return '/var/www/'.$this->getUploadDir();
     }
     
     protected function getUploadDir()

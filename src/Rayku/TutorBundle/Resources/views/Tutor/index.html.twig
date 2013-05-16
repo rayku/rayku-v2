@@ -4,7 +4,7 @@
   <h1 class="ribbon">
     <strong class="ribbon-content">Tutor List</strong>
   </h1>
-  <form action="{{path('post_session')}}" method="post" class="custom">
+  <form action="{{path('post_session')}}" method="post" class="custom" id="create_session">
   	<script type="text/javascript">
   		$('#question').val($('#base_question').val());
   	</script>
@@ -39,6 +39,13 @@
 $(document).ready(function(){
   	var tutorList = []; //store selected tutors
     var tutorCount = 0;
+
+
+    //Create a session
+    $('#create_session').ajaxForm(function(response) {
+        console.log(response);
+        $('#whiteboard').src = response.redirect;
+    });
 
     //Tutor Selection
     $('.tutor-check').on('click', function(){

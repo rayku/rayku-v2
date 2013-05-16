@@ -20,6 +20,13 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class PageController extends Controller
 {
+	public function whiteboardIframeAction()
+	{
+		//die(__LINE__.' '.__FILE__);
+		$result = file_get_contents($_POST['address']);
+		return $result;
+	}
+
 	public function indexAction()
 	{
 		if($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')){

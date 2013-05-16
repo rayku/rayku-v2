@@ -3,6 +3,15 @@ $(function(){
     var tutorCount = 0;
     var $settings = $('.user-settings');
     var $profile = $('.user-profile');
+
+    $('.whiteboard').click(function (){
+        $('.dashboard').animate({
+            display:'none'
+        });
+        $('body').css('overflow', 'hidden');
+        $('.main-header').fadeOut('fast');
+        $('#whiteboard').fadeIn('slow');
+    });
     
     //Forgot password on login modal
     $('a.forgot-password').click(function(){
@@ -30,6 +39,9 @@ $(function(){
     $('.home').on('click', function(){
         $settings.fadeOut('fast');
         $profile.delay(500).fadeIn('slow');
+        $('.main-header').fadeIn('slow');
+        $('#whiteboard').fadeOut('slow');
+        $('body').css('overflow', 'auto');
     });
     
     //Show dropdown navigation

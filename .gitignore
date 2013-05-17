@@ -15,3 +15,7 @@ app/config/parameters.ini
 app/config/parameters.yml
 .vagrant
 composer.lock
+
+# Mac Files
+*.DS_STORE
+src/Rayku/PageBundle/Resources/public/.DS_STORE

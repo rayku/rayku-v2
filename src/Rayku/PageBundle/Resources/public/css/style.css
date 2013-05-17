@@ -1907,24 +1907,40 @@ ul.team li:nth-child(9).active span.line {
 /* About Us */
 
 /* Become A Tutor */
-#become-a-tutor .feature-list {
-	margin: 50px -10px;
+#become-a-tutor .content {
+	width: 1000px;
 }
 
-#become-a-tutor .feature-list .feature {
-	width: 225px;
+#become-a-tutor .content #video {
+	width: 489px;
+	margin-right: 40px;
+	margin-top: 40px;
+	float: left;
+	-moz-box-shadow: 0 0 5px #1268B1;
+	-webkit-box-shadow: 0 0 5px #1268B1;
+	box-shadow: 0px 0px 5px #1268B1;
+}
+
+#become-a-tutor .content .feature-list {
+	margin: 50px -10px;
+	width: 475px;
+	float: left;
+}
+
+#become-a-tutor .content .feature-list .feature {
+	width: 215px;
 	margin: 0 10px 10px;
 	float: left;
 }
 
-#become-a-tutor .feature-list .feature h4 {
+#become-a-tutor .content .feature-list .feature h4 {
 	padding: 0 0 0 30px;
 	font-weight: bold;
 	font-size: 16px;
 	position: relative;
 }
 
-#become-a-tutor .feature-list .feature h4:before {
+#become-a-tutor .content .feature-list .feature h4:before {
 	display: block;
 	width: 24px;
 	height: 24px;
@@ -1935,16 +1951,12 @@ ul.team li:nth-child(9).active span.line {
 	background: url(../images/icons_become_tutor.png) no-repeat left top;
 }
 
-#become-a-tutor .feature-list .feature:nth-child(1) h4:before {background-position: 0px 0px;}
-#become-a-tutor .feature-list .feature:nth-child(2) h4:before {background-position: 0px -38px;}
-#become-a-tutor .feature-list .feature:nth-child(3) h4:before {background-position: 0px -79px;}
-#become-a-tutor .feature-list .feature:nth-child(4) h4:before {background-position: 0px -119px;}
-#become-a-tutor .feature-list .feature:nth-child(5) h4:before {background-position: 0px -159px;}
-#become-a-tutor .feature-list .feature:nth-child(6) h4:before {background-position: 0px -198px;}
-#become-a-tutor .feature-list .feature:nth-child(7) h4:before {background-position: 0px -238px;}
-#become-a-tutor .feature-list .feature:nth-child(8) h4:before {background-position: 0px -279px;}
+#become-a-tutor .content .feature-list .feature:nth-child(1) h4:before {background-position: 0px 0px;}
+#become-a-tutor .content .feature-list .feature:nth-child(2) h4:before {background-position: 0px -79px;}
+#become-a-tutor .content .feature-list .feature:nth-child(3) h4:before {background-position: 0px -119px;}
+#become-a-tutor .content .feature-list .feature:nth-child(4) h4:before {background-position: 0px -198px;}
 
-#become-a-tutor .feature-list .feature p {
+#become-a-tutor .content .feature-list .feature p {
 	font-size: 12px;
 	line-height: 19px;
 	padding: 0 0 0 30px;

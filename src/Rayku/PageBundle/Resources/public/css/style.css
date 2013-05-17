@@ -1109,7 +1109,7 @@ footer.footer:after {
 	top: 150px;
 	bottom: 0px;
 	width: 2px;
-	border: 1px solid #a2b4b4;
+	border: 2px solid #a2b4b4;
 	background: #aabcbc;
 	margin: 0 -2px;
 	z-index: 9;
@@ -1122,7 +1122,7 @@ footer.footer:after {
 	content: '';
 	background: url(../images/timeline_arrow.png) no-repeat left top;
 	bottom: -16px;
-	left: -11px;
+	left: -12px;
 }
 
 #timeline .timeline-row em {
@@ -1134,12 +1134,11 @@ footer.footer:after {
 	box-shadow: 0 1px 0 #fff, inset 0 0 3px rgba(0,0,0,.1);
 	line-height: 38px;
 	color: #fff;
-	font-family: "Bitter";
 	font-size: 11px;
 	text-shadow: 0 1px 0 rgba(4,4,4,.2);
 	text-align: center;
 	position: absolute;
-	left: -18px;
+	left: -19px;
 	top: -18px;
 	-moz-border-radius:19px;
 	-webkit-border-radius:19px;
@@ -1160,7 +1159,7 @@ footer.footer:after {
 	-moz-border-radius:0 0 1px 1px;
 	-webkit-border-radius:0 0 1px 1px;
 	border-radius:0 0 1px 1px;
-	left: 16px;
+	left: 17px;
 }
 
 #timeline .inside .left {
@@ -1193,11 +1192,11 @@ footer.footer:after {
 }
 
 #timeline .inside .left .event {
-	margin: 0 0 58px 60px;
+	margin: 0 0 59px 59px;
 }
 
 #timeline .inside .right .event {
-	margin: 0 60px 58px 0;
+	margin: 0 59px 58px 0;
 }
 
 #timeline .inside .event p.text {
@@ -1322,12 +1321,6 @@ ul.team li a {
 	-o-transition: all ease-in-out 0.5s;
 	transition: all ease-in-out 0.5s;
 	background: #fff;
-}
-
-ul.team li a img {
-	width: 100px;
-	height: 100px;
-	margin: -10px;
 }
 
 ul.team li strong {
@@ -1773,13 +1766,13 @@ ul.team li:nth-child(9).active span.line {
 
 .member-info .info:nth-child(1):before {left: 52px;}
 .member-info .info:nth-child(2):before {left: 160px;}
-.member-info .info:nth-child(3) {left: 75px;}
-.member-info .info:nth-child(4) {left: 185px;}
-.member-info .info:nth-child(5) {left: 291px;}
-.member-info .info:nth-child(6) {left: 400px;}
-.member-info .info:nth-child(7) {left: 507px;}
-.member-info .info:nth-child(8) {left: auto;right: 0px;}
-.member-info .info:nth-child(9) {left: auto;right: 0px;}
+.member-info .info:nth-child(3) {left: 97px;}
+.member-info .info:nth-child(4) {left: 207px;}
+.member-info .info:nth-child(5) {left: 313px;}
+.member-info .info:nth-child(6) {left: 422px;}
+.member-info .info:nth-child(7) {left: 529px;}
+.member-info .info:nth-child(8) {left: auto;right: 10px;}
+.member-info .info:nth-child(9) {left: auto;right: 10px;}
 .member-info .info:nth-child(8):before {left: auto;right: 160px;}
 .member-info .info:nth-child(9):before {left: auto;right: 52px;}
 
@@ -1864,11 +1857,6 @@ ul.team li:nth-child(9).active span.line {
 	color: #4490b3;
 	font-size: 20px;
 	font-weight: bold;
-}
-
-#contact-us .contact-info li a {
-	color: #4490b3;
-	text-decoration: none;
 }
 
 #contact-us:before {

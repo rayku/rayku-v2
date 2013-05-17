@@ -17,5 +17,5 @@ app/config/parameters.yml
 composer.lock
 
 # Mac Files
-*.DS_STORE
-src/Rayku/PageBundle/Resources/public/.DS_STORE
+*.DS_Store
+src/Rayku/PageBundle/Resources/public/.DS_Store

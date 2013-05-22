@@ -14,51 +14,12 @@ use Rayku\ApiBundle\Entity\User;
 use Rayku\ApiBundle\Form\UserType;
 use Rayku\ApiBundle\Form\UserSettingType;
 use Rayku\UserBundle\Form\Type\RegistrationAndProfileFormType;
-use Rayku\UserBundle\Form\Type\RegistrationAndTutorProfileFormType;
 
 /**
  * User controller.
  */
 class UserController extends Controller
 {
-	
-	/**
-	 * @ApiDoc(
-	 *     description="Register a user / tutor account",
-	 *     input="Rayku\UserBundle\Form\Type\RegistrationAndTutorProfileFormType"
-	 * )
-	 */
-	public function postUsersTutorRegistrationAction()
-	{
-		$user = new User();
-		
-		$form = $this->createForm(new RegistrationAndTutorProfileFormType(get_class($user)), $user, array('csrf_protection' => false));
-		$form->bind($this->getRequest());
-		if($form->isValid()){
-			$confirmationEnabled = $this->container->getParameter('fos_user.registration.confirmation.enabled');
-			$this->container->get('fos_user.registration.form.handler')->processReferral($user, $confirmationEnabled);
-			
-			$em = $this->getDoctrine()->getManager();
-			$em->remove($user->getTutor());
-			$em->flush();
-			
-			$route = 'rayku_page_tutor_onboarding';
-			if ($confirmationEnabled) {
-				$this->container->get('session')->set('fos_user_send_confirmation_email/email', $user->getEmail());
-			} else {
-				$response = new RedirectResponse($this->container->get('router')->generate($route));
-				$this->authenticateUser($user, $response);
-			}
-			
-			$url = $this->container->get('router')->generate($route, array(), true);
-			return array('success' => true, 'redirect' => $url);
-		}
-		
-		return array(
-			'entity' => $user,
-			'form'   => $form,
-		);
-	}
 	
 	/**
 	 * @ApiDoc(
@@ -80,9 +41,9 @@ class UserController extends Controller
 				$this->container->get('session')->set('fos_user_send_confirmation_email/email', $user->getEmail());
 				$route = 'fos_user_registration_check_email';
 			} else {
-				$route = 'fos_user_registration_confirmed';
-				$response = new RedirectResponse($this->container->get('router')->generate($route));
+				$response = new RedirectResponse($this->container->get('router')->generate('fos_user_registration_confirmed'));
 				$this->authenticateUser($user, $response);
+				$route = 'fos_user_registration_confirmed';
 			}
 		
 			$url = $this->container->get('router')->generate($route, array(), true);

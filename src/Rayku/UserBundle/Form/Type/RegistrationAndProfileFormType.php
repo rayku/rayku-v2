@@ -16,7 +16,7 @@ class RegistrationAndProfileFormType extends BaseType
 			->add('signup_question', 'hidden', array('required' => false))
 			->add('first_name', NULL, array('label' => 'First Name'))
 			->add('last_name', NULL, array('label' => 'Last Name'))
-		;
+			->add('signup_question', 'hidden', array('required' => false));
 	}
 	
 	public function setDefaultOptions(OptionsResolverInterface $resolver)

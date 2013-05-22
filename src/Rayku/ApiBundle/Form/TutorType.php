@@ -11,7 +11,6 @@ class TutorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
     	$schoolAmountChoices = array(
-    				"",
             		"Freshman",
             		"Sophomore",
             		"Junior",
@@ -30,14 +29,12 @@ class TutorType extends AbstractType
 
         $builder
         	->add('schoolName', NULL, array(
-        		'label' => 'School Attended / Attending'		
+        		'label' => 'School Name'		
         	))
         	->add('rate', NULL, array(
             	'label' => 'RP/Min $1 = 100 RP'		
             ))
-            ->add('degree', NULL, array(
-            	'label' => 'Degree Obtained / Pursuing'
-            ))
+            ->add('degree')
             ->add('schoolAmount', 'choice', array(
             	'label' => 'What best describes you?',
             	'choices' => $schoolAmountChoices,

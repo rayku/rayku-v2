@@ -29,12 +29,6 @@ rayku_page_about:
       _controller: FrameworkBundle:Template:template
       template: 'RaykuPageBundle:Page:about.html.twig'
 
-rayku_page_tutor_onboarding:
-    pattern: /onboarding
-    defaults:
-      _controller: FrameworkBundle:Template:template
-      template: 'RaykuPageBundle:Page:onboarding.html.twig'
-
 rayku_legal_page:
     pattern: /legal
     defaults:
@@ -44,4 +38,5 @@ rayku_legal_page:
 rayku_page_become_a_tutor:
     pattern: /become-a-tutor
     defaults: 
-        _controller: RaykuPageBundle:Page:become
+        _controller: FrameworkBundle:Template:template
+        template: 'RaykuPageBundle:Page:become.html.twig'

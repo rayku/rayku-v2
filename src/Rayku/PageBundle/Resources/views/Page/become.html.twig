@@ -7,6 +7,7 @@
 
 {% block content %}
 <div class="inside static" id="become-a-tutor">
+	{% include 'RaykuPageBundle:Page:tutor_registration_modal.html.twig' with {'form': registrationform} %}
 	<hgroup>
 		<h2>Teach Online, Get Paid!</h2>
 		<h3>Teach students online with our platform on your own schedule and at your own rates.</h3>
@@ -43,7 +44,7 @@
 			<h3>Registration is free and takes approximately 15 minutes:</h3>
 		</hgroup>
 		<p>
-			<a href="{{ path('fos_user_registration_register') }}" class="signup">Get Started</a>
+			<a href="#" data-reveal-id="regModal" class="signup">Get Started</a>
 		</p>
 	</div>
 </div>

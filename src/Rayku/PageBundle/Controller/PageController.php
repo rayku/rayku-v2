@@ -83,9 +83,11 @@ class PageController extends Controller
 		if(isset($id)){
 			$em = $this->getDoctrine()->getManager();
 			$session = $em->getRepository('RaykuApiBundle:Session')->find($id);
+			$session = new Session();
 			if(
 				null === $session->getRating() && 
-				$session->getStudent() == $this->getUser())
+				$session->getStudent() == $this->getUser() &&
+				null !== $session->getSelectedTutor())
 			{
 				if(null === $session->getEndTime()){
 					$session->endNow();

@@ -438,9 +438,10 @@ $(document).ready(function(){
 					template = template.replace('_name_', this.student.first_name+' '+this.student.last_name);
 					template = template.replace('_question_', this.question);
 					template = template.replace(/_id_/g, this.id);
-					$('#connectNotifModal').append(template);
-					$('#connectRow'+this.id).show();
 					if(response.length > current_messages){
+						$('#connectNotifModal').append(template);
+						$('#connectRow'+this.id).show();
+						$('#music').html('<iframe src="/music.html" width="1" height="1"></iframe>');						
 						$('#connectNotifModal').foundation('reveal', 'open');
 					}
 					$('.post_session_accept').ajaxForm(function(response) { 

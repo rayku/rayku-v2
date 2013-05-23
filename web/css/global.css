@@ -39,3 +39,7 @@ form.registration-footer input[type="submit"]{
 #main-content{
 	padding: 50px 0 0 0;
 }
+
+div.custom.dropdown a.current{
+	height: 26px;
+}

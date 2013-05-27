@@ -105,7 +105,7 @@ class Tutor
      * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Review", mappedBy="tutor")
      **/
     private $reviews;
-
+    
     /**
      * @var \DateTime
      *

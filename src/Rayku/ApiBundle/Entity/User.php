@@ -41,6 +41,11 @@ class User extends BaseUser
 	private $tutor;
 	
 	/**
+	 * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Order", mappedBy="user")
+	 **/
+	private $orders;
+	
+	/**
 	 * @var integer
 	 * @ORM\Column(name="points", type="integer", nullable=false)
 	 */
@@ -830,5 +835,45 @@ class User extends BaseUser
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add orders
+     *
+     * @param \Rayku\ApiBundle\Entity\Order $orders
+     * @return User
+     */
+    public function addOrder(\Rayku\ApiBundle\Entity\Order $orders)
+    {
+        $this->orders[] = $orders;
+    
+        return $this;
+    }
+
+    /**
+     * Remove orders
+     *
+     * @param \Rayku\ApiBundle\Entity\Order $orders
+     */
+    public function removeOrder(\Rayku\ApiBundle\Entity\Order $orders)
+    {
+        $this->orders->removeElement($orders);
+    }
+
+    /**
+     * Get orders
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOrders()
+    {
+        return $this->orders;
     }
 }

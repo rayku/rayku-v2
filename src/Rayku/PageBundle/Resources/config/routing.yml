@@ -1,3 +1,7 @@
+rayku_payments:
+    resource: "@RaykuPageBundle/Controller/PaymentController.php"
+    type:     annotation
+
 rayku_session_rate:
     pattern: /session/{id}/rate
     defaults:

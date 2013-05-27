@@ -1,0 +1,19 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/raykupage/css/innerstyle.css') }}" type="text/css" rel="stylesheet" media="screen" />
+{% endblock %}
+
+{% block content %}
+<div id="main-content">
+	<h2>Rayku Points Purchase</h2>
+	How would you like to pay
+	<form action="{{ path('rayku_payment_details' , {'id': order_id } ) }}" method="post">
+		{{ form_widget(form.method) }}
+		{{ form_widget(form._token) }}
+        <input type="submit" />
+    </form>
+</div>
+
+{% endblock %}

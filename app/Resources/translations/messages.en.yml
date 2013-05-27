@@ -1,0 +1,3 @@
+form:
+    label:
+        paypal_express_checkout: "Paypal"

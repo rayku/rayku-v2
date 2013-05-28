@@ -10,7 +10,7 @@ rayku_session_rest:
     resource: Rayku\ApiBundle\Controller\SessionController
     type:     rest
 
-rayku_order_rest:
+rayku_session_rest:
     resource: Rayku\ApiBundle\Controller\OrderController
     type:     rest
 

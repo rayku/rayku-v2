@@ -21,7 +21,7 @@
         "twig/extensions": "1.0.*@dev",
 
         "symfony/symfony": "2.1.*",
-        "symfony/assetic-bundle": "2.3.*",
+        "symfony/assetic-bundle": "2.1.*",
         "symfony/swiftmailer-bundle": "2.1.*",
         "symfony/monolog-bundle": "2.1.*",
 
@@ -65,8 +65,7 @@
         "guzzle/guzzle": "*",
         "jmikola/auto-login-bundle": "dev-master",
         "vespolina/payment-stripe-bundle": "dev-master",
-        "components/jquery": "dev-master",
-        "components/foundation": "dev-master"
+        "ets/payment-dotpay-bundle": "dev-master"
     },
 
     "require-dev": {

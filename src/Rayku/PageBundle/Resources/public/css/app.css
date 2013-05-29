@@ -272,7 +272,7 @@ ul.submenu-item li a:hover {
 	left:0;
 	min-height: 100%; 
    	height:auto !important; 
-	width: 16%;
+	width: 18%;
 	background: rgba(39, 39, 39, 1);
 	margin: 0;
 	padding: 0;
@@ -380,7 +380,7 @@ ul.submenu-item li a:hover {
 	right:0;
 	min-height: 100%; 
    	height:auto !important; 
-	width:84%;
+	width:82%;
 	background-image: url('http://www.rayku.local/bundles/raykupage/images/bg.png');
 	padding: 0px 35px;
 	padding-bottom: 15px;

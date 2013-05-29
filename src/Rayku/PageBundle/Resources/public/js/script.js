@@ -41,7 +41,7 @@ $(document).ready(function(){
     });
     $('.dashboard').click(function (){
     	$('#content-body').animate({
-    		width: '84%'
+    		width: '82%'
     	});
     });
 });

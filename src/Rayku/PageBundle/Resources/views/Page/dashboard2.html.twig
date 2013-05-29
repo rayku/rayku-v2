@@ -36,6 +36,9 @@
 		{% if user.id is null %}
 			{% include 'RaykuPageBundle:Page:registration_modal.html.twig' with {'form': registrationform} %}
 		{% endif %}
+		<!------------------------------
+		SIDE NAVIGATION
+		-------------------------------->
 		<div class="large-4 columns" id="sidebar">
 			<h3 class="userfullname"><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg">{{ user.firstname }} <br><span class="lastname">{{ user.lastname }}</span></h3>
 			<h3 class="userstatus"><span class="status">{% if user.isTutor %}Tutor{% endif %}{% if user.isTutor == false %}Student{% endif %}</span><span class="online">&nbsp;</span></h3>
@@ -66,7 +69,10 @@
 			</div>
 			<div class="row" id="content">
 				<input type="text" placeholder="What is your question?">
-
+				
+			<!------------------------------
+			TUTOR LIST TABLE
+			-------------------------------->
 				<div class="large-8 columns tutor-list">
 					<h3>Online Tutors<a href="#" class="raphael">0</a></h3>
 					<form action="{{path('post_session')}}" method="post" class="custom" id="create_session">
@@ -116,6 +122,10 @@
 					<h3><span class="raphael">$</span><span class="title">Tutor Rating<span></h3>
 					<h4>1000</h4>
 				</div>
+
+			<!------------------------------
+			PAST SESSIONS LIST
+			-------------------------------->
 				<div class="large-4 columns" id ="sessions-list">
 					<h3>Past Sessions</h3>
 					<table>
@@ -139,7 +149,10 @@
 					</table>
 				</div>
 			</div>
-
+			
+			<!------------------------------
+			USER PROFILE
+			-------------------------------->
 			<div class="row userprofile" id="userprofile">
 				<div class="large-12 columns" id="profile">
 					<h3>User Profile</h3>

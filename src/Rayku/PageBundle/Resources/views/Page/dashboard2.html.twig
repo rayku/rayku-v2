@@ -37,8 +37,8 @@
 			{% include 'RaykuPageBundle:Page:registration_modal.html.twig' with {'form': registrationform} %}
 		{% endif %}
 		<div class="large-4 columns" id="sidebar">
-			<h3 class="userfullname"><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg">Sam <br><span class="lastname">Peter Jnr.</span></h3>
-			<h3 class="userstatus"><span class="status">Tutor</span><span class="online">&nbsp;</span></h3>
+			<h3 class="userfullname"><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg">{{ user.firstname }} <br><span class="lastname">{{ user.lastname }}</span></h3>
+			<h3 class="userstatus"><span class="status">{% if user.isTutor %}Tutor{% endif %}{% if user.isTutor == false %}Student{% endif %}</span><span class="online">&nbsp;</span></h3>
 			<ul class="sidebar-nav">
 				<li class="divider"></li>
 				<li class="active"><a class="dashboard" href=#><span class="raphael">S</span> Dashboard</a></li>
@@ -110,7 +110,7 @@
 				</div>
 				<div class="large-2 columns tutor-points">
 					<h3><span class="raphael">#</span><span class="title">Rayku Points</span></h3>
-					<h4>1000</h4>
+					<h4>{{user.points}}</h4>
 				</div>
 				<div class="large-2 columns tutor-rating">
 					<h3><span class="raphael">$</span><span class="title">Tutor Rating<span></h3>
@@ -154,15 +154,15 @@
 							</ul>
 						</div>
 						<div class="large-9 columns profileinfo">
-							<h4 class="username">Sam Peter Jnr.</h4>
+							<h4 class="username">{{ user.firstname }} {{ user.lastname }}</h4>
 
 							<ul class="userinfo">
-								<li>Computer Science</li>
-								<li>Undergraduate Degree Holder</li>
-								<li>From, Dalhousie University</li>
+								<li>{{ user.degree }}</li>
+								<li>{{ user.grade }}</li>
+								<li>From, {{ user.school }}</li>
 							</ul>
-							<p class="about">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.</p>
-							<p class="public"><a href=#><span class="raphael">7</span>Tutor Public Profile</a></p>
+							<p class="about">{{ user.bio }}</p>
+							<p class="public"><a href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></p>
 
 						</div>
 					</div>
@@ -172,5 +172,106 @@
 		</div>
 	</div>
 </div>
+
+<!------------------------------
+MODALS
+-------------------------------->
+{% if user.id %}
+	{% render url('rayku_tutor_new') %}
+
+	{% include 'RaykuPageBundle:Page:notification_modal.html.twig' %}
+{% endif %}
+
+{% if ratesessionform is defined %}
+	<div id="referFriend" class="reveal-modal medium">
+		<div class="row registration-header">
+        	<h2>Refer a Friend</h2>
+		</div>
+	    <div class="row registration-body">
+			<div class="large-12 columns">
+				You can get extra Rayku Points by inviting your friends to try out Rayku. If a friend uses your invitation to sign up for an account you will receive 200 Rayku Points and your friend receives 500 Rayku points.</br><br/>
+				
+				<input type="text" value="http://www.rayku.com/?refcode={{ user.referralCode }}" /><br /><br />
+
+				<a href="#"><img src="https://secure.citizensforethics.org/page/-/images/buttons/btn_fb_55px.gif" /></a>
+			</div>
+		</div>
+		<a class="close-reveal-modal">×</a>
+	</div>
+	
+	<div id="rateTutorModal" class="reveal-modal medium rateTutor">
+		<div class="row registration-header">
+        	<h2>Rate Your Tutor</h2>
+		</div>
+		<div class="row registration-body">
+	    <div class="large-12 columns rate-tutors">
+	        <form id="rateTutorForm" class="custom" name="rate-tutor" action="{{ path('post_session_rate', {'session': session.id}) }}" method="post">
+	            <div class="row">
+	                <div class="large-9 columns">
+	                    <label for="rateTutor">{{ session.selectedtutor }}</label>
+	                    {{ form_widget(ratesessionform.rating) }}
+	                    {{ form_rest(ratesessionform) }}
+	                </div>
+	
+	                <!--// Attach to a review table on DB //-->
+	                <div class="large-12 columns">
+	                    <form>
+	                        <div class="row">
+	                            <div class="large-12 columns">
+	                                <label>Write Review</label>
+	                                <textarea placeholder="small-12.columns">Write a tutor review</textarea>
+	                            </div>
+	                        </div>
+	                    </form>
+	                </div>
+	                <div class="large-3 columns">
+	                    <input type="submit" class="bbutton" value="Rate">
+	                </div>
+	            </div>
+	            <div class="row">
+	            	<div class="large-12 coumns">
+	            		View the <strong><a href="{{ whiteboard_url }}/room/{{ session.id }}/playback/5" target="_blank" />Session Recording</a></strong>
+	            	</div>
+	            </div>
+	        </form>
+	    </div></div>
+	</div>
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#rateTutorModal').foundation('reveal', 'open');
+	    $('#rateTutorForm').ajaxForm(function() {
+	    	if($('select#rating').find(":selected").val() > 3){
+	    		$('#referFriend').foundation('reveal', 'open')    	
+	    	}else{
+		    	$('#rateTutorModal').foundation('reveal', 'close');
+		    }
+		});
+	});
+	</script>
+{% endif %}
+
+ <script>
+    document.write('<script src=' +
+    ('__proto__' in {} ? '/bundles/raykupage/js/vendor/zepto' : '/bundles/raykupage/js/vendor/jquery') +
+    '.js><\/script>')
+</script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.alerts.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.clearing.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.cookie.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.dropdown.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.forms.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.joyride.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.magellan.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.orbit.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.placeholder.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.reveal.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.section.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.tooltips.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.topbar.js') }}"></script>
+<script>
+    $(document).foundation();
+</script>
 </body>
 </html>

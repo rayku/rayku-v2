@@ -10,6 +10,7 @@ $(function(){
         });
         $('body').css('overflow', 'hidden');
         $('.main-header').fadeOut('fast');
+        $('#whiteboard2 iframe').attr("src", "http://whiteboard.rayku.local:8080/standalone");
         $('#whiteboard2').fadeIn('slow');
     });
     
@@ -46,7 +47,7 @@ $(function(){
     
     //Show dropdown navigation
     $('a.logged-in-as').on('mouseenter',function(){
-            $('div.submenu').slideToggle(30);
+            $('div.submenu').slideToggle(300);
         }
     );
     $('.submenu').on('mouseleave', function(){

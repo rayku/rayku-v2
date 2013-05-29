@@ -2,7 +2,7 @@
 
 {% block content %}
   <h1 class="ribbon">
-    <strong class="ribbon-content">Tutor List</strong>
+    <strong class="ribbon-content">Select Relevant Tutors</strong>
   </h1>
   <form action="{{path('post_session')}}" method="post" class="custom" id="create_session">
   	<script type="text/javascript">
@@ -33,7 +33,7 @@
         {% endfor %}
       </tbody>
     </table>
-    <input type="submit" class="bbutton" id="tutorConnect">
+    <input value="Connect Now" type="submit" class="bbutton" id="tutorConnect">
   </form>
   <script>
 $(document).ready(function(){
@@ -44,7 +44,14 @@ $(document).ready(function(){
     //Create a session
     $('#create_session').ajaxForm(function(response) {
         console.log(response);
-        $('#whiteboard').src = response.redirect;
+        //$('#whiteboard').src = response.redirect;
+        $('.dashboard').animate({
+            display:'none'
+        });
+        $('body').css('overflow', 'hidden');
+        $('.main-header').fadeOut('fast');
+        $('#whiteboard2 iframe').attr("src", response.redirect);
+        $('#whiteboard2').fadeIn('slow');
     });
 
     //Tutor Selection

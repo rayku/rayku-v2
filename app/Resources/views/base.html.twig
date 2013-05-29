@@ -34,7 +34,7 @@
         <div id="whiteboard-header">
             <a href=# class="logged-in-as bbutton home">Back Home</a>
         </div>
-        <iframe src="http://whiteboard.rayku.local:8080/standalone" seamless></iframe>
+        <iframe src="" seamless></iframe>
     </div>
     <div class="container">
 	<!-- Optimizely // -->
@@ -59,6 +59,7 @@
                         {% endif %}
                         <li><a class="broadcast" href=#><span class="raphael">Æ</span>Broadcast Session</a></li>
                         <li><a class="settings" href=#><span class="raphael">`</span>Settings</a></li>
+                        <li><a class="buyPoints" href=#><span class="raphael">`</span>Buy Rayku Points</a></li>
                         <li><a class="whiteboard" href=#><span class="raphael">`</span>Go To Whiteboard</a></li>
                         <li><a class="logout" href="{{ path('fos_user_security_logout') }}"><span class="raphael">v</span>{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
                     </ul>

@@ -119,10 +119,12 @@
     {% endblock %}
     {% endblock body %}
     
-    {% include "::GoogleAnalytics.html.twig" %}
-    
-    {% include "::PathAnalytics.html.twig" %}
-    
-    {% include "::ZenDeskFeedback.html.twig" %}
+    {% block analytics %}
+	    {% include "::GoogleAnalytics.html.twig" %}
+	    
+	    {% include "::PathAnalytics.html.twig" %}
+	    
+	    {% include "::ZenDeskFeedback.html.twig" %}
+	{% endblock %}
     </body>
 </html>

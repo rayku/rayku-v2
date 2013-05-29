@@ -16,7 +16,7 @@ rayku_page_homepage_minimized_funnel:
 rayku_register_confirmed:
     pattern: /register/confirmed
     defaults:
-        _controller: RaykuPageBundle:Page:autoConnectSession
+        _controller: RaykuPageBundle:Page:dashboard
 
 rayku_page_dashboard:
     pattern: /dashboard

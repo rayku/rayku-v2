@@ -1,5 +1,7 @@
 <?php
 
+use Vespolina\Payment\StripeBundle\VespolinaPaymentStripeBundle;
+
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
@@ -25,11 +27,15 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
         	new Jmikola\AutoLoginBundle\JmikolaAutoLoginBundle(),
+        	new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+        	new Vespolina\Payment\StripeBundle\VespolinaPaymentStripeBundle(),
         		
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
         	new JMS\DiExtraBundle\JMSDiExtraBundle($this),
         	new JMS\SerializerBundle\JMSSerializerBundle($this),
+        	new JMS\Payment\CoreBundle\JMSPaymentCoreBundle(),
+        	new JMS\Payment\PaypalBundle\JMSPaymentPaypalBundle(),
 
             // DOCTRINE
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
@@ -52,13 +58,12 @@ class AppKernel extends Kernel
 
             // Enable this if you want to audit backend action
             new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
-        	new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
         	
         	// Rayku
         	new Rayku\TutorBundle\RaykuTutorBundle(),
             new Rayku\PageBundle\RaykuPageBundle(),
             new Rayku\ApiBundle\RaykuApiBundle(),
-        	new Rayku\UserBundle\RaykuUserBundle(),
+        	new Rayku\UserBundle\RaykuUserBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

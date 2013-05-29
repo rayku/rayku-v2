@@ -32,13 +32,13 @@ span.raphael{
 header {
 	/*background: url(../images/bg_header.jpg) repeat-x left bottom;*/
 	background: rgb(86,86,86); /* Old browsers */
-background: -moz-linear-gradient(top,  rgba(86,86,86,1) 0%, rgba(33,33,33,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(86,86,86,1)), color-stop(100%,rgba(33,33,33,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  rgba(86,86,86,1) 0%,rgba(33,33,33,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  rgba(86,86,86,1) 0%,rgba(33,33,33,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  rgba(86,86,86,1) 0%,rgba(33,33,33,1) 100%); /* IE10+ */
-background: linear-gradient(to bottom,  rgba(86,86,86,1) 0%,rgba(33,33,33,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#565656', endColorstr='#212121',GradientType=0 ); /* IE6-9 */
+	background: -moz-linear-gradient(top,  rgba(86,86,86,1) 0%, rgba(33,33,33,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(86,86,86,1)), color-stop(100%,rgba(33,33,33,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(86,86,86,1) 0%,rgba(33,33,33,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(86,86,86,1) 0%,rgba(33,33,33,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(86,86,86,1) 0%,rgba(33,33,33,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(86,86,86,1) 0%,rgba(33,33,33,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#565656', endColorstr='#212121',GradientType=0 ); /* IE6-9 */
 
 	height: 50px;
 	-webkit-box-shadow:0px 0px 10px rgba(10, 10, 10, 0.5);
@@ -49,6 +49,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#565656', end
 	top:0;
 	left: 0;
 	width: 100%;
+	border-bottom: 2px solid rgb(26,106,175);
 }
 .header-bg{
 	background: rgb(86,86,86); /* Old browsers */
@@ -173,7 +174,6 @@ header nav a.rayku-points:hover{
 }
 header nav a.notification{
 	position: relative;
-	top:-7px;
 	font-size: 28px; 
 	padding:12px 5px;
 	color: rgba(221, 221, 221, 1);
@@ -1160,15 +1160,6 @@ TUTOR PUBLIC PROFILE
 	border-bottom: none;
 }
 
-form.registration-form label{
-	font-size: 13px;
-	margin-bottom: 5px; 
-}
-form.registration-form input{
-	padding: 10px;
-	height: 40px;
-	border-radius: 3px;
-}
 .registration-header{
 	position: absolute;
 	left:0;
@@ -1188,15 +1179,6 @@ form.registration-form input{
 .registration-body{
 	margin-top:50px;
 }
-.registration-footer input[type="submit"]{
-	position: relative;
-	left:-35px;
-	margin-top: 15px;
-	margin-bottom: 10px;
-}
-
-
-
 
 /*RATING*/
 .rating {

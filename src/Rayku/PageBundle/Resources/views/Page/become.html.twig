@@ -7,44 +7,33 @@
 
 {% block content %}
 <div class="inside static" id="become-a-tutor">
+	{% include 'RaykuPageBundle:Page:tutor_registration_modal.html.twig' with {'form': registrationform} %}
 	<hgroup>
-		<h2>Homework Help Online, Get Paid!</h2>
-		<h3>Rayku lets you teach students online. Start today, and charge by-the-minute rates of your choice (recommended $0.40/min. or $24/hour).</h3>
+		<h2>Teach Online, Get Paid!</h2>
+		<h3>Teach students online with our platform on your own schedule and at your own rates.</h3>
 	</hgroup>
+	<div class="content">
+		<iframe src="http://fast.wistia.net/embed/iframe/hgu3pzo7gd?playButton=false&plugin%5BpostRoll-v1%5D%5Blink%5D=http%3A%2F%2Fwww.rayku.com%2Fregister&plugin%5BpostRoll-v1%5D%5Brewatch%5D=true&plugin%5BpostRoll-v1%5D%5Bstyle%5D%5BbackgroundColor%5D=%23263542&plugin%5BpostRoll-v1%5D%5Bstyle%5D%5Bcolor%5D=%23ffe7c2&plugin%5BpostRoll-v1%5D%5Bstyle%5D%5BfontFamily%5D=Gill%20Sans%2C%20Helvetica%2C%20Arial%2C%20sans-serif&plugin%5BpostRoll-v1%5D%5Bstyle%5D%5BfontSize%5D=36px&plugin%5BpostRoll-v1%5D%5Btext%5D=Register%20for%20free%3Cbr%2F%3Eand%20get%20started%20today&version=v1&videoHeight=275&videoWidth=489&volumeControl=true" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" width="489" height="275" id="video"></iframe>
 	<div class="feature-list">
 		<div class="feature">
 			<h4>Shared live whiteboard</h4>
-			<p>Sessions are carried out through a live shared whiteboard, where students can interact with video, audio, and equation writer tools.</p>
-		</div>
-		<div class="feature">
-			<h4>Request notifications</h4>
-			<p>Instant chat / desktop tutoring request notifications. With passive notifications, you can log in and tutor at your own self-determined schedule.</p>
+			<p>Sessions are carried out through a live shared whiteboard, where students can interact with video, audio, and a full suite of whiteboard tools.</p>
 		</div>
 		<div class="feature">
 			<h4>Flexible schedules</h4>
-			<p>100% flexible tutoring schedules. Tutor when you want, wherever you want! <br><br></p>
+			<p>100% flexible tutoring schedules. Set your status to 'online' whenever you are not doing anything else to start receiving paid tutoring requests. <br><br></p>
 		</div>
 		<div class="feature">
 			<h4>Set your own rates</h4>
-			<p>Start today, and charge by-the-minute rates of your choice.</p>
+			<p>Charge by-the-minute rates of your choice.</p>
 		</div>
 		<div class="feature">
-			<h4>Full billing system</h4>
-			<p>Rayku Points (RP) is the currency we use. 100RP currently equals $1. Full billing system to deliver payments directly to your paypal or bank account.</p>
-		</div>
-		<div class="feature">
-			<h4>Walkthrough video</h4>
-			<p>Tutoring on Rayku is easy! Watch the videos thoroughly, and read the descriptions below each video, to get a full understanding of how to get started as a Rayku tutor.</p>
-		</div>
-		<div class="feature">
-			<h4>Getting clients is easy</h4>
-			<p>You don’t need to bother getting clients. Getting clients is super easy! We pay for advertising and everything to get you great clients. That's our job!</p>
-		</div>
-		<div class="feature">
-			<h4>Earn money</h4>
-			<p>Get paid an average of 65% per session (average $18/hour) after fees. Dependent on the quality of the tutoring session. The higher the quality, the more you earn.</p>
+			<h4>We advertise for you</h4>
+			<p>Our job is to find highly engaged clients for you to tutor.</p>
 		</div>
 		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
 	</div>
 </div>
 
@@ -52,10 +41,10 @@
 	<div class="inside">
 		<hgroup>
 			<h2>Start tutoring on Rayku today</h2>
-			<h3>Create a free tutor account to get started:</h3>
+			<h3>Registration is free and takes approximately 15 minutes:</h3>
 		</hgroup>
 		<p>
-			<a href="{{ path('fos_user_registration_register') }}" class="signup">Get Started</a>
+			<a href="#" data-reveal-id="regModal" class="signup">Get Started</a>
 		</p>
 	</div>
 </div>

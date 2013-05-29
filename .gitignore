@@ -7,11 +7,11 @@ vendor/*
 */cache/*
 web/uploads/*
 web/bundles/*
-src/Rayku/PageBundle/Resources/.DS_STORE
-src/Rayku/PageBundle/Resources/public/.DS_STORE
+.DS_Store
 
 # Configuration files
 app/config/parameters.ini
 app/config/parameters.yml
 .vagrant
 composer.lock
+

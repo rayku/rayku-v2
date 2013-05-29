@@ -8,6 +8,7 @@ use Rayku\ApiBundle\Form\UserType;
 use Rayku\ApiBundle\Form\UserSettingType;
 use Rayku\ApiBundle\Form\RateSessionType;
 use Rayku\UserBundle\Form\Type\RegistrationAndProfileFormType;
+use Rayku\UserBundle\Form\Type\RegistrationAndTutorProfileFormType;
 use Rayku\ApiBundle\Entity\Session;
 use Rayku\ApiBundle\Entity\User;
 use Rayku\ApiBundle\Entity\Tutor;
@@ -60,9 +61,15 @@ class PageController extends Controller
 		return $this->redirect($this->container->getParameter('whiteboard_url').'/room/'.$session->getId().'/student');
 	}
 	
+	public function becomeAction()
+	{
+		$user = new User();
+		$registrationform = $this->createForm(new RegistrationAndTutorProfileFormType(get_class($user)), $user)->createView();
+		return $this->render('RaykuPageBundle:Page:become.html.twig', array('registrationform' => $registrationform));
+	}
+	
 	public function dashboardAction($id = NULL)
 	{
-		//\Doctrine\Common\Util\Debug::dump($this->container->parameters);
 		if($this->getRequest()->isMethod('POST') && null == $this->getUser()){
 			$user = new User();
 			$user->setSignupQuestion($this->getRequest()->get('question'));
@@ -107,6 +114,6 @@ class PageController extends Controller
 			}
 		}
 		
-		return $this->render('RaykuPageBundle:Page:dashboard.html.twig', $view);
+		return $this->render('RaykuPageBundle:Page:dashboard2.html.twig', $view);
 	}
 }

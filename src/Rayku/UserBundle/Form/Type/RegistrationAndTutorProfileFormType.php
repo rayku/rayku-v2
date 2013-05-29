@@ -4,18 +4,22 @@ namespace Rayku\UserBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
+use Rayku\ApiBundle\Form\TutorType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class RegistrationAndProfileFormType extends BaseType
+class RegistrationAndTutorProfileFormType extends BaseType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		parent::buildForm($builder, $options);
 		
 		$builder
-			->add('signup_question', 'hidden', array('required' => false))
 			->add('first_name', NULL, array('label' => 'First Name'))
 			->add('last_name', NULL, array('label' => 'Last Name'))
+			->remove('signup_question')
+			->remove('plainPassword')
+			->add('plainPassword', 'password', array('label' => 'Password'))
+			->add('tutor', new TutorType())
 		;
 	}
 	

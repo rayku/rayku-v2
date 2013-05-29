@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sonata\UserBundle\Entity\BaseUser as BaseUser;
+use FOS\UserBundle\Entity\User as BaseUser;
 
 /**
  * User
@@ -39,6 +39,11 @@ class User extends BaseUser
 	 * @Serializer\Groups({"user.view"})
 	 */
 	private $tutor;
+	
+	/**
+	 * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Order", mappedBy="user")
+	 **/
+	private $orders;
 	
 	/**
 	 * @var integer
@@ -170,6 +175,20 @@ class User extends BaseUser
 	 * @Assert\File(maxSize="6000000")
 	 */
 	private $file;
+	
+	/**
+	 * @var \DateTime
+	 *
+	 * @ORM\Column(name="created_at", type="datetime", nullable=true)
+	 */
+	private $createdAt;
+	
+	/**
+	 * @var \DateTime
+	 *
+	 * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+	 */
+	private $updatedAt;
 	
     /**
      * Sets file.
@@ -499,17 +518,25 @@ class User extends BaseUser
     }
     
     /**
-     * @ORM\PrePersist
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate()
+    {
+    	$this->setUpdatedAt(new \DateTime);
+    }
+    
+    /**
+     * @ORM\PrePersist()
      */
     public function prePersist()
     {
-    	$this
-    		->registerWithCouponCode()
-    		->initReferralCode();
-    	
-    	return parent::prePersist();
+    	$this->setCreatedAt(new \DateTime);
+    	$this->setUpdatedAt(new \DateTime);
     }
     
+    /**
+     * @ORM\PrePersist
+     */
     public function initReferralCode()
     {
     	$this->setReferralCode(base64_encode(uniqid('rayku', true)));
@@ -517,6 +544,9 @@ class User extends BaseUser
     	return $this;
     }
     
+    /**
+     * @ORM\PrePersist
+     */
     public function registerWithCouponCode()
     {
     	if(null === $this->getId() && null !== $this->getCoupon()){
@@ -759,5 +789,91 @@ class User extends BaseUser
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return User
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return User
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add orders
+     *
+     * @param \Rayku\ApiBundle\Entity\Order $orders
+     * @return User
+     */
+    public function addOrder(\Rayku\ApiBundle\Entity\Order $orders)
+    {
+        $this->orders[] = $orders;
+    
+        return $this;
+    }
+
+    /**
+     * Remove orders
+     *
+     * @param \Rayku\ApiBundle\Entity\Order $orders
+     */
+    public function removeOrder(\Rayku\ApiBundle\Entity\Order $orders)
+    {
+        $this->orders->removeElement($orders);
+    }
+
+    /**
+     * Get orders
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOrders()
+    {
+        return $this->orders;
     }
 }

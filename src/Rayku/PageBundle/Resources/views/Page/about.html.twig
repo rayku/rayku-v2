@@ -64,16 +64,16 @@
 					<em>November 2012</em>
 				</p>
 			</div>
-			<div class="event fade-in five">
+			<!--<div class="event fade-in five">
 				<img src="{{asset('bundles/raykupage/images/event_4.jpg')}}" alt="" />
 				<p class="text">
 					Rayku helps new users each day
 					<em>Today</em>
 				</p>
-			</div>
+			</div>-->
 		</div>
 		<div class="timeline-row">
-			<em>2011</em>
+			<em>start</em>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -88,7 +88,7 @@
 	<ul class="team">
 		<li>
 			<a href="#">
-				<img src="http://rayku.com/images/prf3.png" alt="" />
+				<img src="{{asset('bundles/raykupage/images/prf3.png')}}" alt="" />
 			</a>
 			<strong>Aron Solomon</strong>
 			<em>Advisor</em>
@@ -97,7 +97,7 @@
 		</li>
 		<li>
 			<a href="#">
-				<img src="http://rayku.com/images/prf2.png" alt="" />
+				<img src="{{asset('bundles/raykupage/images/prf2.png')}}" alt="" />
 			</a>
 			<strong>Chris Voutsinas</strong>
 			<em>Advisor</em>
@@ -105,7 +105,7 @@
 		</li>
 		<li>
 			<a href="#">
-				<img src="http://rayku.com/images/prf5.png" alt="" />
+				<img src="{{asset('bundles/raykupage/images/prf5.png')}}" alt="" />
 			</a>
 			<strong>Paul Jackson</strong>
 			<em>Advisor</em>
@@ -113,7 +113,7 @@
 		</li>
 		<li class="before">
 			<a href="#">
-				<img src="http://rayku.com/images/prf8.png" alt="" />
+				<img src="{{asset('bundles/raykupage/images/prf8.png')}}" alt="" />
 			</a>
 			<strong>Alex Allevato</strong>
 			<em>BD Lead</em>
@@ -121,7 +121,7 @@
 		</li>
 		<li class="active">
 			<a href="#">
-				<img src="http://rayku.com/images/prf1.png" alt="" />
+				<img src="{{asset('bundles/raykupage/images/prf1.png')}}" alt="" />
 			</a>
 			<strong>Donny Ouyang</strong>
 			<em>President</em>
@@ -129,7 +129,7 @@
 		</li>
 		<li>
 			<a href="#">
-				<img src="http://rayku.com/images/prf9.png" alt="" />
+				<img src="{{asset('bundles/raykupage/images/prf9.png')}}" alt="" />
 			</a>
 			<strong>Colin Hutchinson</strong>
 			<em>Tech Lead</em>
@@ -137,7 +137,7 @@
 		</li>
 		<li>
 			<a href="#">
-				<img src="http://rayku.com/images/prf4.png" alt="" />
+				<img src="{{asset('bundles/raykupage/images/prf4.png')}}" alt="" />
 			</a>
 			<strong>Peter Carrescia</strong>
 			<em>Advisor</em>
@@ -145,7 +145,7 @@
 		</li>
 		<li>
 			<a href="#">
-				<img src="http://rayku.com/images/prf7.png" alt="" />
+				<img src="{{asset('bundles/raykupage/images/prf7.png')}}" alt="" />
 			</a>
 			<strong>Justin Brooke</strong>
 			<em>Advisor</em>
@@ -153,7 +153,7 @@
 		</li>
 		<li>
 			<a href="#">
-				<img src="http://rayku.com/images/prf6.png" alt="" />
+				<img src="{{asset('bundles/raykupage/images/prf6.png')}}" alt="" />
 			</a>
 			<strong>Geoff Simonett</strong>
 			<em>Advisor</em>
@@ -172,7 +172,7 @@
 			<p>Christopher is President at Capital Value & Income Corp. Christopher has held senior strategic roles at leading institutions, including Goldman Sachs (Executive Director), Deutsche Bank (Managing Director), and OMERS (Global Head of Investment). He has also advised numerous public and private companies, including TELUS and Wave Accounting. Christopher received an M.B.A. from the Wharton School of Business, an M.S. from M.I.T., and a Bachelor of Architecture from McGill University.</p>
 		</div>
 		<div class="info">
-			<h4>Paul Jackson <a href="https://twitter.com/donnyouyang" target="_blank" class="right twitter-follow" title="Follow @donnyouyang"></a></h4>
+			<h4>Paul Jackson <a href="https://twitter.com/PaulAlexJackson" target="_blank" class="right twitter-follow" title="Follow @PaulAlexJackson"></a></h4>
 			<p>Advisor</p>
 			<p>Paul is CEO and founder of <a href="http://methodcrm.com" target="_blank">Method CRM</a>, with a focus on product development, user experience and data integration between SaaS applications. Previously, he founded LM Software and QXpress, which were acquired by Marathon Data Systems. Paul is also an angel investor and advisor to several local tech start-ups. Paul holds a BComm from Queen’s University.</p>
 		</div>
@@ -187,7 +187,7 @@
 			<p>Donny started Rayku to address his previous struggles with homework, having tried alternative solutions with no success. Before Rayku, Donny was the founder of Kinkarso Tech. With entrepreneurship as his life, Donny has spoken at M.I.T. on the subject, was named a 'Top 10 Under 20' by Vancouver Magazine, and is the global recipient of the 2010 Student Entrepreneur of the Year award. When he's not hammering away at the office, Donny enjoys rooting for the Vancouver Canucks, and playing Plants vs. Zombies.</p>
 		</div>
 		<div class="info">
-			<h4>Colin Hutchinson</h4>
+			<h4>Colin Hutchinson <a href="https://twitter.com/hutchic" target="_blank" class="right twitter-follow" title="Follow @hutchic"></a></h4>
 			<p>Technology Lead</p>
 			<p>Colin leads technology at Rayku. Colin previously worked as a team lead at a number of companies, scaling and managing large websites with 1 million+ uniques/day. Colin helped contribute to the development of the Symfony Framework, of which we use at Rayku.</p>
 		</div>
@@ -211,7 +211,8 @@
 </div>
 
 <div id="contact-us">
-	<a name="contact" />
+	<a name="contact" /></a>
+	<div id="map_canvas"></div>
 	<div class="contact-info">
 		<h3>Get in touch with us!</h3>
 		<p>Rayku is based in Toronto, Canada.</p>

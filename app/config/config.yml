@@ -83,7 +83,7 @@ swiftmailer:
     password:  %mailer_password%
 
 jms_security_extra:
-    secure_all_services: false
+    secure_all_services: true
 
 sonata_block:
     default_contexts: [cms]

@@ -3,6 +3,7 @@
 namespace Rayku\ApiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use JMS\Payment\CoreBundle\Entity\PaymentInstruction;
 
 
@@ -21,6 +22,7 @@ class Favorite
 	 * @ORM\Column(name="id", type="integer", nullable=false)
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
+	 * @Serializer\Groups({"favorite", "favorite.details"})
 	 */
 	private $id;
     
@@ -29,6 +31,7 @@ class Favorite
      *
      * @ORM\ManyToOne(targetEntity="\Rayku\ApiBundle\Entity\User", inversedBy="favorites")
      * @ORM\JoinColumn(name="sender_id", referencedColumnName="id")
+     * @Serializer\Groups({"favorite.details"})
      */
     private $sender;
 
@@ -37,6 +40,7 @@ class Favorite
      *
      * @ORM\ManyToOne(targetEntity="\Rayku\ApiBundle\Entity\User")
      * @ORM\JoinColumn(name="receiver_id", referencedColumnName="id")
+     * @Serializer\Groups({"favorite.details"})
      */
     private $receiver;
     
@@ -44,6 +48,7 @@ class Favorite
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     * @Serializer\Groups({"favorite", "favorite.details"})
      */
     private $createdAt;
     
@@ -51,6 +56,7 @@ class Favorite
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @Serializer\Groups({"favorite", "favorite.details"})
      */
     private $updatedAt;
     

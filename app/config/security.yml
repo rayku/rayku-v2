@@ -1,6 +1,6 @@
 security:
-    #acl:
-        #connection: default
+    acl:
+        connection: default
     encoders:
         "FOS\UserBundle\Entity\User":
             algorithm: sha1

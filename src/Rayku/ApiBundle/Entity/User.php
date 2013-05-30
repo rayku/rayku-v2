@@ -27,7 +27,7 @@ class User extends BaseUser
 	 * @ORM\Id
 	 * @ORM\Column(type="integer")
 	 * @ORM\GeneratedValue(strategy="AUTO")
-	 * @Serializer\Groups({"list", "user.view"})
+	 * @Serializer\Groups({"user", "user.details"})
 	 */
 	protected $id;
 	
@@ -36,7 +36,7 @@ class User extends BaseUser
 	 *
 	 * @ORM\OneToOne(targetEntity="\Rayku\ApiBundle\Entity\Tutor", cascade={"persist"})
 	 * @ORM\JoinColumn(name="tutor_id", referencedColumnName="id")
-	 * @Serializer\Groups({"user.view"})
+	 * @Serializer\Groups({"user.details"})
 	 */
 	private $tutor;
 	
@@ -48,6 +48,7 @@ class User extends BaseUser
 
 	/**
 	 * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Favorite", mappedBy="sender")
+	 * @Serializer\Groups({"user.details"})
 	 **/
 	private $favorites;
 	
@@ -62,7 +63,7 @@ class User extends BaseUser
 	 *
 	 * @ORM\Column(name="fname", type="string", length=255, nullable=false)
 	 * @Assert\NotBlank(groups={"registration"})
-	 * @Serializer\Groups({"list", "user.view"})
+	 * @Serializer\Groups({"user", "user.details"})
 	 */
 	private $first_name = 'First Name';
 	
@@ -71,7 +72,7 @@ class User extends BaseUser
 	 *
 	 * @ORM\Column(name="lname", type="string", length=255, nullable=false)
 	 * @Assert\NotBlank(groups={"registration"})
-	 * @Serializer\Groups({"list", "user.view"})
+	 * @Serializer\Groups({"user", "user.details"})
 	 */
 	private $last_name = 'Last Name';
 	
@@ -79,7 +80,7 @@ class User extends BaseUser
 	 * @var string
 	 * 
 	 * @ORM\Column(name="referral_code", type="string", length=255, nullable=true)
-	 * @Serializer\Groups({"user.view"})
+	 * @Serializer\Groups({"user.details"})
 	 */
 	private $referral_code;
 	
@@ -100,6 +101,7 @@ class User extends BaseUser
 	/**
      * @ORM\ManyToOne(targetEntity="\Rayku\ApiBundle\Entity\User")
      * @ORM\JoinColumn(name="referral_referer", referencedColumnName="id", nullable=true)
+     * @Serializer\Groups({"user.details"})
 	 */
 	private $referral_referer;
 	
@@ -107,7 +109,7 @@ class User extends BaseUser
 	 * @var string
 	 *
 	 * @ORM\Column(name="signup_question", type="string", length=255, nullable=true)
-	 * @Serializer\Groups({"user.view"})
+	 * @Serializer\Groups({"user.details"})
 	 */
 	private $signup_question;
 	
@@ -116,7 +118,7 @@ class User extends BaseUser
 	 *
 	 * @ORM\Column(name="school", type="string", length=255, nullable=false)
 	 * @Assert\NotBlank()
-	 * @Serializer\Groups({"user.view"})
+	 * @Serializer\Groups({"user.details"})
 	 */
 	private $school = 'School';
 	
@@ -125,7 +127,7 @@ class User extends BaseUser
 	 *
 	 * @ORM\Column(name="school_year", type="string", length=255, nullable=false)
 	 * @Assert\NotBlank()
-	 * @Serializer\Groups({"user.view"})
+	 * @Serializer\Groups({"user.details"})
 	 */
 	private $grade = 'Level of Education';
 	
@@ -134,7 +136,7 @@ class User extends BaseUser
 	 *
 	 * @ORM\Column(name="degree", type="string", length=255, nullable=false)
 	 * @Assert\NotBlank()
-	 * @Serializer\Groups({"user.view"})
+	 * @Serializer\Groups({"user.details"})
 	 */
 	private $degree = 'Degree';
 	
@@ -143,7 +145,7 @@ class User extends BaseUser
 	 *
 	 * @ORM\Column(name="about", type="string", length=255, nullable=false)
 	 * @Assert\NotBlank()
-	 * @Serializer\Groups({"user.view"})
+	 * @Serializer\Groups({"user.details"})
 	 */
 	private $bio = 'Short Bio';
 	
@@ -155,6 +157,7 @@ class User extends BaseUser
 	 *   @ORM\JoinColumn(nullable=true, name="coupon_id", referencedColumnName="id")
 	 * })
 	 * @Assert\Type(type="\Rayku\ApiBundle\Entity\Coupon")
+	 * @Serializer\Groups({"user.details"})
 	 */
 	private $coupon;
 	

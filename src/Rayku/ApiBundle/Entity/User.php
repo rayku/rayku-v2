@@ -45,6 +45,12 @@ class User extends BaseUser
 	 **/
 	private $orders;
 	
+
+	/**
+	 * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Favorite", mappedBy="sender")
+	 **/
+	private $favorites;
+	
 	/**
 	 * @var integer
 	 * @ORM\Column(name="points", type="integer", nullable=false)
@@ -875,5 +881,38 @@ class User extends BaseUser
     public function getOrders()
     {
         return $this->orders;
+    }
+
+    /**
+     * Add favorites
+     *
+     * @param \Rayku\ApiBundle\Entity\Favorite $favorites
+     * @return User
+     */
+    public function addFavorite(\Rayku\ApiBundle\Entity\Favorite $favorites)
+    {
+        $this->favorites[] = $favorites;
+    
+        return $this;
+    }
+
+    /**
+     * Remove favorites
+     *
+     * @param \Rayku\ApiBundle\Entity\Favorite $favorites
+     */
+    public function removeFavorite(\Rayku\ApiBundle\Entity\Favorite $favorites)
+    {
+        $this->favorites->removeElement($favorites);
+    }
+
+    /**
+     * Get favorites
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFavorites()
+    {
+        return $this->favorites;
     }
 }

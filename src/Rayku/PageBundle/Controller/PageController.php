@@ -80,8 +80,12 @@ class PageController extends Controller
 	 * @Template("RaykuPageBundle:Page:dashboard2.html.twig")
 	 */
 	public function dashboardAction()
-	{		
-		return array('user' => $this->getUser());
+	{
+		if(false === $this->get('security.context')->isGranted('ROLE_USER')){
+			throw new AccessDeniedException();
+		}else{
+			return array('user' => $this->getUser());
+		}
 	}
 	
 	/**

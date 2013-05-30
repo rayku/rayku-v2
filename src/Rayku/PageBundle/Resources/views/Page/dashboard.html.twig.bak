@@ -1,0 +1,465 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/raykupage/css/innerstyle.css') }}" type="text/css" rel="stylesheet" media="screen" />
+{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+	{% if user.id is null %}
+		{% include 'RaykuPageBundle:Page:registration_modal.html.twig' with {'form': registrationform} %}
+	{% endif %}
+    <!--Sidebar-->
+		<div class="large-3 columns sidebar">
+    		<div class="row tutor-sidebar">
+                <div class="small-12 columns tutor-label">
+                    <h5>Tutor</h5>
+                    <div class="tutor-switch">
+                        <a href=# name="toggle" id="tutorOn" data="{% if user.isTutor %}isTutor{% endif %}"><span>On</span></a>
+                        <a href=# name="toggle" id="tutorOff" data="{% if user.isTutor == false %}notTutor{% endif %}"><span>Off</span></a>
+                    </div>
+    		    </div>
+    		</div>
+    		{% if user.isTutor %}
+	            <div class="row tutor-status-bar">
+	                <div class="small-12 columns tutor-status">
+	                    <h5>Status <span>
+	                    Online
+	                    </span></h5>
+	                </div>
+	            </div>
+	        {% endif %}
+
+            <div class="row tutor-selected">
+                <h5><span class="tutor-count">0</span> <span class="tright">Tutor(s) Selected</span> </h5>
+                <div class="small-12 columns">
+                    <ol id="selectedTutors">
+                    </ol>
+                    <a href=# class="clear-tutors">Clear All</a>
+                </div>
+            </div>
+		</div>
+    <!--End Sidebar-->
+
+
+    <!--Main Content-->
+	<div class="large-9 columns main-content">
+        <!--User Settings-->    
+        {% if user.id %}
+	        {% include 'RaykuPageBundle:Page:settings.html.twig' with {'usersettingform': usersettingform} %}
+	    {% endif %}
+        
+        <!-- User Profile -->
+        <div class="row user-profile">
+            <div class="large-12 columns user-profile-top">
+                <h6><a href="#" title="Buy Rayku Points" class="rayku-points">{{user.points}}RP</a></h6>
+                <h5>{{ user.username }}</h5>
+            </div>
+            <div class="large-12 columns user-rayku-points">
+                <form class="buy-rayku-points custom" name="buy_rayku_points" action="/paypal.php" method="post">
+                    <div class="row">
+                        <div class="large-3 columns ask-q">
+                            <h5>Buy Rayku Points</h5>
+                        </div>
+                        <div class="large-6 columns">
+                            <label for="customDropdown1">You have <span class="rpoints">0</span> Rayku Points. Buy Some More.</label>
+                            <select id="customDropdown1" class="large" name="amount">
+                                <option DISABLED>Points</option>
+                                <option value="5">500 Points for $5</option>
+                                <option value="10">1000 Points for $10</option>
+                                <option value="25">2500 Points for $25</option>
+                                <option value="50">5000 Points for $50</option>
+                                <option value="100">10000 Points for $100</option>
+                            </select>
+                        </div>
+                        <div class="large-3 columns">
+                        	<input type="hidden" name="loginid" value="{{ user.id }}" />
+                            <input type="submit" class="bbutton" value="Buy">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="large-3 columns user-profile-image">
+                <img src="/{{ user.webPath }}" style="height:200px">
+            </div>  
+            <div class="large-9 columns user-profile-info">
+                <ul class="user-profile-items">
+                    <li>
+                        <a href="#" class="raphael edit-tool">></a>
+                        <form class="user-profile-edit-form" name="name">
+                            <label>Name</label>
+                            <input type="text" placeholder="{{ user.firstname }}" name="current_first_name" class="form-field">
+                            <input type="text" placeholder="{{ user.lastname }}" name="current_last_name" class="form-field">
+                            <input type="submit" class="bbutton" value="Save">
+                            <a href=# class="close-edit">x</a>
+                        </form>
+                        <h4><span class="name edit">{{ user.firstname }} {{ user.lastname }}</span></h4>
+                    </li>
+                    <li>
+                        <a href="#" class="raphael edit-tool">></a>
+                        <form class="user-profile-edit-form" name="education">
+                            <label>Education</label>
+                            <input type="text" placeholder="{{ user.grade }}" name="current_grade" class="form-field">
+                            <input type="submit" class="bbutton" value="Save">
+                            <a href=# class="close-edit">x</a>
+                        </form>
+                        <h5><span class="education edit">{{ user.grade }}</span></h5>
+                    </li>
+                    <li>
+                        <a href="#" class="raphael edit-tool">></a>
+                        <form class="user-profile-edit-form" name="school">
+                            <label>University</label>
+                            <input type="text" placeholder="{{ user.school }}" name="current_school" class="form-field">
+                            <input type="submit" class="bbutton" value="Save">
+                            <a href=# class="close-edit">x</a>
+                        </form>
+                        <span>School:</span> <span class="school edit">{{ user.school }}</span>
+                    </li>
+                    <li>
+                        <a href="#" class="raphael edit-tool">></a>
+                        <form class="user-profile-edit-form" name="degree">
+                            <label>Degree</label>
+                            <input type="text" placeholder="{{ user.degree }}" name="current_degree" class="form-field">
+                            <input type="submit" class="bbutton" value="Save">
+                            <a href=# class="close-edit">x</a>
+                        </form>
+                        <span>Degree:</span> <span class="degree edit">{{ user.degree }}</span>
+                    </li>
+                    {% if user.isTutor %}
+	                    <li>
+	                        <a href="#" class="raphael edit-tool">></a>
+	                        <form class="user-profile-edit-form" name="bio">
+	                            <label>About</label>
+	                            <textarea class="form-field" name="current_bio">{{ user.bio }}</textarea>
+	                            <input type="submit" class="bbutton" value="Save">
+	                            <a href=# class="close-edit">x</a>
+	                        </form>
+	                        <span>About:</span> <span class="bio edit">{{ user.bio }}</span>
+	                    </li>
+	                    <li>
+	                         <span class="tutor edit"><a class="public-tutor-link" href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></span>
+	                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="user-profile-buttons">
+                    <li><a href=# class="bbutton edit-button"><span class="raphael">></span>Edit Profile</a></li>
+                    <li>
+                      <form name="master-form" method="post" class="user-profile-master-form" action="{{ path('post_users', {'user': user.id }) }}" {{ form_enctype(userform) }}>
+                        {{ form_widget(userform.first_name) }}
+                        {{ form_widget(userform.last_name) }}
+                        {{ form_widget(userform.school) }}
+                        {{ form_widget(userform.grade) }}
+                        {{ form_widget(userform.degree) }}
+                        {{ form_widget(userform.bio) }}
+                        <div class="picture-upload" style="display:none; position:absolute; left:-390px">
+	                        {{ form_widget(userform.file, { 'attr' : { 'style':'visibility:hidden' } }) }}
+	                        <input type="button" id="photo-upload" value="Upload Photo!" class="bbutton" />
+	                        <script type="text/javascript">
+	                        	$(function(){
+	                        		$('#photo-upload').click(function(){
+	                        			$('#file').click();
+	                        		});
+	                        	})
+	                        </script>
+	                    </div>
+    	                {{ form_rest(userform) }}
+                        <input type="submit" value="Done Editing" class="bbutton done-button">
+                      </form>
+                    </li>
+                </ul>
+            </div>
+            
+            <script>
+            $(function(){
+                var change = 0;
+                var valarr = []; //declare an empty array
+                //On submitting each individual form
+                $('form.user-profile-edit-form').on('submit', function(event){
+                    event.preventDefault(); //prevent reloading page by clicking submit
+                    var current_form_name = $(this).attr('name'); //get the current form name
+
+                    //for each input field with class .form-field within the current form
+                    $('form[name="'+current_form_name+'"] .form-field').each(function(){
+                        var field_value = $(this).val(); //get the field value
+                        var field_name = $(this).attr('name').replace("current_", ""); //get the field name and split it to get the appropriate identifier
+
+                        if(field_value !== ""){
+                            //set the equivalent input field in master form to the value of the current input field
+                            $('form.user-profile-master-form input[name="'+ field_name +'"]').val(field_value);
+                            valarr.push(field_value); //push the value into an array
+                        }
+                    });
+
+                    // To display on the page if the form had one or more fields
+                    if(valarr.length > 1){
+                        $('.'+current_form_name).html(valarr.join(", "));
+                    }
+                    else{
+                        $('.'+current_form_name).html(valarr.join(""));
+                    }
+                    //Hide the current form
+                    $(this).hide(100);
+                    valarr = [];
+                    return false;
+                });
+
+                //When done profile editing, submit the form. Should be done via Ajax
+                $('form.user-profile-master-form').ajaxForm(function() { 
+                	valarr = [];
+                });
+
+                //slide down rayku points form
+                $('.rayku-points').click(function(event){
+                    event.preventDefault();
+                    $('.user-rayku-points').slideToggle();
+                });
+            });
+            </script>
+            <!--End Profile Info-->
+            <div class="large-12 columns user-divider">
+            </div>
+            <!--Ask Form-->
+            <div class="large-12 columns ask">
+              <form class="custom">
+                <div class="row">
+                  <div class="large-3 columns ask-q">
+                    <h5>Find suitable tutor for</h5>
+                  </div>
+                  <div class="large-3 columns school">
+                    <!--
+                    <select id="schoolSelect" class="medium" name="school">
+                      <option>Choose Institution</option>
+                      <option value="high school" name="selectlevel">High School</option>
+                      <option value="university" name="selectlevel">University</option>
+                    </select>
+                    //-->
+                  </div>
+
+                  <div class="large-3 columns institution" id="placeholder">
+                    <!--
+                    <select id="instSelect" class="medium" disabled>
+                        <option value="Choose" name="choose" id="choose">Select An Institution</option>
+                    </select>
+                    //-->
+                  </div>
+
+                  <div class="large-3 columns institution" id="highschool">
+                    <!--
+                    <select name="highschool" class="medium" disabled>
+                        <option value="Choose" name="choose" id="choose">Choose Grade</option>
+                        <option value="grade 1">Grade 1</option>
+                        <option value="grade 2">Grade 2</option>
+                        <option value="grade 3">Grade 3</option>
+                        <option value="grade 4">Grade 4</option>
+                        <option value="grade 5">Grade 5</option>
+                        <option value="grade 6">Grade 6</option>
+                        <option value="grade 7">Grade 7</option>
+                        <option value="grade 8">Grade 8</option>
+                        <option value="grade 9">Grade 9</option>
+                        <option value="grade 10">Grade 10</option>
+                        <option value="grade 11">Grade 11</option>
+                        <option value="grade 12">Grade 12</option>
+                    </select>
+                    //-->
+                  </div>
+                  <div class="large-3 columns institution" id="university">
+                    <!--
+                    <select name="university" class="medium" disabled>
+                        <option value="Choose" name="choose" id="choose">Choose Year</option>
+                        <option value="year 1">Year 1</option>
+                        <option value="year 2">Year 2</option>
+                        <option value="year 3">Year 3</option>
+                        <option value="year 4">Year 4</option>
+                        <option value="year 5">Year 5</option>
+                    </select>
+                    //-->
+                  </div>
+
+                  <div class="large-3 columns category">
+                    <select id="categorySelect" class="medium" name="category">
+                      <option>Choose Category</option>
+                      <option value="1">Math</option>
+                      <option value="2">Physics</option>
+                      <option value="3">Science</option>
+                      <option value="4">Writing</option>
+                      <option value="5">Chemistry</option>
+                      <option value="6">Biology</option>
+                    </select>
+                  </div>
+
+                  <div class="large-12 columns question-container">
+                    <div class="input-container">
+                      <input type="text" placeholder="What is your question? Or view online tutors" name="ask" id="base_question">
+                    </div>
+                    <input type="submit" class="bbutton" value="View Online Tutors" name="aSubmit">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!--End Ask Form-->
+        </div>
+
+      
+    <!--Tutor List-->
+    <div class="row tutor-list">
+     Loading ...
+    </div>
+  </div>
+  <!--End Tutor List-->
+</div>
+{% if user.id %}
+	{% render url('rayku_tutor_new') %}
+
+	{% include 'RaykuPageBundle:Page:notification_modal.html.twig' %}
+{% endif %}
+
+{% if ratesessionform is defined %}
+	<div id="referFriend" class="reveal-modal medium">
+		<div class="row registration-header">
+        	<h2>Refer a Friend</h2>
+		</div>
+	    <div class="row registration-body">
+			<div class="large-12 columns">
+				You can get extra Rayku Points by inviting your friends to try out Rayku. If a friend uses your invitation to sign up for an account you will receive 200 Rayku Points and your friend receives 500 Rayku points.</br><br/>
+				
+				<input type="text" value="http://www.rayku.com/?refcode={{ user.referralCode }}" /><br /><br />
+
+				<a href="#"><img src="https://secure.citizensforethics.org/page/-/images/buttons/btn_fb_55px.gif" /></a>
+			</div>
+		</div>
+		<a class="close-reveal-modal">×</a>
+	</div>
+	
+	<div id="rateTutorModal" class="reveal-modal medium rateTutor">
+		<div class="row registration-header">
+        	<h2>Rate Your Tutor</h2>
+		</div>
+		<div class="row registration-body">
+	    <div class="large-12 columns rate-tutors">
+	        <form id="rateTutorForm" class="custom" name="rate-tutor" action="{{ path('post_session_rate', {'session': session.id}) }}" method="post">
+	            <div class="row">
+	                <div class="large-9 columns">
+	                    <label for="rateTutor">{{ session.selectedtutor }}</label>
+	                    {{ form_widget(ratesessionform.rating) }}
+	                    {{ form_rest(ratesessionform) }}
+	                </div>
+	
+	                <!--// Attach to a review table on DB //-->
+	                <div class="large-12 columns">
+	                    <form>
+	                        <div class="row">
+	                            <div class="large-12 columns">
+	                                <label>Write Review</label>
+	                                <textarea placeholder="small-12.columns">Write a tutor review</textarea>
+	                            </div>
+	                        </div>
+	                    </form>
+	                </div>
+	                <div class="large-3 columns">
+	                    <input type="submit" class="bbutton" value="Rate">
+	                </div>
+	            </div>
+	            <div class="row">
+	            	<div class="large-12 coumns">
+	            		View the <strong><a href="{{ whiteboard_url }}/room/{{ session.id }}/playback/5" target="_blank" />Session Recording</a></strong>
+	            	</div>
+	            </div>
+	        </form>
+	    </div></div>
+	</div>
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#rateTutorModal').foundation('reveal', 'open');
+	    $('#rateTutorForm').ajaxForm(function() {
+	    	if($('select#rating').find(":selected").val() > 3){
+	    		$('#referFriend').foundation('reveal', 'open')    	
+	    	}else{
+		    	$('#rateTutorModal').foundation('reveal', 'close');
+		    }
+		});
+	});
+	</script>
+{% endif %}
+
+
+<script type="text/javascript">
+//DO NOT BREAK THIS JAVASCRIPT UP
+$(document).ready(function(){
+    //Submit Question
+    $('input[name="aSubmit"]').click(function(event){
+    	event.preventDefault();
+    	$('.tutor-list').html('Loading ... ');
+        $.ajax('{{path('rayku_tutor')}}')
+		    .always(function(xhr, status) { 
+				if(status === 'error' || !xhr.responseText){
+					$('.tutor-list').html('There was an error loading tutors');
+				}else{
+					$('.tutor-list').html(xhr.responseText);
+				}
+			});
+        $('.tutor-list').fadeIn('slow');
+        $('.tutor-selected').fadeIn('fast');
+        
+        
+        //disable all checkboxes for tutors that are busy
+        $('form#tutorList :input').each(function(){
+            var input = $(this);
+            if($(this).attr("data-tutor-status") == 1){
+                $(this).attr('disabled', true);
+            }
+        });
+
+    });
+
+    //set all busy tutors to show a red background
+    $('table#tutorTable tr td').each(function(){
+        var column = $(this);
+        if(column.hasClass('busy')){
+            column.find('a').addClass('tutor-busy');
+        }
+    });
+});
+</script>
+{% endblock %}
+
+{% block head %}
+	{{ parent() }}
+	{% if app.user %}
+		<script src="{{ asset('bundles/raykupage/js/jquery_poll/lib/jquery.smart-poll.js') }}"></script>
+		<script type="text/javascript">
+		window.setInterval(function(){
+			$.get('{{ path('get_sessions') }}', function(response, status){
+				jQuery.each(response, function() {
+					var current_messages = parseInt($('.notif-count').html());
+					$('.notif-count').html(response.length);
+					var template = $('#connectRow_id_').prop("outerHTML");
+					template = template.replace('_name_', this.student.first_name+' '+this.student.last_name);
+					template = template.replace('_question_', this.question);
+					template = template.replace(/_id_/g, this.id);
+					$('#connectNotifModal').append(template);
+					$('#connectRow'+this.id).show();
+					if(response.length > current_messages){
+						$('#connectNotifModal').foundation('reveal', 'open');
+					}
+					$('.post_session_accept').ajaxForm(function(response) { 
+						if(response.success){
+							window.location.href = response.redirect;
+						}else if(response.success !== false){
+							alert(response.message);
+						}else{
+							alert('an unknown error has occured');
+						}
+					})
+					$('.post_session_deny').ajaxForm(function(response) {
+					    if(response.success){
+					        $('#connectNotifModal').foundation('reveal', 'close');
+					    }
+					})
+				})
+			})
+		}, 5000);
+		</script>
+	{% endif %}
+{% endblock %}

@@ -13,9 +13,64 @@
 			<div class="left">
 				<h1>Instant Homework Help</h1>
 				<h2>Connect with a live online tutor, over a beautiful &amp; interactive whiteboard, whenever you need help. Your first session is free!</h2>
-				
-				{% if app.request.attributes.get('_route') == 'rayku_page_homepage' %}
-					{% render "FOSUserBundle:Registration:register" %}
+				{% if app.request.attributes.get('_route') == 'rayku_page_homepage_fb_registration' %}
+					<p><input type="submit" value="Register Now" name="question" class="bbutton" data-reveal-id="fbRegisterModal"></p>
+					<div id="fbRegisterModal" class="reveal-modal medium">
+					    <div class="row login-modal-header">
+					        <a class="close-reveal-modal">&#215;</a>
+					    </div>
+					    <div class="row login-form">
+							<iframe 
+								src="
+									https://www.facebook.com/plugins/registration?
+									client_id=120906181315520&
+									redirect_uri=http%3A%2F%2Fwww.rayku.com%2Fapp_dev.php%2Fregister%2Fconfirmed&
+									fields=name,first_name,last_name,email,password"
+							    scrolling="auto"
+							    frameborder="no"
+							    style="border:none"
+							    allowTransparency="true"
+							    width="100%"
+							    height="360">
+							</iframe>
+						</div>
+					</div>
+				{% elseif app.request.attributes.get('_route') == 'rayku_page_homepage' %}
+					<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+						<p>
+							{{ form_widget(form.signup_question, { 'attr': {'placeholder': 'Describe what you need help with...', 'class': 'ask' } }) }}
+							{{ form_errors(form) }}
+							<input type="submit" value="Ask" name="question" class="bbutton" />
+						</p>
+						<div id="signup-ask">
+							<div class="head"><a href="#" class="close ask-login-button">x</a><span>Please provide account information in order to continue</span> <a href="#" data-reveal-id="loginModal" class="right ask-login-button">Already have an account</a><div class="clear"></div></div>
+							<div class="row signup-form">
+								<div class="large-6 columns">
+						        	{{ form_widget(form.username, { 'attr': {'placeholder': 'Username'} }) }}
+						        	{{ form_errors(form.username) }}
+						      	</div>
+						      	<div class="large-6 columns">
+						        	{{ form_widget(form.email, { 'attr': {'placeholder': 'E-mail'} }) }}
+						        	{{ form_errors(form.email) }}
+						      	</div>
+						      	<div class="large-6 columns">
+						      		{{ form_errors(form.plainPassword) }}
+						        	{{ form_widget(form.plainPassword, { 'attr': {'placeholder': 'Password'} }) }}
+						      	</div>
+						      	<div class="large-6 columns">
+						      		{{ form_errors(form.coupon) }}
+						        	{{ form_widget(form.coupon, { 'attr': {'placeholder': 'Coupon Code (Optional)'} }) }}
+						      	</div>
+						    	<div class="large-6 columns terms">
+						    		By clicking Create Account you are indicating that you have read and agree to the <strong>Terms & Conditions</strong>
+						    	</div>
+						    	<div class="large-6 columns submit">
+						    		{{ form_rest(form) }}
+						    		<input type="submit" value="Create an account and ask" class="bbutton" />
+						    	</div>
+						    </div>
+						</div>
+					</form>
 				{% else %}
 					<form action="{{ path('rayku_page_dashboard') }}" method="POST">
 						<p>

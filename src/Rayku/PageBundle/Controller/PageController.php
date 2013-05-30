@@ -3,117 +3,80 @@
 namespace Rayku\PageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Session\Session as PHPSession;
-use Rayku\ApiBundle\Form\UserType;
-use Rayku\ApiBundle\Form\UserSettingType;
-use Rayku\ApiBundle\Form\RateSessionType;
-use Rayku\UserBundle\Form\Type\RegistrationAndProfileFormType;
-use Rayku\UserBundle\Form\Type\RegistrationAndTutorProfileFormType;
-use Rayku\ApiBundle\Entity\Session;
-use Rayku\ApiBundle\Entity\User;
-use Rayku\ApiBundle\Entity\Tutor;
-use Rayku\ApiBundle\Entity\SessionTutors;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Rayku\UserBundle\Form\Type\RegistrationAndTutorProfileFormType;
+use Rayku\ApiBundle\Entity\User;
 
-/**
- * Page controller.
- *
- */
 class PageController extends Controller
 {
+	/**
+	 * @Route("/about", name="rayku_page_about")
+	 * @Template
+	 */
+	public function aboutAction(){ }
+	
+	/**
+	 * @Route("/onboarding", name="rayku_page_tutor_onboarding")
+	 * @Template
+	 */
+	public function onboardingAction() { }
+	
+	/**
+	 * @Route("/legal", name="rayku_legal_page")
+	 * @Template
+	 */
+	public function legalAction() { }
+	
+	/**
+	 * @Route("/getwhiteboard", name="rayku_page_whiteboard_iframe")
+	 */
 	public function whiteboardIframeAction()
 	{
-		//die(__LINE__.' '.__FILE__);
 		$result = file_get_contents($_POST['address']);
 		return $result;
 	}
 
+	/**
+	 * @Route("/", name="rayku_page_homepage")
+	 * @Route("/ask", name="rayku_page_homepage_minimized_funnel")
+	 * @Template
+	 */
 	public function indexAction()
 	{
 		if($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')){
 			return $this->redirect($this->generateUrl('rayku_page_dashboard'));
 		}
-		return $this->render('RaykuPageBundle:Page:home.html.twig');
-	}
+		return array('form' => $this->container->get('fos_user.registration.form'));
+	}	
 	
-	public function autoConnectSessionAction()
-	{
-		// @todo refactor to use REST api GET /tutors
-		$em = $this->getDoctrine()->getManager();
-		$tutors = $em->getRepository('RaykuApiBundle:Tutor')->findOnlineTutors(Tutor::expire_online, $this->getUser()->getId());
-	
-		if(empty($tutors)){
-			return $this->forward('RaykuPageBundle:Page:dashboard');
-		}
-		// @todo refactor to use REST api POST /sessions
-		$session = new Session();
-		$session->setQuestion($this->getUser()->getSignupQuestion());
-		$session->setStudent($this->getUser());
-		foreach($tutors as $tutor){
-			$potentialTutor = new SessionTutors();
-			$potentialTutor->setTutor($tutor);
-			$session->addPotentialTutor($potentialTutor);
-		}
-	
-		$em->persist($session);
-		$em->flush();
-	
-		return $this->redirect($this->container->getParameter('whiteboard_url').'/room/'.$session->getId().'/student');
-	}
-	
+	/**
+	 * @Route("/become-a-tutor", name="rayku_page_become_a_tutor")
+	 * @Template
+	 */
 	public function becomeAction()
 	{
 		$user = new User();
 		$registrationform = $this->createForm(new RegistrationAndTutorProfileFormType(get_class($user)), $user)->createView();
-		return $this->render('RaykuPageBundle:Page:become.html.twig', array('registrationform' => $registrationform));
+		return array('registrationform' => $registrationform);
 	}
 	
-	public function dashboardAction($id = NULL)
+	/**
+	 * @Route("/session/{id}/rate", requirements={"id" = "\d+"}, name="rayku_session_rate")
+	 */
+	public function rateSessionAction()
 	{
-		if($this->getRequest()->isMethod('POST') && null == $this->getUser()){
-			$user = new User();
-			$user->setSignupQuestion($this->getRequest()->get('question'));
-			$user->setFirstName('');
-			$view['user'] = $user;
-			$view['registrationform'] = $this->createForm(new RegistrationAndProfileFormType(get_class($user)), $user)->createView();
-		}else if(false === $this->get('security.context')->isGranted('ROLE_USER')){
-			throw new AccessDeniedException();
-		}else{
-			$view['user'] = $this->getUser();
-		}
-		
-		$userEditForm = $this->createForm(new UserType(), $this->getUser());
-		$view['userform'] = $userEditForm->createView();
-		
-		$userSettingForm = $this->createForm(new UserSettingType(), $this->getUser());
-		$view['usersettingform'] = $userSettingForm->createView();
-		
-		/*
-		 * @todo move logic to the model layer
-		 * @todo proper error messages to the user
-		 * @todo allow tutors to rate the session
-		 * @todo move to repository class out of controller
-		 */
-		if(isset($id)){
-			$em = $this->getDoctrine()->getManager();
-			$session = $em->getRepository('RaykuApiBundle:Session')->find($id);
-			if(
-				null === $session->getRating() && 
-				$session->getStudent() == $this->getUser())
-			{
-				if(null === $session->getEndTime()){
-					$session->endNow();
-					$em->persist($session);
-					$em->persist($session->getStudent());
-					if(null !== $session->getSelectedTutor()) $em->persist($session->getSelectedTutor());
-					$em->flush();
-				}
-				$sessionRateForm = $this->createForm(new RateSessionType(), $session);
-				$view['session'] = $session;
-				$view['ratesessionform'] = $sessionRateForm->createView();
-			}
-		}
-		
-		return $this->render('RaykuPageBundle:Page:dashboard2.html.twig', $view);
+		die('not implemented yet');
+	}
+	
+	/**
+	 * @Route("/register/confirmed", name="rayku_register_confirmed")
+	 * @Route("/dashboard", name="rayku_page_dashboard")
+	 * @Template("RaykuPageBundle:Page:dashboard2.html.twig")
+	 */
+	public function dashboardAction()
+	{		
+		return array('user' => $this->getUser());
 	}
 }

@@ -48,6 +48,7 @@ class AppKernel extends Kernel
             // FOS
             new FOS\UserBundle\FOSUserBundle(),
         	new FOS\RestBundle\FOSRestBundle(),
+        	new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         		
         	// SONATA
         	new Sonata\BlockBundle\SonataBlockBundle(),
@@ -60,10 +61,10 @@ class AppKernel extends Kernel
             new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
         	
         	// Rayku
-        	new Rayku\TutorBundle\RaykuTutorBundle(),
             new Rayku\PageBundle\RaykuPageBundle(),
             new Rayku\ApiBundle\RaykuApiBundle(),
-        	new Rayku\UserBundle\RaykuUserBundle()
+        	new Rayku\UserBundle\RaykuUserBundle(),
+        	new Rayku\TutorBundle\RaykuTutorBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

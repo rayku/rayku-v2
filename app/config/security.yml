@@ -72,6 +72,7 @@ security:
 
         # Non-secure part of site
         - { path: ^/ask$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/fb$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/about$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/dashboard$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/become-a-tutor$, role: IS_AUTHENTICATED_ANONYMOUSLY }

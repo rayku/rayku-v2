@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+	<title>{% block title %}Rayku{% endblock %}</title>
 	<link href="{{ asset('bundles/raykupage/css/foundation.css') }}" type="text/css" rel="stylesheet" media="screen" />
 	<link href="{{ asset('bundles/raykupage/css/app.css') }}" type="text/css" rel="stylesheet" media="screen" />
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="{{ asset('bundles/raykupage/js/script.js') }}"></script>
+	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+	<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>	
 </head>
 <body>
 <div class="container">
@@ -286,5 +288,11 @@ MODALS
 <script>
     $(document).foundation();
 </script>
+
+    {% include "::GoogleAnalytics.html.twig" %}
+    
+    {% include "::PathAnalytics.html.twig" %}
+    
+    {% include "::ZenDeskFeedback.html.twig" %}
 </body>
 </html>

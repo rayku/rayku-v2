@@ -4,12 +4,6 @@ rayku_page_import:
     prefix:   /
     options:
         expose: true
-    
-rayku_tutor:
-    resource: "@RaykuTutorBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 
 rayku_api_import:
     resource: "@RaykuApiBundle/Resources/config/routing.yml"

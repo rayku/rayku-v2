@@ -17,3 +17,8 @@ rayku_order_rest:
 rayku_favorite_rest:
     resource: Rayku\ApiBundle\Controller\FavoriteController
     type:     rest
+
+rayku_message_rest:
+    resource: Rayku\ApiBundle\Controller\MessageController
+    type:     rest
+    

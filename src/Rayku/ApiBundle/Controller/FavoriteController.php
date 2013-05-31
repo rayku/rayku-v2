@@ -56,6 +56,7 @@ class FavoriteController extends Controller
 	
 
 	/**
+	 * @Secure(roles="ROLE_USER")
 	 * @View()
 	 * @ApiDoc(
 	 *   statusCodes={
@@ -83,7 +84,7 @@ class FavoriteController extends Controller
      *     200="Returned when successful",
      *     400="Returned when there is an error"
      *   },
-	 *   description="Order object",
+	 *   description="Create a new Favorite record",
 	 *   resource=true,
 	 *   input="Rayku\ApiBundle\Form\FavoriteType"
 	 * )

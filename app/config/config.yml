@@ -141,6 +141,10 @@ jms_serializer:
                 path: "@RaykuUserBundle/Resources/config/serializer/fos"
 
 services:
+    rayku.type.new_thread_form:
+        class: Rayku\ApiBundle\Form\NewThreadType
+    rayku.type.reply_thread_form:
+        class: Rayku\ApiBundle\Form\ReplyMessageType
     rayku.auto_login_user_provider:
         class: Rayku\UserBundle\Security\AutoLoginUserProvider
         arguments: [@doctrine]
@@ -170,3 +174,11 @@ services:
 jms_security_extra:
     expressions: true
 
+fos_message:
+    db_driver: orm
+    thread_class: Rayku\ApiBundle\Entity\Thread
+    message_class: Rayku\ApiBundle\Entity\Message
+    new_thread_form:
+        type: rayku.type.new_thread_form
+    reply_form:
+        type: rayku.type.reply_thread_form

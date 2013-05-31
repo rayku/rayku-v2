@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use FOS\MessageBundle\Model\ParticipantInterface;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Entity\User as BaseUser;
@@ -21,7 +22,7 @@ use FOS\UserBundle\Entity\User as BaseUser;
  * @UniqueEntity(fields={"username"}, groups={"registration"}, message="This username has been taken")
  * @UniqueEntity(fields={"email"}, groups={"registration"}, message="This email address has already been registered")
  */
-class User extends BaseUser
+class User extends BaseUser implements ParticipantInterface
 {
 	/**
 	 * @ORM\Id

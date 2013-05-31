@@ -134,8 +134,7 @@ class MessageController extends Controller
 		}
 		
 		return array(
-			'form' => $form->createView(),
-			'data' => $form->getData()
+			'form' => $form
 		);
 	}
 	
@@ -158,15 +157,13 @@ class MessageController extends Controller
         $formHandler = $this->container->get('fos_message.reply_form.handler');
 
         if ($message = $formHandler->process($form)) {
-            return new RedirectResponse($this->container->get('router')->generate('fos_message_thread_view', array(
-                'threadId' => $message->getThread()->getId()
-            )));
+            return array('thread' => $message->getThread());
         }
 
-        return $this->container->get('templating')->renderResponse('FOSMessageBundle:Message:thread.html.twig', array(
-            'form' => $form->createView(),
+        return array(
+            'form' => $form,
             'thread' => $thread
-        ));
+        );
 	}
 }
 

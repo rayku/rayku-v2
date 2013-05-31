@@ -66,7 +66,8 @@
         "jmikola/auto-login-bundle": "dev-master",
         "vespolina/payment-stripe-bundle": "dev-master",
         "ets/payment-dotpay-bundle": "dev-master",
-        "friendsofsymfony/jsrouting-bundle": "*"
+        "friendsofsymfony/jsrouting-bundle": "*",
+        "friendsofsymfony/message-bundle": "dev-master"
     },
 
     "require-dev": {

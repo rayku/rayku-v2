@@ -49,6 +49,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
         	new FOS\RestBundle\FOSRestBundle(),
         	new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+        	new FOS\MessageBundle\FOSMessageBundle(),
         		
         	// SONATA
         	new Sonata\BlockBundle\SonataBlockBundle(),

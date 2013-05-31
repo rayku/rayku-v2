@@ -1,16 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="raykuApp">
 <head>
 	<meta charset="utf-8">
 	<title>{% block title %}Rayku{% endblock %}</title>
+	<link href="{{ asset('bundles/raykupage/css/normalize.css') }}" type="text/css" rel="stylesheet" media="screen" />
 	<link href="{{ asset('bundles/raykupage/css/foundation.css') }}" type="text/css" rel="stylesheet" media="screen" />
 	<link href="{{ asset('bundles/raykupage/css/app.css') }}" type="text/css" rel="stylesheet" media="screen" />
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+	<script src="{{ asset('bundles/raykupage/js/foundation.min.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/app/app.js') }}"></script>
+    <script src="{{ asset('bundles/raykupage/js/vendor/custom.modernizr.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/raykupage/js/script.js') }}"></script>
+
+	<!--ANGULAR-->
+	<script src="{{ asset('bundles/raykupage/js/app/app.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/app/controller.js') }}"></script>
+    <script src="{{ asset('bundles/raykupage/js/app/services.js') }}"></script>
+    <script src="{{ asset('bundles/raykupage/js/app/filters.js') }}"></script>
+    <script src="{{ asset('bundles/raykupage/js/app/directives.js') }}"></script>
+
 	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 	<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>	
+	<script type="text/javascript">
+	//Get online tutors and display them 
+	function loadTutors() {
+		$(".tutor_container").empty();
+	    $.ajax({
+	        url: 'tutors.json',
+	        type: 'GET',
+	        dataType: 'json',
+	        success: function(data){
+	            var tutor = data;
+	            console.log(tutor);
+	            $.each(data, function(i, item){
+	            	console.log(item.id);
+	            	console.log(item.user['first_name']);
+	            	var tutors = [];
+	            	var tutor_row = [
+	            		'<tr class="tutorDetails">',
+		  				'<td class="one"><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>',
+		  				'<td class="two"><p><span class="tutorName">'+item.user["first_name"] + ' ' + item.user["last_name"]+'</span><br><span class="tutorBio">'+item.school_amount+' From '+item.school_name+'</span><br><span class="tutorRP">'+item.rate+' RP/Min</span></p></td>',
+		  				'<td class="three"><input type="checkbox" class="tutor-check" name="potential_tutors[0][tutor]" value="'+item.id+'" data-tutor-id="'+item.id+'" data-tutor-name="'+item.user["first_name"]+' '+item.user["last_name"]+'"></td>',
+		  				'</tr>'
+		  			].join('\n');
+		  			tutors.push(tutor_row);
+
+		  			$(".tutor_container").append(tutors.join('')).fadeIn(150);
+					tutors.splice(0, tutors.length);
+	            });
+	        }
+	    });
+	}
+	</script>
 </head>
-<body>
+<body onload="loadTutors()">
 <div class="container">
 	<header id="header">
 	    <div class="inside">
@@ -28,7 +72,7 @@
                         <li><a class="setting" href=#><span class="raphael">`</span>Settings</a></li>
                         <li><a class="buyPoints" href=#><span class="raphael">`</span>Buy Rayku Points</a></li>
                         <li><a class="whiteboard" href=#><span class="raphael">`</span>Go To Whiteboard</a></li>
-                        <li><a class="logout" href="{{ path('fos_user_security_logout') }}"><span class="raphael">v</span>Logout</a></li>
+                        <li><a class="logout" href="logout"><span class="raphael">v</span>Logout</a></li>
                     </ul>
                 </div>
 	        </nav>
@@ -41,8 +85,10 @@
 		<!------------------------------
 		SIDE NAVIGATION
 		-------------------------------->
-		<div class="large-4 columns" id="sidebar">
+		<div class="large-4 columns" id="sidebar" ng-controller="DashboardCtrl">
+			
 			<h3 class="userfullname"><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg">{{ user.firstname }} <br><span class="lastname">{{ user.lastname }}</span></h3>
+			
 			<h3 class="userstatus"><span class="status">{% if user.isTutor %}Tutor{% endif %}{% if user.isTutor == false %}Student{% endif %}</span><span class="online">&nbsp;</span></h3>
 			<ul class="sidebar-nav">
 				<li class="divider"></li>
@@ -76,41 +122,11 @@
 			TUTOR LIST TABLE
 			-------------------------------->
 				<div class="large-8 columns tutor-list">
-					<h3>Online Tutors<a href="#" class="raphael">0</a></h3>
+					<h3>Online Tutors<a href="#" class="raphael" onclick="loadTutors()">0</a></h3>
 					<form action="{{path('post_session')}}" method="post" class="custom" id="create_session">
 					  	<input type="hidden" value="" name="question" id="question" />
 					  	<table class="tutorTable">
-					  		<tbody>
-					  			<tr class="tutorDetails">
-					  				<td class="one"><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
-					  				<td class="two"><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
-					  				<td class="three"><input type="checkbox"></td>
-					  			</tr>
-					  			<tr class="tutorDetails">
-					  				<td><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
-					  				<td><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
-					  				<td><input type="checkbox"></td>
-					  			</tr>
-					  			<tr class="tutorDetails">
-					  				<td><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
-					  				<td><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
-					  				<td><input type="checkbox"></td>
-					  			</tr>
-					  			<tr class="tutorDetails">
-					  				<td><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
-					  				<td><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
-					  				<td><input type="checkbox"></td>
-					  			</tr>
-					  			<tr class="tutorDetails">
-					  				<td><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
-					  				<td><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
-					  				<td><input type="checkbox"></td>
-					  			</tr>
-					  			<tr class="tutorDetails">
-					  				<td><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
-					  				<td><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
-					  				<td><input type="checkbox"></td>
-					  			</tr>
+					  		<tbody class="tutor_container">
 					  		</tbody>
 					  	</table>
 					    <input value="Connect" type="submit" class="bbutton" id="tutorConnect">

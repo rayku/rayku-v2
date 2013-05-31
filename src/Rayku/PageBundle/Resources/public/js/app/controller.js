@@ -4,11 +4,11 @@ function DashboardCtrl($scope, $http, User, Tutors) {
     $scope.dashboard = data;
     if(data.tutor.id !== null){
       $scope.isTutor = data.tutor.id;
-      $scope.user = { isTutor: 'isTutor', notTutor: '' };
+      $scope.user = { isTutor: 'Tutor', notTutor: '' };
     }
     else{
       $scope.isTutor = null;
-      $scope.user = { isTutor: '', notTutor: 'notTutor' };
+      $scope.user = { isTutor: '', notTutor: 'Student' };
     }
   });
 

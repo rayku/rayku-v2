@@ -34,7 +34,7 @@ sudo mv composer.phar /usr/local/bin/composer
 cd /var/rayku; COMPOSER_PROCESS_TIMEOUT=2400 composer -v update
 cd /var/rayku; php app/console doctrine:database:create
 if [ ! -f "~/dataimportdone" ]; then
-	mysql -u root -pabc123 rayku_v2 < /var/rayku/rayku.dump.sql
+	#mysql -u root -pabc123 rayku_v2 < /var/rayku/rayku.dump.sql
 	touch ~/dataimportdone
 fi
 cd /var/rayku; php app/console doctrine:schema:update --force

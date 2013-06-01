@@ -14,4 +14,4 @@ app/config/parameters.ini
 app/config/parameters.yml
 .vagrant
 composer.lock
-
+bootstrap.sh

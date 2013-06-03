@@ -99,7 +99,7 @@
     {% endblock %}
 
 	{% if is_granted("IS_AUTHENTICATED_ANONYMOUSLY") %}
-		{% render "FOSUserBundle:Security:login" %}
+		{% render controller("FOSUserBundle:Security:login") %}
 	{% endif %}
 
     {% block javascripts %}

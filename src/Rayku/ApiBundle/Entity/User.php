@@ -200,6 +200,8 @@ class User extends BaseUser implements ParticipantInterface
 	 */
 	private $updatedAt;
 	
+	private $webPath;
+	
     /**
      * Sets file.
      *
@@ -852,6 +854,9 @@ class User extends BaseUser implements ParticipantInterface
     public function __construct()
     {
         $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
+        if(null !== $this->getPath()){
+        	$this->webPath = $this->getUploadDir().'/'.$this->getPath();
+        }
     }
     
     /**

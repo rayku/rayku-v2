@@ -33,7 +33,7 @@ foreach ($dbh->query($sql) as $row) {
 	$update = "UPDATE rayku_v2.fos_user_user t SET auto_login = '".$auto_login."', auto_login_expire = '".date('Y-m-d H:i:s', strtotime("+10 minutes"))."' WHERE tutor_id = ".$row['tutor_id']." limit 1";
 	$dbh->exec($update);
 	
-	$message = rawurlencode('A student has requested a tutoring session with you on www.rayku.com/?_al='.$auto_login);
+	$message = rawurlencode('A student has requested a tutoring session with you on www.rayku.com/sessions/'.$row['session_id'].'/accept/?_al='.$auto_login);
 	var_dump(BotServiceProvider::createFor('http://10.180.146.105:8892/msg/'.$row['gtalk_email'].'/'.$message)->getContent());
 	$update = "UPDATE rayku_v2.rayku_tutor_connect c SET tutor_reply = 'contacted gtalk' WHERE session_id = ".$row['session_id']." AND tutor_id = ".$row['tutor_id']." limit 1";
 	$dbh->exec($update);

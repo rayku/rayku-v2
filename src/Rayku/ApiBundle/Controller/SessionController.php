@@ -96,6 +96,23 @@ class SessionController extends Controller
 	 * @ApiDoc(
 	 *   description="Accepts a whiteboard session for a tutor"
 	 * )
+	 *
+	 * @param \Rayku\ApiBundle\Entity\Session $session
+	 */
+	public function getSessionAcceptAction(Session $session)
+	{
+		$session = $this->postSessionAcceptAction($session);
+		if($session['success']){
+			return $this->redirect($session['redirect']);
+		}else{
+			die($session['message']);
+		}
+	}
+	
+	/**
+	 * @ApiDoc(
+	 *   description="Accepts a whiteboard session for a tutor"
+	 * )
 	 * 
 	 * @param \Rayku\ApiBundle\Entity\Session $session
 	 */

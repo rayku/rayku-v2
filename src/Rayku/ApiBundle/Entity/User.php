@@ -550,7 +550,7 @@ class User extends BaseUser
     		
     		if(
     			(null !== $this->getCoupon()->getExpirationCount() && $this->getCoupon()->getExpirationCount() > $this->getCoupon()->getUsed()) || 
-    			(!empty($expirationDate) && $expirationDate < new \DateTime(date('Y-m-d H:i:s')))
+    			(!empty($expirationDate) && $expirationDate > new \DateTime(date('Y-m-d H:i:s')))
     		){
 		    	$this->setPoints($this->getCoupon()->getCredit());
     			$this->setCoupon($this->getCoupon()->incrementUsed());

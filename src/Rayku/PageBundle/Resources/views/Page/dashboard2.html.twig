@@ -161,23 +161,29 @@ $(document).ready(function(){
 			PAST SESSIONS LIST
 			-------------------------------->
 				<div class="large-4 columns" id ="sessions-list">
-					<h3>Past Sessions</h3>
+					<h3>Sessions</h3>
 					<table>
 						<tbody>
 							<tr>
 								<td>1</td>
-								<td>Session With Blaise Kripky</td>
+								<td>Session With Blaise Kripky <span class="active-session">&nbsp;</span></td>
 								<td><a href="#">View</a></td>
+                                <td><a href="#">Delete</a></td>
+
 							</tr>
 							<tr>
 								<td>2</td>
 								<td>Session With Sheldon Cooper</td>
 								<td><a href="#">View</a></td>
+                                <td><a href="#">Delete</a></td>
+
 							</tr>
 							<tr>
 								<td>3</td>
 								<td>Session With Anton Wright</td>
 								<td><a href="#">View</a></td>
+                                <td><a href="#">Delete</a></td>
+
 							</tr>
 						</tbody>
 					</table>
@@ -219,13 +225,13 @@ $(document).ready(function(){
 							<div class="large-9 columns editprofileinfo">
 								<h4 class="username">Edit Profile</h4>
 								<ul class="userinfo">
-									<li><span class="fname">First Name</span><span class="editfname"><input type="text" placeholder="Firstname" name="firstname"></span></li>
-									<li><span class="lname">Last Name</span><span class="editlname"><input type="text" placeholder="Last Name" name="lastname"></span></li>
-									<li><span class="degree">Degree</span><span class="editdegree"><input type="text" placeholder="E.g. Chemical Engineering" name="degree"></span></li>
-									<li><span class="grade">Level Of Education</span><span class="editgrade"><input type="text" placeholder="Undergraduate Degree Holder" name="grade"></span></li>
-									<li><span class="school">School</span><span class="editschool"><input type="text" placeholder="E.g. Ryerson University" name="school"></span></li>
+									<li><span class="fname">First Name</span><span class="editfname"><input type="text" placeholder="{{ user.firstname }}" name="current_first_name"></span></li>
+									<li><span class="lname">Last Name</span><span class="editlname"><input type="text" placeholder="{{ user.lastname }}" name="current_last_name"></span></li>
+									<li><span class="degree">Degree</span><span class="editdegree"><input type="text" placeholder="{{ user.degree }}" name="current_degree"></span></li>
+									<li><span class="grade">Level Of Education</span><span class="editgrade"><input type="text" placeholder="{{ user.grade }}" name="current_grade"></span></li>
+									<li><span class="school">School</span><span class="editschool"><input type="text" placeholder="{{ user.school }}" name="current_school"></span></li>
 								</ul>
-								<p class="about"><span class="bio">Bio</span><span class="editbio"><textarea name="bio"></textarea></span></p>
+								<p class="about"><span class="bio">About</span><span class="editbio"><textarea name="current_bio">{{ user.bio }}</textarea></span></p>
 								<div row>
 									<input type="submit" class="bbutton" value="Save">
 								</div>

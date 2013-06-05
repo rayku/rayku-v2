@@ -586,6 +586,14 @@ table, th, td
 	border: 1px solid rgba(221, 221, 221, 1);
 	border-radius: 3px;
 }
+#sessions-list span.active-session{
+	margin-top: 5px;
+	float: right;
+	background: rgba(59,179,97,1); 
+	height: 8px;
+	width: 8px;
+	border-radius: 35px;
+}
 #sessions-list h3, #profile h3{
 	font-weight: normal;
 	font-size: 1.1em;

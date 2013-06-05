@@ -156,7 +156,7 @@ class UserController extends Controller
 		$editForm->bind($request);
 	
 		if ($editForm->isValid()) {
-			$em = $this->getDoctrine()->getEntityManager();
+			$em = $this->getDoctrine()->getManager();
 			$em->persist($user);
 			$em->flush();
 			return $user;
@@ -183,7 +183,7 @@ class UserController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-        	$em = $this->getDoctrine()->getEntityManager();
+        	$em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
             return $user;

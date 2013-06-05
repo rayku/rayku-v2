@@ -17,7 +17,7 @@ class Activity
 	public function __construct(SecurityContext $context, $doctrine)
 	{
 		$this->context = $context;
-		$this->em = $doctrine->getEntityManager();
+		$this->em = $doctrine->getManager();
 	}
 	
 	/**

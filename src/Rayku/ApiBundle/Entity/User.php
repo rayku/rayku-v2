@@ -200,6 +200,8 @@ class User extends BaseUser implements ParticipantInterface
 	 */
 	private $updatedAt;
 	
+	private $webPath;
+	
     /**
      * Sets file.
      *
@@ -565,7 +567,7 @@ class User extends BaseUser implements ParticipantInterface
     		
     		if(
     			(null !== $this->getCoupon()->getExpirationCount() && $this->getCoupon()->getExpirationCount() > $this->getCoupon()->getUsed()) || 
-    			(!empty($expirationDate) && $expirationDate < new \DateTime(date('Y-m-d H:i:s')))
+    			(!empty($expirationDate) && $expirationDate > new \DateTime(date('Y-m-d H:i:s')))
     		){
 		    	$this->setPoints($this->getCoupon()->getCredit());
     			$this->setCoupon($this->getCoupon()->incrementUsed());
@@ -852,6 +854,9 @@ class User extends BaseUser implements ParticipantInterface
     public function __construct()
     {
         $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
+        if(null !== $this->getPath()){
+        	$this->webPath = $this->getUploadDir().'/'.$this->getPath();
+        }
     }
     
     /**

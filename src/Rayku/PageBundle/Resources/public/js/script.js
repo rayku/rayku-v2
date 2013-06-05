@@ -33,15 +33,26 @@ $(document).ready(function(){
 	    }
     );
 
-    //Animation to increment/decrement dashboard size
+    //Animation to show practice whiteboard iFrame for now
     $('.userWhiteboard').click(function (){
-    	$('#content-body').animate({
-    		width: '98%'
-    	});
+    	$('body').css('overflow', 'hidden');
+        $('.container').fadeOut('fast');
+        $('#whiteboard2 iframe').attr("src", "http://whiteboard.rayku.local:8080/standalone");
+        $('#whiteboard2').delay(500).fadeIn('slow');
     });
-    $('.dashboard').click(function (){
-    	$('#content-body').animate({
-    		width: '82%'
-    	});
+    $('.home').click(function (){
+    	$('body').css('overflow', 'scroll');
+        $('#whiteboard2').fadeOut('slow');
+        $('.container').delay(500).fadeIn('fast');
+    });
+
+    //PROFILE AREA
+    $('.myprofile').click(function(){
+        $('.profileinfo').siblings().fadeOut('fast');
+        $('.profileinfo').delay(500).fadeIn(500);
+    });
+    $('.mysettings').click(function(){
+        $('.profilesettings').siblings().fadeOut('fast');
+        $('.profilesettings').delay(500).fadeIn(500);
     });
 });

@@ -44,7 +44,27 @@ span.raphael{
 	margin: 0;
 	padding: 0;
 }
-
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+	border: 1px solid rgba(198, 198, 198, 1);
+	background-color: #fff;
+	-moz-box-shadow: 0 1px 0 #e9ede9, inset 0 2px 3px rgba(157,159,160,.3);
+	-webkit-box-shadow: 0 1px 0 #e9ede9, inset 0 2px 3px rgba(157,159,160,.3);
+	box-shadow: 0 1px 0 #e9ede9, inset 0 2px 3px rgba(157,159,160,.3);
+	display: block;
+	-webkit-box-sizing: border-box; /* Android ≤ 2.3, iOS ≤ 4 */
+	-moz-box-sizing: border-box; /* Firefox 1+ */
+	box-sizing: border-box; /* Chrome, IE 8+, Opera, Safari 5.1 */
+	color: #8c8c8c;
+	font-size: 12px;
+	padding: 0 20px;
+	height:45px;
+	width: 100%;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	border-radius:2px;
+}
 /* -----------------------------------------
   Main Content
 ----------------------------------------- */
@@ -237,6 +257,7 @@ ul.submenu-item{
 	padding:5px 0px;
 	border-radius: 3px;
 	border-radius: 3px;
+	border:3px solid rgba(221, 221, 221, 1);
 }
 
 ul.submenu-item li{
@@ -622,11 +643,11 @@ table, th, td
 	border-left: 3px solid rgba(22,158,244, 1);
 }
 
-#profile .profileinfo{
+#profile .profileinfo, #profile .profilesettings{
 	width:77.5%;
 	padding-right: 40px;
 }
-#profile .profileinfo h4{
+#profile .profileinfo h4, #profile .profilesettings h4{
 	font-weight: 500;
 	font-size: 1.5em;
 	color: rgba(39, 39, 39, 1);
@@ -646,9 +667,57 @@ table, th, td
 #profile .profileinfo p.public a span{
 	font-style: normal;
 }
+
+#profile .profilesettings{
+	display: none;
+}
+#profile .profilesettings form .row{
+	padding-bottom: 10px;
+}
+#profile .profilesettings form .row input[type="text"], #profile .profilesettings form .row input[type="password"]{
+	margin: 0;
+	width:300px;
+}
 /* -----------------------------------------
    Page Name 2
 ----------------------------------------- */
+#whiteboard2{
+	position: absolute;
+	top:0px;
+	left:0;
+	margin: 0;
+	padding: 0;
+	display: none;
+	width: 100%;
+	min-height: 100%; 
+   	height:auto !important; 
+   	overflow: hidden;
+   	z-index: 1040;
+}
+#whiteboard2 iframe{
+	width: 100%;
+	min-height: 100%; 
+   	height:auto !important; 
+}
+
+#whiteboard-header{
+	position: absolute;
+	top:5px;
+	left:45px;
+	z-index: 1040;
+}
+#whiteboard-header a.bbutton{
+	height: 26px;
+}
+#whiteboard-header a{
+	font-size: 12px;
+	padding:4px;
+}
+#whiteboard-header a:hover{
+	text-decoration: none;
+	color:#fff;
+}
+
 .bbutton {
         
 	-moz-box-shadow:inset 0px 1px 0px 0px #54a3f7;

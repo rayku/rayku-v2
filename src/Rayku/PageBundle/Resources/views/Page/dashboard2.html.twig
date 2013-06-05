@@ -32,10 +32,7 @@
 	        dataType: 'json',
 	        success: function(data){
 	            var tutor = data;
-	            console.log(tutor);
 	            $.each(data, function(i, item){
-	            	console.log(item.id);
-	            	console.log(item.user['first_name']);
 	            	var tutors = [];
 	            	var tutor_row = [
 	            		'<tr class="tutorDetails">',
@@ -55,6 +52,28 @@
 	</script>
 </head>
 <body onload="loadTutors()">
+<div id="whiteboard2">
+    <div id="whiteboard-header">
+        <a href=# class="logged-in-as bbutton home">Back Home</a>
+    </div>
+    <iframe src="" seamless></iframe>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	//Create a session
+    $('#create_session').ajaxForm(function(response) {
+        console.log(response);
+        //$('#whiteboard').src = response.redirect;
+        $('.container').animate({
+            display:'none'
+        });
+        $('body').css('overflow', 'hidden');
+        $('.main-header').fadeOut('fast');
+        $('#whiteboard2 iframe').attr("src", response.redirect);
+        $('#whiteboard2').fadeIn('slow');
+    });
+});
+</script>
 <div class="container">
 	<header id="header">
 	    <div class="inside">
@@ -68,10 +87,7 @@
                     <ul class="submenu-item">
                         <li><a class="home" href=#><span class="raphael">L</span>Home</a></li>
                         <li><a class="practice" href="{{ whiteboard_url }}/standalone" target="_blank"><span class="raphael">b</span>Practice Whiteboard</a></li>
-                        <li><a class="broadcast" href=#><span class="raphael">Æ</span>Broadcast Session</a></li>
                         <li><a class="setting" href=#><span class="raphael">`</span>Settings</a></li>
-                        <li><a class="buyPoints" href=#><span class="raphael">`</span>Buy Rayku Points</a></li>
-                        <li><a class="whiteboard" href=#><span class="raphael">`</span>Go To Whiteboard</a></li>
                         <li><a class="logout" href="logout"><span class="raphael">v</span>Logout</a></li>
                     </ul>
                 </div>
@@ -178,28 +194,82 @@
 						<div class="large-3 columns sidenav">
 							<img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:100%;">
 							<ul class="profilenav">
-								<li><a href=#>Messages</a></li>
-								<li><a href=#>Favorites</a></li>
-								<li><a href=#>Payout</a></li>
-								<li><a href=#>Settings</a></li>
+								<li><a href=# class="myprofile">Profile</a></li>
+								<li><a href=# class="messages">Messages</a></li>
+								<li><a href=# class="favorites">Favorites</a></li>
+								<li><a href=# class="payout">Payout</a></li>
+								<li><a href=# class="mysettings">Settings</a></li>
 							</ul>
 						</div>
-						<div class="large-9 columns profileinfo">
-							<h4 class="username">{{ user.firstname }} {{ user.lastname }}</h4>
+						
+						<div>
+							<div class="large-9 columns profileinfo">
+								<h4 class="username">{{ user.firstname }} {{ user.lastname }}</h4>
 
-							<ul class="userinfo">
-								<li>{{ user.degree }}</li>
-								<li>{{ user.grade }}</li>
-								<li>From, {{ user.school }}</li>
-							</ul>
-							<p class="about">{{ user.bio }}</p>
-							<p class="public"><a href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></p>
+								<ul class="userinfo">
+									<li>{{ user.degree }}</li>
+									<li>{{ user.grade }}</li>
+									<li>From, {{ user.school }}</li>
+								</ul>
+								<p class="about">{{ user.bio }}</p>
+								<p class="public"><a href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></p>
 
+							</div>
+							<div class="large-9 columns profilesettings">
+								<h4 class="username">Settings</h4>
+								<form id="usersettingsForm" class="user-setting" method="POST" action="{{ path('post_users_profile', {'user': app.user.id}) }}">
+						            <div class="row">
+						                <div class="large-3 columns">
+						                    <label>Email</label>
+						                </div>
+						                <div class="large-9 columns">
+						                    <input type="text" placeholder="john@example.com">
+						                </div>
+						            </div>
+						            <div class="row">
+						                <div class="large-3 columns">
+						                    <label>Username</label>
+						                </div>
+						                <div class="large-9 columns">
+						                    <input type="text" placeholder="Username">
+						                </div>   
+						            </div>
+						            <div class="row">
+						                <div class="large-3 columns">
+						                    <label>Old Password</label>
+						                </div>
+						                <div class="large-9 columns">
+						                	<input type="password" placeholder="Old Password">
+						                </div>    
+						            </div>
+						            <div class="row">
+						                <div class="large-3 columns">
+						                    <label>New Password</label>
+						                </div>
+						                <div class="large-9 columns">
+											<input type="password" placeholder="New Password">
+						                </div>      
+						            </div>
+						            <div class="row">
+						                <div class="large-3 columns">
+						                    <label>Confirm Password</label>
+						                </div>
+						                <div class="large-9 columns">
+											<input type="password" placeholder="Confirm Password">
+						                </div>
+						            </div>
+						            <div class="row">
+						                <div class="large-12 large-centered columns">
+						                	<input type="submit" class="bbutton" value="Save Settings">
+						                </div>
+						            </div>
+						        </form>
+							</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </div>

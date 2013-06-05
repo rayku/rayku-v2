@@ -676,6 +676,7 @@ h4 a.myprofileedit{
 }
 #profile .editprofileinfo{
 	padding-top: 20px; 
+	padding-bottom: 10px;
 	display: none;
 }
 #profile .profilesettings{

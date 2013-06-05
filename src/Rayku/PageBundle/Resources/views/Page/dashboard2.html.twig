@@ -201,29 +201,40 @@ $(document).ready(function(){
 								<li><a href=# class="mysettings">Settings</a></li>
 							</ul>
 						</div>
-						
+
 						<div>
 							<div class="large-9 columns profileinfo">
-								<h4 class="username">{{ user.firstname }} {{ user.lastname }}</h4>
+								<h4 class="username"><span class="name">{{ user.firstname }} {{ user.lastname }}</span><a href=# class="myprofileedit raphael">a</a></h4>
+
 
 								<ul class="userinfo">
-									<li>{{ user.degree }}</li>
-									<li>{{ user.grade }}</li>
-									<li>From, {{ user.school }}</li>
+									<li><span class="degree">{{ user.degree }}</span></li>
+									<li><span class="grade">{{ user.grade }}</span></li>
+									<li><span class="school">From, {{ user.school }}</span></li>
 								</ul>
-								<p class="about">{{ user.bio }}</p>
+								<p class="about"><span class="bio">{{ user.bio }}</span></p>
 								<p class="public"><a href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></p>
 
 							</div>
+							<div class="large-9 columns editprofileinfo">
+								<ul class="userinfo">
+									<li><span class="fname">First Name</span><span class="editfname"><input type="text" placeholder="Firstname" name="firstname"></span></li>
+									<li><span class="lname">Last Name</span><span class="editlname"><input type="text" placeholder="Last Name" name="lastname"></span></li>
+									<li><span class="degree">Degree</span><span class="editdegree"><input type="text" placeholder="E.g. Chemical Engineering" name="degree"></span></li>
+									<li><span class="grade">Level Of Education</span><span class="editgrade"><input type="text" placeholder="Undergraduate Degree Holder" name="grade"></span></li>
+									<li><span class="school">School</span><span class="editschool"><input type="text" placeholder="E.g. Ryerson University" name="school"></span></li>
+								</ul>
+								<p class="about"><span class="bio">Bio</span><span class="editbio"><textarea name="bio"></textarea></span></p>
+							</div>
 							<div class="large-9 columns profilesettings">
-								<h4 class="username">Settings</h4>
+								<h4 class="username">Profile Settings</h4>
 								<form id="usersettingsForm" class="user-setting" method="POST" action="{{ path('post_users_profile', {'user': app.user.id}) }}">
 						            <div class="row">
 						                <div class="large-3 columns">
 						                    <label>Email</label>
 						                </div>
 						                <div class="large-9 columns">
-						                    <input type="text" placeholder="john@example.com">
+						                    <input type="text" name="email" placeholder="john@example.com">
 						                </div>
 						            </div>
 						            <div class="row">
@@ -231,7 +242,7 @@ $(document).ready(function(){
 						                    <label>Username</label>
 						                </div>
 						                <div class="large-9 columns">
-						                    <input type="text" placeholder="Username">
+						                    <input type="text" name="username" placeholder="Username">
 						                </div>   
 						            </div>
 						            <div class="row">
@@ -239,7 +250,7 @@ $(document).ready(function(){
 						                    <label>Old Password</label>
 						                </div>
 						                <div class="large-9 columns">
-						                	<input type="password" placeholder="Old Password">
+						                	<input type="password" name="old_password" placeholder="Old Password">
 						                </div>    
 						            </div>
 						            <div class="row">
@@ -247,7 +258,7 @@ $(document).ready(function(){
 						                    <label>New Password</label>
 						                </div>
 						                <div class="large-9 columns">
-											<input type="password" placeholder="New Password">
+											<input type="password" name="new_password" placeholder="New Password">
 						                </div>      
 						            </div>
 						            <div class="row">
@@ -255,7 +266,7 @@ $(document).ready(function(){
 						                    <label>Confirm Password</label>
 						                </div>
 						                <div class="large-9 columns">
-											<input type="password" placeholder="Confirm Password">
+											<input type="password" name="confirm_password" placeholder="Confirm Password">
 						                </div>
 						            </div>
 						            <div class="row">

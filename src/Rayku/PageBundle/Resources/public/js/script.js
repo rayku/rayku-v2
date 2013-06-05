@@ -51,6 +51,10 @@ $(document).ready(function(){
         $('.profileinfo').siblings().fadeOut('fast');
         $('.profileinfo').delay(500).fadeIn(500);
     });
+    $('.myprofileedit').click(function(){
+        $('.editprofileinfo').siblings().fadeOut('fast');
+        $('.editprofileinfo').delay(500).fadeIn(500);
+    });
     $('.mysettings').click(function(){
         $('.profilesettings').siblings().fadeOut('fast');
         $('.profilesettings').delay(500).fadeIn(500);

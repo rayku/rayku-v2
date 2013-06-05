@@ -47,11 +47,11 @@ span.raphael{
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-	border: 1px solid rgba(198, 198, 198, 1);
-	background-color: #fff;
-	-moz-box-shadow: 0 1px 0 #e9ede9, inset 0 2px 3px rgba(157,159,160,.3);
-	-webkit-box-shadow: 0 1px 0 #e9ede9, inset 0 2px 3px rgba(157,159,160,.3);
-	box-shadow: 0 1px 0 #e9ede9, inset 0 2px 3px rgba(157,159,160,.3);
+	border: none;
+	border-bottom: 1px solid rgba(198, 198, 198, 1);
+	box-shadow: none;
+	border-radius: 0px;
+	background: transparent;
 	display: block;
 	-webkit-box-sizing: border-box; /* Android ≤ 2.3, iOS ≤ 4 */
 	-moz-box-sizing: border-box; /* Firefox 1+ */
@@ -61,10 +61,14 @@ input[type="password"] {
 	padding: 0 20px;
 	height:45px;
 	width: 100%;
-	-moz-border-radius:2px;
-	-webkit-border-radius:2px;
-	border-radius:2px;
 }
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus{
+	background: rgba(245, 245, 245, 1);
+	box-shadow: none;
+	outline: none;
+} 
 /* -----------------------------------------
   Main Content
 ----------------------------------------- */
@@ -643,11 +647,14 @@ table, th, td
 	border-left: 3px solid rgba(22,158,244, 1);
 }
 
-#profile .profileinfo, #profile .profilesettings{
+#profile .profileinfo, #profile .profilesettings, #profile .editprofileinfo{
 	width:77.5%;
 	padding-right: 40px;
 }
-#profile .profileinfo h4, #profile .profilesettings h4{
+h4 a.myprofileedit{
+	float: right;
+}
+#profile .profileinfo h4, #profile .profilesettings h4, #profile .editprofileinfo h4{
 	font-weight: 500;
 	font-size: 1.5em;
 	color: rgba(39, 39, 39, 1);
@@ -658,7 +665,7 @@ table, th, td
 	font-size: 0.95em;
 	font-style: italic;
 }
-#profile .profileinfo p{
+#profile .profileinfo p, #profile .editprofileinfo p{
 	font-size: 0.9em;
 }
 #profile .profileinfo p.public a{
@@ -667,7 +674,10 @@ table, th, td
 #profile .profileinfo p.public a span{
 	font-style: normal;
 }
-
+#profile .editprofileinfo{
+	padding-top: 20px; 
+	display: none;
+}
 #profile .profilesettings{
 	display: none;
 }

@@ -361,7 +361,7 @@ ul.submenu-item li a:hover {
 }
 #sidebar ul.sidebar-nav li, #sidebar ul.logout li{
 	width: 100%;
-	padding: 5px 0; 
+	padding: 10px 0; 
 	margin: 0;
 	
 	transition: border-left 0.25s;
@@ -386,7 +386,7 @@ ul.submenu-item li a:hover {
 }
 #sidebar ul.sidebar-nav li a, #sidebar ul.logout li a{
 	font-family: Arial;
-	font-size: 0.95em;
+	font-size: 1em;
 	font-weight: 500;
 	width: 100%;
 	color: rgba(255, 255, 255, 1);

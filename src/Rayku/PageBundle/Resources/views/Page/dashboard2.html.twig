@@ -41,6 +41,8 @@ $(document).ready(function(){
 	        $('.main-header').fadeOut('fast');
 	        $('#whiteboard2 iframe').attr("src", response.redirect);
 	        $('#whiteboard2').fadeIn('slow');
+	    }else{
+	    	alert('There was an error starting your session');
 	    }
     });
 });
@@ -52,13 +54,16 @@ $(document).ready(function(){
 	        <nav>
 	            <a href=# class="notification" data-reveal-id="connectNotifModal"><span class="raphael">M</span><span class="notif-count">0</span></a>
 	            <a href=# class="settings"><span class="raphael">`</span></a>
-	            <a href=# class="logged-in-as"><span class="liau">Logged in as rayku</span> <div class="arrow-down"></div></a> 
+	            <a href=# class="logged-in-as"><span class="liau">Logged in as {{user.username}}</span> <div class="arrow-down"></div></a> 
 	            <div class="submenu" id="submenu">
                     <div class="arrow-up"></div>
                     <ul class="submenu-item">
                         <li><a class="home" href=#><span class="raphael">L</span>Home</a></li>
                         <li><a class="practice" href="{{ whiteboard_url }}/standalone" target="_blank"><span class="raphael">b</span>Practice Whiteboard</a></li>
                         <li><a class="setting" href=#><span class="raphael">`</span>Settings</a></li>
+                        {% if user.isTutor == false %}
+                        	<li><a class="tutor" href=# data-reveal-id="myTutorModal"><span class="raphael">`</span>Become a Tutor</a></li>
+                        {% endif %}
                         <li><a class="logout" href="logout"><span class="raphael">v</span>Logout</a></li>
                     </ul>
                 </div>
@@ -84,8 +89,10 @@ $(document).ready(function(){
 				<li><a class="profile" href=#><span class="raphael">L</span> Profile</a></li>
 				<li class="divider"></li>
 				<li><a class="practice" href=#><span class="raphael">></span> Practice</a></li>
+				<!--
 				<li class="divider"></li>
 				<li><a class="broadcast" href=#><span class="raphael">Æ</span> Broadcast</a></li>
+				//-->
 				<li class="divider"></li>
 				<li><a class="buyPoints" href=#><span class="raphael">#</span> Buy Rayku Points</a></li>
 				<li class="divider"></li>
@@ -154,7 +161,7 @@ $(document).ready(function(){
 							</tr>
 							{% endverbatim %}
 						</tbody>
-						<tbody ng-hide="sessions.length" ng-show="loaded">
+						<tbody ng-show="!sessions.length" ng-show="loaded">
 							<tr><td>No past Session</td></tr>
 						</tbody>
 					</table>
@@ -190,7 +197,9 @@ $(document).ready(function(){
 									<li><span class="school">From, {{ user.school }}</span></li>
 								</ul>
 								<p class="about"><span class="bio">{{ user.bio }}</span></p>
-								<p class="public"><a href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></p>
+								{% if user.isTutor %}
+									<p class="public"><a href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></p>
+								{% endif %}
 
 							</div>
 							<div class="large-9 columns editprofileinfo">

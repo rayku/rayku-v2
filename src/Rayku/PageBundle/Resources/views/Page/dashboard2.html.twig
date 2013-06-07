@@ -21,35 +21,8 @@
     <script src="{{ asset('bundles/raykupage/js/app/directives.js') }}"></script>
 
 	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/jquery_form/jquery.form.js') }}"></script>
 	<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>	
-	<!--<script type="text/javascript">
-	//Get online tutors and display them 
-	function loadTutors() {
-		$(".tutor_container").empty();
-	    $.ajax({
-	        url: 'tutors.json',
-	        type: 'GET',
-	        dataType: 'json',
-	        success: function(data){
-	            var tutor = data;
-	            $.each(data, function(i, item){
-	            	var tutors = [];
-	            	var tutor_row = [
-	            		'<tr class="tutorDetails">',
-		  				'<td class="one"><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>',
-		  				'<td class="two"><p><span class="tutorName">'+item.user["first_name"] + ' ' + item.user["last_name"]+'</span><br><span class="tutorBio">'+item.school_amount+' From '+item.school_name+'</span><br><span class="tutorRP">'+item.rate+' RP/Min</span></p></td>',
-		  				'<td class="three"><input type="checkbox" class="tutor-check" name="potential_tutors[0][tutor]" value="'+item.id+'" data-tutor-id="'+item.id+'" data-tutor-name="'+item.user["first_name"]+' '+item.user["last_name"]+'"></td>',
-		  				'</tr>'
-		  			].join('\n');
-		  			tutors.push(tutor_row);
-
-		  			$(".tutor_container").append(tutors.join('')).fadeIn(150);
-					tutors.splice(0, tutors.length);
-	            });
-	        }
-	    });
-	}
-	</script>-->
 </head>
 <body>
 <div id="whiteboard2">
@@ -62,15 +35,16 @@
 $(document).ready(function(){
 	//Create a session
     $('#create_session').ajaxForm(function(response) {
-        console.log(response);
-        //$('#whiteboard').src = response.redirect;
-        $('.container').animate({
-            display:'none'
-        });
-        $('body').css('overflow', 'hidden');
-        $('.main-header').fadeOut('fast');
-        $('#whiteboard2 iframe').attr("src", response.redirect);
-        $('#whiteboard2').fadeIn('slow');
+    	if(response.success == true){
+	        $('#whiteboard').src = response.redirect;
+	        $('.container').animate({
+	            display:'none'
+	        });
+	        $('body').css('overflow', 'hidden');
+	        $('.main-header').fadeOut('fast');
+	        $('#whiteboard2 iframe').attr("src", response.redirect);
+	        $('#whiteboard2').fadeIn('slow');
+	    }
     });
 });
 </script>

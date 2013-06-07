@@ -12,13 +12,10 @@
 	<script src="{{ asset('bundles/raykupage/js/app/app.js') }}"></script>
     <script src="{{ asset('bundles/raykupage/js/vendor/custom.modernizr.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/raykupage/js/script.js') }}"></script>
-
-	<!--ANGULAR-->
-	<script src="{{ asset('bundles/raykupage/js/app/app.js') }}"></script>
-	<script src="{{ asset('bundles/raykupage/js/app/controller.js') }}"></script>
-    <script src="{{ asset('bundles/raykupage/js/app/services.js') }}"></script>
-    <script src="{{ asset('bundles/raykupage/js/app/filters.js') }}"></script>
-    <script src="{{ asset('bundles/raykupage/js/app/directives.js') }}"></script>
+	
+	<!--REQUIRE-->
+	<script src="{{ asset('bundles/raykupage/js/require.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/main.js') }}"></script>
 
 	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 	<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>	
@@ -146,9 +143,9 @@ $(document).ready(function(){
 					  		<tbody class="tutor_container">
 					  		</tbody>
 					  	</table>-->
-					  	<table class="tutorTable" ng-repeat="tutor in tutors" ng-cloak>
+					  	<table class="tutorTable">
 					  		<tbody>
-					  			<tr class="tutorDetails">
+					  			<tr class="tutorDetails" ng-repeat="tutor in tutors" ng-cloak>
 					  				{% verbatim %}
 		  							<td class="one"><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
 		  							<td class="two"><p><span class="tutorName">{{tutor.user.first_name}} {{tutor.user.last_name}}</span><br><span class="tutorBio">{{tutor.school_amount}} From {{tutor.school_name}}</span><br><span class="tutorRP">{{tutor.rate}} RP/Min</span></p></td>

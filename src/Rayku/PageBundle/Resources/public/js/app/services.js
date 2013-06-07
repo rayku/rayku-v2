@@ -7,7 +7,7 @@
 // In this case it is a simple value service.
 var app = angular.module('raykuApp',[]);
 
-app.factory('User', function($http){
+/*app.factory('User', function($http){
     	var myUser = {
     		async: function () {
     			var user = $http.get('/users/:id').then(function (response) {
@@ -36,3 +36,4 @@ app.factory('Tutors', function($http){
     	};
     	return myTutor;
     });
+*/

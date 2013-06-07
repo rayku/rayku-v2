@@ -1,4 +1,22 @@
-function DashboardCtrl($scope, $http, User, Tutors) {
+function TutorListCtrl($scope, $http) {
+    $http.get(Routing.generate('get_tutors')).success(function(data) {
+        $scope.tutors = data;
+    });
+
+    $scope.getOnlineTutors = function () {
+      $http.get(Routing.generate('get_tutors')).success(function(data) {
+        $scope.tutors = data;
+      });
+    }
+}
+/*
+function UserCtrl($scope, $http) {
+    $http.get(Routing.generate('get_user').success(function(data) {
+        $scope.user = data;
+    });
+}
+*/
+/*function DashboardCtrl($scope, $http, User, Tutors) {
   //get user information
   User.async().then(function (data){
     $scope.dashboard = data;
@@ -90,4 +108,4 @@ function DeletePostCtrl($scope, $http, $location, $routeParams) {
   $scope.home = function () {
     $location.url('/');
   };
-}
+}*/

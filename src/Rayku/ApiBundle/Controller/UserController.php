@@ -123,10 +123,9 @@ class UserController extends Controller
 	{
 		throw new \Exception('not implemented');
 	}
-	
 
 	/**
-	 * @View(serializerGroups={"user.view"})
+	 * @View()
 	 * @ApiDoc(
 	 *   statusCodes={
 	 *     200="Returned when successful"
@@ -135,8 +134,17 @@ class UserController extends Controller
 	 *   output="Rayku\ApiBundle\Entity\User"
 	 * )
 	 */
-	public function getUserAction(User $entity)
+	public function getUserAction($entity)
 	{
+		if($entity == 'mine'){
+			$entity = $this->getUser();
+		}else{
+			$entity = $this->getDoctrine()->getManager('RaykuApiBundle:User')->find($entity);
+		}
+		
+		if(!$entity){
+			$this->createNotFoundException('User not found');
+		}
 		return $entity;
 	}
 	

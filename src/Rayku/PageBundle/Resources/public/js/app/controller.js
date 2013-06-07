@@ -14,6 +14,10 @@ function SessionListCtrl($scope, $http) {
 	$http.get(Routing.generate('get_sessions', {'activeRequests':0})).success(function(data){
 		$scope.sessions = data;
 	})
+	
+	$scope.onLoad = function() {
+	    $scope.loaded = true;
+	}
 }
 /*
 function UserCtrl($scope, $http) {

@@ -857,6 +857,8 @@ class User extends BaseUser implements ParticipantInterface
         if(null !== $this->getPath()){
         	$this->webPath = $this->getUploadDir().'/'.$this->getPath();
         }
+        
+        return parent::__construct();
     }
     
     /**

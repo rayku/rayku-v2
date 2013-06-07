@@ -125,6 +125,7 @@ fos_rest:
     format_listener: true
     view:
         view_response_listener: 'force'
+        serialize_null: true
 
 sensio_framework_extra:
     view:    { annotations: false }

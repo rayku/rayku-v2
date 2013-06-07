@@ -61,7 +61,7 @@
         "sonata-project/doctrine-orm-admin-bundle": "2.2.*",
 
         "friendsofsymfony/user-bundle": "*",
-        "friendsofsymfony/rest-bundle": "0.11.*",
+        "friendsofsymfony/rest-bundle": "*",
         "friendsofsymfony/rest": "*",
         "friendsofsymfony/jsrouting-bundle": "*",
         "friendsofsymfony/message-bundle": "dev-master",

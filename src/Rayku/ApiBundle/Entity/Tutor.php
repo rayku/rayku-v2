@@ -4,6 +4,7 @@ namespace Rayku\ApiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -11,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="rayku_tutor",uniqueConstraints={@ORM\UniqueConstraint(name="user_idx", columns={"user_id"})})
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
+ * @Serializer\AccessorOrder("alphabetical")
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="Rayku\ApiBundle\Entity\TutorRepository")
  * @ORM\HasLifecycleCallbacks
@@ -26,6 +28,7 @@ class Tutor
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Serializer\Groups({"tutor", "tutor.details"})
      */
     private $id;
 
@@ -33,6 +36,7 @@ class Tutor
      * @var boolean
      *
      * @ORM\Column(name="direct_connect_only", type="boolean")
+     * @Serializer\Groups({"tutor", "tutor.details"})
      */
     private $direct_connect;
     
@@ -41,6 +45,7 @@ class Tutor
      *
      * @Assert\NotBlank
      * @ORM\Column(name="school_name", type="string", length=255, nullable=true)
+     * @Serializer\Groups({"tutor", "tutor.details"})
      */
     private $schoolName;
 
@@ -49,6 +54,7 @@ class Tutor
      *
      * @Assert\NotBlank
      * @ORM\Column(name="school_amount", type="string", length=255, nullable=true)
+     * @Serializer\Groups({"tutor", "tutor.details"})
      */
     private $schoolAmount;
     
@@ -57,6 +63,7 @@ class Tutor
      * 
      * @Assert\NotBlank
      * @ORM\Column(name="degree", type="string", length=255, nullable=true)
+     * @Serializer\Groups({"tutor", "tutor.details"})
      */
     private $degree;
 
@@ -64,6 +71,7 @@ class Tutor
      * @var \DateTime
      *
      * @ORM\Column(name="online_web", type="datetime", nullable=true)
+     * @Serializer\Groups({"tutor", "tutor.details"})
      */
     private $onlineWeb;
 
@@ -71,6 +79,7 @@ class Tutor
      * @var \DateTime
      *
      * @ORM\Column(name="online_gtalk", type="datetime", nullable=true)
+     * @Serializer\Groups({"tutor", "tutor.details"})
      */
     private $onlineGtalk;
     
@@ -97,12 +106,14 @@ class Tutor
      * 
      * This field marks when a tutor was last "busy".
      * @ORM\Column(name="busy", type="datetime", nullable=true)
+     * @Serializer\Groups({"tutor.details"})
      */
     private $busy;
     
 
     /**
      * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Review", mappedBy="tutor")
+     * @Serializer\Groups({"tutor.details"})
      **/
     private $reviews;
     
@@ -132,6 +143,7 @@ class Tutor
      *
      * @ORM\OneToOne(targetEntity="\Rayku\ApiBundle\Entity\User", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @Serializer\Groups({"user"})
      */
     private $user;
     
@@ -141,6 +153,7 @@ class Tutor
      *     joinColumns={@ORM\JoinColumn(name="tutor_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="subject_id", referencedColumnName="id")}
      * )
+     * @Serializer\Groups({"tutor.details"})
      */
     private $subjects;
 

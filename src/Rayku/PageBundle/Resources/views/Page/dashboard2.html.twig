@@ -172,31 +172,18 @@ $(document).ready(function(){
 			<!------------------------------
 			PAST SESSIONS LIST
 			-------------------------------->
-				<div class="large-4 columns" id ="sessions-list">
+				<div class="large-4 columns" id ="sessions-list" ng-controller="SessionListCtrl">
 					<h3>Sessions</h3>
 					<table>
-						<tbody>
+						<tbody ng-repeat="session in sessions" ng-cloak>
+							{% verbatim %}
 							<tr>
-								<td>1</td>
-								<td>Session With Blaise Kripky <span class="active-session">&nbsp;</span></td>
+								<td>{{session.id}}</td>
+								<td>Session With {{session.selected_tutor.user.first_name}} {{session.selected_tutor.user.last_name}}</td>
 								<td><a href="#">View</a></td>
                                 <td><a href="#">Delete</a></td>
-
 							</tr>
-							<tr>
-								<td>2</td>
-								<td>Session With Sheldon Cooper</td>
-								<td><a href="#">View</a></td>
-                                <td><a href="#">Delete</a></td>
-
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>Session With Anton Wright</td>
-								<td><a href="#">View</a></td>
-                                <td><a href="#">Delete</a></td>
-
-							</tr>
+							{% endverbatim %}
 						</tbody>
 					</table>
 				</div>

@@ -3,6 +3,7 @@
 namespace Rayku\ApiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -11,6 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @ORM\Entity(repositoryClass="Rayku\ApiBundle\Entity\SessionRepository")
  * @ORM\Table(name="rayku_session")
+ * @Serializer\AccessorOrder("alphabetical")
  * @ORM\HasLifecycleCallbacks
  */
 class Session
@@ -19,6 +21,7 @@ class Session
     /**
      * @var integer
      *
+     * @Serializer\Groups({"session", "session.details"})
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -28,6 +31,7 @@ class Session
     /**
      * @var \DateTime
      *
+     * @Serializer\Groups({"session", "session.details"})
      * @ORM\Column(name="start_time", type="datetime", nullable=true)
      * @Assert\DateTime()
      */
@@ -36,6 +40,7 @@ class Session
     /**
      * @var \DateTime
      *
+     * @Serializer\Groups({"session", "session.details"})
      * @ORM\Column(name="end_time", type="datetime", nullable=true)
      * @Assert\DateTime()
      */
@@ -44,6 +49,7 @@ class Session
     /**
      * @var integer
      *
+     * @Serializer\Groups({"session", "session.details"})
      * @ORM\Column(name="duration", type="integer", nullable=true)
      */
     private $duration;
@@ -51,6 +57,7 @@ class Session
     /**
      * @var integer
      *
+     * @Serializer\Groups({"session", "session.details"})
      * @ORM\Column(name="rating", type="integer", nullable=true)
      */
     private $rating;
@@ -58,6 +65,7 @@ class Session
     /**
      * @var float
      *
+     * @Serializer\Groups({"session", "session.details"})
      * @ORM\Column(name="rate", type="decimal", nullable=true)
      */
     private $rate;
@@ -65,6 +73,7 @@ class Session
     /**
      * @var string
      *
+     * @Serializer\Groups({"session", "session.details"})
      * @ORM\Column(name="question", type="string", length=1000, nullable=true)
      */
     private $question = 'To be discussed';
@@ -72,6 +81,7 @@ class Session
     /**
      * @var integer
      *
+     * @Serializer\Groups({"session", "session.details"})
      * @ORM\Column(name="recording_id", type="integer", nullable=true)
      */
     private $recordingId;
@@ -79,6 +89,7 @@ class Session
     /**
      * @var \User
      *
+     * @Serializer\Groups({"session", "session.details"})
      * @ORM\ManyToOne(targetEntity="\Rayku\ApiBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="student_id", referencedColumnName="id")
@@ -109,15 +120,17 @@ class Session
     
     /**
      * @var \Tutor
-     * 
+     *
+     * @Serializer\Groups({"session", "session.details"})
      * @ORM\ManyToOne(targetEntity="\Rayku\ApiBundle\Entity\Tutor")
      * @ORM\JoinColumn(name="selected_tutor_id", referencedColumnName="id")
      */
-    private $selected_tutor;
+    private $selectedTutor;
     
     /**
      * @var \DateTime
      *
+     * @Serializer\Groups({"session", "session.details"})
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
     private $createdAt;
@@ -554,25 +567,25 @@ class Session
     }
 
     /**
-     * Set selected_tutor
+     * Set selectedTutor
      *
      * @param \Rayku\ApiBundle\Entity\Tutor $selectedTutor
      * @return Session
      */
     public function setSelectedTutor(\Rayku\ApiBundle\Entity\Tutor $selectedTutor = null)
     {
-        $this->selected_tutor = $selectedTutor;
+        $this->selectedTutor = $selectedTutor;
     
         return $this;
     }
 
     /**
-     * Get selected_tutor
+     * Get selectedTutor
      *
      * @return \Rayku\ApiBundle\Entity\Tutor 
      */
     public function getSelectedTutor()
     {
-        return $this->selected_tutor;
+        return $this->selectedTutor;
     }
 }

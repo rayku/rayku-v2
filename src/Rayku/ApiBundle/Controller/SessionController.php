@@ -20,8 +20,12 @@ class SessionController extends Controller
 {
 	
 	/**
+	 * @View(serializerGroups={"session.details", "user", "tutor"})
 	 * @ApiDoc(
 	 *   description="Get active sessions for a tutor",
+	 *   filters={
+	 *     {"name"="activeRequests", "dataType"="boolean"}
+	 *   },
 	 *   statusCodes={
 	 *     200="Returned when successful"
 	 *   }
@@ -32,8 +36,17 @@ class SessionController extends Controller
 		if(!$this->getUser() || !$this->getUser()->getIsTutor()){
 			return array();
 		}
+		
 		$em = $this->getDoctrine()->getManager();
-		$sessions = $em->getRepository('RaykuApiBundle:Session')->findAllActiveByTutor($this->getUser()->getTutor()->getId(), Session::expire_session);
+		if(!$this->getRequest()->get('activeRequests')){
+			if($this->getUser()->getIsTutor()){
+				$sessions = $em->getRepository('RaykuApiBundle:Session')->findBySelectedTutor($this->getUser()->getTutor());
+			}else{
+				$sessions = $em->getRepository('RaykuApiBundle:Session')->findByStudent($this->getUser());
+			}
+		}else{
+			$sessions = $em->getRepository('RaykuApiBundle:Session')->findAllActiveByTutor($this->getUser()->getTutor()->getId(), Session::expire_session);
+		}
 		
 		return $sessions;
 	}

@@ -10,12 +10,12 @@ $gtalkEmails = array();
 $gtalkUsersJSON = json_decode(BotServiceProvider::createFor("http://10.180.146.105:8892/onlines")->getContent());
 
 foreach ($gtalkUsersJSON as $gtalkUserId => $status) {
-        $parts = explode('/', $gtalkUserId);
-        if(strpos($parts[1],'gmail') !== false || strpos($parts[1],'Talk') !== false){
+	$parts = explode('/', $gtalkUserId);
+	if(strpos($parts[1],'gmail') !== false || strpos($parts[1],'Talk') !== false){
 		if (trim($parts[0]) != '') {
 			$gtalkEmails[] = trim($parts[0]);
 		}
-        }
+	}
 }
 
 if(empty($gtalkEmails)){

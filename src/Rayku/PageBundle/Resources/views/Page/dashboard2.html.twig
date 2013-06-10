@@ -175,62 +175,29 @@ $(document).ready(function(){
 									<li><span class="grade">Level Of Education</span><span class="editgrade"><input type="text" ng-model="user.grade" name="current_grade"></span></li>
 									<li><span class="school">School</span><span class="editschool"><input type="text" ng-model="user.school" name="current_school"></span></li>
 								</ul>
-									<p class="about"><span class="bio">About</span><span class="editbio"><textarea ng-model="user.bio"></textarea></span></p>
+									<p class="about"><span class="bio">About</span><span class="editbio"><textarea ng-model="user.bio">{{ user.bio }}</textarea></span></p>
 								<div row>
-									<input type="submit" class="bbutton" value="Save" ng-click="update(user)">
+									<input type="submit" class="bbutton" value="Save" ng-click="update(user)" />
 								</div>
 								</form>
 								{% endverbatim %}
 							</div>
 							<div class="large-9 columns profilesettings">
+								{% verbatim %}
+								<form novalidate>
 								<h4 class="username">Settings</h4>
-								<form id="usersettingsForm" class="user-setting" method="POST" action="{{ path('post_users_profile', {'user': app.user.id}) }}">
-						            <div class="row">
-						                <div class="large-3 columns">
-						                    <label>Email</label>
-						                </div>
-						                <div class="large-9 columns">
-						                    <input type="text" name="email" placeholder="john@example.com">
-						                </div>
-						            </div>
-						            <div class="row">
-						                <div class="large-3 columns">
-						                    <label>Username</label>
-						                </div>
-						                <div class="large-9 columns">
-						                    <input type="text" name="username" placeholder="Username">
-						                </div>   
-						            </div>
-						            <div class="row">
-						                <div class="large-3 columns">
-						                    <label>Old Password</label>
-						                </div>
-						                <div class="large-9 columns">
-						                	<input type="password" name="old_password" placeholder="Old Password">
-						                </div>    
-						            </div>
-						            <div class="row">
-						                <div class="large-3 columns">
-						                    <label>New Password</label>
-						                </div>
-						                <div class="large-9 columns">
-											<input type="password" name="new_password" placeholder="New Password">
-						                </div>      
-						            </div>
-						            <div class="row">
-						                <div class="large-3 columns">
-						                    <label>Confirm Password</label>
-						                </div>
-						                <div class="large-9 columns">
-											<input type="password" name="confirm_password" placeholder="Confirm Password">
-						                </div>
-						            </div>
-						            <div class="row">
-						                <div class="large-12 large-centered columns">
-						                	<input type="submit" class="bbutton" value="Save Settings">
-						                </div>
-						            </div>
-						        </form>
+								<ul class="userinfo">
+									<li><span class="username">Username</span><span><input type="text" ng-model="user.username" name="username"></span></li>
+									<li><span class="email">Email</span><span><input type="text" ng-model="user.email" name="email"></span></li>
+									<li><span class="password">Current Password</span><span><input type="password" ng-model="user.current_password" name="current_password"></span></li>
+									<li><span class="password">New Password</span><span><input type="password" ng-model="user.plainPassword.first" name="plainPassword[first]"></span></li>
+									<li><span class="password">Confirm Password</span><span><input type="password" ng-model="user.plainPassword.second" name="plainPassword[second]"></span></li>
+								</ul>
+								<div row>
+									<input type="submit" class="bbutton" value="Save Settings" ng-click="profile(user)" />
+								</div>
+								</form>								
+								{% endverbatim %}
 							</div>
 						</div>
 

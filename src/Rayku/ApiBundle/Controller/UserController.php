@@ -150,9 +150,15 @@ class UserController extends Controller
 		if($user->getId() !== $this->getUser()->getId()){
 			throw new AccessDeniedException();
 		}
-		$request = $this->getRequest();
+		
 		$editForm = $this->createForm(new UserSettingType(), $user);
-		$editForm->bind($request);
+		 
+		// Ignore extra fields that Angularjs sends with the form
+		$data = $this->getRequest()->request->all();
+		$children = $editForm->all();
+		$data = array_intersect_key($data, $children);
+		
+		$editForm->bind($data);
 	
 		if ($editForm->isValid()) {
 			$em = $this->getDoctrine()->getManager();
@@ -161,8 +167,8 @@ class UserController extends Controller
 			return $user;
 		}
 		return array(
-				'entity'      => $user,
-				'edit_form'   => $editForm,
+			'entity'      => $user,
+			'edit_form'   => $editForm,
 		);
 	}
 	
@@ -174,6 +180,10 @@ class UserController extends Controller
      */
     public function postUsersAction(User $user)
     {
+    	if($user->getId() !== $this->getUser()->getId()){
+    		throw new AccessDeniedException();
+    	}
+    	
     	$editForm = $this->createForm(new UserType(), $user);
     	
     	// Ignore extra fields that Angularjs sends with the form

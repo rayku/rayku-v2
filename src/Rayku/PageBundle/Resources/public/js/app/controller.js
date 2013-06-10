@@ -75,6 +75,12 @@ app.controller('TutorListCtrl', function ($scope, $http, $templateCache, $timeou
       $scope.UserDetailTemplate = '/bundles/raykupage/js/app/views/ProfileView.html';
       $scope.UsernameTemplate = '/bundles/raykupage/js/app/views/UsernameView.html';
     });
+
+    $scope.profile = function(user) {
+      $http.post(Routing.generate('post_users_profile', {'user':userId}), user).success(function(data){
+        $scope.user = user;
+      });
+    }
 	}
 });
 /*

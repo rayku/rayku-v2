@@ -37,7 +37,10 @@ class UserSettingType extends AbstractType
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{
-		$resolver->setDefaults(array('data_class' => 'Rayku\ApiBundle\Entity\User'));
+		$resolver->setDefaults(array(
+			'data_class' => 'Rayku\ApiBundle\Entity\User',
+			'csrf_protection' => false
+		));
 	}
 	
 	public function getName()

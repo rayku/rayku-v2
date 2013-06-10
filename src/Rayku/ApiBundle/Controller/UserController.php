@@ -134,17 +134,8 @@ class UserController extends Controller
 	 *   output="Rayku\ApiBundle\Entity\User"
 	 * )
 	 */
-	public function getUserAction($entity)
+	public function getUserAction(User $entity)
 	{
-		if($entity == 'mine'){
-			$entity = $this->getUser();
-		}else{
-			$entity = $this->getDoctrine()->getManager('RaykuApiBundle:User')->find($entity);
-		}
-		
-		if(!$entity){
-			$this->createNotFoundException('User not found');
-		}
 		return $entity;
 	}
 	
@@ -183,12 +174,14 @@ class UserController extends Controller
      */
     public function postUsersAction(User $user)
     {
-    	if($user->getId() !== $this->getUser()->getId()){
-    		throw new AccessDeniedException();
-    	}
-    	$request = $this->getRequest();
-        $editForm = $this->createForm(new UserType(), $user);
-        $editForm->bind($request);
+    	$editForm = $this->createForm(new UserType(), $user);
+    	
+    	// Ignore extra fields that Angularjs sends with the form
+		$data = $this->getRequest()->request->all();
+		$children = $editForm->all();
+		$data = array_intersect_key($data, $children);
+		
+        $editForm->bind($data);
 
         if ($editForm->isValid()) {
         	$em = $this->getDoctrine()->getManager();

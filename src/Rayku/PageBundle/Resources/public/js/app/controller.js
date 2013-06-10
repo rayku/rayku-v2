@@ -30,6 +30,12 @@ function UserDetailCtrl($scope, $http){
 			$scope.user = user;
 		})
 	}
+	
+	$scope.profile = function(user) {
+		$http.post(Routing.generate('post_users_profile', {'user':userId}), user).success(function(data){
+			$scope.user = user;
+		})
+	}
 }
 /*
 function UserCtrl($scope, $http) {

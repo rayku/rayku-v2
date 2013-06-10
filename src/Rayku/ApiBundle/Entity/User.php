@@ -75,7 +75,7 @@ class User extends BaseUser implements ParticipantInterface
 	 * @Assert\NotBlank(groups={"registration"})
 	 * @Serializer\Groups({"user", "user.details"})
 	 */
-	private $last_name = 'Last Name';
+	private $last_name = ' ';
 	
 	/**
 	 * @var string

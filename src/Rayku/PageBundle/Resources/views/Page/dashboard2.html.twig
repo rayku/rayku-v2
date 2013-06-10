@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<title>{% block title %}Rayku{% endblock %}</title>
@@ -9,7 +9,6 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 	<script src="{{ asset('bundles/raykupage/js/foundation.min.js') }}"></script>
-	<script src="{{ asset('bundles/raykupage/js/app/app.js') }}"></script>
     <script src="{{ asset('bundles/raykupage/js/vendor/custom.modernizr.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/raykupage/js/script.js') }}"></script>
 	
@@ -80,10 +79,8 @@ $(document).ready(function(){
 		<!------------------------------
 		SIDE NAVIGATION
 		-------------------------------->
-		<div class="large-4 columns" id="sidebar">
-			
-			<h3 class="userfullname"><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg">{{ user.firstname }} <br><span class="lastname">{{ user.lastname }}</span></h3>
-			
+		<div class="large-4 columns" id="sidebar" ng-controller="UserDetailCtrl">
+			<div ng-include="UsernameTemplate"></div>
 			<h3 class="userstatus"><span class="status">{% if user.isTutor %}Tutor{% endif %}{% if user.isTutor == false %}Student{% endif %}</span><span class="online">&nbsp;</span></h3>
 			<ul class="sidebar-nav">
 				<li class="divider"></li>
@@ -119,28 +116,10 @@ $(document).ready(function(){
 			TUTOR LIST TABLE
 			-------------------------------->
 				<div class="large-8 columns tutor-list" ng-controller="TutorListCtrl">
-					<h3>Online Tutors<a href="#" class="raphael refreshTutors" ng-click="getOnlineTutors()">0</a></h3>
-					<form action="{{path('post_session')}}" method="post" class="custom" id="create_session">
-					  	<input type="hidden" value="" name="question" id="question" />
-					  	
-					  	<!--<table class="tutorTable">
-					  		<tbody class="tutor_container">
-					  		</tbody>
-					  	</table>-->
-					  	<table class="tutorTable">
-					  		<tbody>
-					  			<tr class="tutorDetails" ng-repeat="tutor in tutors" ng-cloak>
-					  				{% verbatim %}
-		  							<td class="one"><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
-		  							<td class="two"><p><span class="tutorName">{{tutor.user.first_name}} {{tutor.user.last_name}}</span><br><span class="tutorBio">{{tutor.school_amount}} From {{tutor.school_name}}</span><br><span class="tutorRP">{{tutor.rate}} RP/Min</span></p></td>
-		  							<td class="three"><input type="checkbox" class="tutor-check" name="potential_tutors[0][tutor]" value="{{tutor.id}}" data-tutor-id="{{tutor.id}}" data-tutor-name="{{tutor.user.first_name}} {{tutor.user.last_name}}"></td>
-		  							{% endverbatim %}
-		  						</tr>
-                          	</tbody>
-                      	</table>
-					    <input value="Connect" type="submit" class="bbutton" id="tutorConnect">
-					</form>
+					<h3>Online Tutors<a href="#" class="raphael refreshTutors" ng-click="refreshTutors()">0</a></h3>
+					<div ng-include="tutorListTemplate"></div>
 				</div>
+
 				<div class="large-2 columns tutor-points">
 					<h3><span class="raphael">#</span><span class="title">Rayku Points</span></h3>
 					<h4>{{user.points}}</h4>
@@ -155,19 +134,7 @@ $(document).ready(function(){
 			-------------------------------->
 				<div class="large-4 columns" id ="sessions-list" ng-controller="SessionListCtrl">
 					<h3>Sessions</h3> 
-					<table>
-						<tbody>
-							{% verbatim %}
-							<tr ng-repeat="session in sessions" ng-cloak>
-								<td>{{session.id}}</td>
-								<td>Session With {{session.selected_tutor.user.first_name}} {{session.selected_tutor.user.last_name}}</td>
-							</tr>
-							{% endverbatim %}
-						</tbody>
-						<tbody ng-show="!sessions.length" ng-show="loaded">
-							<tr><td>No past Session</td></tr>
-						</tbody>
-					</table>
+					<div ng-include="SessionListTemplate"></div>
 				</div>
 			</div>
 			
@@ -191,15 +158,7 @@ $(document).ready(function(){
 
 						<div ng-controller="UserDetailCtrl">
 							<div class="large-9 columns profileinfo">
-								{% verbatim %}
-								<h4 class="username"><span class="name">{{ user.first_name }} {{ user.last_name }}</span><a href=# class="myprofileedit raphael">a</a></h4>
-								<ul class="userinfo">
-									<li><span class="degree">{{ user.degree }}</span></li>
-									<li><span class="grade">{{ user.grade }}</span></li>
-									<li><span class="school">From, {{ user.school }}</span></li>
-								</ul>
-								<p class="about"><span class="bio">{{ user.bio }}</span></p>
-								{% endverbatim %}
+								<div ng-include="UserDetailTemplate"></div>
 								{% if user.isTutor %}
 									<p class="public"><a href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></p>
 								{% endif %}

@@ -1,36 +1,82 @@
-function TutorListCtrl($scope, $http) {
-    $http.get(Routing.generate('get_tutors')).success(function(data) {
+/*var app = angular.module('raykuApp', []);
+
+app.controller('TutorListCtrl', function($scope, $http, $templateCache, $timeout){
+  $http.get(Routing.generate('get_tutors')).success(function(data) {
         $scope.tutors = data;
     });
 
-    $scope.getOnlineTutors = function () {
+  $scope.tutorListTemplate = 'views/TutorListView.html';
+
+  $scope.refresh = function(){
+    $templateCache.remove('views/TutorListView.html');
+    $scope.tutorListTemplate = '';
+    $timeout(function() {
       $http.get(Routing.generate('get_tutors')).success(function(data) {
         $scope.tutors = data;
       });
-    }
-}
+      $scope.tutorListTemplate = 'views/TutorListView.html';
+    });
+  }
+});*/
+var app = angular.module('raykuApp', []);
 
-function SessionListCtrl($scope, $http) {
+app.controller('TutorListCtrl', function ($scope, $http, $templateCache, $timeout) {
+    $http.get(Routing.generate('get_tutors')).success(function(data) {
+        $scope.tutors = data;
+    });
+    
+    $scope.tutorListTemplate = '/bundles/raykupage/js/app/views/TutorListView.html';
+
+    $scope.refreshTutors = function(){
+    $templateCache.remove('/bundles/raykupage/js/app/views/TutorListView.html');
+    $scope.tutorListTemplate = '';
+
+    $timeout(function() {
+      $http.get(Routing.generate('get_tutors')).success(function(data) {
+        $scope.tutors = data;
+      });
+      $scope.tutorListTemplate = '/bundles/raykupage/js/app/views/TutorListView.html';
+    });
+  }
+}).controller('SessionListCtrl',function ($scope, $http) {
+
 	$http.get(Routing.generate('get_sessions', {'activeRequests':0})).success(function(data){
 		$scope.sessions = data;
-	})
-	
+	});
+
 	$scope.onLoad = function() {
 	    $scope.loaded = true;
 	}
-}
+  $scope.SessionListTemplate = '/bundles/raykupage/js/app/views/SessionsView.html';
 
-function UserDetailCtrl($scope, $http){
+}).controller('UserDetailCtrl', function ($scope, $http, $templateCache, $timeout){
+
 	$http.get(Routing.generate('get_user', {'entity':userId})).success(function(data){
 		$scope.user = data;
-	})
-	
+	});
+
+	$scope.UserDetailTemplate = '/bundles/raykupage/js/app/views/ProfileView.html';
+  $scope.UsernameTemplate = '/bundles/raykupage/js/app/views/UsernameView.html';
+
 	$scope.update = function(user) {
+    $templateCache.remove('/bundles/raykupage/js/app/views/ProfileView.html');
+    $templateCache.remove('/bundles/raykupage/js/app/views/UsernameView.html');
+    $scope.UserDetailTemplate = '';
+    $scope.UsernameTemplate = '';
+
 		$http.post(Routing.generate('post_users', {'user':userId}), user).success(function(data){
 			$scope.user = user;
-		})
+		});
+
+    $timeout(function() {
+      $http.get(Routing.generate('get_user', {'entity':userId})).success(function(data){
+        $scope.user = data;
+      });
+      $scope.UserDetailTemplate = '/bundles/raykupage/js/app/views/ProfileView.html';
+      $scope.UsernameTemplate = '/bundles/raykupage/js/app/views/UsernameView.html';
+    });
 	}
-}
+});
 /*
 function UserCtrl($scope, $http) {
     $http.get(Routing.generate('get_user').success(function(data) {

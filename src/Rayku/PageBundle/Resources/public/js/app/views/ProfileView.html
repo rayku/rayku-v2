@@ -1,0 +1,15 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	 $('.myprofileedit').click(function(){
+        $('.editprofileinfo').siblings().fadeOut('fast');
+        $('.editprofileinfo').delay(500).fadeIn(500);
+    });
+});
+</script>
+<h4 class="username"><span class="name">{{ user.first_name }} {{ user.last_name }}</span><a href=# class="myprofileedit raphael">a</a></h4>
+<ul class="userinfo">
+	<li><span class="degree">{{ user.degree }}</span></li>
+	<li><span class="grade">{{ user.grade }}</span></li>
+	<li><span class="school">From, {{ user.school }}</span></li>
+</ul>
+<p class="about"><span class="bio">{{ user.bio }}</span></p>

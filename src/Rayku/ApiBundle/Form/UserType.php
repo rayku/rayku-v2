@@ -25,7 +25,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Rayku\ApiBundle\Entity\User',
-        	'csrf_protection' => true
+        	'csrf_protection' => false
         ));
     }
 

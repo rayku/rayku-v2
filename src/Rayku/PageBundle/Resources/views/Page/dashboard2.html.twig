@@ -19,7 +19,10 @@
 
 	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 	<script src="{{ asset('bundles/raykupage/js/jquery_form/jquery.form.js') }}"></script>
-	<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>	
+	<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+	<script>
+		var userId = {{ user.id }};
+	</script>
 </head>
 <body>
 <div id="whiteboard2">
@@ -64,7 +67,7 @@ $(document).ready(function(){
                         {% if user.isTutor == false %}
                         	<li><a class="tutor" href=# data-reveal-id="myTutorModal"><span class="raphael">`</span>Become a Tutor</a></li>
                         {% endif %}
-                        <li><a class="logout" href="logout"><span class="raphael">v</span>Logout</a></li>
+                        <li><a class="logout" href="{{ path('fos_user_security_logout') }}"><span class="raphael">v</span>Logout</a></li>
                     </ul>
                 </div>
 	        </nav>
@@ -186,35 +189,39 @@ $(document).ready(function(){
 							</ul>
 						</div>
 
-						<div>
+						<div ng-controller="UserDetailCtrl">
 							<div class="large-9 columns profileinfo">
-								<h4 class="username"><span class="name">{{ user.firstname }} {{ user.lastname }}</span><a href=# class="myprofileedit raphael">a</a></h4>
-
-
+								{% verbatim %}
+								<h4 class="username"><span class="name">{{ user.first_name }} {{ user.last_name }}</span><a href=# class="myprofileedit raphael">a</a></h4>
 								<ul class="userinfo">
 									<li><span class="degree">{{ user.degree }}</span></li>
 									<li><span class="grade">{{ user.grade }}</span></li>
 									<li><span class="school">From, {{ user.school }}</span></li>
 								</ul>
 								<p class="about"><span class="bio">{{ user.bio }}</span></p>
+								{% endverbatim %}
 								{% if user.isTutor %}
 									<p class="public"><a href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></p>
 								{% endif %}
 
 							</div>
 							<div class="large-9 columns editprofileinfo">
+								{% verbatim %}
+								<form novalidate>
 								<h4 class="username">Edit Profile</h4>
 								<ul class="userinfo">
-									<li><span class="fname">First Name</span><span class="editfname"><input type="text" placeholder="{{ user.firstname }}" name="current_first_name"></span></li>
-									<li><span class="lname">Last Name</span><span class="editlname"><input type="text" placeholder="{{ user.lastname }}" name="current_last_name"></span></li>
-									<li><span class="degree">Degree</span><span class="editdegree"><input type="text" placeholder="{{ user.degree }}" name="current_degree"></span></li>
-									<li><span class="grade">Level Of Education</span><span class="editgrade"><input type="text" placeholder="{{ user.grade }}" name="current_grade"></span></li>
-									<li><span class="school">School</span><span class="editschool"><input type="text" placeholder="{{ user.school }}" name="current_school"></span></li>
+									<li><span class="fname">First Name</span><span class="editfname"><input type="text" ng-model="user.first_name" name="first_name"></span></li>
+									<li><span class="lname">Last Name</span><span class="editlname"><input type="text" ng-model="user.last_name" name="current_last_name"></span></li>
+									<li><span class="degree">Degree</span><span class="editdegree"><input type="text" ng-model="user.degree" name="current_degree"></span></li>
+									<li><span class="grade">Level Of Education</span><span class="editgrade"><input type="text" ng-model="user.grade" name="current_grade"></span></li>
+									<li><span class="school">School</span><span class="editschool"><input type="text" ng-model="user.school" name="current_school"></span></li>
 								</ul>
-								<p class="about"><span class="bio">About</span><span class="editbio"><textarea name="current_bio">{{ user.bio }}</textarea></span></p>
+									<p class="about"><span class="bio">About</span><span class="editbio"><textarea ng-model="user.bio"></textarea></span></p>
 								<div row>
-									<input type="submit" class="bbutton" value="Save">
+									<input type="submit" class="bbutton" value="Save" ng-click="update(user)">
 								</div>
+								</form>
+								{% endverbatim %}
 							</div>
 							<div class="large-9 columns profilesettings">
 								<h4 class="username">Settings</h4>

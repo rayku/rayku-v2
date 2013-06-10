@@ -19,6 +19,18 @@ function SessionListCtrl($scope, $http) {
 	    $scope.loaded = true;
 	}
 }
+
+function UserDetailCtrl($scope, $http){
+	$http.get(Routing.generate('get_user', {'entity':userId})).success(function(data){
+		$scope.user = data;
+	})
+	
+	$scope.update = function(user) {
+		$http.post(Routing.generate('post_users', {'user':userId}), user).success(function(data){
+			$scope.user = user;
+		})
+	}
+}
 /*
 function UserCtrl($scope, $http) {
     $http.get(Routing.generate('get_user').success(function(data) {

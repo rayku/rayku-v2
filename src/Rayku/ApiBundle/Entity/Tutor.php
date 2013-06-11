@@ -43,7 +43,6 @@ class Tutor
     /**
      * @var string
      *
-     * @Assert\NotBlank
      * @ORM\Column(name="school_name", type="string", length=255, nullable=true)
      * @Serializer\Groups({"tutor", "tutor.details"})
      */
@@ -52,7 +51,6 @@ class Tutor
     /**
      * @var string
      *
-     * @Assert\NotBlank
      * @ORM\Column(name="school_amount", type="string", length=255, nullable=true)
      * @Serializer\Groups({"tutor", "tutor.details"})
      */
@@ -61,7 +59,6 @@ class Tutor
     /**
      * @var string
      * 
-     * @Assert\NotBlank
      * @ORM\Column(name="degree", type="string", length=255, nullable=true)
      * @Serializer\Groups({"tutor", "tutor.details"})
      */

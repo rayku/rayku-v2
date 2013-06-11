@@ -4,18 +4,25 @@
     var app = angular.module('raykuApp', ['ngUpload']);
 
     //CONTROLLERS
-    app.controller('TutorListCtrl', function ($scope, $http) {
+    app.controller('TutorListCtrl', function ($scope, $rootScope, $http) {
         //Online Tutors List Controller
         $scope.tutorListTemplate = '/bundles/raykupage/js/app/views/TutorListView.html';
     	
         $http.get(Routing.generate('get_tutors')).success(function(data) {
             $scope.tutors = data;
-        });          
+        });
 
         $scope.refreshTutors = function(){
             $http.get(Routing.generate('get_tutors')).success(function(data) {
-              $scope.tutors = data;
+            	$scope.tutors = data;
             });
+        }
+        
+        $scope.update = function(user) {
+        	$http.post(Routing.generate('post_tutors'), user.tutor).success(function(data){
+        		$('#myTutorModal').foundation('reveal', 'close');
+        		$rootScope.user = user;
+        	})
         }
     }).controller('SessionListCtrl',function ($scope, $http) {
         //Sessions List Controller

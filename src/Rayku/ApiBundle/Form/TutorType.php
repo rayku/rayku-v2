@@ -29,26 +29,10 @@ class TutorType extends AbstractType
     	$schoolAmountChoices = array_combine($schoolAmountChoices, $schoolAmountChoices);
 
         $builder
-        	->add('schoolName', NULL, array(
-        		'label' => 'School Attended / Attending'		
-        	))
-        	->add('rate', NULL, array(
+         	->add('rate', NULL, array(
             	'label' => 'RP/Min $1 = 100 RP'		
             ))
-            ->add('degree', NULL, array(
-            	'label' => 'Degree Obtained / Pursuing'
-            ))
-            ->add('schoolAmount', 'choice', array(
-            	'label' => 'What best describes you?',
-            	'choices' => $schoolAmountChoices,
-            	'required' => true	
-           ))
-            ->add('subjects', 'entity', array(
-            	'multiple' => true,
-            	'expanded' => true,
-            	'class' => 'Rayku\ApiBundle\Entity\Subject'
-            ))
-            ->add('gtalk_email', NULL, array(
+             ->add('gtalk_email', NULL, array(
             	'label' => 'Connect Your Google Talk'
             ))
             ->add('direct_connect', NULL, array(
@@ -61,7 +45,8 @@ class TutorType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Rayku\ApiBundle\Entity\Tutor'
+            'data_class' => 'Rayku\ApiBundle\Entity\Tutor',
+        	'csrf_protection' => false
         ));
     }
 

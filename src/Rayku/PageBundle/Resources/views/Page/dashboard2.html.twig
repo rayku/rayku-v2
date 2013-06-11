@@ -65,9 +65,7 @@ $(document).ready(function(){
                         <li><a class="dashboard" href=#><span class="raphael">L</span>Home</a></li>
                         <li><a class="setting" href=#><span class="raphael">`</span>Settings</a></li>
                         <li><a class="myprofileedit" href=#><span class="raphael">`</span>Edit Profile</a></li>
-                        {% if user.isTutor == false %}
-                        	<li><a class="tutor" href=# data-reveal-id="myTutorModal"><span class="raphael">`</span>Become a Tutor</a></li>
-                        {% endif %}
+                        <li><a class="tutor" href=# data-reveal-id="myTutorModal"><span class="raphael">`</span>Become a Tutor</a></li>
                         <li><a class="logout" href="{{ path('fos_user_security_logout') }}"><span class="raphael">v</span>Logout</a></li>
                     </ul>
                 </div>
@@ -183,7 +181,6 @@ $(document).ready(function(){
 								{% endverbatim %}
 							</div>
 							<div class="large-9 columns profilesettings">
-								{% verbatim %}
 								<form novalidate>
 								<h4 class="username">Settings</h4>
 								<ul class="userinfo">
@@ -196,8 +193,7 @@ $(document).ready(function(){
 								<div row>
 									<input type="submit" class="bbutton" value="Save Settings" ng-click="profile(user)" />
 								</div>
-								</form>								
-								{% endverbatim %}
+								</form>
 							</div>
 						</div>
 
@@ -212,7 +208,41 @@ $(document).ready(function(){
 MODALS
 -------------------------------->
 {% if user.id %}
-	{% render url('rayku_tutor_new') %}
+<div id="myTutorModal" class="reveal-modal medium" ng-controller="TutorListCtrl">
+	<div class="row registration-header">
+		<h2>Tutor Profile</h2>
+	</div>
+	<div class="row registration-body">
+		<p>Before activating your tutor status, please fill out as much as possible to completeyour tutor profile.</p>
+	</div>
+	
+	<div class="large-12 columns">
+    <form novalidate>
+		<div class="row">
+		<div class="row degree"><div class="large-12 columns">
+			<label for="rate" class="required">RP/Min $1 = 100 RP</label>
+			<input type="text" id="rate" name="rate" required="required" ng-model="user.tutor.rate">
+		</div></div>
+        <div class="row degree"><div class="large-12 columns">
+        	<label for="gtalk_email">Connect Your Google Talk</label>
+        	<input type="email" id="gtalk_email" name="gtalk_email" maxlength="255" ng-model="user.tutor.gtalk_email">
+        </div></div>
+        <div class="row degree"><div class="large-12 columns">
+        	<label style="width:110px; float:left; height:1px" for="visible" class="required hast-tip" data-tooltip="" title="You can only be connected with directly through your tutor profile page">Direct Connect Only</label>
+        	<input type="checkbox" id="direct_connect" name="direct_connect" data-customforms="disabled" value="1"  ng-model="user.tutor.direct_connect">
+        </div></div>
+        <div class="row listing-preview"><div class="large-12 columns">
+        	<br />
+        	<label>Listing Preview</label>
+        	<p>(When students search for tutors, you will appear as):</p>
+        	<p class="preview"><span class="schoolAmount">Under Graduate Degree Holder</span> From <span class="schoolName">Ryerson University</span> - Economics</p>
+        </div></div>
+    </div>
+    <input type="submit" class="bbutton" value="Save &amp; Activate Tutor Status"  ng-click="update(user)" />
+    </form>
+	</div>
+	<a class="close-reveal-modal">×</a>
+</div>
 
 	{% include 'RaykuPageBundle:Page:notification_modal.html.twig' %}
 {% endif %}

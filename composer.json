@@ -52,7 +52,7 @@
         "twig/extensions": "1.0.*@dev",
 
         "symfony/symfony": "2.2.*",
-        "symfony/assetic-bundle": "2.1.*",
+        "symfony/assetic-bundle": "2.3.*",
         "symfony/swiftmailer-bundle": "2.2.*",
         "symfony/monolog-bundle": "2.2.*",
 
@@ -98,7 +98,7 @@
         "dflydev/markdown": "1.0.2",
         "simplethings/entity-audit-bundle": "dev-master",
         "willdurand/faker-bundle": "dev-master",
-        "kriswallsmith/assetic": "1.1.*",
+        "kriswallsmith/assetic": "*",
         "simplethings/entity-audit-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "dev-master",
         "nelmio/api-doc-bundle": "dev-master",

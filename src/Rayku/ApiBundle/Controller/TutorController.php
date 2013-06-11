@@ -175,7 +175,13 @@ class TutorController extends Controller
 		$request = $this->getRequest();
 		$new = (null === $entity->getId()) ? true : false;
 		$form = $this->createForm(new TutorType(), $entity);
-		$form->bind($request);
+		
+		// Ignore extra fields that Angularjs sends with the form
+		$data = $this->getRequest()->request->all();
+		$children = $form->all();
+		$data = array_intersect_key($data, $children);
+		
+		$form->bind($data);
 		 
 		if ($form->isValid()) {
 			$em = $this->getDoctrine()->getManager();
@@ -197,6 +203,10 @@ class TutorController extends Controller
 				$acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
 				$aclProvider->updateAcl($acl);
 			}
+		}else{
+			echo '<pre>';
+			\Doctrine\Common\Util\Debug::dump($form->getErrors());
+			die(__LINE__.' '.__FILE__);
 		}
 		 
 		if(null !== $entity->getGtalkEmail()){

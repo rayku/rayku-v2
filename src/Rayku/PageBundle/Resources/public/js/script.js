@@ -47,7 +47,7 @@ $(document).ready(function(){
     $('.userWhiteboard').click(function (){
     	$('body').css('overflow', 'hidden');
         $('.container').fadeOut('fast');
-        $('#whiteboard2 iframe').attr("src", "http://whiteboard.rayku.local:8080/standalone");
+        $('#whiteboard2 iframe').attr("src", "http://whiteboard.rayku.com/standalone");
         $('#whiteboard2').delay(500).fadeIn('slow');
     });
     $('.home').click(function (){

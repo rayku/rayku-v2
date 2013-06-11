@@ -1,4 +1,4 @@
-require.config({
+/*require.config({
 	baseUrl: '/bundles/raykupage/js/app'
 });
 
@@ -8,4 +8,4 @@ require(
 	],
 	function () {
 		angular.bootstrap(document, ['raykuApp']);
-	});
+	});*/

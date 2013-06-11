@@ -98,7 +98,9 @@
     </footer>
     {% endblock %}
 
-	
+	{% if is_granted("IS_AUTHENTICATED_ANONYMOUSLY") %}
+		{% render controller("FOSUserBundle:Security:login") %}
+    {% endif %} 	
 
     {% block javascripts %}
 
@@ -132,9 +134,7 @@
     
     {% include "::GoogleAnalytics.html.twig" %}
     
-    {% include "::PathAnalytics.html.twig" %}
-    
-    {% include "::ZenDeskFeedback.html.twig" %}
+    {% include "::PathAnalytics.html.twig" %}    
     </div>
     </body>
 </html>

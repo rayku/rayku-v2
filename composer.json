@@ -14,6 +14,33 @@
     	{
     		"type": "vcs",
     		"url": "https://github.com/rayku/NelmioApiDocBundle"
+    	},
+    	{
+            "type": "package",
+            "package": {
+                "name": "twilson63/ngUpload",
+                "type": "component",
+                "version": "0.3.6",
+                "dist": {
+                    "url": "https://github.com/twilson63/ngUpload/archive/master.zip",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/twilson63/ngUpload.git",
+                    "type": "git",
+                    "reference": "0.3.6"
+                },
+                "extra": {
+                    "component": {
+                        "scripts": [
+                            "ng-upload.js"
+                        ]
+                    }
+                },
+                "require": {
+                    "robloach/component-installer": "*"
+                }
+            }
     	}
     ],
 
@@ -65,6 +92,8 @@
         "friendsofsymfony/rest": "*",
         "friendsofsymfony/jsrouting-bundle": "*",
         "friendsofsymfony/message-bundle": "dev-master",
+        
+        "twilson63/ngUpload": "0.3.*",
 
         "dflydev/markdown": "1.0.2",
         "simplethings/entity-audit-bundle": "dev-master",
@@ -75,7 +104,8 @@
         "nelmio/api-doc-bundle": "dev-master",
         "guzzle/guzzle": "*",
         "jmikola/auto-login-bundle": "dev-master",
-        "vespolina/payment-stripe-bundle": "dev-master"
+        "vespolina/payment-stripe-bundle": "dev-master",
+        "twilson63/ngUpload": "*"
     },
 
     "require-dev": {

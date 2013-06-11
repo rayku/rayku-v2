@@ -14,6 +14,7 @@ if [ -d "/var/www" ]; then
     fi
 fi
 ln -s /var/rayku/web /var/www
+ln -s /var/rayku/components /var/rayku/web/components
 
 if [ -d "/var/log/rayku" ]; then
     sudo mkdir /var/log/rayku

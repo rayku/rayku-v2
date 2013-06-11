@@ -200,6 +200,9 @@ class User extends BaseUser implements ParticipantInterface
 	 */
 	private $updatedAt;
 	
+	/**
+	 * @Serializer\Groups({"user", "user.details"})
+	 */
 	private $webPath;
 	
     /**
@@ -218,6 +221,26 @@ class User extends BaseUser implements ParticipantInterface
         } else {
             $this->path = 'initial';
         }
+    }
+    
+    /**
+     * @ORM\PostLoad()
+     */
+    public function postLoad()
+    {
+    	if($this->last_name == 'Last Name'){
+    		$this->last_name = '';
+    	}
+    	$this->setImageWebPath();
+    }
+    
+    private function setImageWebPath()
+    {
+    	if(null !== $this->getPath()){
+    		$this->webPath = '/'.$this->getUploadDir().'/'.$this->getPath();
+    	}else{
+    		$this->webPath = '/'.$this->getUploadDir().'/default_profile_pic.jpeg';
+    	}
     }
 
     /**
@@ -761,9 +784,7 @@ class User extends BaseUser implements ParticipantInterface
     
     public function getWebPath()
     {
-    	return null === $this->getPath()
-    		? null
-    		: $this->getUploadDir().'/'.$this->getPath();
+    	return $this->webPath;
     }
     
     protected function getUploadRootDir()
@@ -854,9 +875,7 @@ class User extends BaseUser implements ParticipantInterface
     public function __construct()
     {
         $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
-        if(null !== $this->getPath()){
-        	$this->webPath = $this->getUploadDir().'/'.$this->getPath();
-        }
+        $this->setImageWebPath();
         
         return parent::__construct();
     }

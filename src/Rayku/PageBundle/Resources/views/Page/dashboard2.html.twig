@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="raykuApp">
 <head>
 	<meta charset="utf-8">
 	<title>{% block title %}Rayku{% endblock %}</title>
@@ -8,6 +8,7 @@
 	<link href="{{ asset('bundles/raykupage/css/app.css') }}" type="text/css" rel="stylesheet" media="screen" />
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+	<script src="{{ asset('components/ngUpload/ng-upload.js') }}"></script>
 	<script src="{{ asset('bundles/raykupage/js/foundation.min.js') }}"></script>
     <script src="{{ asset('bundles/raykupage/js/vendor/custom.modernizr.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/raykupage/js/script.js') }}"></script>
@@ -15,6 +16,7 @@
 	<!--REQUIRE-->
 	<script src="{{ asset('bundles/raykupage/js/require.js') }}"></script>
 	<script src="{{ asset('bundles/raykupage/js/main.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/app/controller.js') }}"></script>
 
 	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 	<script src="{{ asset('bundles/raykupage/js/jquery_form/jquery.form.js') }}"></script>
@@ -88,15 +90,9 @@ $(document).ready(function(){
 				<li class="divider"></li>
 				<li><a class="profile" href=#><span class="raphael">L</span> Profile</a></li>
 				<li class="divider"></li>
-				<li><a class="practice" href=#><span class="raphael">></span> Practice</a></li>
-				<!--
-				<li class="divider"></li>
-				<li><a class="broadcast" href=#><span class="raphael">Æ</span> Broadcast</a></li>
-				//-->
-				<li class="divider"></li>
 				<li><a class="buyPoints" href=#><span class="raphael">#</span> Buy Rayku Points</a></li>
 				<li class="divider"></li>
-				<li><a class="userWhiteboard" href=#><span class="raphael">?</span> Go to Whiteboard</a></li>
+				<li><a class="userWhiteboard" href=#><span class="raphael">?</span> Practice Whiteboard</a></li>
 				<li class="divider"></li>
 			</ul>
 			<ul class="logout">
@@ -145,12 +141,12 @@ $(document).ready(function(){
 				<div class="large-12 columns" id="profile">
 					<h3>User Profile</h3>
 					<div class="row">
-						<div class="large-3 columns sidenav">
-							<img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:100%;">
+						<div class="large-3 columns sidenav" ng-controller="UserDetailCtrl">
+							{% verbatim %}
+							<img src="{{ user.web_path }}" style="width:100%;">
+							{% endverbatim %}
 							<ul class="profilenav">
 								<li><a href=# class="myprofile">Profile</a></li>
-								<li><a href=# class="messages">Messages</a></li>
-								<li><a href=# class="favorites">Favorites</a></li>
 								<li><a href=# class="payout">Payout</a></li>
 								<li><a href=# class="mysettings">Settings</a></li>
 							</ul>
@@ -165,21 +161,25 @@ $(document).ready(function(){
 
 							</div>
 							<div class="large-9 columns editprofileinfo">
+								<form ng-upload="bar" action="{{ path('post_users', {'user':app.user.id}) }}">
 								{% verbatim %}
-								<form novalidate>
 								<h4 class="username">Edit Profile</h4>
 								<ul class="userinfo">
 									<li><span class="fname">First Name</span><span class="editfname"><input type="text" ng-model="user.first_name" name="first_name"></span></li>
-									<li><span class="lname">Last Name</span><span class="editlname"><input type="text" ng-model="user.last_name" name="current_last_name"></span></li>
-									<li><span class="degree">Degree</span><span class="editdegree"><input type="text" ng-model="user.degree" name="current_degree"></span></li>
-									<li><span class="grade">Level Of Education</span><span class="editgrade"><input type="text" ng-model="user.grade" name="current_grade"></span></li>
-									<li><span class="school">School</span><span class="editschool"><input type="text" ng-model="user.school" name="current_school"></span></li>
+									<li><span class="lname">Last Name</span><span class="editlname"><input type="text" ng-model="user.last_name" name="last_name"></span></li>
+									<li><span class="degree">Degree</span><span class="editdegree"><input type="text" ng-model="user.degree" name="degree"></span></li>
+									<li><span class="grade">Level Of Education</span><span class="editgrade"><input type="text" ng-model="user.grade" name="grade"></span></li>
+									<li><span class="school">School</span><span class="editschool"><input type="text" ng-model="user.school" name="school"></span></li>
 								</ul>
-									<p class="about"><span class="bio">About</span><span class="editbio"><textarea ng-model="user.bio">{{ user.bio }}</textarea></span></p>
-								<div row>
-									<input type="submit" class="bbutton" value="Save" ng-click="update(user)" />
+								<p><span>About</span><span><textarea ng-model="user.bio" name="bio">{{ user.bio }}</textarea></span></p>
+								<p><span>Profile Picture</span><span><input class="bbutton" type="file" name="file" /></span></p>
+								<div class="row">
+									<input type="submit" upload-submit="update(contents, completed)" value="Save" class="bbutton" />
 								</div>
 								</form>
+								
+								<div>{{uploadReport}}</div>
+								
 								{% endverbatim %}
 							</div>
 							<div class="large-9 columns profilesettings">
@@ -301,10 +301,6 @@ MODALS
     $(document).foundation();
 </script>
 
-    {% include "::GoogleAnalytics.html.twig" %}
-    
-    {% include "::PathAnalytics.html.twig" %}
-    
-    {% include "::ZenDeskFeedback.html.twig" %}
+{% include "::GoogleAnalytics.html.twig" %}
 </body>
 </html>

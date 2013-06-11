@@ -62,9 +62,9 @@ $(document).ready(function(){
 	            <div class="submenu" id="submenu">
                     <div class="arrow-up"></div>
                     <ul class="submenu-item">
-                        <li><a class="home" href=#><span class="raphael">L</span>Home</a></li>
-                        <li><a class="practice" href="{{ whiteboard_url }}/standalone" target="_blank"><span class="raphael">b</span>Practice Whiteboard</a></li>
+                        <li><a class="dashboard" href=#><span class="raphael">L</span>Home</a></li>
                         <li><a class="setting" href=#><span class="raphael">`</span>Settings</a></li>
+                        <li><a class="myprofileedit" href=#><span class="raphael">`</span>Edit Profile</a></li>
                         {% if user.isTutor == false %}
                         	<li><a class="tutor" href=# data-reveal-id="myTutorModal"><span class="raphael">`</span>Become a Tutor</a></li>
                         {% endif %}
@@ -95,10 +95,10 @@ $(document).ready(function(){
 				<li><a class="userWhiteboard" href=#><span class="raphael">?</span> Practice Whiteboard</a></li>
 				<li class="divider"></li>
 			</ul>
-			<ul class="logout">
+			<!--<ul class="logout">
 				<li class="divider"></li>
 				<li><a href=#><span class="raphael">Ï</span> Logout</a></li>
-			</ul>
+			</ul>-->
 		</div>
 
 		<div class="large-8 columns" id="content-body">
@@ -143,7 +143,7 @@ $(document).ready(function(){
 					<div class="row">
 						<div class="large-3 columns sidenav" ng-controller="UserDetailCtrl">
 							{% verbatim %}
-							<img src="{{ user.web_path }}" style="width:100%;">
+							<img ng-src="{{ user.web_path }}" style="width:100%;">
 							{% endverbatim %}
 							<ul class="profilenav">
 								<li><a href=# class="myprofile">Profile</a></li>

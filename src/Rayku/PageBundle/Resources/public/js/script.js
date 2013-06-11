@@ -16,6 +16,16 @@ $(document).ready(function(){
     	$('.content-header h3').html('<span class="raphael">'+ icon +'</span>' + navitem);
     });
 
+
+    $('a.setting').click(function (e) {
+        e.preventDefault();
+        console.log('Clicked');
+        $('#content').fadeOut('fast');
+        $('#userprofile').delay(500).fadeIn('fast');
+        $('.profilesettings').siblings().fadeOut('fast');
+        $('.profilesettings').delay(500).fadeIn(500);
+    });
+
     $('.profile').click(function(){
         $('#content').fadeOut('fast');
         $('#userprofile').delay(500).fadeIn('fast');
@@ -45,13 +55,14 @@ $(document).ready(function(){
         $('#whiteboard2').fadeOut('slow');
         $('.container').delay(500).fadeIn('fast');
     });
-
     //PROFILE AREA
     $('.myprofile').click(function(){
         $('.profileinfo').siblings().fadeOut('fast');
         $('.profileinfo').delay(500).fadeIn(500);
     });
     $('.myprofileedit').click(function(){
+        $('#content').fadeOut('fast');
+        $('#userprofile').delay(500).fadeIn('fast');
         $('.editprofileinfo').siblings().fadeOut('fast');
         $('.editprofileinfo').delay(500).fadeIn(500);
     });

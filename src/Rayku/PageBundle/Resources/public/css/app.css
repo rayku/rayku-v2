@@ -328,6 +328,7 @@ ul.submenu-item li a:hover {
 	padding:5px 26px;
 	color: rgba(255, 255, 255, 1);
 }
+
 #sidebar h3.userstatus span.online{
 	position: fixed;
 	margin-top:9px;
@@ -344,6 +345,17 @@ ul.submenu-item li a:hover {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#299a0b', endColorstr='#299a0b',GradientType=0 ); /* IE6-9 */
 	border-radius: 35px;
 }
+#sidebar h3.userstatus span.offline{
+	display: none;
+	position: fixed;
+	margin-top:9px;
+	height: 8px;
+	width: 8px;
+	left:160px;
+	background: rgba(231,26,14,1); /* Old browsers */
+	border-radius: 35px;
+}
+
 #sidebar h3.userstatus span.status{
 	margin-top: -2px;
 	font-size: 0.5em;
@@ -736,6 +748,23 @@ h4 a.myprofileedit{
 	color:#fff;
 }
 
+/*Tutor Profile Modal*/
+#myTutorModal .describes{
+	margin-top:15px; 
+}
+#myTutorModal form input[name="tutorStatusButton"]{
+	margin:5px auto;
+}
+#myTutorModal .listing-preview p{
+	line-height: 15px;
+}
+#myTutorModal p.preview{
+	text-decoration: underline;
+}
+#myTutorModal p.preview:hover{
+	cursor: pointer;
+}
+/*Tutor Profile Modal*/
 .bbutton {
         
 	-moz-box-shadow:inset 0px 1px 0px 0px #54a3f7;

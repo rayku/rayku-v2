@@ -1,7 +1,7 @@
-'use strict';
+//'use strict';
 
-define([], function () {
-    var app = angular.module('raykuApp', []);
+//define([], function () {
+    var app = angular.module('raykuApp', ['ngUpload']);
 
     //SERVICES
     app.service('syncSRV', function ($rootScope) {
@@ -53,16 +53,20 @@ define([], function () {
       	$scope.UserDetailTemplate = '/bundles/raykupage/js/app/views/ProfileView.html';
         $scope.UsernameTemplate = '/bundles/raykupage/js/app/views/UsernameView.html';
 
+        $scope.callbackFunction = function(contentOfInvisibleFrame) {
+            $scope.uploadReport = contentOfInvisibleFrame;
+        }
+        
         //Update user details on user edit profile submit
-      	$scope.update = function(user) {
+      	$scope.update = function(user, completed) {
           $templateCache.remove('/bundles/raykupage/js/app/views/ProfileView.html');
           $templateCache.remove('/bundles/raykupage/js/app/views/UsernameView.html');
           $scope.UserDetailTemplate = '';
           $scope.UsernameTemplate = '';
-
-      		$http.post(Routing.generate('post_users', {'user':userId}), user).success(function(data){
-      			$scope.user = user;
-      		});
+          
+          $http.post(Routing.generate('post_users', {'user':userId}), user).success(function(data){
+        	$scope.user = user;
+          });
 
           $timeout(function() {
             $http.get(Routing.generate('get_user', {'entity':userId})).success(function(data){
@@ -105,4 +109,4 @@ define([], function () {
           }
         };
     });
-});
+//});

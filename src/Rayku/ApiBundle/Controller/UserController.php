@@ -185,13 +185,7 @@ class UserController extends Controller
     	}
     	
     	$editForm = $this->createForm(new UserType(), $user);
-    	
-    	// Ignore extra fields that Angularjs sends with the form
-		$data = $this->getRequest()->request->all();
-		$children = $editForm->all();
-		$data = array_intersect_key($data, $children);
-		
-        $editForm->bind($data);
+        $editForm->bind($this->getRequest());
 
         if ($editForm->isValid()) {
         	$em = $this->getDoctrine()->getManager();

@@ -90,11 +90,9 @@ $(document).ready(function(){
 				<li class="divider"></li>
 				<li><a class="profile" href=#><span class="raphael">L</span> Profile</a></li>
 				<li class="divider"></li>
-				<li><a class="practice" href=#><span class="raphael">></span> Practice</a></li>
+				<li><a class="practice" href=#><span class="raphael">></span> Practice Whiteboard</a></li>
 				<li class="divider"></li>
 				<li><a class="buyPoints" href=#><span class="raphael">#</span> Buy Rayku Points</a></li>
-				<li class="divider"></li>
-				<li><a class="userWhiteboard" href=#><span class="raphael">?</span> Go to Whiteboard</a></li>
 				<li class="divider"></li>
 			</ul>
 			<ul class="logout">
@@ -143,12 +141,12 @@ $(document).ready(function(){
 				<div class="large-12 columns" id="profile">
 					<h3>User Profile</h3>
 					<div class="row">
-						<div class="large-3 columns sidenav">
-							<img src="{{ app.user.webPath }}" style="width:100%;">
+						<div class="large-3 columns sidenav" ng-controller="UserDetailCtrl">
+							{% verbatim %}
+							<img src="{{ user.web_path }}" style="width:100%;">
+							{% endverbatim %}
 							<ul class="profilenav">
 								<li><a href=# class="myprofile">Profile</a></li>
-								<li><a href=# class="messages">Messages</a></li>
-								<li><a href=# class="favorites">Favorites</a></li>
 								<li><a href=# class="payout">Payout</a></li>
 								<li><a href=# class="mysettings">Settings</a></li>
 							</ul>
@@ -163,8 +161,8 @@ $(document).ready(function(){
 
 							</div>
 							<div class="large-9 columns editprofileinfo">
+								<form ng-upload="bar" action="{{ path('post_users', {'user':app.user.id}) }}">
 								{% verbatim %}
-								<form action="/app_dev.php/users/3437" ng-upload="callbackFunction">
 								<h4 class="username">Edit Profile</h4>
 								<ul class="userinfo">
 									<li><span class="fname">First Name</span><span class="editfname"><input type="text" ng-model="user.first_name" name="first_name"></span></li>
@@ -174,9 +172,9 @@ $(document).ready(function(){
 									<li><span class="school">School</span><span class="editschool"><input type="text" ng-model="user.school" name="school"></span></li>
 								</ul>
 								<p><span>About</span><span><textarea ng-model="user.bio" name="bio">{{ user.bio }}</textarea></span></p>
-								<p><span>Profile Picture</span><span><input type="file" name="file" /></span></p>
+								<p><span>Profile Picture</span><span><input class="bbutton" type="file" name="file" /></span></p>
 								<div class="row">
-									<input type="submit" class="upload-submit" value="Save" />
+									<input type="submit" upload-submit="update(contents, completed)" value="Save" class="bbutton" />
 								</div>
 								</form>
 								
@@ -303,10 +301,6 @@ MODALS
     $(document).foundation();
 </script>
 
-    {% include "::GoogleAnalytics.html.twig" %}
-    
-    {% include "::PathAnalytics.html.twig" %}
-    
-    {% include "::ZenDeskFeedback.html.twig" %}
+{% include "::GoogleAnalytics.html.twig" %}
 </body>
 </html>

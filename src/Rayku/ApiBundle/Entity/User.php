@@ -239,7 +239,7 @@ class User extends BaseUser implements ParticipantInterface
     	if(null !== $this->getPath()){
     		$this->webPath = '/'.$this->getUploadDir().'/'.$this->getPath();
     	}else{
-    		$this->webPath = '/'.$this->getUploadDir().'/default_profile.jpg';
+    		$this->webPath = '/default_profile.jpg';
     	}
     }
 

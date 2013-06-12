@@ -263,7 +263,13 @@ class SessionController extends Controller
 	private function processForm(Session $session)
 	{
 		$session->setStudent($this->getUser());
-		$form = $this->createForm(new SessionType(), $session)->bind($this->getRequest());
+		$form = $this->createForm(new SessionType(), $session);
+		// Ignore extra fields that Angularjs sends with the form
+		$data = $this->getRequest()->request->all();
+		$children = $form->all();
+		$data = array_intersect_key($data, $children);
+
+		$form->bind($data);
 		
 		if($form->isValid()){
 			$em = $this->getDoctrine()->getManager();

@@ -19,6 +19,8 @@
 	<script src="{{ asset('bundles/raykupage/js/main.js') }}"></script>
 	<script src="{{ asset('bundles/raykupage/js/app/controller.js') }}"></script>
 
+	<script src="{{ asset('bundles/raykupage/js/ssmgmnt.js') }}"></script>
+
 	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 	<script src="{{ asset('bundles/raykupage/js/jquery_form/jquery.form.js') }}"></script>
 	<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
@@ -27,9 +29,8 @@
 	</script>
 </head>
 <body>
-<div id="loading-indicator" style="opacity: 0.4; position: absolute; top: 0; left: 0; 
-	background-color: black; width: 100%; z-index: 5000; position:fixed; text-align:center;">
-	<img src="http://sierrafire.cr.usgs.gov/images/loading.gif" />
+<div id="loading-indicator">
+	<img src="{{ asset('bundles/raykupage/images/ajax-loader.gif') }}" />
 </div>
 
 <div id="whiteboard2">
@@ -38,31 +39,7 @@
     </div>
     <iframe src="" seamless></iframe>
 </div>
-<script type="text/javascript">
-$(document).ready(function(){
-	//Create a session
-	
-	$('#create_session').submit(function() {
-		$('#loading-indicator').fadeIn('fast');
-	});
-	
-    $('#create_session').ajaxForm(function(response) {
-    	if(response.success == true){
-	        $('#whiteboard').src = response.redirect;
-	        $('#whiteboard2 iframe').attr("src", response.redirect);
-	        $('.container').animate({
-	            display:'none'
-	        });
-	        $('body').css('overflow', 'hidden');
-	        $('.main-header').fadeOut('fast');
-	        $('#whiteboard2').fadeIn('slow');
-	    }else{
-	    	alert('There was an error starting your session');
-	    }
-	    $('#loading-indicator').fadeOut('slow');
-    });
-});
-</script>
+
 <div class="container">
 	<header id="header">
 	    <div class="inside">
@@ -104,6 +81,8 @@ $(document).ready(function(){
 				<li class="divider"></li>
 				<li><a class="userWhiteboard" href=#><span class="raphael">?</span> Practice Whiteboard</a></li>
 				<li class="divider"></li>
+				<li class="backtoWhiteboard"><a class="backWhiteboard" href=#><span class="raphael">?</span> Back to Whiteboard</a></li>
+				<li class="divider backtoWhiteboard"></li>
 			</ul>
 			<!--<ul class="logout">
 				<li class="divider"></li>
@@ -135,6 +114,14 @@ $(document).ready(function(){
 				<div class="large-2 columns tutor-rating">
 					<h3><span class="raphael">$</span><span class="title">Tutor Rating<span></h3>
 					<h4>1000</h4>
+				</div>
+
+			<!-----------------------------
+			TUTOR STATUS
+			-------------------------------->
+				<div class="large-4 columns" id ="sessions-list" ng-controller="UserDetailCtrl">
+					<h3>Tutor Status</h3> 
+					<div ng-include="TutorStatusTemplate"></div>
 				</div>
 
 			<!------------------------------
@@ -184,7 +171,7 @@ $(document).ready(function(){
 									<li><span class="school">School</span><span class="editschool"><input type="text" ng-model="user.school" name="school"></span></li>
 								</ul>
 								<p><span>About</span><span><textarea ng-model="user.bio" name="bio">{{ user.bio }}</textarea></span></p>
-								<p><span>Profile Picture</span><span><input class="bbutton" type="file" name="file" /></span></p>
+								<p><span>Profile Picture</span><span><input type="file" name="file" /></span></p>
 								<div class="row">
 									<input type="submit" upload-submit="update(contents, completed)" value="Save" class="bbutton" />
 								</div>

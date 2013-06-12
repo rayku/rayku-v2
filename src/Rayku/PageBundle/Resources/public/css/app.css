@@ -533,9 +533,13 @@ table, th, td
 
 }
 #tutorConnect{
+	opacity: 1;
 	position: relative;
 	left:42%;
 	margin-top: 10px;
+}
+.disabled{
+	opacity: 0.5;
 }
 .tutor-rating{
 	margin-left: 14px;
@@ -807,7 +811,6 @@ h4 a.myprofileedit{
         
 }
 .bbutton:hover {
-	
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #0061a7), color-stop(1, #007dc1));
 	background:-moz-linear-gradient(top, #0061a7 5%, #007dc1 100%);
 	background:-webkit-linear-gradient(top, #0061a7 5%, #007dc1 100%);
@@ -821,4 +824,21 @@ h4 a.myprofileedit{
 .bbutton:active {
 	position:relative;
 	top:1px;
+}
+#loading-indicator{
+	opacity: 0.4; 
+	position: absolute; 
+	top: 0; 
+	left: 0; 
+	background-color: black; 
+	width: 100%; 
+	height: 100%;
+	z-index: 5000; 
+	position:fixed; 
+	text-align:center;
+}
+#loading-indicator img{
+	position: absolute;
+	top:50%;
+	left:50%;
 }

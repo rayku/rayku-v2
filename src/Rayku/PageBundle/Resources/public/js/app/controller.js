@@ -35,6 +35,7 @@ app.controller('TutorListCtrl', function ($scope, $rootScope, $http) {
     //Users Details List Controller
   	$scope.UserDetailTemplate = '/bundles/raykupage/js/app/views/ProfileView.html';
     $scope.UsernameTemplate = '/bundles/raykupage/js/app/views/UsernameView.html';
+    $scope.TutorStatusTemplate = '/bundles/raykupage/js/app/views/TutorStatusView.html';
 
   	$http.get(Routing.generate('get_user', {'entity':userId})).success(function(data){
   		data.password = '';

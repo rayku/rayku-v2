@@ -81,7 +81,11 @@
 	                    	<form action="{{path('post_session')}}" method="post" class="custom">
 		                    	<input type="hidden" value="Direct connection" name="question" id="question" />
 		                    	<input type="hidden" class="tutor-check" name="potential_tutors[0][tutor]" value="{{ entity.user.tutor.id }}">
-		                    	<input type="submit" class="bbutton direct-connect" value="Connect With Tutor" />
+		                    	{% if entity.busy == true %}
+		                    		<input type="submit" class="bbutton direct-connect" value="Tutor is Busy" disabled="disabled" />
+		                    	{% else %}
+			                    	<input type="submit" class="bbutton direct-connect" value="Connect With Tutor" />
+			                    {% endif %}
 	                        </form>
 	                    {% endif %}
                     </li>

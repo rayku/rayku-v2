@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Session
 {
-	const expire_session = '-10 minutes';
+	const expire_session = '-20 minutes';
     /**
      * @var integer
      *
@@ -428,6 +428,7 @@ class Session
     	return $this;
     }
     
+    
     /**
      * @ORM\PrePersist
      * @ORM\PreUpdate
@@ -436,38 +437,23 @@ class Session
     public function setUsersBusy()
     {
     	$this->updatedTimestamps();
-    	
-    	$busy = new \DateTime();
-        $notBusy = new \DateTime(self::expire_session);
-    	
-    	// If a tutor accepted the session mark everyone as available otherwise mark tutors that don't respond to tutoring requests as busy
-    	if(null === $this->getSelectedTutor()){
-	    	$busy->modify('+10 minutes');
-    	}
     	foreach($this->getPotentialTutors() as $potential_tutor)
     	{
     		if(in_array($potential_tutor->getTutorReply(), array('pending', 'contacted gtalk'))){
-	    		$potential_tutor->getTutor()->setBusy($busy);
-    		}else{
-    			$potential_tutor->getTutor()->setBusy($notBusy);
+	    		$potential_tutor->getTutor()->setBusy(true);
     		}
     	}
-    	
-    	$busy = new \DateTime();
     	
     	$tutor = $this->getSelectedTutor();
     	$student = ($this->getStudent()->getIsTutor()) ? $this->getStudent()->getTutor() : NULL;
     	if($this->getId() == null){ // New Session mark student as busy
-    		if(!is_null($student)) $student->setBusy($busy);
-    	}else if($this->getStartTime() === null && $this->getEndTime() === null && $this->getCreatedAt() > new \DateTime(self::expire_session)){ // Old expired session
-    		if(!is_null($student)) $student->setBusy($notBusy);
-    		if(!is_null($tutor)) $tutor->setBusy($notBusy);
+    		if(!is_null($student)) $student->setBusy(true);
     	}else if($this->getStartTime() !== null && $this->getEndTime() === null){ // Active session with a start and no end
-    		if(!is_null($student)) $student->setBusy($busy);
-    		if(!is_null($tutor)) $tutor->setBusy($busy);    		
-    	}else if($this->getStartTime() !== null && $this->getEndTime() !== null){ // Session that was started and ended
-    		if(!is_null($student)) $student->setBusy($notBusy);
-    		if(!is_null($tutor)) $tutor->setBusy($notBusy);    		
+    		if(!is_null($student)) $student->setBusy(true);
+    		if(!is_null($tutor)) $tutor->setBusy(true);
+    	}else if($this->getEndTime() !== null){ // Session that has been ended
+    		if(!is_null($student)) $student->setBusy(false);
+    		if(!is_null($tutor)) $tutor->setBusy(false);
     	}
     	
     	return $this;

@@ -62,14 +62,14 @@ class TutorController extends Controller
         if(!$user->getIsTutor()){
             return $this->redirect($this->generateUrl('rayku_page_dashboard'));
         }
-        $entity = $em->getRepository('RaykuApiBundle:User')->findOneByUsername($username)->getTutor();
+        $entity = $user->getTutor();
         
         $userSettingForm = $this->createForm(new UserSettingType(), $this->getUser());
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Tutor entity.');
-        }
-        else{
+        }else{
+        	
             return array(
                 'entity'      => $entity,
             	'usersettingform' => $userSettingForm->createView()

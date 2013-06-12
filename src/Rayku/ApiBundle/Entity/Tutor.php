@@ -18,7 +18,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Tutor
 {
 	const expire_online = '-10 minutes';
-	const default_busy_duration = '+10 minutes';
 	
     /**
      * @var integer
@@ -96,9 +95,9 @@ class Tutor
      * @var \DateTime
      * 
      * This field marks when a tutor was last "busy".
-     * @ORM\Column(name="busy", type="datetime", nullable=true)
+     * @ORM\Column(name="busy", type="boolean", nullable=true)
      */
-    private $busy;
+    private $busy = false;
     
 
     /**
@@ -143,7 +142,7 @@ class Tutor
      * )
      */
     private $subjects;
-
+    
     public function __toString()
     {
     	$return = '';
@@ -484,31 +483,6 @@ class Tutor
         return $this->gtalk_email;
     }
     
-    /**
-     * Mark tutor as available
-     */
-    public function available()
-    {
-    	return $this->setBusy(new \DateTime(self::expire_online));
-    }
-    
-    /**
-     * Mark tutor as busy
-     */
-    public function busy()
-    {
-    	return $this->setBusy(new \DateTime(self::default_busy_duration));
-    }
-    
-    /**
-     * Is the tutor busy
-     * @return boolean
-     */
-    public function isBusy()
-    {
-    	return new \DateTime() < $this->getBusy();
-    }
-
     /**
      * Set busy
      *

@@ -67,7 +67,7 @@ class SessionController extends Controller
 			throw $this->createNotFoundException('Unable to find Session.');
 		}else{
 			$potentialTutor->setTutorReply('rejected');
-			$potentialTutor->getTutor()->setBusy(new \DateTime());
+			$potentialTutor->getTutor()->setBusy(false);
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($potentialTutor);
 			$em->flush();
@@ -125,7 +125,7 @@ class SessionController extends Controller
 			throw $this->createNotFoundException('Unable to find Session.');
 		}else{
 			$potentialTutor->setTutorReply('replied');
-			$potentialTutor->getTutor()->setBusy(new \DateTime());
+			$potentialTutor->getTutor()->setBusy(true);
 			$em->persist($potentialTutor);
 		}
 		

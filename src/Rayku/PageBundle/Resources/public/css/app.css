@@ -299,9 +299,10 @@ ul.submenu-item li a:hover {
    	height:auto !important; 
 	width: 18%;
 	background: rgba(39, 39, 39, 1);
+	box-shadow: 3px 0 0px rgba(10, 10, 10, 0.2);
 	margin: 0;
 	padding: 0;
-	z-index: 1;
+	z-index: 2;
 }
 #sidebar h3.userfullname{
 	font-size: 1.5em;
@@ -312,10 +313,8 @@ ul.submenu-item li a:hover {
 	color: rgba(255, 255, 255, 1);
 	background: rgba(50, 50, 50, 0.7);
 }
-#sidebar h3.userfullname img{
-	float: left;
-	width:29%;
-	margin-right: 5px;
+#sidebar img{
+	padding: 10px;
 }
 #sidebar h3.userfullname span.lastname{
 	font-weight: 400;

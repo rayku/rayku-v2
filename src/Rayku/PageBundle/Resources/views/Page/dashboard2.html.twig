@@ -9,6 +9,7 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 	<script src="{{ asset('components/ngUpload/ng-upload.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/app/loadingIndicator.js') }}"></script>
 	<script src="{{ asset('bundles/raykupage/js/foundation.min.js') }}"></script>
     <script src="{{ asset('bundles/raykupage/js/vendor/custom.modernizr.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/raykupage/js/script.js') }}"></script>
@@ -26,6 +27,11 @@
 	</script>
 </head>
 <body>
+<div id="loading-indicator" style="opacity: 0.4; position: absolute; top: 0; left: 0; 
+	background-color: black; width: 100%; z-index: 5000; position:fixed; text-align:center;">
+	<img src="http://sierrafire.cr.usgs.gov/images/loading.gif" />
+</div>
+
 <div id="whiteboard2">
     <div id="whiteboard-header">
         <a href=# class="logged-in-as bbutton home">Back Home</a>
@@ -35,19 +41,25 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	//Create a session
+	
+	$('#create_session').submit(function() {
+		$('#loading-indicator').fadeIn('fast');
+	});
+	
     $('#create_session').ajaxForm(function(response) {
     	if(response.success == true){
 	        $('#whiteboard').src = response.redirect;
+	        $('#whiteboard2 iframe').attr("src", response.redirect);
 	        $('.container').animate({
 	            display:'none'
 	        });
 	        $('body').css('overflow', 'hidden');
 	        $('.main-header').fadeOut('fast');
-	        $('#whiteboard2 iframe').attr("src", response.redirect);
 	        $('#whiteboard2').fadeIn('slow');
 	    }else{
 	    	alert('There was an error starting your session');
 	    }
+	    $('#loading-indicator').fadeOut('slow');
     });
 });
 </script>
@@ -188,7 +200,7 @@ $(document).ready(function(){
 								<ul class="userinfo">
 									<li><span class="username">Username</span><span><input type="text" ng-model="user.username" name="username"></span></li>
 									<li><span class="email">Email</span><span><input type="text" ng-model="user.email" name="email"></span></li>
-									<li><span class="password">Current Password</span><span><input type="password" ng-model="user.current_password" name="current_password"></span></li>
+									<li><span class="password">Current Password</span><span><input type="password" ng-model="user.current_password" name="current_password" value="" autocomplete="off"></span></li>
 									<li><span class="password">New Password</span><span><input type="password" ng-model="user.plainPassword.first" name="plainPassword[first]"></span></li>
 									<li><span class="password">Confirm Password</span><span><input type="password" ng-model="user.plainPassword.second" name="plainPassword[second]"></span></li>
 								</ul>

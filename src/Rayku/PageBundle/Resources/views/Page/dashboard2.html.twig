@@ -112,10 +112,13 @@
 					<h3><span class="raphael">#</span><span class="title">Rayku Points</span></h3>
 					<h4>{{user.points}}</h4>
 				</div>
+
+			{% if user.isTutor %}
 				<div class="large-2 columns tutor-rating">
 					<h3><span class="raphael">$</span><span class="title">Tutor Rating<span></h3>
 					<h4>1000</h4>
 				</div>
+			
 
 			<!-----------------------------
 			TUTOR STATUS
@@ -124,6 +127,7 @@
 					<h3>Tutor Status</h3> 
 					<div ng-include="TutorStatusTemplate"></div>
 				</div>
+			{% endif %}
 
 			<!------------------------------
 			PAST SESSIONS LIST

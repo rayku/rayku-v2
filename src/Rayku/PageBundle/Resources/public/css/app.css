@@ -347,7 +347,10 @@ ul.submenu-item li a:hover {
 	margin-top: 0;
 	margin-bottom: 0; 
 	padding:5px 15px;
+	padding-top: 2px;
+	padding-bottom: 6px;
 	color: rgba(255, 255, 255, 1);
+	border-top: 1px solid rgba(30, 30, 30, 0.7);
 	border-bottom: 1px solid rgba(50, 50, 50, 0.7);
 }
 
@@ -436,7 +439,7 @@ ul.submenu-item li a:hover {
 }
 #sidebar ul.userinfo{
 	list-style-type: none;
-	padding: 5px 15px;
+	padding: 15px 15px;
 }
 #sidebar ul.userinfo li, #sidebar  p{
 	font-size: 12px;
@@ -810,11 +813,21 @@ h4 a.myprofileedit{
 }
 
 /*Tutor Profile Modal*/
+#myTutorModal .large-12{
+	width: 100%;
+	padding: 10px;
+}
+#myTutorModal p {
+	font-size: 12px;
+}
 #myTutorModal .describes{
 	margin-top:15px; 
 }
 #myTutorModal form input[name="tutorStatusButton"]{
 	margin:5px auto;
+}
+#myTutorModal form label{
+	font-size: 12px;
 }
 #myTutorModal .listing-preview p{
 	line-height: 15px;
@@ -824,6 +837,11 @@ h4 a.myprofileedit{
 }
 #myTutorModal p.preview:hover{
 	cursor: pointer;
+}
+#myTutorModal input[type="submit"]{
+	position: relative;
+	top:5px;
+	left:25%;
 }
 /*Tutor Profile Modal*/
 .bbutton {

@@ -60,8 +60,8 @@ $(document).ready(function(){
     });
     //PROFILE AREA
     $('.myprofile').click(function(){
-        $('.profileinfo').siblings().fadeOut('fast');
-        $('.profileinfo').delay(500).fadeIn(500);
+        $('.editprofileinfo').siblings().fadeOut('fast');
+        $('.editprofileinfo').delay(500).fadeIn(500);
     });
     $('.myprofileedit').click(function(){
         $('#content').fadeOut('fast');

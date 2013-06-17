@@ -449,13 +449,12 @@ class Session
      */
     public function setUsersBusy()
     {
-    	$this->updatedTimestamps();
-    	foreach($this->getPotentialTutors() as $potential_tutor)
+    	/*foreach($this->getPotentialTutors() as $potential_tutor)
     	{
     		if(in_array($potential_tutor->getTutorReply(), array('pending', 'contacted gtalk'))){
 	    		$potential_tutor->getTutor()->setBusy(true);
     		}
-    	}
+    	}*/
     	
     	$tutor = $this->getSelectedTutor();
     	$student = ($this->getStudent()->getIsTutor()) ? $this->getStudent()->getTutor() : NULL;

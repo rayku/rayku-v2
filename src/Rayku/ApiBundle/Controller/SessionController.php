@@ -222,7 +222,7 @@ class SessionController extends Controller
 	}
 
 	/**
-	 * @View
+	 * @View(serializerGroups={"session.details"})
 	 * @ApiDoc(
 	 *   description="Rate a session",
 	 *   input="Rayku\ApiBundle\Form\RateSession"
@@ -235,14 +235,14 @@ class SessionController extends Controller
 			throw new AccessDeniedException();
 		}
 		
-		$session = $this->postSessionEndAction($session);
+		$session->endNow();
 		$form = $this->createForm(new RateSessionType(), $session)->bind($this->getRequest());
 	
 		if($form->isValid()){
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($session);
 			$em->flush();
-			return $session;
+			return array('success' => true);
 		}
 		return $form;
 	}

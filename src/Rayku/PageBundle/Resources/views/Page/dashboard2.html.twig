@@ -43,12 +43,26 @@
 </div>
 
 <div class="container">
+<!------------------------------
+NOTIFICATIONS ALERT
+-------------------------------->
+	<div class="notif-container">
+		<section class="notif notif-notice">
+		    <h6 class="notif-title">Notification!</h6>
+		    <p>You found the answer to the ultimate question of life, the universe, and everything.</p>
+		    <div class="notif-controls">
+		        <a href="index.html" class="notif-minimize">Minimize</a>
+		        <a href="index.html" class="notif-zoom">Zoom</a>
+		        <a href="index.html" class="notif-close">Close</a>
+		    </div>
+		</section>
+	</div>
 	<header id="header">
 	    <div class="inside">
 	        <a href="{{ path('rayku_page_dashboard') }}" id="logo"><img src="http://www.rayku.local/bundles/raykupage/images/logo.png" alt="" /></a>
 	        <nav>
 	            <a href=# class="notification" data-reveal-id="connectNotifModal"><span class="raphael">M</span><span class="notif-count">0</span></a>
-	            <a href=# class="settings"><span class="raphael">`</span></a>
+	            
 	            <a href=# class="logged-in-as"><span class="liau">Logged in as {{user.username}}</span> <div class="arrow-down"></div></a> 
 	            <div class="submenu" id="submenu">
                     <div class="arrow-up"></div>
@@ -214,9 +228,7 @@
 	</div>
 </div>
 
-<!------------------------------
-MODALS
--------------------------------->
+
 {% if user.id %}
 <div id="myTutorModal" class="reveal-modal medium" ng-controller="TutorListCtrl">
 	<div class="row registration-header">

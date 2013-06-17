@@ -204,19 +204,19 @@ class TutorController extends Controller
 				$aclProvider->updateAcl($acl);
 			}
 		}else{
-			echo '<pre>';
-			\Doctrine\Common\Util\Debug::dump($form->getErrors());
-			die(__LINE__.' '.__FILE__);
+			return array(
+				'entity' => $entity,
+				'form' => $form	
+			);
 		}
-		 
+		
 		if(null !== $entity->getGtalkEmail()){
 			require_once $this->get('kernel')->getRootDir() .'/../bin/BotServiceProvider.class.php';
 			\BotServiceProvider::createFor('http://10.180.146.105:8892/add/'.$entity->getGtalkEmail())->getContent();
 		}
 		 
 		return array(
-			'entity' => $entity,
-			'form'   => $form,
+			'entity' => $entity
 		);
 	}
 }

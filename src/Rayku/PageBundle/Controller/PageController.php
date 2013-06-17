@@ -8,8 +8,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Rayku\UserBundle\Form\Type\RegistrationAndTutorProfileFormType;
 use Rayku\ApiBundle\Form\UserSettingType;
-use Rayku\ApiBundle\Entity\Tutor;
 use Rayku\ApiBundle\Form\TutorType;
+use Rayku\ApiBundle\Form\RateSessionType;
+use Rayku\ApiBundle\Entity\Tutor;
+use Rayku\ApiBundle\Entity\Session;
 
 use Rayku\ApiBundle\Entity\User;
 
@@ -67,11 +69,30 @@ class PageController extends Controller
 	}
 	
 	/**
-	 * @Route("/session/{id}/rate", requirements={"id" = "\d+"}, name="rayku_session_rate")
+	 * @Route("/session/{session}/rate", name="rayku_session_rate")
+	 * @Template("RaykuPageBundle:Page:dashboard2.html.twig")
+	 * @param \Rayku\ApiBundle\Entity\Session $session
 	 */
-	public function rateSessionAction()
+	public function rateSessionAction(Session $session)
 	{
-		die('not implemented yet');
+		$return = $this->dashboardAction();
+		
+		if(
+				null === $session->getRating() &&
+				$session->getStudent() == $this->getUser() &&
+				null !== $session->getSelectedTutor())
+		{
+			if(null === $session->getEndTime()){
+				$session->endNow();
+				$em->persist($session);
+				$em->persist($session->getStudent());
+				if(null !== $session->getSelectedTutor()) $em->persist($session->getSelectedTutor());
+				$em->flush();
+			}
+			$sessionRateForm = $this->createForm(new RateSessionType(), $session);
+			$return['ratesessionform'] = $sessionRateForm->createView();
+		}
+		return $return;
 	}
 	
 	/**

@@ -7,6 +7,7 @@
 	<link href="{{ asset('bundles/raykupage/css/foundation.css') }}" type="text/css" rel="stylesheet" media="screen" />
 	<link href="{{ asset('bundles/raykupage/css/app.css') }}" type="text/css" rel="stylesheet" media="screen" />
 	<link rel="icon" type="image/ico" href="{{ asset('bundles/raykupage/images/favicon.ico') }}">
+
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 	<script src="{{ asset('components/ngUpload/ng-upload.js') }}"></script>
@@ -264,10 +265,8 @@ MODALS
 	    <div class="row registration-body">
 			<div class="large-12 columns">
 				You can get extra Rayku Points by inviting your friends to try out Rayku. If a friend uses your invitation to sign up for an account you will receive 200 Rayku Points and your friend receives 500 Rayku points.</br><br/>
-				
-				<input type="text" value="http://www.rayku.com/?refcode={{ user.referralCode }}" /><br /><br />
 
-				<a href="#"><img src="https://secure.citizensforethics.org/page/-/images/buttons/btn_fb_55px.gif" /></a>
+				<input type="text" value="http://www.rayku.com/?refcode={{ user.referralCode }}" /><br />
 			</div>
 		</div>
 		<a class="close-reveal-modal">×</a>
@@ -280,32 +279,14 @@ MODALS
 		<div class="row registration-body">
 	    <div class="large-12 columns rate-tutors">
 	        <form id="rateTutorForm" class="custom" name="rate-tutor" action="{{ path('post_session_rate', {'session': session.id}) }}" method="post">
+                <div class="row">
+                    <label for="rateTutor">Your tutor {{ session.selectedtutor }}</label>
+                    {{ form_widget(ratesessionform.rating) }}
+                    {{ form_rest(ratesessionform) }}
+                    <input type="submit" class="bbutton" value="Rate">
+                </div>
 	            <div class="row">
-	                <div class="large-9 columns">
-	                    <label for="rateTutor">{{ session.selectedtutor }}</label>
-	                    {{ form_widget(ratesessionform.rating) }}
-	                    {{ form_rest(ratesessionform) }}
-	                </div>
-	
-	                <!--// Attach to a review table on DB //-->
-	                <div class="large-12 columns">
-	                    <form>
-	                        <div class="row">
-	                            <div class="large-12 columns">
-	                                <label>Write Review</label>
-	                                <textarea placeholder="small-12.columns">Write a tutor review</textarea>
-	                            </div>
-	                        </div>
-	                    </form>
-	                </div>
-	                <div class="large-3 columns">
-	                    <input type="submit" class="bbutton" value="Rate">
-	                </div>
-	            </div>
-	            <div class="row">
-	            	<div class="large-12 coumns">
-	            		View the <strong><a href="{{ whiteboard_url }}/room/{{ session.id }}/playback/5" target="_blank" />Session Recording</a></strong>
-	            	</div>
+	            	<br />View the <strong><a href="{{ whiteboard_url }}/room/{{ session.id }}/playback/5" target="_blank" />Session Recording</a></strong>
 	            </div>
 	        </form>
 	    </div></div>
@@ -314,32 +295,46 @@ MODALS
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$('#rateTutorModal').foundation('reveal', 'open');
+		$('#rateTutorForm').submit(function() {
+			$('#loading-indicator').fadeIn('fast');
+		});
 	    $('#rateTutorForm').ajaxForm(function() {
 	    	if($('select#rating').find(":selected").val() > 3){
-	    		$('#referFriend').foundation('reveal', 'open')    	
+	    		$('#referFriend').foundation('reveal', 'open');   	
 	    	}else{
 		    	$('#rateTutorModal').foundation('reveal', 'close');
 		    }
+		    $('#loading-indicator').fadeOut('fast');
 		});
 	});
 	</script>
 {% endif %}
 
- <script>
-    document.write('<script src=' +
+<script>
+	document.write('<script src=' +
     ('__proto__' in {} ? '/bundles/raykupage/js/vendor/zepto' : '/bundles/raykupage/js/vendor/jquery') +
     '.js><\/script>')
 </script>
 
-{% javascripts
-    '@RaykuPageBundle/Resources/public/js/foundation//*' %}
-    <script src="{{ asset_url }}"></script>
-{% endjavascripts %}
-
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.alerts.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.clearing.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.cookie.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.dropdown.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.forms.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.joyride.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.magellan.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.orbit.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.placeholder.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.reveal.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.section.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.tooltips.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.topbar.js') }}"></script>
 <script>
     $(document).foundation();
 </script>
 
 {% include "::GoogleAnalytics.html.twig" %}
+
 </body>
 </html>

@@ -46,10 +46,10 @@ $(document).ready(function(){
 
     //Animation to show practice whiteboard iFrame for now
     $('.userWhiteboard').click(function (){
-    	$('body').css('overflow', 'hidden');
         $('.container').fadeOut('fast');
         $('#whiteboard2 iframe').attr("src", "http://whiteboard.rayku.com/standalone");
         $('#whiteboard2').delay(500).fadeIn('slow');
+        $('body').css('overflow', 'hidden');
     });
     $('.home').click(function (){
     	$('body').css('overflow', 'scroll');

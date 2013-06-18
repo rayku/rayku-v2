@@ -64,6 +64,10 @@ $(document).ready(function(){
         $('.editprofileinfo').siblings().fadeOut('fast');
         $('.editprofileinfo').delay(500).fadeIn(500);
     });
+    $('.payout').click(function(){
+        $('.tutorpayout').siblings().fadeOut('fast');
+        $('.tutorpayout').delay(500).fadeIn(500);
+    });
     $('.myprofileedit').click(function(){
         $('#content').fadeOut('fast');
         $('#userprofile').delay(500).fadeIn('fast');

@@ -9,16 +9,3 @@
   	</tbody>
 </table>
 <input value="Connect" type="submit" class="bbutton" id="tutorConnect" name="tutorConnect">
-
-<script type="text/javascript">
-	function selectTutor () {
-		//checkbox toggle tutor selection
-	    $('.tutorTable tr td').on('click', 
-	        function(){
-	            console.log('clicked');
-	    		var checkbox = $(this).find('input[type="checkbox"]');
-	    		checkbox.attr("checked", !checkbox.prop("checked"));
-		    }
-	    );
-	}
-</script>

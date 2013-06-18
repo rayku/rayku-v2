@@ -325,6 +325,7 @@ ul.submenu-item li a:hover {
 	margin: 0;
 	padding: 0;
 	z-index: 2;
+	overflow: hidden;
 }
 #sidebar h3.userfullname{
 	font-size: 1.5em;
@@ -427,7 +428,7 @@ ul.submenu-item li a:hover {
 	font-weight: 500;
 	width: 100%;
 	color: rgba(255, 255, 255, 1);
-	padding:15px 120px 15px 10px;
+	padding:15px 140px 15px 10px;
 	clear: both;
 }
 #sidebar ul.sidebar-nav li a span{
@@ -731,25 +732,28 @@ table, th, td
 	border-left: 3px solid rgba(22,158,244, 1);
 }
 
-#profile .profileinfo, #profile .profilesettings, #profile .editprofileinfo{
+#profile .profileinfo, #profile .tutorpayout, #profile .profilesettings, #profile .editprofileinfo{
 	width:77.5%;
 	padding-right: 40px;
 }
 h4 a.myprofileedit{
 	float: right;
 }
-#profile .profileinfo h4, #profile .profilesettings h4, #profile .editprofileinfo h4{
+#profile .profileinfo h4, #profile .tutorpayout h4, #profile .profilesettings h4, #profile .editprofileinfo h4{
 	font-weight: 500;
 	font-size: 1.5em;
 	color: rgba(39, 39, 39, 1);
 	padding-bottom: 12px;
 	border-bottom: 1px solid rgba(221, 221, 221, 1); 
 }
+#profile .tutorpayout h5{
+	font-size: 1.1em;
+}
 #profile ul.userinfo li{
 	font-size: 0.95em;
 	font-style: italic;
 }
-#profile .profileinfo p, #profile .editprofileinfo p{
+#profile .profileinfo p, #profile .editprofileinfo p, #profile .tutorpayout p{
 	font-size: 0.9em;
 }
 #profile .profileinfo p.public a{

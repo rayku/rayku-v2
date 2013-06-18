@@ -29,6 +29,42 @@
 	<script>
 		var userId = {{ user.id }};
 	</script>
+	
+	<script type="text/javascript">
+	window.setInterval(function(){
+		$.get(Routing.generate('get_sessions', {'activeRequests':1}), function(response, status){
+			jQuery.each(response, function() {
+				var current_messages = parseInt($('.notif-count').html());
+				$('.notif-count').html(response.length);
+				var template = $('#connectRow_id_').prop("outerHTML");
+				template = template.replace('_name_', this.student.first_name+' '+this.student.last_name);
+				template = template.replace('_question_', this.question);
+				template = template.replace(/_id_/g, this.id);
+				if(response.length > current_messages){
+					$('#connectNotifModal').append(template);
+					$('#connectRow'+this.id).show();
+					$('#music').html('<iframe src="/music.html" width="1" height="1"></iframe>');            
+					$('#connectNotifModal').foundation('reveal', 'open');
+				}
+				$('.post_session_accept').ajaxForm(function(response) { 
+				if(response.success){
+					window.location.href = response.redirect;
+				}else if(response.success !== false){
+					alert(response.message);
+				}else{
+					alert('an unknown error has occured');
+				}
+			})
+			$('.post_session_deny').ajaxForm(function(response) {
+				if(response.success){
+					$('#connectNotifModal').foundation('reveal', 'close');
+					$('#music').html('');
+				}
+			})
+		})
+	})
+}, 5000);
+</script>
 </head>
 <body>
 <div id="loading-indicator">

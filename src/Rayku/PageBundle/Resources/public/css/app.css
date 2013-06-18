@@ -780,7 +780,7 @@ h4 a.myprofileedit{
    Page Name 2
 ----------------------------------------- */
 #whiteboard2{
-	position: absolute;
+	position:fixed;
 	top:0px;
 	left:0;
 	margin: 0;
@@ -790,7 +790,7 @@ h4 a.myprofileedit{
 	min-height: 100%; 
    	height:auto !important; 
    	overflow: hidden;
-   	z-index: 1040;
+   	z-index: 5000;
 }
 #whiteboard2 iframe{
 	width: 100%;

@@ -37,7 +37,7 @@ class Tutor
      * @ORM\Column(name="direct_connect_only", type="boolean")
      * @Serializer\Groups({"tutor", "tutor.details"})
      */
-    private $direct_connect;
+    private $direct_connect = false;
     
     /**
      * @var string

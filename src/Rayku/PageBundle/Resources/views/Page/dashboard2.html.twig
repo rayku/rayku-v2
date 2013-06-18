@@ -29,6 +29,42 @@
 	<script>
 		var userId = {{ user.id }};
 	</script>
+	
+	<script type="text/javascript">
+	window.setInterval(function(){
+		$.get(Routing.generate('get_sessions', {'activeRequests':1}), function(response, status){
+			jQuery.each(response, function() {
+				var current_messages = parseInt($('.notif-count').html());
+				$('.notif-count').html(response.length);
+				var template = $('#connectRow_id_').prop("outerHTML");
+				template = template.replace('_name_', this.student.first_name+' '+this.student.last_name);
+				template = template.replace('_question_', this.question);
+				template = template.replace(/_id_/g, this.id);
+				if(response.length > current_messages){
+					$('#connectNotifModal').append(template);
+					$('#connectRow'+this.id).show();
+					$('#music').html('<iframe src="/music.html" width="1" height="1"></iframe>');						
+					$('#connectNotifModal').foundation('reveal', 'open');
+				}
+				$('.post_session_accept').ajaxForm(function(response) { 
+					if(response.success){
+						window.location.href = response.redirect;
+					}else if(response.success !== false){
+						alert(response.message);
+					}else{
+						alert('an unknown error has occured');
+					}
+				})
+				$('.post_session_deny').ajaxForm(function(response) {
+				    if(response.success){
+				        $('#connectNotifModal').foundation('reveal', 'close');
+				        $('#music').html('');
+				    }
+				})
+			})
+		})
+	}, 5000);
+	</script>
 </head>
 <body>
 <div id="loading-indicator">
@@ -84,7 +120,7 @@ NOTIFICATIONS ALERT
 		<!------------------------------
 		SIDE NAVIGATION
 		-------------------------------->
-		<div class="large-4 columns" id="sidebar" ng-controller="UserDetailCtrl">
+		<div class="four columns" id="sidebar" ng-controller="UserDetailCtrl">
 			<div ng-include="UsernameTemplate"></div>
 			<h3 class="userstatus"><span class="status">{% if user.isTutor %}Tutor{% endif %}{% if user.isTutor == false %}Student{% endif %}</span><span class="online">&nbsp;</span></h3>
 			<ul class="userinfo">
@@ -109,61 +145,64 @@ NOTIFICATIONS ALERT
 			</ul>
 		</div>
 
-		<div class="large-8 columns" id="content-body">
+		<div class="eight columns" id="content-body">
 			<div class="row content-header">
 				<h3><span class="raphael">S</span>Dashboard</h3>
 			</div>
 			<div class="row" id="content">
 				<input type="text" placeholder="What is your question?">
 				
-			<!------------------------------
-			TUTOR LIST TABLE
-			-------------------------------->
-				<div class="large-8 columns tutor-list" ng-controller="TutorListCtrl">
+				<!------------------------------
+				TUTOR LIST TABLE
+				-------------------------------->
+				<div class="eight columns"><div class="tutor-list" ng-controller="TutorListCtrl">
 					<h3>Online Tutors<a href="#" class="raphael refreshTutors" ng-click="refreshTutors()">0</a></h3>
 					<form action="{{path('post_session')}}" method="post" class="custom" id="create_session">
 					<div ng-include="tutorListTemplate"></div>
 					</form>
+				</div></div>
+				
+				<div class="four columns">
+					<div class="row">
+						<div class="six columns tutor-points">
+							<h3><span class="raphael">#</span><span class="title">Rayku Points</span></h3>
+							<h4>{{user.points}}</h4>
+						</div>
+						<div class="six columns tutor-rating">
+							<h3><span class="raphael">$</span><span class="title">Tutor Rating<span></h3>
+							<h4>1000</h4>
+						</div>
+					</div>
+					<div class="row">
+					<!-----------------------------
+					TUTOR STATUS
+					-------------------------------->
+						<!-- not valid foundation css reference: http://foundation.zurb.com/old-docs/f3/grid.php
+						<div class="twelve columns"><div id="sessions-list" ng-controller="UserDetailCtrl">
+							<h3>Tutor Status</h3> 
+							<div ng-include="TutorStatusTemplate"></div>
+						</div></div>
+						// -->
+					</div>
+		
+					<!------------------------------
+					PAST SESSIONS LIST
+					-------------------------------->
+					<div class="row">
+						<div class="twelve columns" style="padding:0px"><div style="width:100%" id="sessions-list" ng-controller="SessionListCtrl">
+							<h3>Sessions</h3> 
+							<div ng-include="SessionListTemplate"></div>
+						</div></div>
+					</div>
 				</div>
-
-				<div class="large-2 columns tutor-points">
-					<h3><span class="raphael">#</span><span class="title">Rayku Points</span></h3>
-					<h4>{{user.points}}</h4>
-				</div>
-
-			{% if user.isTutor %}
-				<div class="large-2 columns tutor-rating">
-					<h3><span class="raphael">$</span><span class="title">Tutor Rating<span></h3>
-					<h4>1000</h4>
-				</div>
-			
-
-			<!-----------------------------
-			TUTOR STATUS
-			-------------------------------->
-				<div class="large-4 columns tutor-status" id ="sessions-list" ng-controller="UserDetailCtrl">
-					<h3>Tutor Status</h3> 
-					<div ng-include="TutorStatusTemplate"></div>
-				</div>
-			{% endif %}
-
-			<!------------------------------
-			PAST SESSIONS LIST
-			---------------------------------->
-				<div class="large-4 columns" id ="sessions-list" ng-controller="SessionListCtrl">
-					<h3>Sessions</h3> 
-					<div ng-include="SessionListTemplate"></div>
-				</div>
-			</div>
-			
 			<!------------------------------
 			USER PROFILE
 			---------------------------------->
 			<div class="row userprofile" id="userprofile">
-				<div class="large-12 columns" id="profile">
+				<div class="twelve columns" id="profile">
 					<h3>User Profile</h3>
 					<div class="row">
-						<div class="large-3 columns sidenav" ng-controller="UserDetailCtrl">
+						<div class="three columns sidenav" ng-controller="UserDetailCtrl">
 							{% verbatim %}
 							<img ng-src="{{ user.web_path }}" style="width:100%;">
 							{% endverbatim %}
@@ -175,14 +214,14 @@ NOTIFICATIONS ALERT
 						</div>
 
 						<div ng-controller="UserDetailCtrl">
-							<div class="large-9 columns profileinfo">
+							<div class="nine columns profileinfo">
 								<div ng-include="UserDetailTemplate"></div>
 								{% if user.isTutor %}
 									<p class="public"><a href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></p>
 								{% endif %}
 
 							</div>
-							<div class="large-9 columns editprofileinfo">
+							<div class="nine columns editprofileinfo">
 								<form ng-upload="bar" action="{{ path('post_users', {'user':app.user.id}) }}">
 								{% verbatim %}
 								<h4 class="username">Edit Profile</h4>
@@ -204,7 +243,7 @@ NOTIFICATIONS ALERT
 								
 								{% endverbatim %}
 							</div>
-							<div class="large-9 columns profilesettings">
+							<div class="nine columns profilesettings">
 								<form novalidate>
 								<h4 class="username">Settings</h4>
 								<ul class="userinfo">
@@ -238,22 +277,18 @@ NOTIFICATIONS ALERT
 		<p>Before activating your tutor status, please fill out as much as possible to completeyour tutor profile.</p>
 	</div>
 	
-	<div class="large-12 columns">
+	<div class="twelve columns">
     <form novalidate>
 		<div class="row">
-		<div class="row degree"><div class="large-12 columns">
+		<div class="row degree"><div class="twelve columns">
 			<label for="rate" class="required">RP/Min $1 = 100 RP</label>
 			<input type="text" id="rate" name="rate" required="required" ng-model="user.tutor.rate">
 		</div></div>
-        <div class="row degree"><div class="large-12 columns">
+        <div class="row degree"><div class="twelve columns">
         	<label for="gtalk_email">Connect Your Google Talk</label>
         	<input type="email" id="gtalk_email" name="gtalk_email" maxlength="255" ng-model="user.tutor.gtalk_email">
         </div></div>
-        <div class="row degree"><div class="large-12 columns">
-        	<label style="width:110px; float:left; height:1px" for="visible" class="required hast-tip" data-tooltip="" title="You can only be connected with directly through your tutor profile page">Direct Connect Only</label>
-        	<input type="checkbox" id="direct_connect" name="direct_connect" data-customforms="disabled" value="1"  ng-model="user.tutor.direct_connect">
-        </div></div>
-        <div class="row listing-preview"><div class="large-12 columns">
+        <div class="row listing-preview"><div class="twelve columns">
         	<br />
         	<label>Listing Preview</label>
         	<p>(When students search for tutors, you will appear as):</p>
@@ -275,7 +310,7 @@ NOTIFICATIONS ALERT
         	<h2>Refer a Friend</h2>
 		</div>
 	    <div class="row registration-body">
-			<div class="large-12 columns">
+			<div class="twelve columns">
 				You can get extra Rayku Points by inviting your friends to try out Rayku. If a friend uses your invitation to sign up for an account you will receive 200 Rayku Points and your friend receives 500 Rayku points.</br><br/>
 
 				<input type="text" value="http://www.rayku.com/?refcode={{ user.referralCode }}" /><br />
@@ -289,7 +324,7 @@ NOTIFICATIONS ALERT
         	<h2>Rate Your Tutor</h2>
 		</div>
 		<div class="row registration-body">
-	    <div class="large-12 columns rate-tutors">
+	    <div class="twelve columns rate-tutors">
 	        <form id="rateTutorForm" class="custom" name="rate-tutor" action="{{ path('post_session_rate', {'session': session.id}) }}" method="post">
                 <div class="row">
                     <label for="rateTutor">Your tutor {{ session.selectedtutor }}</label>
@@ -328,20 +363,20 @@ NOTIFICATIONS ALERT
     '.js><\/script>')
 </script>
 
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.alerts.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.clearing.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.cookie.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.dropdown.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.forms.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.joyride.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.magellan.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.orbit.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.placeholder.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.reveal.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.section.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.tooltips.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.topbar.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.alerts.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.clearing.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.cookie.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.dropdown.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.forms.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.joyride.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.magellan.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.orbit.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.placeholder.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.reveal.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.section.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.tooltips.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.topbar.js') }}"></script>
 <script>
     $(document).foundation();
 </script>

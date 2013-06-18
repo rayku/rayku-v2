@@ -1,10 +1,19 @@
 var app = angular.module('raykuApp', ['ngUpload', 'LoadingIndicator']);
-
+function selectTutor () {
+    //checkbox toggle tutor selection
+      $('.tutorTable tr td').on('click', 
+          function(){
+              console.log('clicked');
+          var checkbox = $(this).find('input[type="checkbox"]');
+          checkbox.attr("checked", !checkbox.prop("checked"));
+        }
+      );
+  }
 //CONTROLLERS
 app.controller('TutorListCtrl', function ($scope, $rootScope, $http) {
     //Online Tutors List Controller
     $scope.tutorListTemplate = '/bundles/raykupage/js/app/views/TutorListView.html';
-	
+	  $scope.$on('$viewContentLoaded', selectTutor);
     $http.get(Routing.generate('get_tutors')).success(function(data) {
         $scope.tutors = data;
     });

@@ -36,8 +36,9 @@ $(document).ready(function(){
     });
 
     //checkbox toggle tutor selection
-    $('.tutorTable tr').click(
-    	function(){
+    $('.tutorTable tr').on('click', 
+        function(){
+            console.log('clicked');
     		var checkbox = $(this).find('input[type="checkbox"]');
     		checkbox.attr("checked", !checkbox.prop("checked"));
 	    }

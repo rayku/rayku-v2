@@ -14,7 +14,7 @@ class SessionRepository extends EntityRepository
 			->innerJoin('s.potential_tutors', 't')
 			->where('t.tutor = :tutorId')
 			->andWhere('t.tutorReply = \'pending\'')
-			->andWhere('s.selected_tutor is NULL')
+			->andWhere('s.selectedTutor is NULL')
 			->andWhere('s.endTime is NULL')
 			->andWhere('s.createdAt > :expire_session')
 			->setParameter('tutorId', $tutor_id)

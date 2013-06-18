@@ -204,6 +204,7 @@ class TutorController extends Controller
 				$aclProvider->updateAcl($acl);
 			}
 		}else{
+			die('invalid');
 			return array(
 				'entity' => $entity,
 				'form' => $form	

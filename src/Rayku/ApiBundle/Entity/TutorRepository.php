@@ -20,7 +20,7 @@ class TutorRepository extends EntityRepository
 				$qb->expr()->gt('t.onlineGtalk', ':expire_online')
 			))
 			->andWhere($qb->expr()->orx(
-				$qb->expr()->lt('t.busy', ':expire_online'),
+				$qb->expr()->eq('t.busy', '0'),
 				't.busy IS NULL'
 			))
 			->andWhere('t.direct_connect = :direct_connect')

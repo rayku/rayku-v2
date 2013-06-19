@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<title>{% block title %}Rayku{% endblock %}</title>
-	<link href="{{ asset('bundles/raykupage/css/normalize.css') }}" type="text/css" rel="stylesheet" media="screen" />
-	<link href="{{ asset('bundles/raykupage/css/foundation.css') }}" type="text/css" rel="stylesheet" media="screen" />
+	<link href="{{ asset('components/normalize.css/normalize.css') }}" type="text/css" rel="stylesheet" media="screen" />
+	<link href="{{ asset('components/foundation/css/foundation.min.css') }}" type="text/css" rel="stylesheet" media="screen" />
 	<link href="{{ asset('bundles/raykupage/css/app.css') }}" type="text/css" rel="stylesheet" media="screen" />
 	<link rel="icon" type="image/ico" href="{{ asset('bundles/raykupage/images/favicon.ico') }}">
 
@@ -12,8 +12,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 	<script src="{{ asset('components/ngUpload/ng-upload.js') }}"></script>
 	<script src="{{ asset('bundles/raykupage/js/app/loadingIndicator.js') }}"></script>
-	<script src="{{ asset('bundles/raykupage/js/foundation.min.js') }}"></script>
-    <script src="{{ asset('bundles/raykupage/js/vendor/custom.modernizr.js') }}"></script>
+	<script src="{{ asset('components/foundation/js/foundation.min.js') }}"></script>
+    <script src="{{ asset('components/modernizr/modernizr.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/raykupage/js/script.js') }}"></script>
 	
 	<!--REQUIRE-->
@@ -155,44 +155,34 @@ NOTIFICATIONS ALERT
 			<!------------------------------
 			TUTOR LIST TABLE
 			-------------------------------->
-				<div class="large-8 columns tutor-list" ng-controller="TutorListCtrl">
+				<div class="large-8 columns"><div class="tutor-list" ng-controller="TutorListCtrl">
 					<h3>Online Tutors<a href="#" class="raphael refreshTutors" ng-click="refreshTutors()">0</a></h3>
 					<form action="{{path('post_session')}}" method="post" class="custom" id="create_session">
 					<div ng-include="tutorListTemplate"></div>
 					</form>
+				</div></div>
+				
+				<div class="large-4 columns">
+					<div class="row">
+						<div class="large-6 columns">
+							<h3><span class="raphael">#</span><span class="title">Rayku Points</span></h3>
+							<h4>{{user.points}}</h4>
+						</div>
+		
+						{% if user.isTutor %}
+							<div class="large-6 columns">
+								<h3><span class="raphael">$</span><span class="title">Tutor Rating<span></h3>
+								<h4>1000</h4>
+							</div>
+						{% endif %}
+					</div>
+					<div class="row">
+						<div class="large-12 columns" id ="sessions-list" ng-controller="SessionListCtrl">
+							<h3>Sessions</h3> 
+							<div ng-include="SessionListTemplate"></div>
+						</div>
+					</div>
 				</div>
-
-				<div class="large-2 columns tutor-points">
-					<h3><span class="raphael">#</span><span class="title">Rayku Points</span></h3>
-					<h4>{{user.points}}</h4>
-				</div>
-
-			{% if user.isTutor %}
-				<div class="large-2 columns tutor-rating">
-					<h3><span class="raphael">$</span><span class="title">Tutor Rating<span></h3>
-					<h4>1000</h4>
-				</div>
-			
-
-			<!-----------------------------
-			TUTOR STATUS
-			-------------------------------->
-			<!--
-				<div class="large-4 columns tutor-status" id ="sessions-list" ng-controller="UserDetailCtrl">
-					<h3>Tutor Status</h3> 
-					<div ng-include="TutorStatusTemplate"></div>
-				</div>
-			-->
-			{% endif %}
-
-			<!------------------------------
-			PAST SESSIONS LIST
-			---------------------------------->
-				<div class="large-4 columns" id ="sessions-list" ng-controller="SessionListCtrl">
-					<h3>Sessions</h3> 
-					<div ng-include="SessionListTemplate"></div>
-				</div>
-			</div>
 			
 			<!------------------------------
 			USER PROFILE
@@ -396,20 +386,20 @@ NOTIFICATIONS ALERT
     '.js><\/script>')
 </script>
 
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.alerts.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.clearing.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.cookie.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.dropdown.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.forms.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.joyride.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.magellan.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.orbit.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.placeholder.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.reveal.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.section.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.tooltips.js') }}"></script>
-<script src="{{ asset('bundles/raykupage/js/foundation/foundation.topbar.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.alerts.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.clearing.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.cookie.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.dropdown.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.forms.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.joyride.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.magellan.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.orbit.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.placeholder.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.reveal.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.section.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.tooltips.js') }}"></script>
+<script src="{{ asset('components/foundation/js/foundation/foundation.topbar.js') }}"></script>
 <script>
     $(document).foundation();
 </script>

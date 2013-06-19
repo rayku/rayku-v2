@@ -1,8 +1,8 @@
-set :application, "set your application name here"
-set :domain,      "#{application}.com"
-set :app_path,    "app"
+set :application, "Rayku"
+set :domain,      "rayku.com"
+set :app_path,    "/var/rayku.com"
 
-set :repository,  "#{domain}:/var/repos/#{application}.git"
+set :repository,  "git@github.com:rayku/rayku-v2.git"
 set :scm,         :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `subversion`, `mercurial`, `perforce`, or `none`
 
@@ -12,11 +12,15 @@ set :model_manager, "doctrine"
 set  :keep_releases,  3
 
 # Be more verbose by uncommenting the following line
-# logger.level = Logger::MAX_LEVEL
+logger.level = Logger::MAX_LEVEL
 
 ## Nice options to add
 # set :composer_options,        "--prefer-source"
-# ssh_options[:forward_agent] = true
+ssh_options[:forward_agent] = true
+
+set :branch, "dev-branch"
+set :git_enable_submodules, 1
+set :use_sudo, false
 
 # set :shared_files,            ["app/config/parameters.yml"]
 # set :shared_children,         [app_path + "/logs", web_path + "/uploads", "data"]

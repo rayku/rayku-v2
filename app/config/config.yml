@@ -16,7 +16,6 @@ framework:
     templating:      { engines: ['twig'] }
     default_locale:  %locale%
     session:
-        default_locale: %locale%
         lifetime:       36000
         save_path: %kernel.root_dir%/var/sessions
 

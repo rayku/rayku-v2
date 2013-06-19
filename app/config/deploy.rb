@@ -25,12 +25,12 @@ set :use_sudo, false
 set :user, "donny"
 # set :dump_assetic_assets, true
 
-# set :shared_files,            ["app/config/parameters.yml"]
+set :shared_files,            ["app/config/parameters.yml"]
+set :assets_symlinks,         true
 # set :shared_children,         [app_path + "/logs", web_path + "/uploads", "data"]
 # set :clear_controllers,       false
-# set :assets_symlinks,         true
 
-before 'symfony:cache:warmup', 'symfony:doctrine:migrations:migrate'
+# before 'symfony:cache:warmup', 'symfony:doctrine:migrations:migrate'
 before 'symfony:composer:install', 'composer:copy_vendors'
 before 'symfony:composer:update', 'composer:copy_vendors'
 

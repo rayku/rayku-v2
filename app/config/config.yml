@@ -24,14 +24,14 @@ framework:
 vespolina_payment_stripe:
     api_key: 1
 
-#jms_payment_core:
-#    secret: someSffwefe3cdretP4ssfwew0rd
+jms_payment_core:
+    secret: someSffwefe3cdretP4ssfwew0rd
 
-#jms_payment_paypal:
-#    username: cs_api1.mail.rayku.com
-#    password: SKL4RVUQANURAXGY
-#    signature: AfEmwenmQvR8u1hO0aIA5CE.wbA9AHR3pmSGHRriSHF2P79ZNClaIKLC
-#    debug: false
+jms_payment_paypal:
+    username: cs_api1.mail.rayku.com
+    password: SKL4RVUQANURAXGY
+    signature: AfEmwenmQvR8u1hO0aIA5CE.wbA9AHR3pmSGHRriSHF2P79ZNClaIKLC
+    debug: false
 
 # Twig Configuration
 twig:

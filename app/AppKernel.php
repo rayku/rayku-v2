@@ -34,8 +34,8 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
         	new JMS\DiExtraBundle\JMSDiExtraBundle($this),
         	new JMS\SerializerBundle\JMSSerializerBundle($this),
-        	#new JMS\Payment\CoreBundle\JMSPaymentCoreBundle(),
-        	#new JMS\Payment\PaypalBundle\JMSPaymentPaypalBundle(),
+        	new JMS\Payment\CoreBundle\JMSPaymentCoreBundle(),
+        	new JMS\Payment\PaypalBundle\JMSPaymentPaypalBundle(),
 
             // DOCTRINE
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),

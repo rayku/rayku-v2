@@ -14,7 +14,6 @@ if [ -d "/var/www" ]; then
     fi
 fi
 ln -s /var/rayku/web /var/www
-ln -s /var/rayku/components /var/rayku/web/components
 
 if [ -f "/home/vagrant/.ssh/id_rsa" ]; then
 	cp /var/rayku/id_rsa /home/vagrant/.ssh/
@@ -38,7 +37,7 @@ sudo curl -s https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 cd /var/rayku; COMPOSER_PROCESS_TIMEOUT=2400 composer -v update
 cd /var/rayku; php app/console doctrine:database:create
-cd /var/rayku; php app/console assetic:dump --watch  &
+#cd /var/rayku; php app/console assetic:dump --watch  &
 if [ ! -f "~/dataimportdone" ]; then
 	mysql -u root -pabc123 rayku_v2 < /var/rayku/rayku.dump.sql
 	touch ~/dataimportdone

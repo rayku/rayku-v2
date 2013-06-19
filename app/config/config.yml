@@ -19,6 +19,7 @@ framework:
         default_locale: %locale%
         lifetime:       36000
         auto_start:     true
+        save_path: "%kernel.root_dir%/sessions/"
     session: ~
 
 vespolina_payment_stripe:

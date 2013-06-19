@@ -91,8 +91,12 @@ class Tutor
      * @var float
      *
      * @Assert\NotBlank
-     * @Assert\Min(limit = 0, message = "You can't have a rate less than 0.")
-     * @Assert\Max(limit = 500, message = "Highest rate available is 500.")
+     * @Assert\Range(
+     *     min = 0,
+     *     max = 500,
+     *     minMessage = "You can't have a rate less than 0.",
+     *     maxMessage = "You can't have a rate more than 500."
+     * )
      * @ORM\Column(name="rate", type="float", nullable=true)
      */
     private $rate;

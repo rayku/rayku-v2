@@ -23,26 +23,35 @@ set :branch, "dev-branch"
 set :git_enable_submodules, 1
 set :use_sudo, false
 set :user, "donny"
-set :dump_assetic_assets, true
+# set :dump_assetic_assets, true
 
 # set :shared_files,            ["app/config/parameters.yml"]
 # set :shared_children,         [app_path + "/logs", web_path + "/uploads", "data"]
 # set :clear_controllers,       false
 # set :assets_symlinks,         true
 
+before 'symfony:cache:warmup', 'symfony:doctrine:migrations:migrate'
+before 'symfony:composer:install', 'composer:copy_vendors'
+before 'symfony:composer:update', 'composer:copy_vendors'
 
-# http://capifony.org/cookbook/speeding-up-deploy.html
-# before 'symfony:composer:install', 'composer:copy_vendors'
-# before 'symfony:composer:update', 'composer:copy_vendors'
-#
-# namespace :composer do
-#   task :copy_vendors, :except => { :no_release => true } do
-#     capifony_pretty_print "--> Copy vendor file from previous release"
-#
-#     run "vendorDir=#{current_path}/vendor; if [ -d $vendorDir ] || [ -h $vendorDir ]; then cp -a $vendorDir #{latest_release}/vendor; fi;"
-#     capifony_puts_ok
-#   end
-# end
+namespace :deploy do
+	# Apache needs to be restarted to make sure that the APC cache is cleared.
+	# This overwrites the :restart task in the parent config which is empty.
+	desc "Restart Apache"
+	task :restart, :except => { :no_release => true }, :roles => :app do
+		run "sudo service apache2 restart"
+		puts "--> Apache successfully restarted".green
+	end
+end
+
+namespace :composer do
+  task :copy_vendors, :except => { :no_release => true } do
+    capifony_pretty_print "--> Copy vendor file from previous release"
+
+    run "vendorDir=#{current_path}/vendor; if [ -d $vendorDir ] || [ -h $vendorDir ]; then cp -a $vendorDir #{latest_release}/vendor; fi;"
+    capifony_puts_ok
+  end
+end
 
 # # configure production settings
 # task :production do

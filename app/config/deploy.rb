@@ -27,7 +27,7 @@ set :user, "donny"
 
 set :shared_files,            ["app/config/parameters.yml"]
 set :assets_symlinks,         true
-# set :shared_children,         [app_path + "/logs", web_path + "/uploads", "data"]
+set :shared_children, [app_path + "/logs", app_path + "/sessions", web_path + "/uploads", "vendor"]
 # set :clear_controllers,       false
 
 # before 'symfony:cache:warmup', 'symfony:doctrine:migrations:migrate'

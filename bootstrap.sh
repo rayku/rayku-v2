@@ -16,6 +16,10 @@ fi
 ln -s /var/rayku/web /var/www
 ln -s /var/rayku/components /var/rayku/web/components
 
+if [ -f "/home/vagrant/.ssh/id_rsa" ]; then
+	cp /var/rayku/id_rsa /home/vagrant/.ssh/
+fi
+
 if [ -d "/var/log/rayku" ]; then
     sudo mkdir /var/log/rayku
     sudo chmod 777 /var/log/rayku

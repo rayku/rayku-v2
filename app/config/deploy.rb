@@ -1,15 +1,16 @@
 set :application, "Rayku"
-set :domain,      "rayku.com"
-set :app_path,    "/var/rayku.com"
+set :domain,      "198.101.199.107"
+set :deploy_to,    "/var/rayku.com"
 
 set :repository,  "git@github.com:rayku/rayku-v2.git"
 set :scm,         :git
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `subversion`, `mercurial`, `perforce`, or `none`
+
+role  :web,           domain
+role  :app,           domain, :primary => true
 
 set :model_manager, "doctrine"
-# Or: `propel`
-
-set  :keep_releases,  3
+set :use_composer, true
+set :keep_releases,  3
 
 # Be more verbose by uncommenting the following line
 logger.level = Logger::MAX_LEVEL
@@ -21,6 +22,8 @@ ssh_options[:forward_agent] = true
 set :branch, "dev-branch"
 set :git_enable_submodules, 1
 set :use_sudo, false
+set :user, "donny"
+set :dump_assetic_assets, true
 
 # set :shared_files,            ["app/config/parameters.yml"]
 # set :shared_children,         [app_path + "/logs", web_path + "/uploads", "data"]

@@ -20,7 +20,6 @@ framework:
         lifetime:       36000
         auto_start:     true
         save_path: %kernel.root_dir%/var/sessions
-    session: ~
 
 vespolina_payment_stripe:
     api_key: 1

@@ -310,6 +310,27 @@ ul.submenu-item li a{
 ul.submenu-item li a:hover {
 	text-decoration: none;
 }
+.connectNotif h2{
+	border-bottom: 1px solid rgba(221, 221, 221, 1);
+	padding-bottom: 15px;
+}
+.connectNotifImage img{
+	width: 200px;
+}
+.connectNotifRow{
+	border-bottom: 1px solid rgba(221, 221, 221, 1);
+	padding: 0px;
+	margin-top: 10px;
+}
+.connectNotifInfo ul{
+	position: relative;
+	top:5px;
+	list-style-type: none;
+}
+.connectNotifInfo ul li:first-child{
+	color:rgba(0, 0, 150, 1);
+	font-weight: 600;
+}
 /* -----------------------------------------
   Sidebar
 ----------------------------------------- */

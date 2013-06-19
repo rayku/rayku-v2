@@ -31,8 +31,8 @@ set :shared_children, [app_path + "/logs", app_path + "/sessions", web_path + "/
 # set :clear_controllers,       false
 
 # before 'symfony:cache:warmup', 'symfony:doctrine:migrations:migrate'
-before 'symfony:composer:install', 'composer:copy_vendors'
-before 'symfony:composer:update', 'composer:copy_vendors'
+# before 'symfony:composer:install', 'composer:copy_vendors'
+# before 'symfony:composer:update', 'composer:copy_vendors'
 
 namespace :deploy do
 	# Apache needs to be restarted to make sure that the APC cache is cleared.

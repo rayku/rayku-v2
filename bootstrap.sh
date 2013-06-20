@@ -43,4 +43,4 @@ if [ ! -f "~/dataimportdone" ]; then
 	touch ~/dataimportdone
 fi
 cd /var/rayku; php app/console doctrine:schema:update --force
-sudo gem install capifony
+gem install capifony

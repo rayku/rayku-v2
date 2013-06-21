@@ -22,13 +22,7 @@ class PageController extends Controller
 	 * @Template
 	 */
 	public function aboutAction(){ }
-	
-	/**
-	 * @Route("/onboarding", name="rayku_page_tutor_onboarding")
-	 * @Template
-	 */
-	public function onboardingAction() { }
-	
+		
 	/**
 	 * @Route("/legal", name="rayku_legal_page")
 	 * @Template
@@ -70,7 +64,7 @@ class PageController extends Controller
 	
 	/**
 	 * @Route("/session/{session}/rate", name="rayku_session_rate")
-	 * @Template("RaykuPageBundle:Page:dashboard2.html.twig")
+	 * @Template("RaykuPageBundle:Page:dashboard.html.twig")
 	 * @param \Rayku\ApiBundle\Entity\Session $session
 	 */
 	public function rateSessionAction(Session $session)
@@ -98,7 +92,8 @@ class PageController extends Controller
 	/**
 	 * @Route("/register/confirmed", name="rayku_register_confirmed")
 	 * @Route("/dashboard", name="rayku_page_dashboard")
-	 * @Template("RaykuPageBundle:Page:dashboard2.html.twig")
+	 * @Route("/onboarding", name="rayku_page_tutor_onboarding")
+	 * @Template("RaykuPageBundle:Page:dashboard.html.twig")
 	 */
 	public function dashboardAction()
 	{

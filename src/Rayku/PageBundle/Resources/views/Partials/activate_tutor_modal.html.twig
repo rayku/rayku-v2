@@ -1,0 +1,35 @@
+<div id="myTutorModal" class="reveal-modal medium">
+	<div class="row registration-header">
+		<h2>Tutor Profile</h2>
+	</div>
+	<div class="row registration-body">
+		<p>Before activating your tutor status, please fill out as much as possible to completeyour tutor profile.</p>
+	</div>
+	
+	<div class="large-12 columns">
+    <form novalidate>
+		<div class="row">
+		<div class="row degree"><div class="large-12 columns">
+			<label for="rate" class="required">RP/Min $1 = 100 RP</label>
+			<input type="text" id="rate" name="rate" required="required" ng-model="user.tutor.rate">
+		</div></div>
+        <div class="row degree"><div class="large-12 columns">
+        	<label for="gtalk_email">Connect Your Google Talk</label>
+        	<input type="email" id="gtalk_email" name="gtalk_email" maxlength="255" ng-model="user.tutor.gtalk_email">
+        </div></div>
+        <div class="row degree"><div class="large-12 columns">
+        	<label style="width:110px; float:left; height:1px" for="visible" class="required hast-tip" data-tooltip="" title="You can only be connected with directly through your tutor profile page">Direct Connect Only</label>
+        	<input type="checkbox" id="direct_connect" name="direct_connect" data-customforms="disabled" value="1"  ng-model="user.tutor.direct_connect">
+        </div></div>
+        <div class="row listing-preview"><div class="large-12 columns">
+        	<br />
+        	<label>Listing Preview</label>
+        	<p>(When students search for tutors, you will appear as):</p>
+        	<p class="preview"><span class="schoolAmount">Under Graduate Degree Holder</span> From <span class="schoolName">Ryerson University</span> - Economics</p>
+        </div></div>
+    </div>
+    <input type="submit" class="bbutton" value="Save &amp; Activate Tutor Status"  ng-click="update(user)" />
+    </form>
+	</div>
+	<a class="close-reveal-modal">×</a>
+</div>

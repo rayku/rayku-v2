@@ -24,25 +24,12 @@
 			</div>
 		</div>
 
-	{% if user.isTutor %}
-		<div class="large-2 columns tutor-rating">
+		<div class="large-2 columns tutor-rating" ng-show="user.is_tutor" ng-cloak>
 			<div class="rcontainer">
 				<h3><span class="raphael">$</span><span class="title">Tutor Rating<span></h3>
 				<h4>1000</h4>
 			</div>
 		</div>
-	
-
-	<!-----------------------------
-	TUTOR STATUS
-	-------------------------------->
-	<!--
-		<div class="large-4 columns tutor-status" id ="sessions-list" ng-controller="UserDetailCtrl">
-			<h3>Tutor Status</h3> 
-			<div ng-include="TutorStatusTemplate"></div>
-		</div>
-	-->
-	{% endif %}
 
 	<!------------------------------
 	PAST SESSIONS LIST
@@ -74,10 +61,7 @@
 				<div ng-controller="UserDetailCtrl">
 					<div class="large-9 columns profileinfo">
 						<div ng-include="UserDetailTemplate"></div>
-						{% if user.isTutor %}
-							<p class="public"><a href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></p>
-						{% endif %}
-
+						<p class="public" ng-show="user.is_tutor" ng-cloak><a href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></p>
 					</div>
 					<div class="large-9 columns tutorpayout">
 						<h4 class="">Tutor Payout</h4>

@@ -1,32 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="raykuApp">
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
-	<link href="{{ asset('bundles/raykupage/css/foundation.css') }}" type="text/css" rel="stylesheet" media="screen" />
+	<title>{% block title %}Rayku{% endblock %}</title>
+	<link href="{{ asset('bundles/raykupage/css/normalize.css') }}" type="text/css" rel="stylesheet" media="screen" />
+	<link href="{{ asset('bundles/raykupage/css/foundation.min.css') }}" type="text/css" rel="stylesheet" media="screen" />
 	<link href="{{ asset('bundles/raykupage/css/app.css') }}" type="text/css" rel="stylesheet" media="screen" />
+	<link rel="icon" type="image/ico" href="{{ asset('bundles/raykupage/images/favicon.ico') }}">
+
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+	<script src="{{ asset('components/ngUpload/ng-upload.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/app/loadingIndicator.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/foundation.min.js') }}"></script>
+    <script src="{{ asset('bundles/raykupage/js/vendor/custom.modernizr.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/raykupage/js/script.js') }}"></script>
+	
+	<!--REQUIRE-->
+	<script src="{{ asset('bundles/raykupage/js/require.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/main.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/app/controller.js') }}"></script>
+
+	<script src="{{ asset('bundles/raykupage/js/ssmgmnt.js') }}"></script>
+
+	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/jquery_form/jquery.form.js') }}"></script>
+	<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+	<script>
+		var userId = {{ user.id }};
+	</script>
+	
+	<script type="text/javascript">
+	window.setInterval(function(){
+		$.get(Routing.generate('get_sessions', {'activeRequests':1}), function(response, status){
+			jQuery.each(response, function() {
+				var current_messages = parseInt($('.notif-count').html());
+				$('.notif-count').html(response.length);
+				var template = $('#connectRow_id_').prop("outerHTML");
+				template = template.replace('_name_', this.student.first_name+' '+this.student.last_name);
+				template = template.replace('_question_', this.question);
+				template = template.replace(/_id_/g, this.id);
+				if(response.length > current_messages){
+					$('#connectNotifModal').append(template);
+					$('#connectRow'+this.id).show();
+					$('#music').html('<iframe src="/music.html" width="1" height="1"></iframe>');            
+					$('#connectNotifModal').foundation('reveal', 'open');
+				}
+				$('.post_session_accept').ajaxForm(function(response) { 
+				if(response.success){
+					window.location.href = response.redirect;
+				}else if(response.success !== false){
+					alert(response.message);
+				}else{
+					alert('an unknown error has occured');
+				}
+			})
+			$('.post_session_deny').ajaxForm(function(response) {
+				if(response.success){
+					$('#connectNotifModal').foundation('reveal', 'close');
+					$('#music').html('');
+				}
+			})
+		})
+	})
+}, 5000);
+</script>
 </head>
 <body>
+<div id="loading-indicator">
+	<img src="{{ asset('bundles/raykupage/images/ajax-loader.gif') }}" />
+</div>
+
+<div id="whiteboard2">
+    <div id="whiteboard-header">
+        <a href=# class="logged-in-as bbutton home">Back Home</a>
+    </div>
+    <iframe src="" seamless></iframe>
+</div>
+
 <div class="container">
+					<!------------------------------
+NOTIFICATIONS ALERT
+-------------------------------->
+	<div class="notif-container">
+		<section class="notif notif-notice">
+		    <h6 class="notif-title">Notification!</h6>
+		    <p>You found the answer to the ultimate question of life, the universe, and everything.</p>
+		    <div class="notif-controls">
+		        <a href="index.html" class="notif-minimize">Minimize</a>
+		        <a href="index.html" class="notif-zoom">Zoom</a>
+		        <a href="index.html" class="notif-close">Close</a>
+		    </div>
+		</section>
+	</div>
 	<header id="header">
 	    <div class="inside">
-	        <a href="/app_dev.php/dashboard" id="logo"><img src="http://www.rayku.local/bundles/raykupage/images/logo.png" alt="" /></a>
+	        <a href="{{ path('rayku_page_dashboard') }}" id="logo"><span class="beta">beta</span><img src="{{ asset('bundles/raykupage/images/logo.png') }}" alt="" /></a>
 	        <nav>
 	            <a href=# class="notification" data-reveal-id="connectNotifModal"><span class="raphael">M</span><span class="notif-count">0</span></a>
-	            <a href=# class="settings"><span class="raphael">`</span></a>
-	            <a href=# class="logged-in-as"><span class="liau">Logged in as rayku</span> <div class="arrow-down"></div></a> 
+	            
+	            <a href=# class="logged-in-as"><span class="liau">Logged in as {{user.username}}</span> <div class="arrow-down"></div></a> 
 	            <div class="submenu" id="submenu">
                     <div class="arrow-up"></div>
                     <ul class="submenu-item">
-                        <li><a class="home" href=#><span class="raphael">L</span>Home</a></li>
-                        <li><a class="practice" href="http://whiteboard.rayku.local:8080/standalone" target="_blank"><span class="raphael">b</span>Practice Whiteboard</a></li>
-                        <li><a class="broadcast" href=#><span class="raphael">Æ</span>Broadcast Session</a></li>
+                        <li><a class="dashboard" href=#><span class="raphael">L</span>Home</a></li>
                         <li><a class="setting" href=#><span class="raphael">`</span>Settings</a></li>
-                        <li><a class="buyPoints" href=#><span class="raphael">`</span>Buy Rayku Points</a></li>
-                        <li><a class="whiteboard" href=#><span class="raphael">`</span>Go To Whiteboard</a></li>
-                        <li><a class="logout" href="/app_dev.php/logout"><span class="raphael">v</span>Logout</a></li>
+                        <li><a class="myprofileedit" href=#><span class="raphael">`</span>Edit Profile</a></li>
+                        <li><a class="tutor" href=# data-reveal-id="myTutorModal"><span class="raphael">`</span>Become a Tutor</a></li>
+                        <li><a class="tutor" href=# data-reveal-id="tutorLoadModal"><span class="raphael">`</span>Tutor Load</a></li>
+                        <li><a class="logout" href="{{ path('fos_user_security_logout') }}"><span class="raphael">v</span>Logout</a></li>
                     </ul>
                 </div>
 	        </nav>
@@ -36,27 +118,31 @@
 		{% if user.id is null %}
 			{% include 'RaykuPageBundle:Page:registration_modal.html.twig' with {'form': registrationform} %}
 		{% endif %}
-		<div class="large-4 columns" id="sidebar">
-			<h3 class="userfullname"><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg">Sam <br><span class="lastname">Peter Jnr.</span></h3>
-			<h3 class="userstatus"><span class="status">Tutor</span><span class="online">&nbsp;</span></h3>
-			<ul class="sidebar-nav">
-				<li class="divider"></li>
-				<li class="active"><a class="dashboard" href=#><span class="raphael">S</span> Dashboard</a></li>
-				<li class="divider"></li>
-				<li><a class="profile" href=#><span class="raphael">L</span> Profile</a></li>
-				<li class="divider"></li>
-				<li><a class="practice" href=#><span class="raphael">></span> Practice</a></li>
-				<li class="divider"></li>
-				<li><a class="broadcast" href=#><span class="raphael">Æ</span> Broadcast</a></li>
-				<li class="divider"></li>
-				<li><a class="buyPoints" href=#><span class="raphael">#</span> Buy Rayku Points</a></li>
-				<li class="divider"></li>
-				<li><a class="userWhiteboard" href=#><span class="raphael">?</span> Go to Whiteboard</a></li>
-				<li class="divider"></li>
+		<!------------------------------
+		SIDE NAVIGATION
+		-------------------------------->
+		<div class="large-4 columns" id="sidebar" ng-controller="UserDetailCtrl">
+			<div ng-include="UsernameTemplate"></div>
+			<h3 class="userstatus"><span class="status">{% if user.isTutor %}Tutor{% endif %}{% if user.isTutor == false %}Student{% endif %}</span><span class="online">&nbsp;</span></h3>
+			<ul class="userinfo">
+				<li><span class="degree">{{ user.degree }}</span></li>
+				<li><span class="grade">{{ user.grade }}</span></li>
+				<li><span class="school">From, {{ user.school }}</span></li>
+				<li class="about"><span class="bio">{{ user.bio }}</span></li>
 			</ul>
-			<ul class="logout">
-				<li class="divider"></li>
-				<li><a href=#><span class="raphael">Ï</span> Logout</a></li>
+			
+			<ul class="sidebar-nav">
+				
+				<li><a class="dashboard active" href=#><span class="raphael">S</span> Dashboard</a></li>
+				
+				<li><a class="myprofileedit" href=#><span class="raphael">`</span> Settings</a></li>
+				
+				<li><a class="buyPoints" href=# data-reveal-id="buyPointsModal"><span class="raphael">#</span> Buy Points</a></li>
+				
+				<li><a class="userWhiteboard" href=#><span class="raphael">?</span> Practice</a></li>
+				
+				<li class="backtoWhiteboard"><a class="backWhiteboard" href=#><span class="raphael">?</span> Back to Whiteboard</a></li>
+				<li class="divider backtoWhiteboard"></li>
 			</ul>
 		</div>
 
@@ -66,114 +152,291 @@
 			</div>
 			<div class="row" id="content">
 				<input type="text" placeholder="What is your question?">
-
-				<div class="large-8 columns tutor-list">
-					<h3>Online Tutors<a href="#" class="raphael">0</a></h3>
+				
+			<!------------------------------
+			TUTOR LIST TABLE
+			-------------------------------->
+				<div id="tutorList" class="large-8 columns tutor-list" ng-controller="TutorListCtrl">
 					<form action="{{path('post_session')}}" method="post" class="custom" id="create_session">
-					  	<input type="hidden" value="" name="question" id="question" />
-					  	<table class="tutorTable">
-					  		<tbody>
-					  			<tr class="tutorDetails">
-					  				<td class="one"><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
-					  				<td class="two"><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
-					  				<td class="three"><input type="checkbox"></td>
-					  			</tr>
-					  			<tr class="tutorDetails">
-					  				<td><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
-					  				<td><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
-					  				<td><input type="checkbox"></td>
-					  			</tr>
-					  			<tr class="tutorDetails">
-					  				<td><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
-					  				<td><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
-					  				<td><input type="checkbox"></td>
-					  			</tr>
-					  			<tr class="tutorDetails">
-					  				<td><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
-					  				<td><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
-					  				<td><input type="checkbox"></td>
-					  			</tr>
-					  			<tr class="tutorDetails">
-					  				<td><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
-					  				<td><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
-					  				<td><input type="checkbox"></td>
-					  			</tr>
-					  			<tr class="tutorDetails">
-					  				<td><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
-					  				<td><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
-					  				<td><input type="checkbox"></td>
-					  			</tr>
-					  		</tbody>
-					  	</table>
-					    <input value="Connect" type="submit" class="bbutton" id="tutorConnect">
+					<div tutor-list></div>
 					</form>
 				</div>
+
 				<div class="large-2 columns tutor-points">
-					<h3><span class="raphael">#</span><span class="title">Rayku Points</span></h3>
-					<h4>1000</h4>
+					<div ="pcontainer">
+						<h3><span class="raphael">#</span><span class="title">Rayku Points</span></h3>
+						<h4>{{user.points}}</h4>
+					</div>
 				</div>
+
+			{% if user.isTutor %}
 				<div class="large-2 columns tutor-rating">
-					<h3><span class="raphael">$</span><span class="title">Tutor Rating<span></h3>
-					<h4>1000</h4>
+					<div class="rcontainer">
+						<h3><span class="raphael">$</span><span class="title">Tutor Rating<span></h3>
+						<h4>1000</h4>
+					</div>
 				</div>
-				<div class="large-4 columns" id ="sessions-list">
-					<h3>Past Sessions</h3>
-					<table>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Session With Blaise Kripky</td>
-								<td><a href="#">View</a></td>
-                                <td><a href="#">Delete</a></td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>Session With Sheldon Cooper</td>
-								<td><a href="#">View</a></td>
-                                <td><a href="#">Delete</a></td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>Session With Anton Wright</td>
-								<td><a href="#">View</a></td>
-                                <td><a href="#">Delete</a></td>
-							</tr>
-						</tbody>
-					</table>
+			
+
+			<!-----------------------------
+			TUTOR STATUS
+			-------------------------------->
+			<!--
+				<div class="large-4 columns tutor-status" id ="sessions-list" ng-controller="UserDetailCtrl">
+					<h3>Tutor Status</h3> 
+					<div ng-include="TutorStatusTemplate"></div>
+				</div>
+			-->
+			{% endif %}
+
+			<!------------------------------
+			PAST SESSIONS LIST
+			---------------------------------->
+				<div class="large-4 columns" id ="sessions-list" ng-controller="SessionListCtrl">
+					<h3>Sessions</h3> 
+					<div ng-include="SessionListTemplate"></div>
 				</div>
 			</div>
-
+			
+			<!------------------------------
+			USER PROFILE
+			---------------------------------->
 			<div class="row userprofile" id="userprofile">
 				<div class="large-12 columns" id="profile">
 					<h3>User Profile</h3>
 					<div class="row">
-						<div class="large-3 columns sidenav">
-							<img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:100%;">
+						<div class="large-3 columns sidenav" ng-controller="UserDetailCtrl">
+							{% verbatim %}
+							<img ng-src="{{ user.web_path }}" style="height:150px;">
+							{% endverbatim %}
 							<ul class="profilenav">
-								<li><a href=#>Messages</a></li>
-								<li><a href=#>Favorites</a></li>
-								<li><a href=#>Payout</a></li>
-								<li><a href=#>Settings</a></li>
+								<li><a href=# class="myprofile">Profile</a></li>
+								<li><a href=# class="payout">Payout</a></li>
+								<li><a href=# class="mysettings">Settings</a></li>
 							</ul>
 						</div>
-						<div class="large-9 columns profileinfo">
-							<h4 class="username">Sam Peter Jnr.</h4>
 
-							<ul class="userinfo">
-								<li>Computer Science</li>
-								<li>Undergraduate Degree Holder</li>
-								<li>From, Dalhousie University</li>
-							</ul>
-							<p class="about">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.</p>
-							<p class="public"><a href=#><span class="raphael">7</span>Tutor Public Profile</a></p>
+						<div ng-controller="UserDetailCtrl">
+							<div class="large-9 columns profileinfo">
+								<div ng-include="UserDetailTemplate"></div>
+								{% if user.isTutor %}
+									<p class="public"><a href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></p>
+								{% endif %}
 
+							</div>
+							<div class="large-9 columns tutorpayout">
+								<h4 class="">Tutor Payout</h4>
+								<h5>How much are tutors paid?</h5>
+								<p>Tutors set their own rates in cents/minute. Rayku takes a varied platform fee depending on you number of sessions and the quality of them. The higher the quality, the less our platform fee is. There is also a small PayPal fee.</p>
+								<h5>How often are tutors paid?</h5>
+								<p>Tutors are paid after they accumulate 5000 Rayku Points ($50). You should receive your money within a week via PayPal.</p>
+								<h5>How are tutors paid?</h5>
+								<p>Our tutors require a PayPal account.</p>
+								<p><a href="https://docs.google.com/forms/d/1CUGxAuvhBtGwtVpWqaL2V52f93BBn1GVPdl4DPXzidI/viewform" target="_blank">Cash Out Form</a></p>
+							</div>
+							<div class="large-9 columns editprofileinfo">
+								<form ng-upload="bar" action="{{ path('post_users', {'user':app.user.id}) }}">
+								{% verbatim %}
+								<h4 class="username">Edit Profile</h4>
+								<ul class="userinfo">
+									<li><span class="fname">First Name</span><span class="editfname"><input type="text" ng-model="user.first_name" name="first_name"></span></li>
+									<li><span class="lname">Last Name</span><span class="editlname"><input type="text" ng-model="user.last_name" name="last_name"></span></li>
+									<li><span class="degree">Degree</span><span class="editdegree"><input type="text" ng-model="user.degree" name="degree"></span></li>
+									<li><span class="grade">Level Of Education</span><span class="editgrade"><input type="text" ng-model="user.grade" name="grade"></span></li>
+									<li><span class="school">School</span><span class="editschool"><input type="text" ng-model="user.school" name="school"></span></li>
+								</ul>
+								<p><span>About</span><span><textarea ng-model="user.bio" name="bio">{{ user.bio }}</textarea></span></p>
+								<p><span>Profile Picture</span><span><input type="file" name="file" /></span></p>
+								<div class="row">
+									<input type="submit" upload-submit="update(contents, completed)" value="Save" class="bbutton" />
+								</div>
+								</form>
+								
+								<div>{{uploadReport}}</div>
+								
+								{% endverbatim %}
+							</div>
+							<div class="large-9 columns profilesettings">
+								<form novalidate>
+								<h4 class="username">Settings</h4>
+								<ul class="userinfo">
+									<li><span class="username">Username</span><span><input type="text" ng-model="user.username" name="username"></span></li>
+									<li><span class="email">Email</span><span><input type="text" ng-model="user.email" name="email"></span></li>
+									<li><span class="password">Current Password</span><span><input type="password" ng-model="user.current_password" name="current_password" value="" autocomplete="off"></span></li>
+									<li><span class="password">New Password</span><span><input type="password" ng-model="user.plainPassword.first" name="plainPassword[first]"></span></li>
+									<li><span class="password">Confirm Password</span><span><input type="password" ng-model="user.plainPassword.second" name="plainPassword[second]"></span></li>
+								</ul>
+								<div row>
+									<input type="submit" class="bbutton" value="Save Settings" ng-click="profile(user)" />
+								</div>
+								</form>
+							</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </div>
+
+<div id="buyPointsModal" class="reveal-modal medium">
+	<div class="row registration-header">
+		<h2>Buy Rayku Points</h2>
+	</div>
+	<div class="row registration-body">
+        <form class="buy-rayku-points custom" name="buy_rayku_points" action="/paypal.php" method="post">
+            <select id="customDropdown1" class="large" name="amount">
+                <option DISABLED>Points</option>
+                <option value="5">500 Points for $5</option>
+                <option value="10">1000 Points for $10</option>
+                <option value="25">2500 Points for $25</option>
+                <option value="50">5000 Points for $50</option>
+                <option value="100">10000 Points for $100</option>
+            </select>
+        	<input type="hidden" name="loginid" value="{{ user.id }}" />
+            <input type="submit" class="bbutton" value="Buy">
+        </form>
+	</div>
+	<a class="close-reveal-modal">×</a>
+</div>
+
+<div id="tutorLoadModal" class="reveal-modal large">
+	<div class="row header">
+		<div class="large-12 columns">
+			<h2><img src="{{ asset('bundles/raykupage/images/ajax-loader.gif') }}" /><span>Please Wait, Notifying Tutors...</span></h2>
+		</div>
+	</div>
+	<div class="row body">
+		<div class="large-12 columns">
+			<p>Approximate waiting time 5 minutes... <a href=#>Notify me when a tutor connects</a></p>
+			<form>
+				<textarea placeholder="Describe your question in detail"></textarea>
+				<input type="submit" class="bbutton">
+			</form>
+		</div>
+	</div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+{% if user.id %}
+<div id="myTutorModal" class="reveal-modal medium" ng-controller="TutorListCtrl">
+	<div class="row registration-header">
+		<h2>Tutor Profile</h2>
+	</div>
+	<div class="row registration-body">
+		<p>Before activating your tutor status, please fill out as much as possible to completeyour tutor profile.</p>
+	</div>
+	
+	<div class="large-12 columns">
+    <form novalidate>
+		<div class="row">
+		<div class="row degree"><div class="large-12 columns">
+			<label for="rate" class="required">RP/Min $1 = 100 RP</label>
+			<input type="text" id="rate" name="rate" required="required" ng-model="user.tutor.rate">
+		</div></div>
+        <div class="row degree"><div class="large-12 columns">
+        	<label for="gtalk_email">Connect Your Google Talk</label>
+        	<input type="email" id="gtalk_email" name="gtalk_email" maxlength="255" ng-model="user.tutor.gtalk_email">
+        </div></div>
+        <div class="row degree"><div class="large-12 columns">
+        	<label style="width:110px; float:left; height:1px" for="visible" class="required hast-tip" data-tooltip="" title="You can only be connected with directly through your tutor profile page">Direct Connect Only</label>
+        	<input type="checkbox" id="direct_connect" name="direct_connect" data-customforms="disabled" value="1"  ng-model="user.tutor.direct_connect">
+        </div></div>
+        <div class="row listing-preview"><div class="large-12 columns">
+        	<br />
+        	<label>Listing Preview</label>
+        	<p>(When students search for tutors, you will appear as):</p>
+        	<p class="preview"><span class="schoolAmount">Under Graduate Degree Holder</span> From <span class="schoolName">Ryerson University</span> - Economics</p>
+        </div></div>
+    </div>
+    <input type="submit" class="bbutton" value="Save &amp; Activate Tutor Status"  ng-click="update(user)" />
+    </form>
+	</div>
+	<a class="close-reveal-modal">×</a>
+</div>
+
+	{% include 'RaykuPageBundle:Page:notification_modal.html.twig' %}
+{% endif %}
+
+{% if ratesessionform is defined %}
+	<div id="referFriend" class="reveal-modal medium">
+		<div class="row registration-header">
+        	<h2>Refer a Friend</h2>
+		</div>
+	    <div class="row registration-body">
+			<div class="large-12 columns">
+				You can get extra Rayku Points by inviting your friends to try out Rayku. If a friend uses your invitation to sign up for an account you will receive 200 Rayku Points and your friend receives 500 Rayku points.</br><br/>
+
+				<input type="text" value="http://www.rayku.com/?refcode={{ user.referralCode }}" /><br />
+			</div>
+		</div>
+		<a class="close-reveal-modal">×</a>
+	</div>
+	
+	<div id="rateTutorModal" class="reveal-modal medium rateTutor">
+		<div class="row registration-header">
+        	<h2>Rate Your Tutor</h2>
+		</div>
+		<div class="row registration-body">
+	    <div class="large-12 columns rate-tutors">
+	        <form id="rateTutorForm" class="custom" name="rate-tutor" action="{{ path('post_session_rate', {'session': session.id}) }}" method="post">
+                <div class="row">
+                    <label for="rateTutor">Your tutor {{ session.selectedtutor }}</label>
+                    {{ form_widget(ratesessionform.rating) }}
+                    {{ form_rest(ratesessionform) }}
+                    <input type="submit" class="bbutton" value="Rate">
+                </div>
+	            <div class="row">
+	            	<br />View the <strong><a href="{{ whiteboard_url }}/room/{{ session.id }}/playback/5" target="_blank" />Session Recording</a></strong>
+	            </div>
+	        </form>
+	    </div></div>
+	</div>
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#rateTutorModal').foundation('reveal', 'open');
+		$('#rateTutorForm').submit(function() {
+			$('#loading-indicator').fadeIn('fast');
+		});
+	    $('#rateTutorForm').ajaxForm(function() {
+	    	if($('select#rating').find(":selected").val() > 3){
+	    		$('#referFriend').foundation('reveal', 'open');   	
+	    	}else{
+		    	$('#rateTutorModal').foundation('reveal', 'close');
+		    }
+		    $('#loading-indicator').fadeOut('fast');
+		});
+	});
+	</script>
+{% endif %}
+
+<script>
+	document.write('<script src=' +
+    ('__proto__' in {} ? '/bundles/raykupage/js/vendor/zepto' : '/bundles/raykupage/js/vendor/jquery') +
+    '.js><\/script>')
+</script>
+
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.alerts.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.clearing.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.cookie.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.dropdown.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.forms.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.joyride.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.magellan.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.orbit.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.placeholder.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.reveal.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.section.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.tooltips.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.topbar.js') }}"></script>
+<script>
+    $(document).foundation();
+</script>
+
+{% include "::GoogleAnalytics.html.twig" %}
+
 </body>
 </html>

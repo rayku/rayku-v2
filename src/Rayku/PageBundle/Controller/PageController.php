@@ -98,7 +98,7 @@ class PageController extends Controller
 	/**
 	 * @Route("/register/confirmed", name="rayku_register_confirmed")
 	 * @Route("/dashboard", name="rayku_page_dashboard")
-	 * @Template("RaykuPageBundle:Page:dashboard2.html.twig")
+	 * @Template("RaykuPageBundle:Page:dashboard.html.twig")
 	 */
 	public function dashboardAction()
 	{

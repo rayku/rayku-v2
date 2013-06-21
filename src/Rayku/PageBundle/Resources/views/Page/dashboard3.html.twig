@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Welcome to CodeIgniter</title>
+	<link href="{{ asset('bundles/raykupage/css/foundation.css') }}" type="text/css" rel="stylesheet" media="screen" />
+	<link href="{{ asset('bundles/raykupage/css/app.css') }}" type="text/css" rel="stylesheet" media="screen" />
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="{{ asset('bundles/raykupage/js/script.js') }}"></script>
+</head>
+<body>
+<div class="container">
+	<header id="header">
+	    <div class="inside">
+	        <a href="/app_dev.php/dashboard" id="logo"><img src="http://www.rayku.local/bundles/raykupage/images/logo.png" alt="" /></a>
+	        <nav>
+	            <a href=# class="notification" data-reveal-id="connectNotifModal"><span class="raphael">M</span><span class="notif-count">0</span></a>
+	            <a href=# class="settings"><span class="raphael">`</span></a>
+	            <a href=# class="logged-in-as"><span class="liau">Logged in as rayku</span> <div class="arrow-down"></div></a> 
+	            <div class="submenu" id="submenu">
+                    <div class="arrow-up"></div>
+                    <ul class="submenu-item">
+                        <li><a class="home" href=#><span class="raphael">L</span>Home</a></li>
+                        <li><a class="practice" href="http://whiteboard.rayku.local:8080/standalone" target="_blank"><span class="raphael">b</span>Practice Whiteboard</a></li>
+                        <li><a class="broadcast" href=#><span class="raphael">Æ</span>Broadcast Session</a></li>
+                        <li><a class="setting" href=#><span class="raphael">`</span>Settings</a></li>
+                        <li><a class="buyPoints" href=#><span class="raphael">`</span>Buy Rayku Points</a></li>
+                        <li><a class="whiteboard" href=#><span class="raphael">`</span>Go To Whiteboard</a></li>
+                        <li><a class="logout" href="/app_dev.php/logout"><span class="raphael">v</span>Logout</a></li>
+                    </ul>
+                </div>
+	        </nav>
+	    </div>
+	</header>
+	<div class="row" id="main-content">
+		{% if user.id is null %}
+			{% include 'RaykuPageBundle:Page:registration_modal.html.twig' with {'form': registrationform} %}
+		{% endif %}
+		<div class="large-4 columns" id="sidebar">
+			<h3 class="userfullname"><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg">Sam <br><span class="lastname">Peter Jnr.</span></h3>
+			<h3 class="userstatus"><span class="status">Tutor</span><span class="online">&nbsp;</span></h3>
+			<ul class="sidebar-nav">
+				<li class="divider"></li>
+				<li class="active"><a class="dashboard" href=#><span class="raphael">S</span> Dashboard</a></li>
+				<li class="divider"></li>
+				<li><a class="profile" href=#><span class="raphael">L</span> Profile</a></li>
+				<li class="divider"></li>
+				<li><a class="practice" href=#><span class="raphael">></span> Practice</a></li>
+				<li class="divider"></li>
+				<li><a class="broadcast" href=#><span class="raphael">Æ</span> Broadcast</a></li>
+				<li class="divider"></li>
+				<li><a class="buyPoints" href=#><span class="raphael">#</span> Buy Rayku Points</a></li>
+				<li class="divider"></li>
+				<li><a class="userWhiteboard" href=#><span class="raphael">?</span> Go to Whiteboard</a></li>
+				<li class="divider"></li>
+			</ul>
+			<ul class="logout">
+				<li class="divider"></li>
+				<li><a href=#><span class="raphael">Ï</span> Logout</a></li>
+			</ul>
+		</div>
+
+		<div class="large-8 columns" id="content-body">
+			<div class="row content-header">
+				<h3><span class="raphael">S</span>Dashboard</h3>
+			</div>
+			<div class="row" id="content">
+				<input type="text" placeholder="What is your question?">
+
+				<div class="large-8 columns tutor-list">
+					<h3>Online Tutors<a href="#" class="raphael">0</a></h3>
+					<form action="{{path('post_session')}}" method="post" class="custom" id="create_session">
+					  	<input type="hidden" value="" name="question" id="question" />
+					  	<table class="tutorTable">
+					  		<tbody>
+					  			<tr class="tutorDetails">
+					  				<td class="one"><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
+					  				<td class="two"><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
+					  				<td class="three"><input type="checkbox"></td>
+					  			</tr>
+					  			<tr class="tutorDetails">
+					  				<td><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
+					  				<td><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
+					  				<td><input type="checkbox"></td>
+					  			</tr>
+					  			<tr class="tutorDetails">
+					  				<td><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
+					  				<td><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
+					  				<td><input type="checkbox"></td>
+					  			</tr>
+					  			<tr class="tutorDetails">
+					  				<td><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
+					  				<td><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
+					  				<td><input type="checkbox"></td>
+					  			</tr>
+					  			<tr class="tutorDetails">
+					  				<td><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
+					  				<td><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
+					  				<td><input type="checkbox"></td>
+					  			</tr>
+					  			<tr class="tutorDetails">
+					  				<td><img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:50px;"></td>
+					  				<td><p><span class="tutorName">Sam Peter Jnr</span><br><span class="tutorBio">Undergraduate Degree Holder From Dalhousie University</span><br><span class="tutorRP">40 RP/Min</span></p></td>
+					  				<td><input type="checkbox"></td>
+					  			</tr>
+					  		</tbody>
+					  	</table>
+					    <input value="Connect" type="submit" class="bbutton" id="tutorConnect">
+					</form>
+				</div>
+				<div class="large-2 columns tutor-points">
+					<h3><span class="raphael">#</span><span class="title">Rayku Points</span></h3>
+					<h4>1000</h4>
+				</div>
+				<div class="large-2 columns tutor-rating">
+					<h3><span class="raphael">$</span><span class="title">Tutor Rating<span></h3>
+					<h4>1000</h4>
+				</div>
+				<div class="large-4 columns" id ="sessions-list">
+					<h3>Past Sessions</h3>
+					<table>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>Session With Blaise Kripky</td>
+								<td><a href="#">View</a></td>
+                                <td><a href="#">Delete</a></td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>Session With Sheldon Cooper</td>
+								<td><a href="#">View</a></td>
+                                <td><a href="#">Delete</a></td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>Session With Anton Wright</td>
+								<td><a href="#">View</a></td>
+                                <td><a href="#">Delete</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="row userprofile" id="userprofile">
+				<div class="large-12 columns" id="profile">
+					<h3>User Profile</h3>
+					<div class="row">
+						<div class="large-3 columns sidenav">
+							<img src="http://www.rayku.local/uploads/users/161a50c635cebda7bdfcf87a20f7266708401843.jpeg" style="width:100%;">
+							<ul class="profilenav">
+								<li><a href=#>Messages</a></li>
+								<li><a href=#>Favorites</a></li>
+								<li><a href=#>Payout</a></li>
+								<li><a href=#>Settings</a></li>
+							</ul>
+						</div>
+						<div class="large-9 columns profileinfo">
+							<h4 class="username">Sam Peter Jnr.</h4>
+
+							<ul class="userinfo">
+								<li>Computer Science</li>
+								<li>Undergraduate Degree Holder</li>
+								<li>From, Dalhousie University</li>
+							</ul>
+							<p class="about">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.</p>
+							<p class="public"><a href=#><span class="raphael">7</span>Tutor Public Profile</a></p>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,6 +1,7 @@
 {% extends "::angular_base.html.twig" %}
 
 {% block content %}
+
 	<div class="row content-header">
 		<h3><span class="raphael">S</span>Dashboard</h3>
 	</div>
@@ -15,21 +16,34 @@
 			<div tutor-list></div>
 			</form>
 		</div>
-	
+
 		<div class="large-2 columns tutor-points">
 			<div ="pcontainer">
 				<h3><span class="raphael">#</span><span class="title">Rayku Points</span></h3>
 				<h4>{{user.points}}</h4>
 			</div>
 		</div>
-	
-		<div class="large-2 columns tutor-rating" ng-show="user.is_tutor" ng-cloak>
+
+	{% if user.isTutor %}
+		<div class="large-2 columns tutor-rating">
 			<div class="rcontainer">
 				<h3><span class="raphael">$</span><span class="title">Tutor Rating<span></h3>
 				<h4>1000</h4>
 			</div>
 		</div>
 	
+
+	<!-----------------------------
+	TUTOR STATUS
+	-------------------------------->
+	<!--
+		<div class="large-4 columns tutor-status" id ="sessions-list" ng-controller="UserDetailCtrl">
+			<h3>Tutor Status</h3> 
+			<div ng-include="TutorStatusTemplate"></div>
+		</div>
+	-->
+	{% endif %}
+
 	<!------------------------------
 	PAST SESSIONS LIST
 	---------------------------------->
@@ -56,11 +70,14 @@
 						<li><a href=# class="mysettings">Settings</a></li>
 					</ul>
 				</div>
-	
+
 				<div ng-controller="UserDetailCtrl">
 					<div class="large-9 columns profileinfo">
 						<div ng-include="UserDetailTemplate"></div>
-						<p ng-show="user.is_tutor" ng-cloak class="public"><a href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></p>	
+						{% if user.isTutor %}
+							<p class="public"><a href="{{ path('rayku_tutor_show', { 'username': user.username } ) }}"><span class="raphael">7</span>Tutor Public Profile</a></p>
+						{% endif %}
+
 					</div>
 					<div class="large-9 columns tutorpayout">
 						<h4 class="">Tutor Payout</h4>
@@ -110,7 +127,7 @@
 						</form>
 					</div>
 				</div>
-	
+
 			</div>
 		</div>
 	</div>

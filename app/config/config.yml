@@ -16,11 +16,8 @@ framework:
     templating:      { engines: ['twig'] }
     default_locale:  %locale%
     session:
-        default_locale: %locale%
         lifetime:       36000
-        auto_start:     true
-        save_path: "%kernel.root_dir%/sessions/"
-    session: ~
+        save_path: %kernel.root_dir%/var/sessions
 
 vespolina_payment_stripe:
     api_key: 1

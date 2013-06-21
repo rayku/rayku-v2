@@ -27,12 +27,12 @@ set :user, "donny"
 
 set :shared_files,            ["app/config/parameters.yml"]
 set :assets_symlinks,         true
-set :shared_children, [app_path + "/logs", app_path + "/sessions", web_path + "/uploads", "vendor"]
+set :shared_children, [app_path + "/logs", app_path + "/var", web_path + "/uploads", "vendor", "components"]
 # set :clear_controllers,       false
 
 # before 'symfony:cache:warmup', 'symfony:doctrine:migrations:migrate'
-before 'symfony:composer:install', 'composer:copy_vendors'
-before 'symfony:composer:update', 'composer:copy_vendors'
+# before 'symfony:composer:install', 'composer:copy_vendors'
+# before 'symfony:composer:update', 'composer:copy_vendors'
 
 namespace :deploy do
 	# Apache needs to be restarted to make sure that the APC cache is cleared.
@@ -44,14 +44,14 @@ namespace :deploy do
 	end
 end
 
-namespace :composer do
-  task :copy_vendors, :except => { :no_release => true } do
-    capifony_pretty_print "--> Copy vendor file from previous release"
-
-    run "vendorDir=#{current_path}/vendor; if [ -d $vendorDir ] || [ -h $vendorDir ]; then cp -a $vendorDir #{latest_release}/vendor; fi;"
-    capifony_puts_ok
-  end
-end
+# namespace :composer do
+#   task :copy_vendors, :except => { :no_release => true } do
+#     capifony_pretty_print "--> Copy vendor file from previous release"
+# 
+#     run "vendorDir=#{current_path}/vendor; if [ -d $vendorDir ] || [ -h $vendorDir ]; then cp -a $vendorDir #{latest_release}/vendor; fi;"
+#     capifony_puts_ok
+#   end
+# end
 
 # # configure production settings
 # task :production do

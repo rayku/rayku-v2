@@ -11,8 +11,8 @@ $(document).ready(function(){
     $('#sidebar ul.sidebar-nav li a').click(function(){
     	var navitem = $(this).text().substr(1);
     	var icon = $(this).text().charAt(0);
-    	$('#sidebar ul.sidebar-nav li').siblings().removeClass('active');
-    	$(this).parent().addClass('active');
+    	$(this).parent().siblings().find('a').removeClass('active');
+    	$(this).addClass('active');
     	$('.content-header h3').html('<span class="raphael">'+ icon +'</span>' + navitem);
     });
 
@@ -49,7 +49,7 @@ $(document).ready(function(){
         $('.container').fadeOut('fast');
         $('#whiteboard2 iframe').attr("src", "http://whiteboard.rayku.com/standalone");
         $('#whiteboard2').delay(500).fadeIn('slow');
-        
+
     });
     $('.home').click(function (){
     	$('body').css('overflow', 'scroll');
@@ -79,3 +79,4 @@ $(document).ready(function(){
         $('.profilesettings').delay(500).fadeIn(500);
     });
 });
+

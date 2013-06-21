@@ -1,5 +1,7 @@
+<div id="table-div">
+<h3>Online Tutors<a href="#" class="raphael refreshTutors" ng-click="refreshTutors()">0</a></h3>
 <input type="hidden" value="" name="question" id="question" />
-<table class="tutorTable">
+<table class="tutorTable" id="tutorTable">
 	<tbody>
 		<tr class="tutorDetails" ng-repeat="tutor in tutors" ng-cloak>
 		<td class="one"><img ng-src="{{ tutor.user.web_path }}" style="width:50px;"></td>
@@ -9,3 +11,4 @@
   	</tbody>
 </table>
 <input value="Connect" type="submit" class="bbutton" id="tutorConnect" name="tutorConnect">
+</div>

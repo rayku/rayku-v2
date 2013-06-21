@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>{% block title %}Rayku{% endblock %}</title>
 	<link href="{{ asset('bundles/raykupage/css/normalize.css') }}" type="text/css" rel="stylesheet" media="screen" />
-	<link href="{{ asset('bundles/raykupage/css/foundation.css') }}" type="text/css" rel="stylesheet" media="screen" />
+	<link href="{{ asset('bundles/raykupage/css/foundation.min.css') }}" type="text/css" rel="stylesheet" media="screen" />
 	<link href="{{ asset('bundles/raykupage/css/app.css') }}" type="text/css" rel="stylesheet" media="screen" />
 	<link rel="icon" type="image/ico" href="{{ asset('bundles/raykupage/images/favicon.ico') }}">
 
@@ -95,7 +95,7 @@ NOTIFICATIONS ALERT
 	</div>
 	<header id="header">
 	    <div class="inside">
-	        <a href="{{ path('rayku_page_dashboard') }}" id="logo"><img src="{{ asset('bundles/raykupage/images/logo.png') }}" alt="" /></a>
+	        <a href="{{ path('rayku_page_dashboard') }}" id="logo"><span class="beta">beta</span><img src="{{ asset('bundles/raykupage/images/logo.png') }}" alt="" /></a>
 	        <nav>
 	            <a href=# class="notification" data-reveal-id="connectNotifModal"><span class="raphael">M</span><span class="notif-count">0</span></a>
 	            
@@ -107,6 +107,7 @@ NOTIFICATIONS ALERT
                         <li><a class="setting" href=#><span class="raphael">`</span>Settings</a></li>
                         <li><a class="myprofileedit" href=#><span class="raphael">`</span>Edit Profile</a></li>
                         <li><a class="tutor" href=# data-reveal-id="myTutorModal"><span class="raphael">`</span>Become a Tutor</a></li>
+                        <li><a class="tutor" href=# data-reveal-id="tutorLoadModal"><span class="raphael">`</span>Tutor Load</a></li>
                         <li><a class="logout" href="{{ path('fos_user_security_logout') }}"><span class="raphael">v</span>Logout</a></li>
                     </ul>
                 </div>
@@ -131,15 +132,15 @@ NOTIFICATIONS ALERT
 			</ul>
 			
 			<ul class="sidebar-nav">
-				<li class="divider"></li>
-				<li class="active"><a class="dashboard" href=#><span class="raphael">S</span> Dashboard</a></li>
-				<li class="divider"></li>
+				
+				<li><a class="dashboard active" href=#><span class="raphael">S</span> Dashboard</a></li>
+				
 				<li><a class="myprofileedit" href=#><span class="raphael">`</span> Settings</a></li>
-				<li class="divider"></li>
-				<li><a class="buyPoints" href=# data-reveal-id="buyPointsModal"><span class="raphael">#</span> Buy Rayku Points</a></li>
-				<li class="divider"></li>
-				<li><a class="userWhiteboard" href=#><span class="raphael">?</span> Practice Whiteboard</a></li>
-				<li class="divider"></li>
+				
+				<li><a class="buyPoints" href=# data-reveal-id="buyPointsModal"><span class="raphael">#</span> Buy Points</a></li>
+				
+				<li><a class="userWhiteboard" href=#><span class="raphael">?</span> Practice</a></li>
+				
 				<li class="backtoWhiteboard"><a class="backWhiteboard" href=#><span class="raphael">?</span> Back to Whiteboard</a></li>
 				<li class="divider backtoWhiteboard"></li>
 			</ul>
@@ -155,22 +156,25 @@ NOTIFICATIONS ALERT
 			<!------------------------------
 			TUTOR LIST TABLE
 			-------------------------------->
-				<div class="large-8 columns tutor-list" ng-controller="TutorListCtrl">
-					<h3>Online Tutors<a href="#" class="raphael refreshTutors" ng-click="refreshTutors()">0</a></h3>
+				<div id="tutorList" class="large-8 columns tutor-list" ng-controller="TutorListCtrl">
 					<form action="{{path('post_session')}}" method="post" class="custom" id="create_session">
-					<div ng-include="tutorListTemplate"></div>
+					<div tutor-list></div>
 					</form>
 				</div>
 
 				<div class="large-2 columns tutor-points">
-					<h3><span class="raphael">#</span><span class="title">Rayku Points</span></h3>
-					<h4>{{user.points}}</h4>
+					<div ="pcontainer">
+						<h3><span class="raphael">#</span><span class="title">Rayku Points</span></h3>
+						<h4>{{user.points}}</h4>
+					</div>
 				</div>
 
 			{% if user.isTutor %}
 				<div class="large-2 columns tutor-rating">
-					<h3><span class="raphael">$</span><span class="title">Tutor Rating<span></h3>
-					<h4>1000</h4>
+					<div class="rcontainer">
+						<h3><span class="raphael">$</span><span class="title">Tutor Rating<span></h3>
+						<h4>1000</h4>
+					</div>
 				</div>
 			
 
@@ -295,6 +299,24 @@ NOTIFICATIONS ALERT
         </form>
 	</div>
 	<a class="close-reveal-modal">×</a>
+</div>
+
+<div id="tutorLoadModal" class="reveal-modal large">
+	<div class="row header">
+		<div class="large-12 columns">
+			<h2><img src="{{ asset('bundles/raykupage/images/ajax-loader.gif') }}" /><span>Please Wait, Notifying Tutors...</span></h2>
+		</div>
+	</div>
+	<div class="row body">
+		<div class="large-12 columns">
+			<p>Approximate waiting time 5 minutes... <a href=#>Notify me when a tutor connects</a></p>
+			<form>
+				<textarea placeholder="Describe your question in detail"></textarea>
+				<input type="submit" class="bbutton">
+			</form>
+		</div>
+	</div>
+  <a class="close-reveal-modal">&#215;</a>
 </div>
 
 {% if user.id %}

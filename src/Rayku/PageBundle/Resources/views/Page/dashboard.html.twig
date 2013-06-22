@@ -156,7 +156,7 @@ NOTIFICATIONS ALERT
 			<!------------------------------
 			TUTOR LIST TABLE
 			-------------------------------->
-				<div id="tutorList" class="large-8 columns tutor-list" ng-controller="TutorListCtrl">
+				<div id="tutorList" class="large-7 columns tutor-list" ng-controller="TutorListCtrl">
 					<form action="{{path('post_session')}}" method="post" class="custom" id="create_session">
 					<div tutor-list></div>
 					</form>
@@ -170,7 +170,7 @@ NOTIFICATIONS ALERT
 				</div>
 
 			{% if user.isTutor %}
-				<div class="large-2 columns tutor-rating">
+				<div class="large-2 large-offset-1 columns tutor-rating">
 					<div class="rcontainer">
 						<h3><span class="raphael">$</span><span class="title">Tutor Rating<span></h3>
 						<h4>1000</h4>
@@ -192,7 +192,7 @@ NOTIFICATIONS ALERT
 			<!------------------------------
 			PAST SESSIONS LIST
 			---------------------------------->
-				<div class="large-4 columns" id ="sessions-list" ng-controller="SessionListCtrl">
+				<div class="large-5 columns" id ="sessions-list" ng-controller="SessionListCtrl">
 					<h3>Sessions</h3> 
 					<div ng-include="SessionListTemplate"></div>
 				</div>

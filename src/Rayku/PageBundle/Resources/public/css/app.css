@@ -622,13 +622,19 @@ table, th, td
 .disabled{
 	opacity: 0.5;
 }
-.tutor-rating{
+
+.tutor-points, .tutor-rating{
 	height: 60px;
-	
-}
-.tutor-points{
-	height: 60px;
-	
+	border: 1px solid rgba(221, 221, 221, 1);
+	background: rgb(255,255,255);
+	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(229,229,229,1)));
+	background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%);
+	background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%);
+	background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%);
+	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 );
+	border-radius: 3px;
 }
 .tutor-points h3, .tutor-rating h3{
 	font-weight: normal;
@@ -652,9 +658,7 @@ table, th, td
 	margin-top: -6px;
 	margin-left: 28px;
 }
-.pcontainer, .rcontainer{
 
-}
 #sessions-list{
 	background: rgba(255, 255, 255, 1);
 	padding: 0;

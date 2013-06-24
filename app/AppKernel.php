@@ -85,9 +85,9 @@ class AppKernel extends Kernel
     
     public function getCacheDir()
     {
-    	if($this->getEnvironment() !== 'prod'){
+    	/*if($this->getEnvironment() !== 'prod'){
 	    	return '/tmp/cache/rayku/'.$this->environment;
-    	}
+    	}*/
     }
     
     public function getLogDir()

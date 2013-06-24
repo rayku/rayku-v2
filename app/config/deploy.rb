@@ -1,13 +1,13 @@
 task :production do
   set :deploy_to,    "/var/rayku.com"
   set :deploy_via, :remote_cache
-  after('deploy:create_symlink', 'cache:clear')
+  set :clear_controllers, true
 end
 
 task :beta do
   set :deploy_to,    "/var/beta.rayku.com"
   set :deploy_via, :remote_cache
-  after('deploy:create_symlink', 'cache:clear')
+  set :clear_controllers, false
 end
 
 
@@ -41,7 +41,6 @@ set :user, "donny"
 set :shared_files,            ["app/config/parameters.yml"]
 set :assets_symlinks,         true
 set :shared_children, [app_path + "/logs", app_path + "/var", web_path + "/uploads", "vendor", "components"]
-# set :clear_controllers,       false
 
 # before 'symfony:cache:warmup', 'symfony:doctrine:migrations:migrate'
 # before 'symfony:composer:install', 'composer:copy_vendors'
@@ -66,32 +65,3 @@ end
 #   end
 # end
 
-# # configure production settings
-# task :production do
-#     set :stage,     "production"
-#     set :deploy_to, "/usr/local/web/htdocs/org.sonata-project"
-#
-#     role :app,      'wwww-data@sonata-project.org', :master => true, :primary => true
-#     # role :app,      'wwww-data@sonata-project.org'
-#
-#     role :web,      'wwww-data@sonata-project.org', :master => true, :primary => true
-#     # role :web,      'wwww-data@sonata-project.org'
-#
-#     role :db,       "wwww-data@db.sonata-project.org", :primary => true, :no_release => true
-# end
-#
-# # configure validation settings
-# task :validation do
-#     set :stage,     "validation"
-#     set :deploy_to, "/usr/local/web/htdocs/org.sonata-project.validation"
-#
-#     role :app,      'wwww-data@validation.sonata-project.org', :master => true, :primary => true
-#     # role :app,      'wwww-data@sonata-project.org'
-#
-#     role :web,      'wwww-data@validation.sonata-project.org', :master => true, :primary => true
-#     # role :web,      'wwww-data@sonata-project.org'
-#
-#     role :db,       "wwww-data@db.validation.sonata-project.org", :primary => true, :no_release => true
-#
-#     set :sonata_page_managers, ['page', 'snapshot']
-# end

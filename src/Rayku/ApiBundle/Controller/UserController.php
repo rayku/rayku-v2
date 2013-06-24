@@ -39,8 +39,13 @@ class UserController extends Controller
 			$this->container->get('fos_user.registration.form.handler')->processReferral($user, $confirmationEnabled);
 			
 			$em = $this->getDoctrine()->getManager();
-			$em->remove($user->getTutor());
+			// shouldn't be necessary :(
+			$tutor = $user->getTutor();
+			$tutor->setUser($user);
+			$em->persist($tutor);
+			$em->persist($user);
 			$em->flush();
+			
 			
 			$route = 'rayku_page_tutor_onboarding';
 			if ($confirmationEnabled) {

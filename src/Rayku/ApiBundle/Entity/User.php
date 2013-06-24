@@ -365,10 +365,12 @@ class User extends BaseUser implements ParticipantInterface
     		$tutor = $this->getTutor();
     		if(!method_exists($tutor, 'getDeletedAt')){
     			$this->isTutor = false;
+    			return $this->isTutor;
     		}
     		$deletedAt = $this->getTutor()->getDeletedAt();
     	}catch(\Exception $e){
     		$this->isTutor = false;
+    		return $this->isTutor;
     	}
     	$this->isTutor = ($deletedAt == null && null !== $this->getTutor()->getId()) ? true : false;
     	return $this->isTutor;

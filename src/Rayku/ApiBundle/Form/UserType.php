@@ -5,6 +5,7 @@ namespace Rayku\ApiBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Rayku\ApiBundle\Form\UserSchoolType;
 
 class UserType extends AbstractType
 {
@@ -13,12 +14,12 @@ class UserType extends AbstractType
         $builder
             ->add('first_name')
             ->add('last_name')
-            ->add('school')
-            ->add('grade')
-            ->add('degree')
             ->add('bio')
             ->add('file')
-        ;
+            ->add('userschool', new UserSchoolType(), array(
+            	'data_class' => 'Rayku\ApiBundle\Entity\User',
+            	'virtual' => true
+           ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

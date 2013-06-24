@@ -5,37 +5,19 @@ namespace Rayku\ApiBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Rayku\ApiBundle\Form\UserSchoolType;
 
 class TutorType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-    	$schoolAmountChoices = array(
-    				"",
-            		"Freshman",
-            		"Sophomore",
-            		"Junior",
-            		"Senior",
-            		"Masters Student",
-            		"Phd Candidate",
-            		"Undergrad Degree Holder",
-            		"Masters Degree Holder",
-            		"Phd Degree Holder",
-            		"Teaching Assistant",
-            		"Professor",
-            		"Middle School Teacher",
-            		"High School Teacher"
-            	);
-    	$schoolAmountChoices = array_combine($schoolAmountChoices, $schoolAmountChoices);
-
         $builder
-         	->add('rate', NULL, array(
+        	->add('rate', NULL, array(
             	'label' => 'RP/Min $1 = 100 RP'		
             ))
-             ->add('gtalk_email', NULL, array(
+            ->add('gtalk_email', NULL, array(
             	'label' => 'Connect Your Google Talk'
-            )
-        );
+            ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

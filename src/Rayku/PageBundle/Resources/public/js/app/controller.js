@@ -26,9 +26,10 @@ app.controller('SessionListCtrl',function ($scope, $rootScope, $http) {
     };
 
     //Should be used to update the sessions name
-    $scope.update = function (name) {
+    $scope.update = function (id) {
       //dont know what the url generated for session name update is so just wrote this in here as a placeholder
-      $http.post(Routing.generate('post_sessions', {'session':5}), data).success(function(data){
+      $http.post(Routing.generate('post_sessions', {'session':id}), data).success(function(data){
+        $rootScope.sessions = data;
         refreshSessions();
       }).error(function (data) {
         $scope.error = data || "Request failed";

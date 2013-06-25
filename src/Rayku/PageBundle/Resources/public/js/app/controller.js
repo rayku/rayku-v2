@@ -41,10 +41,10 @@ app.controller('TutorListCtrl', function ($scope, $rootScope, $http) {
     };
 
     //Should be used to update the sessions name
-    $scope.update = function (id) {
+    $scope.update = function (session) {
       //dont know what the url generated for session name update is so just wrote this in here as a placeholder
-      $http.post(Routing.generate('post_sessions', {'session':id}), id).success(function(data){
-        refreshSessions();
+      $http.post(Routing.generate('post_sessions', {'session':session.id, 'name':session.name})).success(function(data){
+        //done
       }).error(function (data) {
         $scope.error = data || "Request failed";
       });

@@ -10,7 +10,7 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="session in sessions" ng-cloak>
-			<td>{{session.tutor_session_name}} <form><input type="text" name="session_name" ng-model="session.tutor_session_name"></td>
+			<td>{{session.name}} <form><input type="text" name="session_name" ng-model="session.name"></td>
 			<td>{{session.selected_tutor.user.first_name}} {{session.selected_tutor.user.last_name}}</td>
 			<td>{{session.rating}}</td>
 			<td><a href=# data-session="{{session.id}}">View</a></td>

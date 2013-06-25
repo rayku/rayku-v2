@@ -8,6 +8,7 @@ vendor/*
 web/uploads/*
 web/bundles/*
 web/components/*
+app/var/*
 components/*
 .DS_Store
 

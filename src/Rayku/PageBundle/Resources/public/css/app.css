@@ -1319,3 +1319,7 @@ h4 a.myprofileedit{
 	margin-top: 10px;
 	resize:none;
 }
+
+.ttemplate, .ttemplate form{
+	background: none;
+}

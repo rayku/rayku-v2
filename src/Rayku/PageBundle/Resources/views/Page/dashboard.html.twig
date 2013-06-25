@@ -226,9 +226,8 @@ NOTIFICATIONS ALERT
 			TUTOR LIST TABLE
 			-------------------------------->
 				<div id="tutorList" class="large-7 columns tutor-list" ng-controller="TutorListCtrl">
-					<form action="{{path('post_session')}}" method="post" class="custom" id="create_session">
-					<div tutor-list></div>
-					</form>
+					<h3>Online Tutors<a href="#" class="raphael refreshTutors" ng-click="refreshTutors()">0</a></h3>
+					<div ng-include="TutorListTemplate" class="ttemplate"></div>
 				</div>
 
 				<div class="large-2 columns tutor-points">

@@ -14,7 +14,7 @@
 			<td>{{session.selected_tutor.user.first_name}} {{session.selected_tutor.user.last_name}}</td>
 			<td>{{session.rating}}</td>
 			<td><a href=# data-session="{{session.id}}">View</a></td>
-			<td><a href=#>Edit</a><button ng-click="update({{session.id}})">Save</button></form></td>
+			<td><a href=#>Edit</a><button ng-click="update(session)">Save</button></form></td>
 		</tr>
 	</tbody>
 	<tbody ng-show="!sessions.length" ng-show="loaded">

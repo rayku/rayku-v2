@@ -67,17 +67,23 @@ class SessionController extends Controller
     public function postSessionsAction(Session $session){
     	$sessionName = $this->getRequest()->get('name');
 
+    	$valid = false;
+    	if($this->getUser()->getTutor() == $session->getSelectedTutor()){
+    		$session->setTutorSessionName($sessionName);
+    		$valid = true;
+    	}
     	if($this->getUser() == $session->getStudent()){
     		$session->setStudentSessionName($sessionName);
-    	}else if($this->getUser()->getTutor() == $session->getSelectedTutor()){
-    		$session->setTutorSessionName($sessionName);
-    	}else{
-    		throw new AccessDeniedException();
+    		$valid = true;
     	}
-    	$em = $this->getDoctrine()->getManager();
-		$em->persist($session);
-		$em->flush();	
-        return array('success' => true);
+    	if(!$valid){
+    		throw new AccessDeniedException();
+    	}else{
+	    	$em = $this->getDoctrine()->getManager();
+			$em->persist($session);
+			$em->flush();	
+	        return array('success' => true);
+    	}
     }
 	
 	/**

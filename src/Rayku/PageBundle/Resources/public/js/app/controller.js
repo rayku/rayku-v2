@@ -14,6 +14,14 @@ app.controller('TutorListCtrl', function ($scope, $rootScope, $http) {
         	$scope.tutors = data;
         });
     }
+
+    //Poll Tutors
+    /*setInterval(function () {
+      console.log('Polling tutors');
+      $http.get(Routing.generate('get_tutors')).success(function(data) {
+        $scope.tutors = data;
+      });
+    }, 15000);*/
     
     $scope.update = function(user) {
     	$http.post(Routing.generate('post_tutors'), user.tutor).success(function(data){

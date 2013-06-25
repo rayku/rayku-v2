@@ -65,7 +65,7 @@ class SessionController extends Controller
      *  @param \Rayku\ApiBundle\Entity\Session $session
      */
     public function postSessionsAction(Session $session){
-    	$sessionName = $this->getRequest()->get('session_name');
+    	$sessionName = $this->getRequest()->get('name');
 
     	if($this->getUser() == $session->getStudent()){
     		$session->setStudentSessionName($sessionName);

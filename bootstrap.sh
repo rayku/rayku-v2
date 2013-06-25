@@ -15,9 +15,7 @@ if [ -d "/var/www" ]; then
 fi
 ln -s /var/rayku/web /var/www
 
-if [ -f "/home/vagrant/.ssh/id_rsa" ]; then
-	cp /var/rayku/id_rsa /home/vagrant/.ssh/
-fi
+cp /var/rayku/id_rsa /home/vagrant/.ssh/
 
 if [ -d "/var/log/rayku" ]; then
     sudo mkdir /var/log/rayku

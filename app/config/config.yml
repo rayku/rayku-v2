@@ -5,6 +5,7 @@ imports:
     - { resource: @RaykuApiBundle/Resources/config/admin_session.xml }
     - { resource: @RaykuApiBundle/Resources/config/admin_subject.xml }
     - { resource: @RaykuApiBundle/Resources/config/admin_coupon.xml }
+    - { resource: @RaykuApiBundle/Resources/config/admin_course.xml }
 
 framework:
     translator: { fallback: en }

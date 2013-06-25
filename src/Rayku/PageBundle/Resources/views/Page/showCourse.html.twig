@@ -1,0 +1,15 @@
+{% extends "::angular_base.html.twig" %}
+
+{% block content %}
+	<div class="row content-header">
+		<h3><span class="raphael">S</span>{{ course.name }}</h3>
+	</div>
+	<div class="row" id="content" ng-controller="CourseViewCtrl">
+		<div id="courseView" class="large-8 columns course-view">
+			<h3>About</h3>
+		</div>
+		<div class="large-4 columns course-view">
+			<h3>Past Sessions</h3>
+		</div>
+	</div>
+{% endblock %}

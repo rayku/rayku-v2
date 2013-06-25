@@ -257,12 +257,13 @@ class SessionController extends Controller
 	 */
 	public function postSessionAction()
 	{
-		return $this->processForm(new Session());
+		$session = new Session();
+		$session->setStudent($this->getUser());
+		return $this->processForm($session);
 	}
 	
 	private function processForm(Session $session)
 	{
-		$session->setStudent($this->getUser());
 		$form = $this->createForm(new SessionType(), $session);
 		// Ignore extra fields that Angularjs sends with the form
 		$data = $this->getRequest()->request->all();

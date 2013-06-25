@@ -22,3 +22,7 @@ rayku_message_rest:
     resource: Rayku\ApiBundle\Controller\MessageController
     type:     rest
     
+rayku_course_rest:
+    resource: Rayku\ApiBundle\Controller\CourseController
+    type:     rest
+    

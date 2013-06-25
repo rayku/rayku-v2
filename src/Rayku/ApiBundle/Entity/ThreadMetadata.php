@@ -40,4 +40,34 @@ class ThreadMetadata extends BaseThreadMetadata
 		return $this;
 	}
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get thread
+     *
+     * @return \Rayku\ApiBundle\Entity\Thread 
+     */
+    public function getThread()
+    {
+        return $this->thread;
+    }
+
+    /**
+     * Get participant
+     *
+     * @return \Rayku\ApiBundle\Entity\User 
+     */
+    public function getParticipant()
+    {
+        return $this->participant;
+    }
 }

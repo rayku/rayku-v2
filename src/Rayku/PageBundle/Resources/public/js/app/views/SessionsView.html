@@ -1,9 +1,20 @@
 <table>
+	<thead>
+		<tr>
+			<th>Session Name</th>
+			<th>Tutor</th>
+			<th>Rating</th>
+			<th>View</th>
+			<th>Edit</th>
+		</tr>
+	</thead>
 	<tbody>
 		<tr ng-repeat="session in sessions" ng-cloak>
-			<td>{{session.id}}</td>
-			<td>Session name</td>
-			<td>Session With {{session.selected_tutor.user.first_name}} {{session.selected_tutor.user.last_name}}</td>
+			<td>{{session.tutor_session_name}} <form><input type="text" name="session_name" ng-model="session.tutor_session_name"></form></td>
+			<td>{{session.selected_tutor.user.first_name}} {{session.selected_tutor.user.last_name}}</td>
+			<td>{{session.rating}}</td>
+			<td><a href=# data-session="{{session.id}}">View</a></td>
+			<td><a href=# data-session="{{session.id}}">Edit</a></td>
 		</tr>
 	</tbody>
 	<tbody ng-show="!sessions.length" ng-show="loaded">

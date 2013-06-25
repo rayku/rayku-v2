@@ -12,9 +12,10 @@ app.controller('TutorListCtrl', function ($scope, $rootScope, $http) {
     });
 });
 
-app.controller('SessionListCtrl',function ($scope, $http) {
+app.controller('SessionListCtrl',function ($scope, $rootScope, $http) {
     //Sessions List Controller
   	$scope.SessionListTemplate = '/bundles/raykupage/js/app/views/SessionsView.html';
+    $scope.master= {};
 
     function refreshSessions(){
       $http.get(Routing.generate('get_sessions', {'activeRequests':0})).success(function (data){
@@ -23,7 +24,10 @@ app.controller('SessionListCtrl',function ($scope, $http) {
         $scope.error = data || "Request failed";
       });
     };
-    $scope.nameSession = function (name) {
+
+    //Should be used to update the sessions name
+    $scope.update = function (name) {
+      //dont know what the url generated for session name update is so just wrote this in here as a placeholder
       $http.post(Routing.generate('set_session_name'), data).success(function(data){
         refreshSessions();
       }).error(function (data) {

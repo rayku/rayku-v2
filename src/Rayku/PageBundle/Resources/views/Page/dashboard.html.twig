@@ -97,7 +97,7 @@ NOTIFICATIONS ALERT
 	    <div class="inside">
 	        <a href="{{ path('rayku_page_dashboard') }}" id="logo"><span class="beta">beta</span><img src="{{ asset('bundles/raykupage/images/logo.png') }}" alt="" /></a>
 	        <nav>
-	            <a href=# class="notification" data-reveal-id="connectNotifModal"><span class="raphael">M</span><span class="notif-count">0</span></a>
+	            <a href=# class="notification" data-reveal-id="connectNotifModal"><span class="raphael">[</span><span class="notif-count">0</span></a>
 	            
 	            <a href=# class="logged-in-as"><span class="liau">Logged in as {{user.username}}</span> <div class="arrow-down"></div></a> 
 	            <div class="submenu" id="submenu">
@@ -108,6 +108,9 @@ NOTIFICATIONS ALERT
                         <li><a class="myprofileedit" href=#><span class="raphael">`</span>Edit Profile</a></li>
                         <li><a class="tutor" href=# data-reveal-id="myTutorModal"><span class="raphael">`</span>Become a Tutor</a></li>
                         <li><a class="tutor" href=# data-reveal-id="tutorLoadModal"><span class="raphael">`</span>Tutor Load</a></li>
+
+						<li><a class="tutor" href=# data-reveal-id="tutorLoadModal"><span class="raphael">`</span>Broadcast Session</a></li>
+
                         <li><a class="logout" href="{{ path('fos_user_security_logout') }}"><span class="raphael">v</span>Logout</a></li>
                     </ul>
                 </div>
@@ -152,7 +155,73 @@ NOTIFICATIONS ALERT
 			</div>
 			<div class="row" id="content">
 				<input type="text" placeholder="What is your question?">
-				
+				<form class="custom">
+				<div class="large-3 columns school">
+                    
+                    <select id="schoolSelect" class="medium" name="school">
+                      <option>Choose Institution</option>
+                      <option value="high school" name="selectlevel">High School</option>
+                      <option value="university" name="selectlevel">University</option>
+                    </select>
+                    
+                  </div>
+
+                  <div class="large-3 columns institution" id="placeholder">
+                    
+                    <select id="instSelect" class="medium" disabled>
+                        <option value="Choose" name="choose" id="choose">Select An Institution</option>
+                    </select>
+                    
+                  </div>
+
+                  <div class="large-3 columns institution" id="highschool">
+                    <!--
+                    <select name="highschool" class="medium" disabled>
+                        <option value="Choose" name="choose" id="choose">Choose Grade</option>
+                        <option value="grade 1">Grade 1</option>
+                        <option value="grade 2">Grade 2</option>
+                        <option value="grade 3">Grade 3</option>
+                        <option value="grade 4">Grade 4</option>
+                        <option value="grade 5">Grade 5</option>
+                        <option value="grade 6">Grade 6</option>
+                        <option value="grade 7">Grade 7</option>
+                        <option value="grade 8">Grade 8</option>
+                        <option value="grade 9">Grade 9</option>
+                        <option value="grade 10">Grade 10</option>
+                        <option value="grade 11">Grade 11</option>
+                        <option value="grade 12">Grade 12</option>
+                    </select>
+                    //-->
+                  </div>
+                  <div class="large-3 columns institution" id="university">
+                   
+                    <select name="university" class="medium" disabled>
+                        <option value="Choose" name="choose" id="choose">Choose Year</option>
+                        <option value="year 1">Year 1</option>
+                        <option value="year 2">Year 2</option>
+                        <option value="year 3">Year 3</option>
+                        <option value="year 4">Year 4</option>
+                        <option value="year 5">Year 5</option>
+                    </select>
+                    
+                  </div>
+
+                  <div class="large-3 columns category">
+                    
+                    <select id="categorySelect" class="medium" name="category">
+                      <option>Choose Category</option>
+                      <option value="General Math">General Math</option>
+                      <option value="Pre-Algebra">Pre-Algebra</option>
+                      <option value="Geometry">Geometry</option>
+                      <option value="Algebra">Algebra</option>
+                      <option value="Trigonometry">Trigonometry</option>
+                      <option value="Calculus">Calculus</option>
+                      <option value="Statistics">Statistics & Probability</option>
+                      <option value="Advanced Math">Advanced Math</option>
+                    </select>
+                   
+                  </div>
+				</form>
 			<!------------------------------
 			TUTOR LIST TABLE
 			-------------------------------->

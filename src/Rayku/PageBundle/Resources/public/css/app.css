@@ -359,7 +359,7 @@ ul.submenu-item li a:hover {
 	overflow: hidden;
 }
 #sidebar h3.userfullname{
-	font-size: 1.5em;
+	font-size: 1.3em;
 	margin-top: 0;
 	margin-bottom: 0; 
 	padding:10px 25px;
@@ -450,7 +450,7 @@ ul.submenu-item li a:hover {
 }
 #sidebar ul.sidebar-nav li a, #sidebar ul.logout li a{
 	font-family: Arial;
-	font-size: 1em;
+	font-size: 0.9em;
 	font-weight: 500;
 	width: 130%;
 	color: rgba(255, 255, 255, 1);
@@ -471,7 +471,7 @@ ul.submenu-item li a:hover {
 	padding: 15px 15px;
 }
 #sidebar ul.userinfo li, #sidebar  p{
-	font-size: 12px;
+	font-size: 0.85em;
 }
 /* -----------------------------------------
   Content Body
@@ -766,14 +766,17 @@ h4 a.myprofileedit{
 	float: right;
 }
 #profile .profileinfo h4, #profile .tutorpayout h4, #profile .profilesettings h4, #profile .editprofileinfo h4{
-	font-weight: 500;
+	color: rgba(151, 151, 151, 0.8);
+	font-weight: 400;
 	font-size: 1.5em;
 	color: rgba(39, 39, 39, 1);
-	padding-bottom: 12px;
+	padding-top: 8px;
+	padding-bottom: 8px;
 	border-bottom: 1px solid rgba(221, 221, 221, 1); 
 }
 #profile .tutorpayout h5{
 	font-size: 1.1em;
+	color: rgba(160, 160, 160, 1);
 }
 #profile ul.userinfo li{
 	font-size: 0.95em;
@@ -843,6 +846,9 @@ h4 a.myprofileedit{
 }
 
 /*Tutor Profile Modal*/
+#myTutorModal .reveal-modal{
+	border-radius: 3px;
+}
 #myTutorModal .large-12{
 	width: 100%;
 	padding: 10px;

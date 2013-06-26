@@ -10,11 +10,11 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="session in sessions" ng-cloak>
-			<td class="session_displayed_name">{{session.tutor_session_name}}<form><input type="text" name="session_name" ng-model="session.tutor_session_name"></td>
+			<td class="session_displayed_name"><div ng-hide="editorEnabled">{{session.tutor_session_name}}</div><form><div ng-show="editorEnabled"><input type="text" name="session_name" ng-model="session.tutor_session_name"> <button class="save_session_name" ng-click="update(session)" ng-click="editorEnabled=!editorEnabled">Save</button></div></td>
 			<td>{{session.selected_tutor.user.first_name}} {{session.selected_tutor.user.last_name}}</td>
 			<td>{{session.rating}}</td>
 			<td><a href=# data-session="{{session.id}}">View</a></td>
-			<td><a href=# class="edit_session_name">Edit</a><button class="save_session_name" ng-click="update(session)">Save</button></form></td>
+			<td><a href=# ng-click="editorEnabled=!editorEnabled" class="edit_session_name">Edit</a></form></td>
 		</tr>
 	</tbody>
 	<tbody ng-show="!sessions.length" ng-show="loaded">
@@ -25,12 +25,14 @@
 .session_displayed_name{
 	padding-top: 18px; 
 }
+input[name="session_name"]{
+	width:70px;
+	padding:5px;
+}
 </style>
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$('button.save_session_name').hide();
-	$('input[name="session_name"]').hide();
 	$('a.edit_session_name').click(function (event){
 		event.preventDefault();
 		$('button.save_session_name').show();

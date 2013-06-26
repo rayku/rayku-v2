@@ -4,6 +4,7 @@ namespace Rayku\UserBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
+use Rayku\ApiBundle\Form\UserSchoolType;
 use Rayku\ApiBundle\Form\TutorType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -14,13 +15,16 @@ class RegistrationAndTutorProfileFormType extends BaseType
 		parent::buildForm($builder, $options);
 		
 		$builder
-			->add('first_name', NULL, array('label' => 'First Name'))
-			->add('last_name', NULL, array('label' => 'Last Name'))
+			->add('first_name')
+			->add('last_name')
 			->remove('signup_question')
 			->remove('plainPassword')
 			->add('plainPassword', 'password', array('label' => 'Password'))
-			->add('tutor', new TutorType())
-		;
+			->add('userschool', new UserSchoolType(), array(
+					'data_class' => 'Rayku\ApiBundle\Entity\User',
+					'virtual' => true
+			))
+			->add('tutor', new TutorType());
 	}
 	
 	public function setDefaultOptions(OptionsResolverInterface $resolver)

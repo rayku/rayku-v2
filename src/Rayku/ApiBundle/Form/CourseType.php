@@ -5,33 +5,31 @@ namespace Rayku\ApiBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Rayku\ApiBundle\Form\UserSchoolType;
 
-class UserType extends AbstractType
+class CourseType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('first_name')
-            ->add('last_name')
-            ->add('bio')
-            ->add('file')
-            ->add('userschool', new UserSchoolType(), array(
-            	'data_class' => 'Rayku\ApiBundle\Entity\User',
-            	'virtual' => true
-           ));
+            ->add('name')
+            ->add('type')
+            ->add('createdAt')
+            ->add('updatedAt')
+            ->add('instructor')
+            ->add('students')
+            ->add('sessions')
+        ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Rayku\ApiBundle\Entity\User',
-        	'csrf_protection' => false
+            'data_class' => 'Rayku\ApiBundle\Entity\Course'
         ));
     }
 
     public function getName()
     {
-        return '';
+        return 'rayku_apibundle_coursetype';
     }
 }

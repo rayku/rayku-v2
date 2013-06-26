@@ -204,6 +204,11 @@ class User extends BaseUser implements ParticipantInterface
 	 * @Serializer\Groups({"user", "user.details"})
 	 */
 	private $webPath;
+
+	/**
+	 * @Serializer\Groups({"user", "user.details"})
+	 */
+	private $isTutor;
 	
     /**
      * Sets file.
@@ -359,13 +364,16 @@ class User extends BaseUser implements ParticipantInterface
     	try{
     		$tutor = $this->getTutor();
     		if(!method_exists($tutor, 'getDeletedAt')){
-    			return false;
+    			$this->isTutor = false;
+    			return $this->isTutor;
     		}
     		$deletedAt = $this->getTutor()->getDeletedAt();
     	}catch(\Exception $e){
-    		return false;
+    		$this->isTutor = false;
+    		return $this->isTutor;
     	}
-    	return ($deletedAt == null && null !== $this->getTutor()->getId()) ? true : false;
+    	$this->isTutor = ($deletedAt == null && null !== $this->getTutor()->getId()) ? true : false;
+    	return $this->isTutor;
     }
 
     /**
@@ -876,6 +884,7 @@ class User extends BaseUser implements ParticipantInterface
     {
         $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
         $this->setImageWebPath();
+        $this->getIsTutor();
         
         return parent::__construct();
     }

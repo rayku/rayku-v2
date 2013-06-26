@@ -37,7 +37,7 @@
 		<p class="bottom-line">Already have an account? <a href="#" data-reveal-id="loginModal">Sign In to Rayku!</a></p>
 	</div>
 	{% if is_granted("IS_AUTHENTICATED_ANONYMOUSLY") %}	
-		{% render "FOSUserBundle:Security:login" %}
+		{% render controller("FOSUserBundle:Security:login") %}
 	{% endif %}
 	
 	{% block javascripts %}

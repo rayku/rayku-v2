@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="raykuApp">
+<head>
+	<meta charset="utf-8">
+	<title>{% block title %}Rayku{% endblock %}</title>
+	<link href="{{ asset('bundles/raykupage/css/normalize.css') }}" type="text/css" rel="stylesheet" media="screen" />
+	<link href="{{ asset('bundles/raykupage/css/foundation.min.css') }}" type="text/css" rel="stylesheet" media="screen" />
+	<link href="{{ asset('bundles/raykupage/css/app.css') }}" type="text/css" rel="stylesheet" media="screen" />
+	<link rel="icon" type="image/ico" href="{{ asset('bundles/raykupage/images/favicon.ico') }}">
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+	<script src="{{ asset('components/ngUpload/ng-upload.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/app/loadingIndicator.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/foundation.min.js') }}"></script>
+    <script src="{{ asset('bundles/raykupage/js/vendor/custom.modernizr.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/raykupage/js/script.js') }}"></script>
+	
+	<script src="{{ asset('bundles/raykupage/js/app/controller.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/ssmgmnt.js') }}"></script>
+
+	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/jquery_form/jquery.form.js') }}"></script>
+	<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+	<script>
+		var userId = {{ user.id }};
+	</script>
+	
+	<script type="text/javascript">
+	window.setInterval(function(){
+		$.get(Routing.generate('get_sessions', {'activeRequests':1}), function(response, status){
+			jQuery.each(response, function() {
+				var current_messages = parseInt($('.notif-count').html());
+				$('.notif-count').html(response.length);
+				var template = $('#connectRow_id_').prop("outerHTML");
+				template = template.replace('_name_', this.student.first_name+' '+this.student.last_name);
+				template = template.replace('_question_', this.question);
+				template = template.replace(/_id_/g, this.id);
+				if(response.length > current_messages){
+					$('#connectNotifModal').append(template);
+					$('#connectRow'+this.id).show();
+					$('#music').html('<iframe src="/music.html" width="1" height="1"></iframe>');            
+					$('#connectNotifModal').foundation('reveal', 'open');
+				}
+				$('.post_session_accept').ajaxForm(function(response) { 
+				if(response.success){
+					window.location.href = response.redirect;
+				}else if(response.success !== false){
+					alert(response.message);
+				}else{
+					alert('an unknown error has occured');
+				}
+			})
+			$('.post_session_deny').ajaxForm(function(response) {
+				if(response.success){
+					$('#connectNotifModal').foundation('reveal', 'close');
+					$('#music').html('');
+				}
+			})
+		})
+	})
+}, 5000);
+</script>
+</head>
+<body>
+<div id="loading-indicator">
+	<img src="{{ asset('bundles/raykupage/images/ajax-loader.gif') }}" />
+</div>
+
+<div id="whiteboard2">
+    <div id="whiteboard-header">
+        <a href=# class="logged-in-as bbutton home">Back Home</a>
+    </div>
+    <iframe src="" seamless></iframe>
+</div>
+
+<div class="container">
+	<header id="header">
+	    <div class="inside">
+	        <a href="{{ path('rayku_page_dashboard') }}" id="logo"><span class="beta">beta</span><img src="{{ asset('bundles/raykupage/images/logo.png') }}" alt="" /></a>
+	        <nav>
+	            <a href=# class="notification" data-reveal-id="connectNotifModal"><span class="raphael">M</span><span class="notif-count">0</span></a>
+	            
+	            <a href=# class="logged-in-as"><span class="liau">Logged in as {{user.username}}</span> <div class="arrow-down"></div></a> 
+	            <div class="submenu" id="submenu">
+                    <div class="arrow-up"></div>
+                    <ul class="submenu-item">
+                        <li><a class="dashboard" href=#><span class="raphael">L</span>Home</a></li>
+                        <li><a class="setting" href=#><span class="raphael">`</span>Settings</a></li>
+                        <li><a class="myprofileedit" href=#><span class="raphael">`</span>Edit Profile</a></li>
+                        <li><a class="tutor" href=# data-reveal-id="myTutorModal"><span class="raphael">`</span>Become a Tutor</a></li>
+                        <li><a class="tutor" href=# data-reveal-id="tutorLoadModal"><span class="raphael">`</span>Tutor Load</a></li>
+                        <li><a class="logout" href="{{ path('fos_user_security_logout') }}"><span class="raphael">v</span>Logout</a></li>
+                    </ul>
+                </div>
+	        </nav>
+	    </div>
+	</header>
+	<div class="row" id="main-content">
+		<!------------------------------
+		SIDE NAVIGATION
+		-------------------------------->
+		<div class="large-4 columns" id="sidebar" ng-controller="UserDetailCtrl">
+			<div ng-include="UsernameTemplate"></div>
+			<h3 class="userstatus"><span class="status" ng-cloak>
+				<div ng-show="user.is_tutor" ng-cloak>Tutor</div>
+				<div ng-hide="user.is_tutor" ng-cloak>Student</div>
+			</span>
+			<span class="online">&nbsp;</span></h3>
+			<ul class="userinfo" ng-cloak>
+				{% verbatim %}
+				<li><span class="degree">{{ user.degree }}</span></li>
+				<li><span class="grade">{{ user.grade }}</span></li>
+				<li><span class="school">From, {{ user.school }}</span></li>
+				<li class="about"><span class="bio">{{ user.bio }}</span></li>
+				{% endverbatim %}
+			</ul>
+			
+			<ul class="sidebar-nav">
+				
+				<li><a class="dashboard active" href=#><span class="raphael">S</span> Dashboard</a></li>
+				
+				<li><a class="myprofileedit" href=#><span class="raphael">`</span> Settings</a></li>
+				
+				<li><a class="buyPoints" href=# data-reveal-id="buyPointsModal"><span class="raphael">#</span> Buy Points</a></li>
+				
+				<li><a class="userWhiteboard" href=#><span class="raphael">?</span> Practice</a></li>
+				
+				<li class="backtoWhiteboard"><a class="backWhiteboard" href=#><span class="raphael">?</span> Back to Whiteboard</a></li>
+				<li class="divider backtoWhiteboard"></li>
+			</ul>
+		</div>
+
+		<div class="large-8 columns" id="content-body">
+		{% block content %}{% endblock %}
+		</div>
+	</div>
+</div>
+
+
+<div id="tutorLoadModal" class="reveal-modal large">
+	<div class="row header">
+		<div class="large-12 columns">
+			<h2><img src="{{ asset('bundles/raykupage/images/ajax-loader.gif') }}" /><span>Please Wait, Notifying Tutors...</span></h2>
+		</div>
+	</div>
+	<div class="row body">
+		<div class="large-12 columns">
+			<p>Approximate waiting time 5 minutes... <a href=#>Notify me when a tutor connects</a></p>
+			<form>
+				<textarea placeholder="Describe your question in detail"></textarea>
+				<input type="submit" class="bbutton">
+			</form>
+		</div>
+	</div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+{% include 'RaykuPageBundle:Partials:buy_points_modal.html.twig' %}
+{% include 'RaykuPageBundle:Partials:activate_tutor_modal.html.twig' %}
+{% include 'RaykuPageBundle:Partials:notification_modal.html.twig' %}
+
+{% if ratesessionform is defined %}
+	{% include 'RaykuPageBundle:Partials:rate_session_modal.html.twig' %}
+{% endif %}
+
+<script>
+	document.write('<script src=' +
+    ('__proto__' in {} ? '/bundles/raykupage/js/vendor/zepto' : '/bundles/raykupage/js/vendor/jquery') +
+    '.js><\/script>')
+</script>
+
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.alerts.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.clearing.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.cookie.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.dropdown.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.forms.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.joyride.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.magellan.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.orbit.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.placeholder.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.reveal.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.section.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.tooltips.js') }}"></script>
+<script src="{{ asset('bundles/raykupage/js/foundation/foundation.topbar.js') }}"></script>
+<script>
+    $(document).foundation();
+</script>
+
+{% include "::GoogleAnalytics.html.twig" %}
+
+</body>
+</html>

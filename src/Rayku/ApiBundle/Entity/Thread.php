@@ -59,4 +59,64 @@ class Thread extends BaseThread
 		parent::addMetadata($meta);
 	}
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \Rayku\ApiBundle\Entity\User 
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Remove messages
+     *
+     * @param \Rayku\ApiBundle\Entity\Message $messages
+     */
+    public function removeMessage(\Rayku\ApiBundle\Entity\Message $messages)
+    {
+        $this->messages->removeElement($messages);
+    }
+
+    /**
+     * Get messages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+
+    /**
+     * Remove metadata
+     *
+     * @param \Rayku\ApiBundle\Entity\ThreadMetadata $metadata
+     */
+    public function removeMetadata(\Rayku\ApiBundle\Entity\ThreadMetadata $metadata)
+    {
+        $this->metadata->removeElement($metadata);
+    }
+
+    /**
+     * Get metadata
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
 }

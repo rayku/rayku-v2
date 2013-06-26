@@ -134,6 +134,22 @@ class PageController extends Controller
 		}
 	}
 	
+	/**
+	 * @Route("/course/{slug}/view", name="rayku_course_show")
+	 * @Template()
+	 */
+	public function showCourseAction($slug)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$course = $em->getRepository('RaykuApiBundle:Course')->findOneBySlug($slug);
+		if(!$course){
+			return $this->redirect($this->generateUrl('rayku_page_dashboard'));
+		}
+		return array(
+			'course' => $course,
+			'user' => $this->getUser()
+		);
+	}
 
 	/**
 	 * Displays a form to create a new Tutor entity.

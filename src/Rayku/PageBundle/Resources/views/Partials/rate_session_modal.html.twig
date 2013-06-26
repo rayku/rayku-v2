@@ -1,0 +1,50 @@
+<div id="referFriend" class="reveal-modal medium">
+	<div class="row registration-header">
+    	<h2>Refer a Friend</h2>
+	</div>
+    <div class="row registration-body">
+		<div class="large-12 columns">
+			You can get extra Rayku Points by inviting your friends to try out Rayku. If a friend uses your invitation to sign up for an account you will receive 200 Rayku Points and your friend receives 500 Rayku points.</br><br/>
+
+			<input type="text" value="http://www.rayku.com/?refcode={{ user.referralCode }}" /><br />
+		</div>
+	</div>
+	<a class="close-reveal-modal">×</a>
+</div>
+
+<div id="rateTutorModal" class="reveal-modal medium rateTutor">
+	<div class="row registration-header">
+    	<h2>Rate Your Tutor</h2>
+	</div>
+	<div class="row registration-body">
+    <div class="large-12 columns rate-tutors">
+        <form id="rateTutorForm" class="custom" name="rate-tutor" action="{{ path('post_session_rate', {'session': session.id}) }}" method="post">
+            <div class="row">
+                <label for="rateTutor">Your tutor {{ session.selectedtutor }}</label>
+                {{ form_widget(ratesessionform.rating) }}
+                {{ form_rest(ratesessionform) }}
+                <input type="submit" class="bbutton" value="Rate">
+            </div>
+            <div class="row">
+            	<br />View the <strong><a href="{{ whiteboard_url }}/room/{{ session.id }}/playback/5" target="_blank" />Session Recording</a></strong>
+            </div>
+        </form>
+    </div></div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#rateTutorModal').foundation('reveal', 'open');
+	$('#rateTutorForm').submit(function() {
+		$('#loading-indicator').fadeIn('fast');
+	});
+    $('#rateTutorForm').ajaxForm(function() {
+    	if($('select#rating').find(":selected").val() > 3){
+    		$('#referFriend').foundation('reveal', 'open');   	
+    	}else{
+	    	$('#rateTutorModal').foundation('reveal', 'close');
+	    }
+	    $('#loading-indicator').fadeOut('fast');
+	});
+});
+</script>

@@ -41,4 +41,34 @@ class MessageMetadata extends BaseMessageMetadata
 		return $this;
 	}
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get message
+     *
+     * @return \Rayku\ApiBundle\Entity\Message 
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * Get participant
+     *
+     * @return \Rayku\ApiBundle\Entity\User 
+     */
+    public function getParticipant()
+    {
+        return $this->participant;
+    }
 }

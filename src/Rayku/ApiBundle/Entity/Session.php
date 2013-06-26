@@ -114,6 +114,7 @@ class Session
     /**
      * @var \RaykuSession
      *
+     * @Serializer\Exclude
      * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\SessionTutors", mappedBy="session", cascade={"persist", "remove"})
      */
     private $potential_tutors;
@@ -134,6 +135,18 @@ class Session
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
     private $createdAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\Rayku\ApiBundle\Entity\Course", cascade={"persist"}, mappedBy="sessions")
+     * @ORM\JoinTable(name="rayku_couse_session",
+     *     joinColumns={@ORM\JoinColumn(name="session_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="course_id", referencedColumnName="id")}
+     * )
+     * @ORM\OrderBy({"createdAt" = "DESC"})
+     * @Serializer\Groups({"session", "session.details"})
+     */
+    private $courses;
+    
     
     /**
      * @var \DateTime
@@ -144,7 +157,7 @@ class Session
     
     public function __toString()
     {
-    	return $this->getId().' '.$this->getCreatedAt()->format('Y-m-d H:i:s');
+    	return $this->getCreatedAt()->format('Y-m-d H:i:s');
     }
     
     /**
@@ -572,5 +585,38 @@ class Session
     public function getSelectedTutor()
     {
         return $this->selectedTutor;
+    }
+
+    /**
+     * Add courses
+     *
+     * @param \Rayku\ApiBundle\Entity\Course $courses
+     * @return Session
+     */
+    public function addCourse(\Rayku\ApiBundle\Entity\Course $courses)
+    {
+        $this->courses[] = $courses;
+    
+        return $this;
+    }
+
+    /**
+     * Remove courses
+     *
+     * @param \Rayku\ApiBundle\Entity\Course $courses
+     */
+    public function removeCourse(\Rayku\ApiBundle\Entity\Course $courses)
+    {
+        $this->courses->removeElement($courses);
+    }
+
+    /**
+     * Get courses
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCourses()
+    {
+        return $this->courses;
     }
 }

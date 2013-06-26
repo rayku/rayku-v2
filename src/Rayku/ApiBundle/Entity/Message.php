@@ -62,4 +62,54 @@ class Message extends BaseMessage
         parent::addMetadata($meta);
     }
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get thread
+     *
+     * @return \Rayku\ApiBundle\Entity\Thread 
+     */
+    public function getThread()
+    {
+        return $this->thread;
+    }
+
+    /**
+     * Get sender
+     *
+     * @return \Rayku\ApiBundle\Entity\User 
+     */
+    public function getSender()
+    {
+        return $this->sender;
+    }
+
+    /**
+     * Remove metadata
+     *
+     * @param \Rayku\ApiBundle\Entity\MessageMetadata $metadata
+     */
+    public function removeMetadata(\Rayku\ApiBundle\Entity\MessageMetadata $metadata)
+    {
+        $this->metadata->removeElement($metadata);
+    }
+
+    /**
+     * Get metadata
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
 }

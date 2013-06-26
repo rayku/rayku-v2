@@ -10,11 +10,11 @@
 	<!------------------------------
 	TUTOR LIST TABLE
 	-------------------------------->
+		<form action="{{path('post_session')}}" method="post" class="custom" id="create_session">
 		<div id="tutorList" class="large-8 columns tutor-list" ng-controller="TutorListCtrl">
-			<form action="{{path('post_session')}}" method="post" class="custom" id="create_session">
 			<div tutor-list></div>
-			</form>
 		</div>
+		</form>
 
 		<div class="large-2 columns tutor-points">
 			<div ="pcontainer">

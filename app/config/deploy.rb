@@ -1,8 +1,8 @@
-#task :production do
-#  set :deploy_to,    "/var/rayku.com"
-#  set :deploy_via, :remote_cache
-#  set :clear_controllers, true
-#end
+task :production do
+  set :deploy_to,    "/var/rayku.com"
+  set :deploy_via, :remote_cache
+  set :clear_controllers, true
+end
 
 task :beta do
   set :deploy_to,    "/var/beta.rayku.com"

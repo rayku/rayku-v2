@@ -3,6 +3,7 @@
 namespace Rayku\ApiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -12,6 +13,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="rayku_course")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
+ * @Serializer\AccessorOrder("alphabetical")
+ * @Serializer\ExclusionPolicy("all")
  * @UniqueEntity(fields={"slug"}, message="This course unique identifier has already been taken.  Course slugs must be unique")
  */
 class Course
@@ -30,6 +33,7 @@ class Course
      *
      * @Assert\NotBlank
      * @ORM\Column(name="slug", type="string", length=255, nullable=false)
+     * @Serializer\Expose
      */
     private $slug = '';
     
@@ -75,7 +79,7 @@ class Course
     private $students;
     
     /**
-     * @ORM\ManyToMany(targetEntity="\Rayku\ApiBundle\Entity\Session", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="\Rayku\ApiBundle\Entity\Session", cascade={"persist"}, inversedBy="courses")
      * @ORM\JoinTable(name="rayku_couse_session",
      *     joinColumns={@ORM\JoinColumn(name="course_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="session_id", referencedColumnName="id")}

@@ -75,11 +75,12 @@ class Course
     private $students;
     
     /**
-     * @ORM\ManyToMany(targetEntity="\Rayku\ApiBundle\Entity\Session")
+     * @ORM\ManyToMany(targetEntity="\Rayku\ApiBundle\Entity\Session", cascade={"persist"})
      * @ORM\JoinTable(name="rayku_couse_session",
      *     joinColumns={@ORM\JoinColumn(name="course_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="session_id", referencedColumnName="id")}
      * )
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $sessions;
     

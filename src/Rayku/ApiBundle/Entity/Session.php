@@ -144,7 +144,7 @@ class Session
     
     public function __toString()
     {
-    	return $this->getId().' '.$this->getCreatedAt()->format('Y-m-d H:i:s');
+    	return $this->getCreatedAt()->format('Y-m-d H:i:s');
     }
     
     /**

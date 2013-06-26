@@ -149,7 +149,6 @@ class PageController extends Controller
 			'course' => $course,
 			'user' => $this->getUser()
 		);
-		
 	}
 
 	/**

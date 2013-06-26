@@ -7,8 +7,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 use Rayku\ApiBundle\Entity\Session;
+use Rayku\ApiBundle\Entity\Course;
 use Rayku\ApiBundle\Entity\SessionTutors;
 use Rayku\ApiBundle\Form\SessionType;
 use Rayku\ApiBundle\Form\RateSessionType;
@@ -245,6 +247,44 @@ class SessionController extends Controller
 			return array('success' => true);
 		}
 		return $form;
+	}
+
+	/**
+	 * @View()
+	 * @Secure(roles="ROLE_INSTRUCTOR")
+	 * @ApiDoc(
+	 *   description="Create a new broadcast session",
+	 *   statusCodes={
+	 *     200="Returned when successful",
+	 *     403="Returned when unauthorized"
+	 *   }
+	 * )
+	 * @param \Rayku\ApiBundle\Entity\Course $course
+	 */
+	public function postSessionBroadcastAction(Course $course)
+	{
+		$em = $this->getDoctrine()->getManager();
+		
+		$pastSessions = $course->getSessions();
+		foreach($pastSessions as $pastSession){
+			if($pastSession->getEndTime() == NULL){
+				$pastSession->setEndTime(new \DateTime('now'));
+				$em->persist($pastSession);
+			}
+		}
+		
+		$session = new Session();
+		$session->setStudent($this->getUser());
+		$session->setSelectedTutor($this->getUser()->getTutor());
+		$session->setQuestion('Broadcast Session');
+		$course->addSession($session);
+
+		$em->persist($session);
+		$em->flush();
+		return array(
+			'success' => true, 
+			'redirect' => $this->container->getParameter('whiteboard_url').'/room/'.$session->getId().'/broadcast/12345'
+		);
 	}
 	
 	/**

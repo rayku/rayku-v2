@@ -32,7 +32,13 @@ app.controller('TutorListCtrl', function ($scope, $rootScope, $http) {
     //Sessions List Controller
     $scope.SessionListTemplate = '/bundles/raykupage/js/app/views/SessionsView.html';
 
-    function refreshSessions(){
+    $http.get(Routing.generate('get_sessions', {'activeRequests':0})).success(function (data){
+        $scope.sessions = data;
+      }).error(function (data) {
+        $scope.error = data || "Request failed";
+    });
+
+    $scope.refreshSessions = function () {
       $http.get(Routing.generate('get_sessions', {'activeRequests':0})).success(function (data){
         $scope.sessions = data;
       }).error(function (data) {
@@ -44,6 +50,7 @@ app.controller('TutorListCtrl', function ($scope, $rootScope, $http) {
     $scope.update = function (session) {
       $http.post(Routing.generate('post_sessions', {'session':session.id, 'name':session.tutor_session_name})).success(function(data){
         //done
+        refreshSessions();
       }).error(function (data) {
         $scope.error = data || "Request failed";
       });
@@ -53,8 +60,6 @@ app.controller('TutorListCtrl', function ($scope, $rootScope, $http) {
     $scope.onLoad = function() {
         $scope.loaded = true;
     }
-
-    refreshSessions();
 }).controller('UserDetailCtrl', function ($scope, $rootScope, $http){
     //Users Details List Controller
   	$scope.UserDetailTemplate = '/bundles/raykupage/js/app/views/ProfileView.html';
@@ -79,3 +84,15 @@ app.controller('TutorListCtrl', function ($scope, $rootScope, $http) {
     	});
     }
 });  
+
+
+app.directive('saveSessionName', [function (){
+  return {
+    restrict: 'EACM',
+    replace: false,
+    template: '<a href=# class="edit_session_name">Edit</a>',
+    link: function (scope, elem, attrs) {
+      
+    }
+  }
+}]);

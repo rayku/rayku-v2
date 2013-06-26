@@ -105,13 +105,12 @@ NOTIFICATIONS ALERT
                     <ul class="submenu-item">
                         <li><a class="dashboard" href=#><span class="raphael">L</span>Home</a></li>
                         <li><a class="setting" href=#><span class="raphael">`</span>Settings</a></li>
-                        <li><a class="myprofileedit" href=#><span class="raphael">`</span>Edit Profile</a></li>
-                        <li><a class="tutor" href=# data-reveal-id="myTutorModal"><span class="raphael">`</span>Become a Tutor</a></li>
-                        <li><a class="tutor" href=# data-reveal-id="tutorLoadModal"><span class="raphael">`</span>Tutor Load</a></li>
+                        <li><a class="myprofileedit" href=#><span class="raphael">></span>Edit Profile</a></li>
+                        <li><a class="tutor" href=# data-reveal-id="myTutorModal"><span class="raphael">u</span>Become a Tutor</a></li>
 
-						<li><a class="tutor" href=# data-reveal-id="tutorLoadModal"><span class="raphael">`</span>Broadcast Session</a></li>
-
-                        <li><a class="logout" href="{{ path('fos_user_security_logout') }}"><span class="raphael">v</span>Logout</a></li>
+						<li><a class="tutor" href=# data-reveal-id="tutorBroadcastModal"><span class="raphael">Ü</span>Broadcast Session</a></li>
+						<li class="divider"></li>
+                        <li><a class="logout" href="{{ path('fos_user_security_logout') }}"><span class="raphael">W</span>Logout</a></li>
                     </ul>
                 </div>
 	        </nav>
@@ -155,6 +154,7 @@ NOTIFICATIONS ALERT
 			</div>
 			<div class="row" id="content">
 				<input type="text" placeholder="What is your question?">
+				<!--
 				<form class="custom">
 				<div class="large-3 columns school">
                     
@@ -175,7 +175,7 @@ NOTIFICATIONS ALERT
                   </div>
 
                   <div class="large-3 columns institution" id="highschool">
-                    <!--
+                    
                     <select name="highschool" class="medium" disabled>
                         <option value="Choose" name="choose" id="choose">Choose Grade</option>
                         <option value="grade 1">Grade 1</option>
@@ -191,7 +191,7 @@ NOTIFICATIONS ALERT
                         <option value="grade 11">Grade 11</option>
                         <option value="grade 12">Grade 12</option>
                     </select>
-                    //-->
+                    
                   </div>
                   <div class="large-3 columns institution" id="university">
                    
@@ -222,6 +222,7 @@ NOTIFICATIONS ALERT
                    
                   </div>
 				</form>
+				//-->
 			<!------------------------------
 			TUTOR LIST TABLE
 			-------------------------------->
@@ -251,19 +252,19 @@ NOTIFICATIONS ALERT
 			<!-----------------------------
 			TUTOR STATUS
 			-------------------------------->
-			<!--
-				<div class="large-4 columns tutor-status" id ="sessions-list" ng-controller="UserDetailCtrl">
+			
+				<div class="large-5 columns tutor-status" id ="sessions-list" ng-controller="UserDetailCtrl">
 					<h3>Tutor Status</h3> 
 					<div ng-include="TutorStatusTemplate"></div>
 				</div>
-			-->
+			
 			{% endif %}
 
 			<!------------------------------
 			PAST SESSIONS LIST
 			---------------------------------->
 				<div class="large-5 columns" id ="sessions-list" ng-controller="SessionListCtrl">
-					<h3>Sessions</h3> 
+					<h3>Sessions<a href=# class="raphael refreshSession" ng-click="refreshSession()">0</a></h3> 
 					<div ng-include="SessionListTemplate"></div>
 				</div>
 			</div>
@@ -371,18 +372,17 @@ NOTIFICATIONS ALERT
 	<a class="close-reveal-modal">×</a>
 </div>
 
-<div id="tutorLoadModal" class="reveal-modal large">
+<div id="tutorBroadcastModal" class="reveal-modal small">
 	<div class="row header">
 		<div class="large-12 columns">
-			<h2><img src="{{ asset('bundles/raykupage/images/ajax-loader.gif') }}" /><span>Please Wait, Notifying Tutors...</span></h2>
+			<h2><span>Name this session</span></h2>
 		</div>
 	</div>
 	<div class="row body">
 		<div class="large-12 columns">
-			<p>Approximate waiting time 5 minutes... <a href=#>Notify me when a tutor connects</a></p>
 			<form>
-				<textarea placeholder="Describe your question in detail"></textarea>
-				<input type="submit" class="bbutton">
+				<input type="text" placeholder="Session Name" name="session_name_input">
+				<input type="submit" value="Start Session" class="bbutton" name="session_name_submit">
 			</form>
 		</div>
 	</div>

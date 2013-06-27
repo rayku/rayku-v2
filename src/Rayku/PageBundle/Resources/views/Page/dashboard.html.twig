@@ -252,19 +252,19 @@ NOTIFICATIONS ALERT
 			<!-----------------------------
 			TUTOR STATUS
 			-------------------------------->
-			
+			<!--
 				<div class="large-5 columns tutor-status" id ="sessions-list" ng-controller="UserDetailCtrl">
 					<h3>Tutor Status</h3> 
 					<div ng-include="TutorStatusTemplate"></div>
 				</div>
-			
+			-->
 			{% endif %}
 
 			<!------------------------------
 			PAST SESSIONS LIST
 			---------------------------------->
 				<div class="large-5 columns" id ="sessions-list" ng-controller="SessionListCtrl">
-					<h3>Sessions<a href=# class="raphael refreshSession" ng-click="refreshSession()">0</a></h3> 
+					<h3>Sessions<a href=# class="raphael refreshSession" ng-click="refreshSessions()">0</a></h3> 
 					<div ng-include="SessionListTemplate"></div>
 				</div>
 			</div>

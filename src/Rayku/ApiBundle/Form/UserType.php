@@ -16,10 +16,9 @@ class UserType extends AbstractType
             ->add('last_name')
             ->add('bio')
             ->add('file')
-            ->add('userschool', new UserSchoolType(), array(
-            	'data_class' => 'Rayku\ApiBundle\Entity\User',
-            	'virtual' => true
-           ));
+            ->add('school')
+            ->add('grade')
+            ->add('degree');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

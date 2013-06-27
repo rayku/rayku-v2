@@ -16,7 +16,11 @@
     <script src="{{ asset('bundles/raykupage/js/vendor/custom.modernizr.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/raykupage/js/script.js') }}"></script>
 	
+	<!--REQUIRE-->
+	<script src="{{ asset('bundles/raykupage/js/require.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/main.js') }}"></script>
 	<script src="{{ asset('bundles/raykupage/js/app/controller.js') }}"></script>
+
 	<script src="{{ asset('bundles/raykupage/js/ssmgmnt.js') }}"></script>
 
 	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
@@ -79,7 +83,7 @@
 	    <div class="inside">
 	        <a href="{{ path('rayku_page_dashboard') }}" id="logo"><span class="beta">beta</span><img src="{{ asset('bundles/raykupage/images/logo.png') }}" alt="" /></a>
 	        <nav>
-	            <a href=# class="notification" data-reveal-id="connectNotifModal"><span class="raphael">M</span><span class="notif-count">0</span></a>
+	            <a href=# class="notification" data-reveal-id="connectNotifModal"><span class="raphael">[</span><span class="notif-count">0</span></a>
 	            
 	            <a href=# class="logged-in-as"><span class="liau">Logged in as {{user.username}}</span> <div class="arrow-down"></div></a> 
 	            <div class="submenu" id="submenu">
@@ -90,6 +94,9 @@
                         <li><a class="myprofileedit" href=#><span class="raphael">`</span>Edit Profile</a></li>
                         <li><a class="tutor" href=# data-reveal-id="myTutorModal"><span class="raphael">`</span>Become a Tutor</a></li>
                         <li><a class="tutor" href=# data-reveal-id="tutorLoadModal"><span class="raphael">`</span>Tutor Load</a></li>
+
+						<li><a class="tutor" href=# data-reveal-id="tutorLoadModal"><span class="raphael">`</span>Broadcast Session</a></li>
+
                         <li><a class="logout" href="{{ path('fos_user_security_logout') }}"><span class="raphael">v</span>Logout</a></li>
                     </ul>
                 </div>
@@ -97,35 +104,27 @@
 	    </div>
 	</header>
 	<div class="row" id="main-content">
+		{% if user.id is null %}
+			{% include 'RaykuPageBundle:Page:registration_modal.html.twig' with {'form': registrationform} %}
+		{% endif %}
 		<!------------------------------
 		SIDE NAVIGATION
 		-------------------------------->
 		<div class="large-4 columns" id="sidebar" ng-controller="UserDetailCtrl">
 			<div ng-include="UsernameTemplate"></div>
-			<h3 class="userstatus"><span class="status" ng-cloak>
-				<div ng-show="user.is_tutor" ng-cloak>Tutor</div>
-				<div ng-hide="user.is_tutor" ng-cloak>Student</div>
-			</span>
-			<span class="online">&nbsp;</span></h3>
-			<ul class="userinfo" ng-cloak>
-				{% verbatim %}
+			<h3 class="userstatus"><span class="status">{% if user.isTutor %}Tutor{% endif %}{% if user.isTutor == false %}Student{% endif %}</span><span class="online">&nbsp;</span></h3>
+			<ul class="userinfo">
 				<li><span class="degree">{{ user.degree }}</span></li>
 				<li><span class="grade">{{ user.grade }}</span></li>
 				<li><span class="school">From, {{ user.school }}</span></li>
 				<li class="about"><span class="bio">{{ user.bio }}</span></li>
-				{% endverbatim %}
 			</ul>
 			
 			<ul class="sidebar-nav">
-				
 				<li><a class="dashboard active" href=#><span class="raphael">S</span> Dashboard</a></li>
-				
 				<li><a class="myprofileedit" href=#><span class="raphael">`</span> Settings</a></li>
-				
 				<li><a class="buyPoints" href=# data-reveal-id="buyPointsModal"><span class="raphael">#</span> Buy Points</a></li>
-				
 				<li><a class="userWhiteboard" href=#><span class="raphael">?</span> Practice</a></li>
-				
 				<li class="backtoWhiteboard"><a class="backWhiteboard" href=#><span class="raphael">?</span> Back to Whiteboard</a></li>
 				<li class="divider backtoWhiteboard"></li>
 			</ul>

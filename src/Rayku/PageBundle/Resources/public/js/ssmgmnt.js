@@ -1,5 +1,4 @@
 var session = null;
-console.log(session);
 
 $(document).ready(function(){
 	//Create a session

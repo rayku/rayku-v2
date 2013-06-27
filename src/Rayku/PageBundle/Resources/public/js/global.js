@@ -17,7 +17,7 @@ $(function(){
     //Forgot password on login modal
     $('a.forgot-password').click(function(){
         if($('.login-button').hasClass('disabled')){
-            //$('.forgot-email-form').slideUp(200);
+            $('.forgot-email-form').slideUp(200);
             $('.login-modal-divider1').hide();
             $('.login-button').removeClass('disabled');
             $('.login-button').attr('disabled', false);

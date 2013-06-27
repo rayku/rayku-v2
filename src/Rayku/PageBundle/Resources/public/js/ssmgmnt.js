@@ -42,3 +42,18 @@ $(document).ready(function(){
     	}
     });
 });
+
+$(function () {
+    $('input[name="session_name_submit"]').click(function(){
+        var session_name = $('input[name="session_name_input"]').val();
+        console.log(session_name);
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            success: function (data){
+                console.log($(this).val());
+            }
+        });
+    });
+});

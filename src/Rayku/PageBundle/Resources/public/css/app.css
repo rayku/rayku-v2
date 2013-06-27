@@ -168,7 +168,7 @@ header nav a{
 header nav a.logged-in-as {
     background: rgba(221, 221, 221, 1);
     border:1px solid #dcdcdc;
-    
+    border-radius: 3px;
     display:inline-block;
     color:#666666;
     font-family:arial;
@@ -290,10 +290,10 @@ ul.submenu-item{
 	background: rgba(255, 255, 255, 1);
 	list-style-type: none;
 	box-shadow: 0 0 8px rgba(10, 10, 10, 0.2);
-	padding:5px 0px;
+	padding:3px 0px;
 	border-radius: 3px;
 	border-radius: 3px;
-	border:3px solid rgba(221, 221, 221, 1);
+	border:1px solid rgba(221, 221, 221, 1);
 }
 
 ul.submenu-item li{
@@ -301,13 +301,13 @@ ul.submenu-item li{
 	margin:0;
 }
 ul.submenu-item li:hover{
-	background: rgba(221, 221, 221, 1);
+	background: rgba(221, 221, 221, 0.5);
 }
 ul.submenu-item li.divider{
 	padding:0;
 	margin: 0;
-	border-bottom: 1px solid rgba(221, 221, 221, 0.2);
-	border-top: 1px solid rgba(0, 0, 0, 1);
+	border-bottom: 1px solid rgba(221, 221, 221, 0.3);
+	border-top: 1px solid rgba(200, 200, 200, 0.5);
 }
 ul.submenu-item li a{
 	font-family:Arial;
@@ -546,7 +546,7 @@ ul.submenu-item li a:hover {
 	border:1px solid rgba(221, 221, 221, 0.7);
 	border-bottom: none;	
 }
-.tutor-list h3 a{
+.tutor-list h3 a, #sessions-list h3 a{
 	float: right;
 	font-weight: bold;
 	margin-top: 1px;
@@ -1287,18 +1287,18 @@ h4 a.myprofileedit{
 	position: relative;
 	top:12px;
 }
-#tutorLoadModal .header h2{
+#tutorBroadcastModal .header h2{
 	font-weight: 500;
 	margin-top: 0px;
 	color: #1a6aaf;
-	font-size: 1.952em;
+	font-size: 1.5em;
 	padding-top: 10px;
 }
-#tutorLoadModal .header h2 span{
+#tutorBroadcastModal .header h2 span{
 	position: relative;
-	top:-17px;
+	top:3px;
 }
-#tutorLoadModal .header{
+#tutorBroadcastModal .header{
 	position: absolute;
 	left:0;
 	top:0;
@@ -1309,10 +1309,10 @@ h4 a.myprofileedit{
 	margin-bottom: 15px;
 	border-bottom: 1px solid rgba(221, 221, 221, 0.5);
 }
-#tutorLoadModal .body{
+#tutorBroadcastModal .body{
 	margin-top: 50px;
 }
-#tutorLoadModal textarea{
+#tutorBroadcastModal textarea{
 	width: 100%;
 	height: 120px;
 	margin-top: 10px;

@@ -72,7 +72,7 @@
             	<a href="{{ path('rayku_page_homepage') }}" id="logo"><img src="{{asset('bundles/raykupage/images/logo.png')}}" alt="" /></a>
 	            <nav>
 	                <a href="#" class="ask-login-button" data-reveal-id="loginModal">Login</a>
-	                <a href="{% block signuplink %}{{ path('fos_user_registration_register') }}{% endblock %}" class="signup-user">Signup</a>
+	                <a href="/register" class="signup-user">Signup</a>
 	                <a href="{{ path('rayku_page_become_a_tutor') }}">Become a Tutor</a>
 	            </nav>
 	        {% endif %}

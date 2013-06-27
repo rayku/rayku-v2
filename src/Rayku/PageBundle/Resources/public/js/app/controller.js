@@ -11,8 +11,7 @@ app.controller('TutorListCtrl', function ($scope, $rootScope, $http) {
       this.find('input[type="checkbox"]').attr("checked", "checked");
     });
 }).controller('CourseViewCtrl',function ($scope, $http){
-	
-
+	// TBD
 }).controller('SessionListCtrl',function ($scope, $http) {
     //Sessions List Controller
   	$scope.SessionListTemplate = '/bundles/raykupage/js/app/views/SessionsView.html';

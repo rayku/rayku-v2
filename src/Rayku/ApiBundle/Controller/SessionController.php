@@ -265,6 +265,10 @@ class SessionController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 		
+		if($course->getInstructor() != $this->getUser()){
+			throw new AccessDeniedException();
+		}
+		
 		$pastSessions = $course->getSessions();
 		foreach($pastSessions as $pastSession){
 			if($pastSession->getEndTime() == NULL){

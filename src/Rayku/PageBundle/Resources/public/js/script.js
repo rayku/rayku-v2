@@ -57,7 +57,6 @@ $(document).ready(function(){
         $('.container').delay(500).fadeIn('fast');
         $('.content-header h3').html('<span class="raphael">S</span>Dashboard');
         $('#sidebar ul.sidebar-nav li').siblings().removeClass('active');
-        $('#sidebar ul.sidebar-nav li a.dashboard').parent().addClass('active');
     });
     //PROFILE AREA
     $('.myprofile').click(function(){

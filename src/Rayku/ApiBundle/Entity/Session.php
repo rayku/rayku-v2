@@ -154,6 +154,22 @@ class Session
      * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
     private $updatedAt;
+
+    /**
+     * @var string
+     *
+     * @Serializer\Groups({"session", "session.details"})
+     * @ORM\Column(name="student_session_name", type="string", length=1000, nullable=true)
+     */
+    private $student_session_name = 'No Name';
+
+    /**
+     * @var string
+     *
+     * @Serializer\Groups({"session", "session.details"})
+     * @ORM\Column(name="tutor_session_name", type="string", length=1000, nullable=true)
+     */
+    private $tutor_session_name = 'No Name';
     
     public function __toString()
     {
@@ -585,6 +601,52 @@ class Session
     public function getSelectedTutor()
     {
         return $this->selectedTutor;
+    }
+
+    /**
+     * Set student_session_name
+     *
+     * @param string $studentSessionName
+     * @return Session
+     */
+    public function setStudentSessionName($studentSessionName)
+    {
+        $this->student_session_name = $studentSessionName;
+    
+        return $this;
+    }
+
+    /**
+     * Get student_session_name
+     *
+     * @return string 
+     */
+    public function getStudentSessionName()
+    {
+        return $this->student_session_name;
+    }
+
+    /**
+     * Set tutor_session_name
+     *
+     * @param string $tutorSessionName
+     * @return Session
+     */
+    public function setTutorSessionName($tutorSessionName)
+    {
+        $this->tutor_session_name = $tutorSessionName;
+    
+        return $this;
+    }
+
+    /**
+     * Get tutor_session_name
+     *
+     * @return string 
+     */
+    public function getTutorSessionName()
+    {
+        return $this->tutor_session_name;
     }
 
     /**

@@ -52,6 +52,41 @@ class SessionController extends Controller
 		
 		return $sessions;
 	}
+	/**
+	 * @View()
+     * @ApiDoc(
+     *   statusCodes={
+     *     200="Returned when successful",
+     *     400="Returned when there is an error"
+     *   },
+     *   filters={
+	 *     {"name"="session_name", "dataType"="string"}
+	 *   },
+     *   description="Update session record"
+     * )
+     *  @param \Rayku\ApiBundle\Entity\Session $session
+     */
+    public function postSessionsAction(Session $session){
+    	$sessionName = $this->getRequest()->get('name');
+
+    	$valid = false;
+    	if($this->getUser()->getTutor() == $session->getSelectedTutor()){
+    		$session->setTutorSessionName($sessionName);
+    		$valid = true;
+    	}
+    	if($this->getUser() == $session->getStudent()){
+    		$session->setStudentSessionName($sessionName);
+    		$valid = true;
+    	}
+    	if(!$valid){
+    		throw new AccessDeniedException();
+    	}else{
+	    	$em = $this->getDoctrine()->getManager();
+			$em->persist($session);
+			$em->flush();	
+	        return array('success' => true);
+    	}
+    }
 	
 	/**
 	 * @ApiDoc(

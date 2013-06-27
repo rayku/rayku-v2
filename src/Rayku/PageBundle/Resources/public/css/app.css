@@ -507,6 +507,12 @@ ul.submenu-item li a:hover {
 #content {
 	margin-top: 65px;
 }
+#categories{
+	background: rgba(255, 255, 255, 1);
+	padding: 38px 0;
+	padding-top: 10px;
+	border:1px solid rgba(221, 221, 221, 0.7);
+}
 #tutorList{
 
 }
@@ -793,6 +799,13 @@ h4 a.myprofileedit{
 #profile .editprofileinfo{ 
 	padding-bottom: 15px;
 	display: none;
+}
+#profile .editprofileinfo input[name="file"]{
+	margin-left: 5px;
+	margin-right: 5px;
+}
+#profile .editprofileinfo .bbutton{
+	margin-left: 15px;
 }
 #profile .profilesettings{
 	display: none;

@@ -91,11 +91,28 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
   	$scope.UserDetailTemplate = '/bundles/raykupage/js/app/views/ProfileView.html';
     $scope.UsernameTemplate = '/bundles/raykupage/js/app/views/UsernameView.html';
     $scope.TutorStatusTemplate = '/bundles/raykupage/js/app/views/TutorStatusView.html';
+    $scope.SidebarDetailTemplate = '/bundles/raykupage/js/app/views/SidebarDetailView.html';
 
   	$http.get(Routing.generate('get_user', {'entity':userId})).success(function(data){
   		data.password = '';
   		$rootScope.user = data;
   	});
+
+    $scope.refreshUser = function () {
+      $http.get(Routing.generate('get_user', {'entity':userId})).success(function(data){
+        data.password = '';
+        $templateCache.remove('/bundles/raykupage/js/app/views/SidebarDetailView.html');
+        $templateCache.remove('/bundles/raykupage/js/app/views/UsernameView.html');
+        $scope.SidebarDetailTemplate = '';
+        $scope.UsernameTemplate = '';
+        $rootScope.user = data;
+
+        $timeout(function () {
+          $scope.SidebarDetailTemplate = '/bundles/raykupage/js/app/views/SidebarDetailView.html';
+          $scope.UsernameTemplate = '/bundles/raykupage/js/app/views/UsernameView.html';
+        }, 1000);
+      });
+    }
   	
     $scope.update = function(content, completed) {
     	// Don't need to do anything

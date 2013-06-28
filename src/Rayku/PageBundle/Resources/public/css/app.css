@@ -1378,6 +1378,48 @@ h4 a.myprofileedit{
 	resize:none;
 }
 
+#getStartedModal .header h2{
+	font-weight: 500;
+	margin-top: 0px;
+	color: #1a6aaf;
+	font-size: 1.5em;
+	padding-top: 10px;
+}
+#getStartedModal .header h2 span{
+	position: relative;
+	top:3px;
+}
+#getStartedModal .header{
+	position: absolute;
+	left:0;
+	top:0;
+	height: 60px;
+	background: rgba(221, 221, 221, 0.5);
+	width: 100%;
+	text-align: center;
+	margin-bottom: 15px;
+	border-bottom: 1px solid rgba(221, 221, 221, 0.5);
+}
+#getStartedModal .body{
+	margin-top: 50px;
+	margin-bottom: -25px;
+}
+#getStartedModal .body ul{
+	list-style-type: none;
+}
+#getStartedModal textarea{
+	width: 100%;
+	height: 60px;
+	margin-top: 10px;
+	resize:none;
+}
+#getStartedModal input[name="file"]{
+	margin-left: 5px;
+}
+#getStartedModal .bbutton{
+	position: relative;
+	left:42%;
+}
 .ttemplate, .ttemplate form{
 	background: none;
 }
@@ -1385,8 +1427,8 @@ h4 a.myprofileedit{
 .sidebar-small-screen{
 	margin-left: 0;
 }
-.sidebar-small-screen-remove{
-
+#charNum{
+	font-weight: bold;
 }
 @media only screen and (min-width : 320px) and (max-width : 1024px) {
 /* Styles */

@@ -1,3 +1,12 @@
+var pathname = window.location.pathname;
+var hash = window.location.hash;
+var locale = pathname.split('/');
+var abs = hash.split('/');
+
+console.log(location);
+console.log(hash);
+console.log(abs);
+
 $(document).ready(function(){
 	//Show dropdown navigation
     $('a.logged-in-as').on('mouseenter',function(){
@@ -37,7 +46,7 @@ $(document).ready(function(){
     });
 
     //checkbox toggle tutor selection
-    $('.tutorTable tr td').on('click', 
+    $('.tutorTable tr').on('click', 
         function(){
             console.log('clicked');
     		var checkbox = $(this).find('input[type="checkbox"]');
@@ -95,6 +104,11 @@ $(document).ready(function(){
         $('#sidebar').fadeOut('fast'); //fadeout the sidebar
         $('.slide-out').fadeIn('fast');//fadein the slide-out button
     });
+
+    $('.startedSave').click(function (event) {
+        $('#getStartedModal').foundation('reveal', 'close');
+        event.preventDefault();
+    })
 });
 
 // Used to show/hide sidebar depending on screen size
@@ -112,4 +126,13 @@ $(window).resize(function () {
         $('.slide-out').fadeIn('fast');
     }
 });
+
+function countChar(val) {
+    var len = val.value.length;
+    if (len >= 120) {
+        val.value = val.value.substring(0, 120);
+    } else {
+        $('#charNum').text(120 - len + ' Characters Left');
+    }
+}
 

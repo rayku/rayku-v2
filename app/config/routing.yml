@@ -50,3 +50,23 @@ _sonata_admin:
     type: sonata_admin
     prefix: /admin
 
+# Angular routes for the purpose of exporting them to fos js router
+angular_dashboard:
+    pattern: /#/dashboard
+    options:
+        expose: true
+
+angular_profile:
+    pattern: /#/profile
+    options:
+        expose: true
+
+angular_settings:
+    pattern: /#/settings
+    options:
+        expose: true
+
+angular_payout:
+    pattern: /#/payout
+    options:
+        expose: true

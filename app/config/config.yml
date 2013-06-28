@@ -182,3 +182,6 @@ fos_message:
         type: rayku.type.new_thread_form
     reply_form:
         type: rayku.type.reply_thread_form
+        
+fos_js_routing:
+    routes_to_expose: [ fos_user_security_logout ]

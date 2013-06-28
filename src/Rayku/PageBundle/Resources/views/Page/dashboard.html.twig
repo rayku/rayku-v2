@@ -3,7 +3,12 @@
 {% block content %}
 	
 	<div class="row content-header">
+		<div class="slide-out">
+			<div class="arrow-right">
+			</div>
+		</div>
 		<h3><span class="raphael">S</span>Dashboard</h3>
+		
 	</div>
 	<div class="row" id="content">
 		<input type="text" placeholder="What is your question?">
@@ -79,7 +84,7 @@
 	<!------------------------------
 	TUTOR LIST TABLE
 	-------------------------------->
-		<div id="tutorList" class="large-7 columns tutor-list" ng-controller="TutorListCtrl">
+		<div id="tutorList" class="large-8 columns tutor-list" ng-controller="TutorListCtrl">
 			<h3>Online Tutors<a href="#" class="raphael refreshTutors" ng-click="refreshTutors()">0</a></h3>
 			<form action="{{path('post_session')}}" method="post" class="custom" id="create_session">
 			<div ng-include="TutorListTemplate"></div>
@@ -113,7 +118,7 @@
 	<!------------------------------
 	PAST SESSIONS LIST
 	---------------------------------->
-		<div class="large-5 columns" id ="sessions-list" ng-controller="SessionListCtrl">
+		<div class="large-4 columns" id ="sessions-list" ng-controller="SessionListCtrl">
 			<h3>Sessions<a href=# class="raphael refreshSession" ng-click="refreshSessions()">0</a></h3>
 			<div ng-include="SessionListTemplate"></div>
 		</div>

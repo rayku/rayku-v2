@@ -168,7 +168,7 @@ header nav a{
 header nav a.logged-in-as {
     background: rgba(221, 221, 221, 1);
     border:1px solid #dcdcdc;
-    border-radius: 3px;
+    border-radius: 2px;
     display:inline-block;
     color:#666666;
     font-family:arial;
@@ -219,6 +219,51 @@ header nav a.logged-in-as:active {
 	position: relative;
 	margin-top: -9px;
 	margin-left: 138px;
+}
+.slide-out{
+	display: none;
+	position: absolute;
+	top:12px;
+	left: -2px;
+	margin-bottom: -10px;
+	width:20px;
+	padding:5px 5px;
+	padding-left: 8px; 
+	background: rgba(227, 227, 227, 1);
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+	box-shadow: 0 0 5px rgba(121, 121, 121, 1);
+}
+.slide-in{
+	display: none;
+	position: absolute;
+	top : 65px;
+	left:22.5%;
+	width:20px;
+	padding:5px 5px; 
+	padding-left: 8px;
+	background: rgba(227, 227, 227, 1);
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+	box-shadow: 0 0 5px rgba(121, 121, 121, 1);
+	z-index: 100;
+}
+
+.arrow-right {
+	width: 0; 
+	height: 0; 
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	
+	border-left: 5px solid rgba(121, 121, 121, 1);
+}
+.arrow-left {
+	width: 0; 
+	height: 0; 
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent; 
+	
+	border-right:5px solid rgba(121, 121, 121, 1); 
 }
 header nav a.notification{
 	position: relative;
@@ -500,7 +545,8 @@ ul.submenu-item li a:hover {
 }
 #content-body .content-header h3{
 	color:rgba(39, 39, 39, 1);
-	padding: 0px 25px;
+	padding: 5px 25px;
+	padding-bottom: 0px;
 	font-weight: normal;
 	font-size: 1.4em;
 }
@@ -1334,4 +1380,111 @@ h4 a.myprofileedit{
 
 .ttemplate, .ttemplate form{
 	background: none;
+}
+
+.sidebar-small-screen{
+	margin-left: 0;
+}
+.sidebar-small-screen-remove{
+
+}
+@media only screen and (min-width : 320px) and (max-width : 1024px) {
+/* Styles */
+	#sidebar{
+		display: none;
+	}
+
+	#content-body{
+		width: 100%;
+	}
+	#slide-in{
+		display: none;
+	}
+	.slide-out{
+		display: block;
+	}
+}
+
+@media only screen and (min-width : 1025px) {
+/* Styles */
+	#sidebar{
+		position: fixed;
+		top:50px;
+		left:0;
+		min-height: 100%; 
+	   	height:auto !important; 
+		width: 18%;
+		background: rgba(39, 39, 39, 1);
+		box-shadow: 3px 0 0px rgba(10, 10, 10, 0.2);
+		margin: 0;
+		padding: 0;
+		z-index: 2;
+		overflow: hidden;
+	}
+
+	#content-body{
+		position: absolute;
+		top:50px;
+		right:0;
+		min-height: 100%; 
+	   	height:auto !important; 
+		width:82%;
+		background-image: url('http://www.rayku.local/bundles/raykupage/images/bg.png');
+		padding: 0px 35px;
+		padding-bottom: 15px;
+		z-index: 1;
+		overflow:auto;	
+		overflow-x:hidden; 
+	}
+	#slide-in{
+		display: none;
+	}
+	.slide-out{
+		display: none;
+	}
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+/* Styles */
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+/* Styles */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+/* Styles */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+/* Styles */
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+/* Styles */
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+/* Styles */
+}
+
+/* Desktops and laptops ----------- */
+@media only screen and (min-width : 1224px) {
+/* Styles */
+}
+
+/* Large screens ----------- */
+@media only screen and (min-width : 1824px) {
+/* Styles */
+}
+
+/* iPhone 4 ----------- */
+@media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
 }

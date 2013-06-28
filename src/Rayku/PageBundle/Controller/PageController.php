@@ -46,7 +46,12 @@ class PageController extends Controller
 	public function indexAction()
 	{
 		if($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')){
-			return $this->redirect($this->generateUrl('rayku_page_dashboard'));
+			return $this->render(
+				'RaykuPageBundle:Page:secure.html.twig',
+				array(
+					'user' => $this->getUser()
+				)
+			);
 		}
 		return array('form' => $this->container->get('fos_user.registration.form'));
 	}	

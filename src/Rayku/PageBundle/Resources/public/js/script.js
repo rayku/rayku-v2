@@ -16,7 +16,7 @@ $(document).ready(function(){
     	$('.content-header h3').html('<span class="raphael">'+ icon +'</span>' + navitem);
     });
 
-
+/*
     $('a.setting').click(function (e) {
         e.preventDefault();
         console.log('Clicked');
@@ -30,6 +30,7 @@ $(document).ready(function(){
         $('#content').fadeOut('fast');
         $('#userprofile').delay(500).fadeIn('fast');
     });
+*/
     $('.dashboard').click(function(){
         $('#userprofile').fadeOut('fast');
         $('#content').delay(500).fadeIn('fast');
@@ -77,5 +78,38 @@ $(document).ready(function(){
         $('.profilesettings').siblings().fadeOut('fast');
         $('.profilesettings').delay(500).fadeIn(500);
     });
+
+
+    //To show sidebar for small screen
+    $('.slide-out').click(function () {
+        $(this).fadeOut('fast'); //fadeout slideout button
+        //show the sidebar
+        $('#sidebar').addClass('sidebar-small-screen').fadeIn('fast');
+        //show the slide in button
+        $('.slide-in').fadeIn('fast');
+    });
+
+    //To hide sidebar for small screen
+    $('.slide-in').click(function () {
+        $(this).fadeOut('fast');//fade this button out
+        $('#sidebar').fadeOut('fast'); //fadeout the sidebar
+        $('.slide-out').fadeIn('fast');//fadein the slide-out button
+    });
+});
+
+// Used to show/hide sidebar depending on screen size
+$(window).resize(function () {
+    //determine if document width is greater than 1025
+    if($(document).width() > 1025){
+        $('#sidebar').fadeIn('fast');
+        $('#content-body').css('width', '82%');
+        $('.slide-out').fadeOut('fast');
+        $('.slide-in').fadeOut('fast');
+    } 
+    else if($(document).width() < 1025){
+        $('#sidebar').fadeOut('fast');
+        $('#content-body').css('width', '100%');
+        $('.slide-out').fadeIn('fast');
+    }
 });
 

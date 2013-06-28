@@ -1,9 +1,19 @@
-var app = angular.module('raykuApp', ['ngUpload', 'LoadingIndicator']);
+var app = angular.module('raykuApp', ['ngUpload', 'LoadingIndicator']).
+	config(['$routeProvider', function($routeProvider){
+		$routeProvider.
+			when('/course/:name/view', {templateUrl: '/bundles/raykupage/partials/course-view.html', controller: 'CourseViewCtrl'}).
+			when('/dashboard', {templateUrl: '/bundles/raykupage/partials/dashboard-view.html'}).
+			when('/profile', {templateUrl: '/bundles/raykupage/partials/user-edit.html'}).
+			when('/settings', {templateUrl: '/bundles/raykupage/partials/user-settings.html'}).
+			when('/payout', {templateUrl: '/bundles/raykupage/partials/payout.html'}).
+			otherwise({redirectTo:'/dashboard'});
+	}]);
 
-//CONTROLLERS
-app.controller('TutorListCtrl', function ($scope, $rootScope, $http) {
-    'use strict';
-
+app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
+	$http.get(Routing.generate('get_course', {course:$routeParams.name})).success(function(data){
+		$scope.course = data;
+	})
+}).controller('TutorListCtrl', function ($scope, $rootScope, $http) {
     //Online Tutors List Controller
     $scope.TutorListTemplate = '/bundles/raykupage/js/app/views/TutorListView.html';
 	
@@ -16,23 +26,13 @@ app.controller('TutorListCtrl', function ($scope, $rootScope, $http) {
         	$scope.tutors = data;
         });
     }
-
-    //Poll Tutors
-    /*setInterval(function () {
-      console.log('Polling tutors');
-      $http.get(Routing.generate('get_tutors')).success(function(data) {
-        $scope.tutors = data;
-      });
-    }, 15000);*/
     
     $scope.update = function(user) {
     	$http.post(Routing.generate('post_tutors'), user.tutor).success(function(data){
     		$rootScope.user = user;
     	})
     }
-}).controller('CourseViewCtrl',function ($scope, $http){
-	// TBD
-}).controller('SessionListCtrl',function ($scope, $rootScope, $http, $templateCache, $timeout) {
+}).controller('SessionListCtrl', function ($scope, $rootScope, $http, $templateCache, $timeout) {
     //Sessions List Controller
     $scope.SessionListTemplate = '/bundles/raykupage/js/app/views/SessionsView.html';
 
@@ -81,16 +81,17 @@ app.controller('TutorListCtrl', function ($scope, $rootScope, $http) {
   	});
   	
     $scope.update = function(content, completed) {
-      	$http.get(Routing.generate('get_user', {'entity':userId})).success(function(data){
-      		$rootScope.user = data;
-      		$('.myprofile').click();
-      	});
+    	// Don't need to do anything
     }
 
     $scope.profile = function(user) {
     	$http.post(Routing.generate('post_users_profile', {'user':userId}), user).success(function(data){
     		$rootScope.user = user;
     	});
+    }
+    
+    $scope.path = function(path, args) {
+    	return Routing.generate('post_users',{user:3437});
     }
 });  
 

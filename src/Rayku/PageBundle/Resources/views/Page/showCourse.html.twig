@@ -4,47 +4,4 @@
 	<script type="text/javascript">
 		var courseId = {{ course.id }};
 	</script>
-	<div class="row content-header">
-		<h3><span class="raphael">S</span>{% verbatim %}{{ course.name }}{% endverbatim %}</h3> 
-	</div>
-	<div class="row" id="content" ng-controller="CourseViewCtrl">
-		<div id="courseView" class="large-8 columns course-view">
-			<h3>About</h3>
-			<div style="padding:10px">{{ course.description }}</div>
-			{% if is_granted('ROLE_INSTRUCTOR') %}
-				<form action="{{ path('post_session_broadcast', {'course':course.id}) }}" method="post" id="broadcast_session">
-					<input value="New Broadcast" type="submit" class="bbutton" id="tutorConnect" name="tutorConnect">
-				</form>
-				<script type="text/javascript">
-					$(document).ready(function(){
-						var options = { 
-							success: function(response){
-								window.location.replace(response.redirect);
-							}
-						};
-						$('#broadcast_session').ajaxForm(options)
-					});
-				</script>
-			{% endif %}
-		</div>
-		<div class="large-4 columns course-view" id="session-list">
-			<h3>Sessions</h3>
-			<div><table>
-				<tbody>
-					{% for session in course.sessions %}
-					<tr>
-						<td>
-							Session Recorded on {{ session }}
-							{% if session.endTime == false %}
-								<a href="{{ whiteboard_url }}/room/{{ session.id }}/broadcast">LIVE</a>
-							{% else %}
-								<a href="{{ whiteboard_url }}/room/{{ session.id }}/playback">RECORDED</a>
-							{% endif %}
-						</td>
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table></div>
-		</div>
-	</div>
 {% endblock %}

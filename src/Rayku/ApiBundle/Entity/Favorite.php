@@ -13,6 +13,7 @@ use JMS\Payment\CoreBundle\Entity\PaymentInstruction;
  * @ORM\Table(name="rayku_favorite")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
+ * @Serializer\AccessorOrder("alphabetical")
  */
 class Favorite
 {

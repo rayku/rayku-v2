@@ -1,0 +1,31 @@
+<div class="row content-header">
+	<h3><span class="raphael">`</span> Settings</h3>
+</div>
+
+<div class="row userprofile" id="userprofile">
+	<div class="large-12 columns" id="profile">
+		<h3>User Profile</h3>
+		<div class="row">
+			<div class="large-3 columns sidenav" ng-controller="UserDetailCtrl">
+				<img ng-src="{{ user.web_path }}" style="height:150px;">
+				<ul class="profilenav">
+					<li><a href="#/profile" class="myprofile">Profile</a></li>
+					<li><a href="#/payout" class="payout">Payout</a></li>
+					<li><a href="#/settings" class="mysettings">Settings</a></li>
+				</ul>
+			</div>
+
+			<div class="large-9 columns tutorpayout">
+				<h4 class="">Tutor Payout</h4>
+				<h5>How much are tutors paid?</h5>
+				<p>Tutors set their own rates in cents/minute. Rayku takes a varied platform fee depending on you number of sessions and the quality of them. The higher the quality, the less our platform fee is. There is also a small PayPal fee.</p>
+				<h5>How often are tutors paid?</h5>
+				<p>Tutors are paid after they accumulate 5000 Rayku Points ($50). You should receive your money within a week via PayPal.</p>
+				<h5>How are tutors paid?</h5>
+				<p>Our tutors require a PayPal account.</p>
+				<p><a href="https://docs.google.com/forms/d/1CUGxAuvhBtGwtVpWqaL2V52f93BBn1GVPdl4DPXzidI/viewform" target="_blank">Cash Out Form</a></p>
+			</div>
+
+		</div>
+	</div>
+</div>

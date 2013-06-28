@@ -16,7 +16,7 @@ $(document).ready(function(){
     	$('.content-header h3').html('<span class="raphael">'+ icon +'</span>' + navitem);
     });
 
-
+/*
     $('a.setting').click(function (e) {
         e.preventDefault();
         console.log('Clicked');
@@ -34,7 +34,7 @@ $(document).ready(function(){
         $('#userprofile').fadeOut('fast');
         $('#content').delay(500).fadeIn('fast');
     });
-
+*/
     //checkbox toggle tutor selection
     $('.tutorTable tr td').on('click', 
         function(){

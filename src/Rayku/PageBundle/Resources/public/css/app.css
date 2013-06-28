@@ -719,10 +719,6 @@ table, th, td
 	padding: 6px 0;
 	font-size: 12px;
 }
-#userprofile{
-	display: none;
-	margin-top: 65px;
-}
 #profile{
 	background: rgba(255, 255, 255, 1);
 	width: 100%;
@@ -792,10 +788,9 @@ h4 a.myprofileedit{
 }
 #profile .editprofileinfo{ 
 	padding-bottom: 15px;
-	display: none;
 }
-#profile .profilesettings{
-	display: none;
+#userprofile{
+	margin-top: 50px;
 }
 #profile .profilesettings form .row{
 	padding-bottom: 10px;

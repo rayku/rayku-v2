@@ -29,6 +29,7 @@ class CourseController extends Controller
 	 *     200="Returned when successful"
 	 *   }
 	 * )
+	 * @View(serializerGroups={"course"})
 	 */
 	public function getCoursesAction()
 	{
@@ -47,9 +48,21 @@ class CourseController extends Controller
 	 *   description="Get a course record",
 	 *   output="Rayku\ApiBundle\Entity\Course"
 	 * )
+	 * @View(serializerGroups={"course.details", "session"})
 	 */
-	public function getCourseAction(Course $course)
+	public function getCourseAction($course)
 	{
+		$em = $this->getDoctrine()->getRepository('RaykuApiBundle:Course');
+		if(is_numeric($course)){
+			$course = $em->find($course);
+		}else{
+			$course = $em->findOneBySlug($course);
+		}
+		
+		if(!$course){
+			throw $this->createNotFoundException('The course was not found');
+		}
+		
 		return $course;
 	}
 }

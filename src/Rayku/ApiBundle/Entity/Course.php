@@ -14,7 +14,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  * @Serializer\AccessorOrder("alphabetical")
- * @Serializer\ExclusionPolicy("all")
  * @UniqueEntity(fields={"slug"}, message="This course unique identifier has already been taken.  Course slugs must be unique")
  */
 class Course
@@ -33,7 +32,7 @@ class Course
      *
      * @Assert\NotBlank
      * @ORM\Column(name="slug", type="string", length=255, nullable=false)
-     * @Serializer\Expose
+     * @Serializer\Groups({"course", "course.details"})
      */
     private $slug = '';
     
@@ -42,6 +41,7 @@ class Course
      *
      * @Assert\NotBlank
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     * @Serializer\Groups({"course", "course.details"})
      */
     private $name = '';
 
@@ -50,6 +50,7 @@ class Course
      *
      * @Assert\NotBlank
      * @ORM\Column(name="description", type="string", length=255, nullable=false)
+     * @Serializer\Groups({"course", "course.details"})
      */
     private $description = '';   
      
@@ -85,6 +86,7 @@ class Course
      *     inverseJoinColumns={@ORM\JoinColumn(name="session_id", referencedColumnName="id")}
      * )
      * @ORM\OrderBy({"createdAt" = "DESC"})
+     * @Serializer\Groups({"course.details"})
      */
     private $sessions;
     

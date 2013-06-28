@@ -70,3 +70,8 @@ angular_payout:
     pattern: /#/payout
     options:
         expose: true
+
+angular_course_view:
+    pattern: /#/course/:name/view
+    options:
+        expose: true

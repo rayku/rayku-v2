@@ -14,11 +14,11 @@ app.provider('routeGenerator', function() {
 app.
 	config(['$routeProvider', 'routeGeneratorProvider', function($routeProvider, routeGeneratorProvider){
 		$routeProvider.
-			when('/course/:name/view', {templateUrl: '/bundles/raykupage/partials/course-view.html', controller: 'CourseViewCtrl'}).
+			when(routeGeneratorProvider.generate('angular_course_view'), {templateUrl: '/bundles/raykupage/partials/course-view.html', controller: 'CourseViewCtrl'}).
 			when(routeGeneratorProvider.generate('angular_dashboard'), {templateUrl: '/bundles/raykupage/partials/dashboard-view.html'}).
 			when(routeGeneratorProvider.generate('angular_profile'), {templateUrl: '/bundles/raykupage/partials/user-edit.html'}).
-			when('/settings', {templateUrl: '/bundles/raykupage/partials/user-settings.html'}).
-			when('/payout', {templateUrl: '/bundles/raykupage/partials/payout.html'}).
+			when(routeGeneratorProvider.generate('angular_settings'), {templateUrl: '/bundles/raykupage/partials/user-settings.html'}).
+			when(routeGeneratorProvider.generate('angular_payout'), {templateUrl: '/bundles/raykupage/partials/payout.html'}).
 			otherwise({redirectTo:'/dashboard'});
 	}]);
 

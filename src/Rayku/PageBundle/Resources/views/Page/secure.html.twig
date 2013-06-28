@@ -66,14 +66,14 @@
 }, 5000);
 </script>
 </head>
-<body>
+<body ng-controller="MainCtrl">
 <div id="loading-indicator">
 	<img src="{{ asset('bundles/raykupage/images/ajax-loader.gif') }}" />
 </div>
 
 <div id="whiteboard2">
     <div id="whiteboard-header">
-        <a href=# class="logged-in-as bbutton home">Back Home</a>
+        <a href="#" class="logged-in-as bbutton home">Back Home</a>
     </div>
     <iframe src="" seamless></iframe>
 </div>
@@ -81,7 +81,10 @@
 <div class="container">
 	<header id="header">
 	    <div class="inside">
-	        <a href="#/dashboard" id="logo"><span class="beta">beta</span><img src="{{ asset('bundles/raykupage/images/logo.png') }}" alt="" /></a>
+	    	{% verbatim %}<a href="{{ path('angular_dashboard') }}" id="logo"{% endverbatim %}>
+	    		<span class="beta">beta</span><img src="{{ asset('bundles/raykupage/images/logo.png') }}" alt="" />
+	    	</a>
+	        {% verbatim %}
 	        <nav>
 	            <a href=# class="notification" data-reveal-id="connectNotifModal"><span class="raphael">[</span><span class="notif-count">0</span></a>
 	            
@@ -89,17 +92,16 @@
 	            <div class="submenu" id="submenu">
                     <div class="arrow-up"></div>
                     <ul class="submenu-item">
-                        <li><a class="dashboard" href="#/dashboard"><span class="raphael">L</span>Home</a></li>
-                        <li><a class="setting" href="#/settings"><span class="raphael">`</span>Settings</a></li>
-                        <li><a class="myprofileedit" href=#><span class="raphael">></span>Edit Profile</a></li>
+                        <li><a class="dashboard" href="{{ path('angular_dashboard') }}"><span class="raphael">L</span>Home</a></li>
+                        <li><a class="setting" href="{{ path('angular_settings') }}"><span class="raphael">`</span>Settings</a></li>
+                        <li><a class="myprofileedit" href="{{ path('angular_settings') }}"><span class="raphael">></span>Edit Profile</a></li>
                         <li><a class="tutor" href=# data-reveal-id="myTutorModal"><span class="raphael">u</span>Become a Tutor</a></li>
-
-						<li><a class="tutor" href=# data-reveal-id="tutorBroadcastModal"><span class="raphael">Ü</span>Broadcast Session</a></li>
 						<li class="divider"></li>
                         <li><a class="logout" href="{{ path('fos_user_security_logout') }}"><span class="raphael">W</span>Logout</a></li>
                     </ul>
                 </div>
 	        </nav>
+	        {% endverbatim %}
 	    </div>
 	</header>
 	<div class="row" id="main-content">
@@ -120,12 +122,14 @@
 			</ul>
 			
 			<ul class="sidebar-nav">
-				<li><a class="dashboard active" href="#/dashboard><span class="raphael">S</span> Dashboard</a></li>
-				<li><a class="myprofileedit" href="#/profile"><span class="raphael">`</span> Settings</a></li>
+				{% verbatim %}
+				<li><a class="dashboard active" href="{{ path('angular_dashboard') }}"><span class="raphael">S</span> Dashboard</a></li>
+				<li><a class="myprofileedit" href="{{ path('angular_profile') }}"><span class="raphael">`</span> Settings</a></li>
 				<li><a class="buyPoints" href=# data-reveal-id="buyPointsModal"><span class="raphael">#</span> Buy Points</a></li>
 				<li><a class="userWhiteboard" href=#><span class="raphael">?</span> Practice</a></li>
 				<li class="backtoWhiteboard"><a class="backWhiteboard" href=#><span class="raphael">?</span> Back to Whiteboard</a></li>
 				<li class="divider backtoWhiteboard"></li>
+				{% endverbatim %}
 			</ul>
 		</div>
 

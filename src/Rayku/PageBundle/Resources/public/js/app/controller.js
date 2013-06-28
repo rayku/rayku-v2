@@ -1,11 +1,24 @@
-var app = angular.module('raykuApp', ['ngUpload', 'LoadingIndicator']).
-	config(['$routeProvider', function($routeProvider){
+var app = angular.module('raykuApp', ['ngUpload', 'LoadingIndicator']);
+
+app.provider('routeGenerator', function() {
+    this.$get = function() {
+    	return null;
+    };
+ 
+    this.generate = function(name, params) {
+        $route = Routing.generate(name, params).split('#');
+        return $route[1];
+    };
+});
+
+app.
+	config(['$routeProvider', 'routeGeneratorProvider', function($routeProvider, routeGeneratorProvider){
 		$routeProvider.
-			when('/course/:name/view', {templateUrl: '/bundles/raykupage/partials/course-view.html', controller: 'CourseViewCtrl'}).
-			when('/dashboard', {templateUrl: '/bundles/raykupage/partials/dashboard-view.html'}).
-			when('/profile', {templateUrl: '/bundles/raykupage/partials/user-edit.html'}).
-			when('/settings', {templateUrl: '/bundles/raykupage/partials/user-settings.html'}).
-			when('/payout', {templateUrl: '/bundles/raykupage/partials/payout.html'}).
+			when(routeGeneratorProvider.generate('angular_course_view'), {templateUrl: '/bundles/raykupage/partials/course-view.html', controller: 'CourseViewCtrl'}).
+			when(routeGeneratorProvider.generate('angular_dashboard'), {templateUrl: '/bundles/raykupage/partials/dashboard-view.html'}).
+			when(routeGeneratorProvider.generate('angular_profile'), {templateUrl: '/bundles/raykupage/partials/user-edit.html'}).
+			when(routeGeneratorProvider.generate('angular_settings'), {templateUrl: '/bundles/raykupage/partials/user-settings.html'}).
+			when(routeGeneratorProvider.generate('angular_payout'), {templateUrl: '/bundles/raykupage/partials/payout.html'}).
 			otherwise({redirectTo:'/dashboard'});
 	}]);
 
@@ -13,6 +26,10 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
 	$http.get(Routing.generate('get_course', {course:$routeParams.name})).success(function(data){
 		$scope.course = data;
 	})
+}).controller('MainCtrl', function ($rootScope){
+	$rootScope.path = function(path, args) {
+    	return Routing.generate(path, args);
+    }
 }).controller('TutorListCtrl', function ($scope, $rootScope, $http) {
     //Online Tutors List Controller
     $scope.TutorListTemplate = '/bundles/raykupage/js/app/views/TutorListView.html';
@@ -88,10 +105,6 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
     	$http.post(Routing.generate('post_users_profile', {'user':userId}), user).success(function(data){
     		$rootScope.user = user;
     	});
-    }
-    
-    $scope.path = function(path, args) {
-    	return Routing.generate('post_users',{user:3437});
     }
 });  
 

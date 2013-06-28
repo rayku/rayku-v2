@@ -9,9 +9,9 @@
 			<div class="large-3 columns sidenav" ng-controller="UserDetailCtrl">
 				<img ng-src="{{ user.web_path }}" style="height:150px;">
 				<ul class="profilenav">
-					<li><a href="#/profile" class="myprofile">Profile</a></li>
-					<li><a href="#/payout" class="payout">Payout</a></li>
-					<li><a href="#/settings" class="mysettings">Settings</a></li>
+					<li><a href="{{ path('angular_profile') }}" class="myprofile">Profile</a></li>
+					<li><a href="{{ path('angular_payout') }}" class="payout">Payout</a></li>
+					<li><a href="{{ path('angular_settings') }}" class="mysettings">Settings</a></li>
 				</ul>
 			</div>
 

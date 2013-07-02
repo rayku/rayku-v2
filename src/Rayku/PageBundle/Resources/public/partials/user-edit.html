@@ -26,7 +26,7 @@
 						<li><span class="grade">Level Of Education</span><span class="editgrade"><input type="text" ng-model="user.grade" name="grade"></span></li>
 						<li><span class="school">School</span><span class="editschool"><input type="text" ng-model="user.school" name="school"></span></li>
 					</ul>
-					<p><span>About (<span id="charNum"></span>)</span><span><textarea class="user-bio" ng-model="user.bio" name="bio" onkeyup="countChar(this)">{{ user.bio }}</textarea></span></p>
+					<p><span>About</span><span><textarea class="user-bio" ng-model="user.bio" name="bio" onkeyup="countChar(this)">{{ user.bio }}</textarea></span></p>
 					<p><span>Profile Picture</span><span><input type="file" name="file" /></span></p>
 					<div class="row">
 							<input type="submit" upload-submit="update(contents, completed)" value="Save" class="bbutton" />

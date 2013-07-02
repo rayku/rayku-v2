@@ -90,8 +90,8 @@
                     <div class="arrow-up"></div>
                     <ul class="submenu-item">
                         <li><a class="dashboard" href=#><span class="raphael">L</span>Home</a></li>
-                        <li><a class="setting" href=#><span class="raphael">`</span>Settings</a></li>
-                        <li><a class="myprofileedit" href=#><span class="raphael">></span>Edit Profile</a></li>
+                        <li><a class="setting" href="{{ path('angular_profile') }}"><span class="raphael">`</span>Settings</a></li>
+                        <li><a class="myprofileedit" href="{{ path('angular_settings') }}"><span class="raphael">></span>Edit Profile</a></li>
                         <li><a class="tutor" href=# data-reveal-id="myTutorModal"><span class="raphael">u</span>Become a Tutor</a></li>
 
                         <li><a class="tutor" href=# data-reveal-id="getStartedModal"><span class="raphael">u</span>Get Started</a></li>
@@ -121,8 +121,8 @@
 			<div ng-include="SidebarDetailTemplate"></div>
 			
 			<ul class="sidebar-nav">
-				<li><a class="dashboard active" href=#><span class="raphael">S</span> Dashboard</a></li>
-				<li><a class="myprofileedit" href=#><span class="raphael">`</span> Settings</a></li>
+				<li><a class="dashboard active" href="{{ path('angular_dashboard') }}"><span class="raphael">S</span> Dashboard</a></li>
+				<li><a class="myprofileedit" href="{{ path('angular_profile') }}"><span class="raphael">`</span> Settings</a></li>
 				<li><a class="buyPoints" href=# data-reveal-id="buyPointsModal"><span class="raphael">#</span> Buy Points</a></li>
 				<li><a class="userWhiteboard" href=#><span class="raphael">?</span> Practice</a></li>
 				<li class="backtoWhiteboard"><a class="backWhiteboard" href=#><span class="raphael">?</span> Back to Whiteboard</a></li>

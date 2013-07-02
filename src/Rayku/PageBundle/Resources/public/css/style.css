@@ -2089,6 +2089,10 @@ ul.team li:nth-child(9).active span.line {
 	/*background: url(../images/modal_bg.png);*/
 	background: rgba(221, 221, 221, 1);
 }
+#loginModal label.username, #loginModal label.password{
+	margin-bottom: 8px;
+	margin-left: 1px;
+}
 .reveal-modal{
 	border: none;
 	border-radius: 3px;
@@ -2118,10 +2122,12 @@ ul.team li:nth-child(9).active span.line {
 }
 .login-modal-divider1{
 	display: none;
-	width: 100%;
+	width: 90%;
 	margin-top: 35px;
 	margin-bottom: -25px;
 	padding: 0;
+	margin-left: 23px;
+	margin-right: 50px;
 	border-top: 1px solid #9a9b9e;
 	border-bottom: 1px solid #fff;
 }
@@ -2151,7 +2157,7 @@ ul.team li:nth-child(9).active span.line {
 	padding:20px 25px 35px 25px;
 }
 .forgot-email-form{
-	height: 170px;
+	height: 190px;
 }
 .login-label{
 	color: #5a5d60;
@@ -2164,8 +2170,8 @@ ul.team li:nth-child(9).active span.line {
 input.login-input, #user_login_email, #user_login_password{
 	height: 46px;
 	padding:0px 10px;
-	border-radius: 5px;
-	box-shadow: inset 0 0 6px rgba(100, 100, 100, 0.5);
+	border-radius: 3px;
+	box-shadow: inset 0 0 6px rgba(100, 100, 100, 0.3);
 	border:1px solid rgba(100, 100, 100, 0.5);
 }
 .bbutton {
@@ -2227,17 +2233,18 @@ input.login-input, #user_login_email, #user_login_password{
 	top:1px;
 }
 .login-button{
-	position: absolute;
-	top:5px;
-	right:16px;
+	position: relative;
+
+    	top: 0px;
+    	left: 0px;
 }
 .disabled{
 	opacity: 0.5;
 }
 .submit-button{
-	position: absolute;
-	top:26px;
-	right:16px;
+	position: relative;
+    	top: 0px;
+    	left: 0px;
 }
 a.forgot-password{
 	float: right;
@@ -2246,6 +2253,9 @@ a.forgot-password{
 	text-shadow: 0 1px 0 rgba(255,255,255,.6);
 	text-decoration: underline;
 	padding: 10px 5px;
+}
+.remember, .forgot{
+	margin-top:0px;
 }
 input[name="_remember_me"]{
 	position: relative;
@@ -2288,4 +2298,13 @@ label.remember-checkbox{
 }
 #whiteboard2{
 	display: none;
+}
+
+@-moz-document url-prefix() { 
+  	.login-button {
+  		position: relative;
+  		float:right;
+    	top: 0px;
+    	right: 0px;
+	}
 }

@@ -6,6 +6,7 @@
         <img src="{{asset('/bundles/raykupage/images/logo.png')}}" alt="rayku">
         <a class="close-reveal-modal">&#215;</a>
     </div>
+
     <div class="row login-form">
         <div class="row login-modal-error">
             <div class="large-12 columns">
@@ -17,11 +18,13 @@
         	<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />        
             <div class="row">
                 <div class="large-12 columns">
+                    <label class="username">Email or Username:</label>
 				    <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="E-mail or Username" required="required" class="login-input" />
                 </div>
             </div>
             <div class="row">
                 <div class="large-12 columns">
+                    <label class="password">Password:</label>
 				    <input type="password" id="password" name="_password" placeholder="Password" required="required"  class="login-input" />
 					<input type="submit" class="bbutton login-button" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" class="bbutton" />
                 </div>
@@ -45,7 +48,7 @@
                 <div class="large-12 columns">
                     <label class="login-label">Forgot Password</label>
                     <input class="login-input" name="username" type="text" placeholder="Enter your Username" required>
-                    <input type="submit" class="bbutton submit-button" class="bbutton"/>
+                    <input type="submit" value="Submit" class="bbutton submit-button" class="bbutton"/>
                 </div>
             </div>
         </form>

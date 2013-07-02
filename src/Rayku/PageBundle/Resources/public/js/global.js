@@ -15,14 +15,15 @@ $(function(){
     });
     
     //Forgot password on login modal
-    $('a.forgot-password').click(function(){
+    $('a.forgot-password').on('click', function(){
         if($('.login-button').hasClass('disabled')){
+        	console.log('hide forgot form');
             $('.forgot-email-form').slideUp(200);
             $('.login-modal-divider1').hide();
             $('.login-button').removeClass('disabled');
             $('.login-button').attr('disabled', false);
-        }
-        else {
+        }else {
+        	console.log('show forgot form');
             $('.forgot-email-form').slideDown(200);
             $('.login-modal-divider1').show();
             $('.login-button').addClass('disabled');

@@ -40,6 +40,9 @@ class PageController extends Controller
 
 	/**
 	 * @Route("/", name="rayku_page_homepage")
+	 * @Route("/register/confirmed", name="rayku_register_confirmed")
+	 * @Route("/dashboard", name="rayku_page_dashboard")
+	 * @Route("/onboarding", name="rayku_page_tutor_onboarding")
 	 * @Route("/ask", name="rayku_page_homepage_minimized_funnel")
 	 * @Template
 	 */
@@ -92,21 +95,6 @@ class PageController extends Controller
 			$return['ratesessionform'] = $sessionRateForm->createView();
 		}
 		return $return;
-	}
-	
-	/**
-	 * @Route("/register/confirmed", name="rayku_register_confirmed")
-	 * @Route("/dashboard", name="rayku_page_dashboard")
-	 * @Route("/onboarding", name="rayku_page_tutor_onboarding")
-	 * @Template("RaykuPageBundle:Page:dashboard.html.twig")
-	 */
-	public function dashboardAction()
-	{
-		if(false === $this->get('security.context')->isGranted('ROLE_USER')){
-			throw new AccessDeniedException();
-		}else{
-			return array('user' => $this->getUser());
-		}
 	}
 	
 	/**

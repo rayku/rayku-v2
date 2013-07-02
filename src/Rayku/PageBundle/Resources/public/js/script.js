@@ -3,10 +3,6 @@ var hash = window.location.hash;
 var locale = pathname.split('/');
 var abs = hash.split('/');
 
-console.log(location);
-console.log(hash);
-console.log(abs);
-
 $(document).ready(function(){
 	//Show dropdown navigation
     $('a.logged-in-as').on('mouseenter',function(){

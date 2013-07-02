@@ -51,7 +51,7 @@ security:
                 check_path:     /login_check
                 failure_path:   /login
                 always_use_default_target_path: true
-                default_target_path: /dashboard
+                default_target_path: /
             logout:       true
             anonymous:    true
 

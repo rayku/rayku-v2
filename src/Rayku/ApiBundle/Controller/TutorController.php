@@ -60,7 +60,7 @@ class TutorController extends Controller
 	}
 	
 	/**
-	 * @View()
+	 * @View(serializerGroups={"tutor.details", "tutor", "user"})
 	 * @ApiDoc(
 	 *   statusCodes={
      *     200="Returned when successful"

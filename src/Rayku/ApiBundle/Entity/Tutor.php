@@ -113,7 +113,6 @@ class Tutor
 
     /**
      * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Review", mappedBy="tutor")
-     * @Serializer\Groups({"tutor.details"})
      **/
     private $reviews;
     
@@ -153,7 +152,6 @@ class Tutor
      *     joinColumns={@ORM\JoinColumn(name="tutor_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="subject_id", referencedColumnName="id")}
      * )
-     * @Serializer\Groups({"tutor.details"})
      */
     private $subjects;
     

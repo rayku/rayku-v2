@@ -47,7 +47,9 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
     $scope.update = function(user) {
     	$http.post(Routing.generate('post_tutors'), user.tutor).success(function(data){
     		$rootScope.user = user;
-    	})
+    		$('#myTutorModal').hide();
+    		$('.reveal-modal-bg').hide();
+    	});
     }
 }).controller('SessionListCtrl', function ($scope, $rootScope, $http, $templateCache, $timeout) {
     //Sessions List Controller

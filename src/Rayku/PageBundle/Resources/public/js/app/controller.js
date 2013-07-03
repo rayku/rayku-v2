@@ -66,6 +66,9 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
         $templateCache.remove('/bundles/raykupage/js/app/views/SessionsView.html');
         $scope.SessionListTemplate = '';
         $scope.sessions = data;
+        $timeout(function() {
+          $scope.SessionListTemplate = '/bundles/raykupage/js/app/views/SessionsView.html';
+        },1000);
       }).error(function (data) {
         $scope.error = data || "Request failed";
       });
@@ -76,9 +79,6 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
       $http.post(Routing.generate('post_sessions', {'session':session.id, 'name':session.tutor_session_name})).success(function(data){
         //done
         $scope.refreshSessions();
-        $timeout(function() {
-          $scope.SessionListTemplate = '/bundles/raykupage/js/app/views/SessionsView.html';
-        },1000);
       }).error(function (data) {
         $scope.error = data || "Request failed";
       });

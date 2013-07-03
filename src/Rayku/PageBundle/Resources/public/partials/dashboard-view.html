@@ -19,7 +19,7 @@ TUTOR LIST TABLE
 			<h4>{{user.points}}</h4>
 		</div>
 	</div>
-	<div class="large-2 columns tutor-rating" ng-show="user.is_tutor" ng-cloak>
+	<div class="large-2 large-offset-1 columns tutor-rating" ng-show="user.is_tutor" ng-cloak>
 		<div class="rcontainer">
 			<h3><span class="raphael">$</span><span class="title">Tutor Rating<span></h3>
 			<h4>1000</h4>
@@ -30,7 +30,7 @@ TUTOR LIST TABLE
 PAST SESSIONS LIST
 ---------------------------------->
 	<div class="large-5 columns" id ="sessions-list" ng-controller="SessionListCtrl">
-		<h3>Sessions<a href=# class="raphael refreshSession" ng-click="refreshSessions()">0</a></h3>
+		<h3>Sessions<div class="ng-edit session-refr raphael refreshSession" ng-click="refreshSessions()" style="float:right; margin-right:15px;">0</div></h3>
 		<div ng-include="SessionListTemplate"></div>
 	</div>
 </div>

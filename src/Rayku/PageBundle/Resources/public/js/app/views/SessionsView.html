@@ -13,8 +13,8 @@
 			<td class="session_displayed_name"><div ng-hide="editorEnabled">{{session.tutor_session_name}}</div><form><div ng-show="editorEnabled"><input type="text" name="session_name" ng-model="session.tutor_session_name"> <button class="save_session_name" ng-click="update(session)" ng-click="editorEnabled=!editorEnabled">Save</button></div></td>
 			<td>{{session.selected_tutor.user.first_name}} {{session.selected_tutor.user.last_name}}</td>
 			<td>{{session.rating}}</td>
-			<td><a href=# data-session="{{session.id}}">View</a></td>
-			<td><a href=# ng-click="editorEnabled=!editorEnabled" class="edit_session_name">Edit</a></form></td>
+			<td><div class="ng-edit" data-session="{{session.id}}">View</div></td>
+			<td><div class="ng-edit" ng-click="editorEnabled=!editorEnabled" class="edit_session_name">Edit</div></form></td>
 		</tr>
 	</tbody>
 	<tbody ng-show="!sessions.length" ng-show="loaded">
@@ -28,6 +28,12 @@
 input[name="session_name"]{
 	width:7em;
 	padding:5px;
+}
+.ng-edit{
+	color:rgba(120, 120, 120, 1);
+}
+.ng-edit:hover{
+	cursor: pointer;
 }
 </style>
 

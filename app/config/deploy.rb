@@ -1,11 +1,11 @@
 task :production do
-  set :deploy_to,    "/var/rayku.com"
+  set :deploy_to,    "/var/beta.rayku.com"
   set :deploy_via, :remote_cache
   set :clear_controllers, true
 end
 
 task :beta do
-  set :deploy_to,    "/var/rayku.com"
+  set :deploy_to,    "/var/beta.rayku.com"
   set :deploy_via, :remote_cache
   set :clear_controllers, false
 end
@@ -13,7 +13,7 @@ end
 
 set :application, "Rayku"
 set :domain,      "198.101.199.107"
-set :deploy_to,    "/var/rayku.com"
+set :deploy_to,    "/var/beta.rayku.com"
 
 set :repository,  "git@github.com:rayku/rayku-v2.git"
 set :scm,         :git

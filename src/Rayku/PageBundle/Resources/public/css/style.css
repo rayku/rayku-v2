@@ -2299,7 +2299,11 @@ label.remember-checkbox{
 #whiteboard2{
 	display: none;
 }
-
+li.register_input ul li{
+	float:right;
+	margin-top: -50px;
+	margin-bottom: -30px;
+}
 @-moz-document url-prefix() { 
   	.login-button {
   		position: relative;

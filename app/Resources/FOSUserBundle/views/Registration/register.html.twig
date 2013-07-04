@@ -9,17 +9,14 @@
 		<a href="{{ path('rayku_page_homepage') }}" class="logo"></a>
 		<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
 			<ul>
-				<li>
+				<li class="register_input">
 					{{ form_row(form.username) }}
 				</li>
-				<li>
+				<li class="register_input">
 					{{ form_row(form.email) }}
 				</li>
 				<li>
 					{{ form_row(form.plainPassword) }}
-				</li>
-				<li>
-					{{ form_row(form.signup_question) }}
 				</li>
 				<li>
 					{{ form_row(form.coupon) }}
@@ -28,7 +25,7 @@
 					By clicking Get Started you agree to the <a href="#">Terms & Conditions</a>
 				</li>
 				<li class="right submit">
-					{{ form_rest(form) }}
+					{{ form_widget(form._token) }}
 					<input type="submit" value="Get Started"  class="bbutton" />
 				</li>
 			</ul>

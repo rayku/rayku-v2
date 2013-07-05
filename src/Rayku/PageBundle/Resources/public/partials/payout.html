@@ -4,10 +4,10 @@
 
 <div class="row userprofile" id="userprofile">
 	<div class="large-12 columns" id="profile">
-		<h3>User Profile</h3>
 		<div class="row">
 			<div class="large-3 columns sidenav" ng-controller="UserDetailCtrl">
-				<img ng-src="{{ user.web_path }}" style="height:150px;">
+				<!--<img ng-src="{{ user.web_path }}" style="height:150px;">-->
+				<h3>Account</h3>
 				<ul class="profilenav">
 					<li><a href="{{ path('angular_profile') }}" class="myprofile">Profile</a></li>
 					<li><a href="{{ path('angular_payout') }}" class="payout">Payout</a></li>
@@ -16,7 +16,6 @@
 			</div>
 
 			<div class="large-9 columns tutorpayout">
-				<h4 class="">Tutor Payout</h4>
 				<h5>How much are tutors paid?</h5>
 				<p>Tutors set their own rates in cents/minute. Rayku takes a varied platform fee depending on you number of sessions and the quality of them. The higher the quality, the less our platform fee is. There is also a small PayPal fee.</p>
 				<h5>How often are tutors paid?</h5>

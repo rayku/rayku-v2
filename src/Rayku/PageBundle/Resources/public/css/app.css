@@ -312,7 +312,8 @@ header a.userRateLink{
 }
 header a span.userRate{
 	color:rgba(59,179,97,1);
-	font-weight: bold
+	font-weight: bold;
+	width:100%;
 }
 .inside {
 	padding: 0 20px;
@@ -784,15 +785,19 @@ table, th, td
 	margin-top: 65px;
 }
 #profile{
-	background: rgba(255, 255, 255, 1);
 	width: 100%;
-	padding: 0;
 	margin: 10px 0;
-	border: 1px solid rgba(221, 221, 221, 1);
-	border-radius: 3px;
 }
 #profile .sidenav{
-	width:22.5%;
+	padding: 0;
+}
+#profile .sidenav h3{
+	font-weight: 500;
+	font-size: 1.5em;
+	color:rgba(120, 120, 120, 1);
+	text-align: center;
+	background: transparent;
+	border-bottom: none;
 }
 #profile ul.profilenav, #profile ul.userinfo{
 	list-style-type: none;
@@ -803,7 +808,7 @@ table, th, td
 	background:rgb(240,246,250);
 	border-bottom: 1px solid rgba(255, 255, 255, 1);
 	border-left: 3px solid rgba(22,158,244, 0.5);
-	padding: 5px 0; 
+	padding: 10px 0; 
 	margin: 0;
 	
 	transition: border-left 0.25s;
@@ -812,17 +817,24 @@ table, th, td
 #profile ul.profilenav li a{
 	width: 100%;
 	padding:10px 140px 10px 20px;
+	font-weight: bold;
+	font-size: 1em;
 }
 #profile ul.profilenav li:hover{
 	border-left: 3px solid rgba(22,158,244, 1);
 }
 
 #profile .profileinfo, #profile .tutorpayout, #profile .profilesettings, #profile .editprofileinfo{
-	width:77.5%;
 	padding-right: 40px;
+	background: rgba(255, 255, 255, 1);
+	border: 1px solid rgba(221, 221, 221, 0.5);
 }
 h4 a.myprofileedit{
 	float: right;
+}
+#profile .profileinfo, #profile .tutorpayout, #profile .profilesettings, #profile .editprofileinfo{
+	padding:10px 50px;
+	padding-top: 25px;
 }
 #profile .profileinfo h4, #profile .tutorpayout h4, #profile .profilesettings h4, #profile .editprofileinfo h4{
 	color: rgba(151, 151, 151, 0.8);
@@ -859,6 +871,10 @@ h4 a.myprofileedit{
 }
 #profile .editprofileinfo .bbutton{
 	margin-left: 15px;
+}
+#profile .profilesettings{
+	background: rgba(255, 255, 255, 1);
+	border: 1px solid rgba(221, 221, 221, 0.5);
 }
 #profile .profilesettings form .row{
 	padding-bottom: 10px;

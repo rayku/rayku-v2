@@ -4,10 +4,10 @@
 
 <div class="row userprofile" id="userprofile">
 	<div class="large-12 columns" id="profile">
-		<h3>User Profile</h3>
 		<div class="row" ng-controller="UserDetailCtrl">
 			<div class="large-3 columns sidenav">
-				<img ng-src="{{ user.web_path }}" style="height:150px;">
+				<!--<img ng-src="{{ user.web_path }}" style="height:150px;">-->
+				<h3>Account</h3>
 				<ul class="profilenav">
 					<li><a href="{{ path('angular_profile') }}" class="myprofile">Profile</a></li>
 					<li><a href="{{ path('angular_payout') }}" class="payout">Payout</a></li>
@@ -17,7 +17,7 @@
 
 			<div class="large-9 columns profilesettings">
 				<form novalidate>
-				<h4 class="username">Settings</h4>
+
 				<ul class="userinfo">
 					<li><span class="username">Username</span><span><input type="text" ng-model="user.username" name="username"></span></li>
 					<li><span class="email">Email</span><span><input type="text" ng-model="user.email" name="email"></span></li>

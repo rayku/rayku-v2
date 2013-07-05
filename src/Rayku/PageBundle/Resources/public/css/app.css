@@ -576,7 +576,14 @@ ul.submenu-item li a:hover {
 	width:100%;
 	background: rgba(255, 255, 255, 1);
 }
-.course-view h3, .tutor-list h3{
+.tutor-list h3, #sessions-list h3{
+	font-weight: normal;
+	font-size: 1em;
+	color: rgba(39, 39, 39, 0.7);
+	padding: 10px 2px;
+	margin: 0;
+}
+.course-view h3{
 	font-weight: normal;
 	font-size: 1em;
 	color: rgba(39, 39, 39, 1);
@@ -711,10 +718,8 @@ table, th, td
 }
 
 #sessions-list{
-	background: rgba(255, 255, 255, 1);
 	padding: 0;
 	margin: 10px 0;
-	border: 1px solid rgba(221, 221, 221, 0.7);
 }
 #sessions-list span.active-session{
 	margin-top: 5px;
@@ -724,7 +729,7 @@ table, th, td
 	width: 8px;
 	border-radius: 35px;
 }
-#sessions-list h3, #profile h3{
+#profile h3{
 	font-weight: normal;
 	font-size: 1em;
 	color: rgba(39, 39, 39, 1);

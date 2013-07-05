@@ -50,6 +50,8 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
     		$('#myTutorModal').hide();
     		$('.reveal-modal-bg').hide();
     	});
+
+      
     }
 }).controller('SessionListCtrl', function ($scope, $rootScope, $http, $templateCache, $timeout) {
     //Sessions List Controller

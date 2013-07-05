@@ -1,4 +1,4 @@
-<table>
+<!--<table>
 	<thead>
 		<tr>
 			<th>Session Name</th>
@@ -20,7 +20,21 @@
 	<tbody ng-show="!sessions.length" ng-show="loaded">
 		<tr><td>No past Session</td></tr>
 	</tbody>
-</table>
+</table>-->
+<ul class="sessionsList">
+	<li ng-repeat="session in sessions" ng-cloak>
+		<ul>
+			<li class="sesName"><div ng-hide="editorEnabled">{{session.tutor_session_name}}</div><form><div ng-show="editorEnabled"><input type="text" name="session_name" ng-model="session.tutor_session_name"> <button class="save_session_name" ng-click="update(session)" ng-click="editorEnabled=!editorEnabled">Save</button></div></li>
+			<li class="sesTutor">{{session.selected_tutor.user.first_name}} {{session.selected_tutor.user.last_name}}</li>
+			<li class="sesRating">{{session.rating}} &nbsp;</li>
+			<li class="sesView"><div class="ng-edit" data-session="{{session.id}}">View</div></li>
+			<li class="sesEdit"><div class="ng-edit" ng-click="editorEnabled=!editorEnabled" class="edit_session_name">Edit</div></form></li>
+		</ul>
+	</li>
+	<li ng-show="!sessions.length" ng-show="loaded">
+		<ul><li>No past Session</li></ul>
+	</li>
+</ul>
 <style type="text/css">
 .session_displayed_name{
 	padding-top: 18px; 
@@ -31,9 +45,51 @@ input[name="session_name"]{
 }
 .ng-edit{
 	color:rgba(120, 120, 120, 1);
+	margin-left: 10px; 
 }
 .ng-edit:hover{
 	cursor: pointer;
+}
+
+ul.sessionsList, ul.sessionsList li > ul{
+		list-style-type: none;
+		padding: 0;
+}
+ul.sessionsList > li{
+	background: rgba(255, 255, 255, 1);
+	padding: 10px;
+	margin-bottom: 1px;
+	border-bottom: 1px solid rgba(221, 221, 221, 1);
+	transition: box-shadow 0.3s;
+	-webkit-transition: box-shadow 0.3s;
+}
+ul.sessionsList > li:hover{
+	background: rgba();
+	box-shadow: 0 0 8px rgba(120, 120, 120, 0.5);
+}
+ul.sessionsList li > ul li{
+	margin-top: 0;
+	display: inline-block;
+	padding:15 15px;
+	padding-bottom: 0px;
+}
+li.sesName{
+	width:30%;
+	padding: 10px;
+}
+li.sesTutor{
+	width:35%;
+}
+li.sesRating{
+	width:5%;
+	position: relative;
+}
+li.sesView{
+	width:7.5%;
+	margin-right-right:10px;
+}
+li.sesEdit{
+	width:7.5%;
 }
 </style>
 

@@ -1,5 +1,5 @@
 <input type="hidden" value="" name="question" id="question" />
-<table class="tutorTable" id="tutorTable">
+<!--<table class="tutorTable" id="tutorTable">
 	<tbody>
 		<tr class="tutorDetails" ng-repeat="tutor in tutors" ng-cloak>
 		<td class="one"><img ng-src="{{ tutor.user.web_path }}" style="width:50px;"></td>
@@ -7,5 +7,95 @@
 		<td class="three"><input type="checkbox" class="tutor-check" name="potential_tutors[0][tutor]" value="{{tutor.id}}" data-tutor-id="{{tutor.id}}" data-tutor-name="{{tutor.user.first_name}} {{tutor.user.last_name}}"></td>
 		</tr>
   	</tbody>
-</table>
+</table>-->
+<ul class="tutorsList">
+	<li ng-repeat="tutor in tutors" ng-cloak ng-click="tutor.checked = !tutor.checked">
+		<ul>
+			<li class="tutorImage"><img ng-src="{{ tutor.user.web_path }}" style="width:50px;"></li>
+			<li class="tutorNameAmount"><h4><span class="tutorName">{{tutor.user.first_name}} {{tutor.user.last_name}}</span></h4><p><span class="tutorBio">{{tutor.school_amount}} From {{tutor.school_name}}</span></p><p><span class="tutorBio">{{tutor.bio}}</span></p></li>
+			<li class="tutorsRate"><p><span class="therate">{{tutor.rate}}40RP</span> <span class="permn">per minute</span></p></li>
+			<li class="tutorCheck"><input ng-model="tutor.checked" type="checkbox" class="tutor-check" name="potential_tutors[0][tutor]" value="{{tutor.id}}" data-tutor-id="{{tutor.id}}" data-tutor-name="{{tutor.user.first_name}} {{tutor.user.last_name}}"></li>
+		</ul>
+	</li>
+</ul>
+<script type="text/javascript">
+	$(function () {
+		$('ul.tutorsList li').on('click', function () {
+			$scope.$apply(function () {
+				console.log('checked');
+			});
+		});
+	});
+</script>
+<style type="text/css">
+	ul.tutorsList, ul.tutorsList li > ul{
+		list-style-type: none;
+		padding: 0;
+	}
+	ul.tutorsList > li{
+		background: rgba(255, 255, 255, 1);
+		padding: 10px;
+		margin-bottom: 1px;
+		border-bottom: 1px solid rgba(221, 221, 221, 1);
+		transition: box-shadow 0.3s;
+		-webkit-transition: box-shadow 0.3s;
+	}
+	ul.tutorsList > li:hover{
+		background: rgba();
+		box-shadow: 0 0 8px rgba(120, 120, 120, 0.5);
+	}
+	ul.tutorsList li > ul li{
+		margin-top: 0;
+		display: inline-block;
+		padding:0 15px;
+	}
+	ul.tutorsList li > ul li img{
+		width:100%;
+		height: 100%;
+		border: 1px solid rgba(221, 221, 221, 1);
+		border-radius: 35px;
+	}
+	li.tutorImage{
+		width:15%;
+		position: relative;
+		top:8px;
+	}
+	li.tutorNameAmount{
+		width:55%;
+	}
+	li.tutorNameAmount p{
+		line-height: 15px;
+	}
+	li.tutorsRate{
+		position: relative;
+		top:-3px;
+		width:15%;
+	}
+	li.tutorsRate p{
+		line-height: 10px;
+	}
+	li.tutorsRate span.therate{
+		font-size: 1.4em;
+		margin-bottom: -5px;
+	}
+	li.tutorsRate span.permn{
+		margin-top: -15px;
+		font-size: 0.7em;
+	}
+	li.tutorCheck{
+		position: relative;
+		top:-11px;
+		width:10%;
+	}
+	ul.tutorsList li > ul li h4{
+		color: rgba(10, 10, 10, 1);
+		font-size: 1.4em;
+		font-weight: 500;
+		margin-bottom: 0;
+	}
+	ul.tutorsList li > ul li span.tutorBio{
+		font-size: 0.85em;
+		font-weight: normal;
+	}
+</style>
 <input value="Connect" type="submit" class="bbutton" id="tutorConnect" name="tutorConnect">

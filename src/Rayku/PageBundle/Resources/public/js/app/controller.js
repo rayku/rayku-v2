@@ -101,10 +101,6 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
   		data.password = '';
   		$rootScope.user = data;
   	});
-  	
-  	$scope.updateUserName = function(name){
-  		$scope.user.username = name.replace(/ /g,".");
-  	}
 
     $scope.refreshUser = function () {
       $http.get(Routing.generate('get_user', {'entity':userId})).success(function(data){
@@ -129,6 +125,7 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
     $scope.profile = function(user) {
     	$http.post(Routing.generate('post_users_profile', {'user':userId}), user).success(function(data){
     		$rootScope.user = user;
+    		username = user.username; // update global username variable
     	});
     }
 });  

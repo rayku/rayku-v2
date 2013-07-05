@@ -26,8 +26,11 @@
     <div class="row modal-body">
         <form action="{{ path('post_users_tutor_registration') }}" {{ form_enctype(form) }} method="POST" class="custom registration-form" id="tutor_register_form">
             <div class="row">
-                <div class="large-12 columns">
-		            {{ form_row(form.name) }}
+            	<div class="large-6 columns">
+            		{{ form_row(form.first_name) }}
+            	</div>
+            	<div class="large-6 columns">
+            		{{ form_row(form.last_name) }}
 		        </div>
 		    </div>
             <div class="row">

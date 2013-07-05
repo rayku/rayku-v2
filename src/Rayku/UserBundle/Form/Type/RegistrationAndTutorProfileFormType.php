@@ -15,7 +15,8 @@ class RegistrationAndTutorProfileFormType extends BaseType
 		parent::buildForm($builder, $options);
 		
 		$builder
-			->add('name')
+			->add('first_name')
+			->add('last_name')
 			->remove('signup_question')
 			->remove('plainPassword')
 			->add('plainPassword', 'password', array('label' => 'Password'))

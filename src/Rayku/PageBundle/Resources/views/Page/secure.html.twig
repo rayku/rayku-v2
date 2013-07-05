@@ -38,7 +38,7 @@
 				var current_messages = parseInt($('.notif-count').html());
 				$('.notif-count').html(response.length);
 				var template = $('#connectRow_id_').prop("outerHTML");
-				template = template.replace('_name_', this.student.name);
+				template = template.replace('_name_', this.student.first_name+' '+this.student.last_name);
 				template = template.replace('_question_', this.question);
 				template = template.replace(/_id_/g, this.id);
 				if(response.length > current_messages){
@@ -75,7 +75,7 @@
 <div id="whiteboard2">
     <div id="whiteboard-header">
     	{% verbatim %}
-        <a href="{{ path('angular_dashboard') }}" class="logged-in-as bbutton home">Back Home</a>
+        <a href="{{ path('rayku_username_dashboard', {username:user.username}) }}" class="logged-in-as bbutton home">Back Home</a>
         {% endverbatim %}
     </div>
     <iframe src="" seamless></iframe>
@@ -85,7 +85,7 @@
 	<header id="header">
 	    <div class="inside">
 	    	{% verbatim %}
-	    	<a href="{{ path('angular_dashboard') }}" id="logo">
+	    	<a href="{{ path('rayku_username_dashboard', {username:user.username}) }}" id="logo">
 	    	{% endverbatim %}
 	    		<span class="beta">beta</span><img src="{{ asset('bundles/raykupage/images/logo.png') }}" alt="" />
 	    	</a>
@@ -95,11 +95,11 @@
 
 	            <a href=# class="notification" data-reveal-id="connectNotifModal"><span class="raphael">[</span><span class="notif-count">0</span></a>
 	            
-	            <a href=# class="logged-in-as"><img ng-src="{{ user.web_path }}"/> <span class="logged-in-as-name">{{ user.first_name }}</span><div class="arrow-down"></div></a> 
+	            <a href=# class="logged-in-as"><img ng-src="{{ user.web_path }}"/> <span class="logged-in-as-name">{{ user.first_name }} {{ user.last_name }}</span><div class="arrow-down"></div></a> 
 	            <div class="submenu" id="submenu">
                     <div class="arrow-up"></div>
                     <ul class="submenu-item">
-                        <li><a class="dashboard" href="{{ path('angular_dashboard') }}"><span class="raphael">L</span>Home</a></li>
+                        <li><a class="dashboard" href="{{ path('rayku_username_dashboard', {username:user.username}) }}"><span class="raphael">L</span>Home</a></li>
                         <li><a class="setting" href="{{ path('angular_profile') }}"><span class="raphael">`</span>Settings</a></li>
                         <li><a class="myprofileedit" href="{{ path('angular_settings') }}"><span class="raphael">></span>Edit Profile</a></li>
                         <li><a class="tutor" href=# data-reveal-id="myTutorModal"><span class="raphael">u</span>Become a Tutor</a></li>
@@ -130,7 +130,7 @@
 			
 			{% verbatim %}
 			<ul class="sidebar-nav">
-				<li><a class="dashboard active" href="{{ path('angular_dashboard') }}"><span class="raphael">S</span> Dashboard</a></li>
+				<li><a class="dashboard active" href="{{ path('rayku_username_dashboard', {username:user.username}) }}"><span class="raphael">S</span> Dashboard</a></li>
 				<li><a class="myprofileedit" href="{{ path('angular_profile') }}"><span class="raphael">`</span> Settings</a></li>
 				<li><a class="buyPoints" href=# data-reveal-id="buyPointsModal"><span class="raphael">#</span> Buy Points</a></li>
 				<li><a class="userWhiteboard" href=#><span class="raphael">?</span> Practice</a></li>
@@ -156,7 +156,8 @@
 			<div class="large-12 columns editprofileinfo">
 				<form ng-upload="bar" action="{{ path('post_users', {'user':user.id}) }}">
 				<ul class="userinfo">
-					<li><span class="fname">Name</span><span class="editfname"><input type="text" ng-model="user.name" name="name" ng-change="updateUserName(user.name)"></span></li>
+					<li><span class="fname">First Name</span><span class="editfname"><input type="text" ng-model="user.first_name" name="first_name"></span></li>
+					<li><span class="lname">Last Name</span><span class="editlname"><input type="text" ng-model="user.last_name" name="last_name"></span></li>
 					<li><span class="username">Username</span><span class="editusername"><input type="text" ng-model="user.username" name="username"></span></li>
 					<li><span class="degree">Degree</span><span class="editdegree"><input type="text" ng-model="user.degree" name="degree"></span></li>
 					<li><span class="grade">Level Of Education</span><span class="editgrade"><input type="text" ng-model="user.grade" name="grade"></span></li>

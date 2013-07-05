@@ -61,21 +61,12 @@ class User extends BaseUser implements ParticipantInterface
 	
 	/**
 	 * @var string
-	 * 
-	 * @ORM\Column(name="name", type="string", length=255, nullable=true)
-	 * @Assert\NotBlank(groups={"registration"})
-	 * @Serializer\Groups({"user", "user.details"})
-	 */
-	private $name;
-	
-	/**
-	 * @var string
 	 *
 	 * @ORM\Column(name="fname", type="string", length=255, nullable=false)
 	 * @Assert\NotBlank(groups={"registration"})
 	 * @Serializer\Groups({"user", "user.details"})
 	 */
-	private $first_name = 'First Name';
+	private $first_name = ' ';
 	
 	/**
 	 * @var string
@@ -254,17 +245,6 @@ class User extends BaseUser implements ParticipantInterface
     		$this->webPath = '/'.$this->getUploadDir().'/'.$this->getPath();
     	}else{
     		$this->webPath = '/default_profile.jpg';
-    	}
-    }
-    
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
-    public function createUsername()
-    {
-    	if(empty($this->username)){
-	    	$this->setUsername(str_replace(" ",".",$this->getName()));
     	}
     }
 
@@ -973,28 +953,5 @@ class User extends BaseUser implements ParticipantInterface
     public function getFavorites()
     {
         return $this->favorites;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return User
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 }

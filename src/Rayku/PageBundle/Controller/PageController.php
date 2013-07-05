@@ -42,17 +42,19 @@ class PageController extends Controller
 	 * @Route("/", name="rayku_page_homepage")
 	 * @Route("/register/confirmed", name="rayku_register_confirmed")
 	 * @Route("/dashboard", name="rayku_page_dashboard")
+	 * @Route("/#/{username}", name="rayku_username_dashboard", options={"expose"=true})
 	 * @Route("/onboarding", name="rayku_page_tutor_onboarding")
 	 * @Route("/ask", name="rayku_page_homepage_minimized_funnel")
 	 * @Template
 	 */
-	public function indexAction()
+	public function indexAction($username = null)
 	{
 		if($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')){
+			$user = $this->getUser();
 			return $this->render(
 				'RaykuPageBundle:Page:secure.html.twig',
 				array(
-					'user' => $this->getUser()
+					'user' => $user
 				)
 			);
 		}

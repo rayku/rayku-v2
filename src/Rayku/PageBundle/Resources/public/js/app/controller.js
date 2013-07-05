@@ -15,11 +15,11 @@ app.
 	config(['$routeProvider', 'routeGeneratorProvider', function($routeProvider, routeGeneratorProvider){
 		$routeProvider.
 			when(routeGeneratorProvider.generate('angular_course_view'), {templateUrl: '/bundles/raykupage/partials/course-view.html', controller: 'CourseViewCtrl'}).
-			when(routeGeneratorProvider.generate('angular_dashboard'), {templateUrl: '/bundles/raykupage/partials/dashboard-view.html'}).
+			when(routeGeneratorProvider.generate('rayku_username_dashboard', {username:username}), {templateUrl: '/bundles/raykupage/partials/dashboard-view.html'}).
 			when(routeGeneratorProvider.generate('angular_profile'), {templateUrl: '/bundles/raykupage/partials/user-edit.html'}).
 			when(routeGeneratorProvider.generate('angular_settings'), {templateUrl: '/bundles/raykupage/partials/user-settings.html'}).
 			when(routeGeneratorProvider.generate('angular_payout'), {templateUrl: '/bundles/raykupage/partials/payout.html'}).
-			otherwise({redirectTo:'/dashboard'});
+			otherwise({redirectTo:routeGeneratorProvider.generate('rayku_username_dashboard', {username:username})});
 	}]);
 
 app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){

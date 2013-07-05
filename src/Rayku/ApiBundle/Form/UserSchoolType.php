@@ -11,19 +11,19 @@ class UserSchoolType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
     	$schoolAmountChoices = array(
-    		"Freshman",
-    		"Sophomore",
-    		"Junior",
-   			"Senior",
-   			"Masters Student",
-   			"Phd Candidate",
-   			"Undergrad Degree Holder",
-    		"Masters Degree Holder",
-    		"Phd Degree Holder",
-    		"Teaching Assistant",
-   			"Professor",
-   			"Middle School Teacher",
-   			"High School Teacher"
+    		"Freshman" => "Freshman",
+    		"Sophomore" => "Sophomore",
+    		"Junior" => "Junior",
+   			"Senior" => "Senior",
+   			"Masters Student" => "Masters Student",
+   			"Phd Candidate" => "Phd Candidate",
+   			"Undergrad Degree Holder" => "Undergrad Degree Holder",
+    		"Masters Degree Holder" => "Masters Degree Holder",
+    		"Phd Degree Holder" => "Phd Degree Holder",
+    		"Teaching Assistant" => "Teaching Assistant",
+   			"Professor" => "Professor",
+   			"Middle School Teacher" => "Middle School Teacher",
+   			"High School Teacher" => "High School Teacher"
     	);
         $builder
 	        ->add('school', 'choice', array(

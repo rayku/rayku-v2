@@ -101,6 +101,10 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
   		data.password = '';
   		$rootScope.user = data;
   	});
+  	
+  	$scope.updateUserName = function(name){
+  		$scope.user.username = name.replace(/ /g,".");
+  	}
 
     $scope.refreshUser = function () {
       $http.get(Routing.generate('get_user', {'entity':userId})).success(function(data){

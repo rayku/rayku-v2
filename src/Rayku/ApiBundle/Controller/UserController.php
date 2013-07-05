@@ -47,7 +47,7 @@ class UserController extends Controller
 			$em->flush();
 			
 			
-			$route = 'rayku_page_tutor_onboarding';
+			$route = 'rayku_dashboard';
 			if ($confirmationEnabled) {
 				$this->container->get('session')->set('fos_user_send_confirmation_email/email', $user->getEmail());
 			} else {

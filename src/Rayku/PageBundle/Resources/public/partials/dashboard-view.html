@@ -7,12 +7,13 @@
 TUTOR LIST TABLE
 -------------------------------->
 	<div id="tutorList" class="large-7 columns tutor-list" ng-controller="TutorListCtrl">
-		<h3>Displaying online tutors<a href="#" class="raphael refreshTutors" ng-click="refreshTutors()">0</a></h3>
+		<h3>Displaying online tutors<a href="#" class="refreshTutors" ng-click="refreshTutors()">refresh</a></h3>
 		<form action="{{path('post_session')}}" method="post" class="custom" id="create_session">
 		<div ng-include="TutorListTemplate"></div>
 		</form>
 	</div>
-
+	
+	<!--
 	<div class="large-2 columns tutor-points">
 		<div ="pcontainer">
 			<h3><span class="raphael">#</span><span class="title">Rayku Points</span></h3>
@@ -25,12 +26,12 @@ TUTOR LIST TABLE
 			<h4>1000</h4>
 		</div>
 	</div>
-
+	-->
 <!------------------------------
 PAST SESSIONS LIST
 ---------------------------------->
 	<div class="large-5 columns" id ="sessions-list" ng-controller="SessionListCtrl">
-		<h3>Past sessions<div class="ng-edit session-refr raphael refreshSession" ng-click="refreshSessions()" style="float:right; margin-right:15px;">0</div></h3>
+		<h3>Past sessions<div class="ng-edit session-refr refreshSession" ng-click="refreshSessions()" style="float:right; margin-right:15px;">refresh</div></h3>
 		<div ng-include="SessionListTemplate"></div>
 	</div>
 </div>

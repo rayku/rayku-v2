@@ -13,7 +13,7 @@
 		<ul>
 			<li class="tutorImage"><img ng-src="{{ tutor.user.web_path }}" style="width:50px;"></li>
 			<li class="tutorNameAmount"><h4><span class="tutorName">{{tutor.user.first_name}} {{tutor.user.last_name}}</span></h4><p><span class="tutorBio">{{tutor.school_amount}} From {{tutor.school_name}}</span></p><p><span class="tutorBio">{{tutor.bio}}</span></p></li>
-			<li class="tutorsRate"><p><span class="therate">{{tutor.rate}}40RP</span> <span class="permn">per minute</span></p></li>
+			<li class="tutorsRate"><p><span class="therate">{{tutor.rate}}40</span>RP <span class="permn">per minute</span></p></li>
 			<li class="tutorCheck"><input ng-model="tutor.checked" type="checkbox" class="tutor-check" name="potential_tutors[0][tutor]" value="{{tutor.id}}" data-tutor-id="{{tutor.id}}" data-tutor-name="{{tutor.user.first_name}} {{tutor.user.last_name}}"></li>
 		</ul>
 	</li>
@@ -34,7 +34,7 @@
 	}
 	ul.tutorsList > li{
 		background: rgba(255, 255, 255, 1);
-		padding: 10px;
+		padding: 10px 0px;
 		margin-bottom: 1px;
 		border-bottom: 1px solid rgba(221, 221, 221, 1);
 		transition: box-shadow 0.3s;
@@ -63,6 +63,11 @@
 	li.tutorNameAmount{
 		width:55%;
 	}
+	li.tutorNameAmount span.tutorName{
+		color:rgba(100, 100, 100, 1);
+		font-weight: bold;
+		font-size: 1em;
+	}
 	li.tutorNameAmount p{
 		line-height: 15px;
 	}
@@ -75,7 +80,9 @@
 		line-height: 10px;
 	}
 	li.tutorsRate span.therate{
+		color:rgba(59,179,97,1);
 		font-size: 1.4em;
+		font-weight: bold;
 		margin-bottom: -5px;
 	}
 	li.tutorsRate span.permn{

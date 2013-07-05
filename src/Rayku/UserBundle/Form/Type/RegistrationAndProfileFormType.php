@@ -14,8 +14,7 @@ class RegistrationAndProfileFormType extends BaseType
 		
 		$builder
 			->add('signup_question', 'hidden', array('required' => false))
-			->add('first_name', NULL, array('label' => 'First Name'))
-			->add('last_name', NULL, array('label' => 'Last Name'))
+			->add('name', NULL, array('label' => 'Name'))
 		;
 	}
 	

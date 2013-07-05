@@ -28,6 +28,7 @@
 	<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 	<script>
 		var userId = {{ user.id }};
+		var username = '{{ user.username }}';
 	</script>
 	
 	<script type="text/javascript">
@@ -37,7 +38,7 @@
 				var current_messages = parseInt($('.notif-count').html());
 				$('.notif-count').html(response.length);
 				var template = $('#connectRow_id_').prop("outerHTML");
-				template = template.replace('_name_', this.student.first_name+' '+this.student.last_name);
+				template = template.replace('_name_', this.student.name);
 				template = template.replace('_question_', this.question);
 				template = template.replace(/_id_/g, this.id);
 				if(response.length > current_messages){
@@ -73,7 +74,9 @@
 
 <div id="whiteboard2">
     <div id="whiteboard-header">
-        <a href="#" class="logged-in-as bbutton home">Back Home</a>
+    	{% verbatim %}
+        <a href="{{ path('angular_dashboard') }}" class="logged-in-as bbutton home">Back Home</a>
+        {% endverbatim %}
     </div>
     <iframe src="" seamless></iframe>
 </div>
@@ -81,10 +84,12 @@
 <div class="container">
 	<header id="header">
 	    <div class="inside">
-	    	{% verbatim %}<a href="{{ path('angular_dashboard') }}" id="logo"{% endverbatim %}>
+	    	{% verbatim %}
+	    	<a href="{{ path('angular_dashboard') }}" id="logo">
+	    	{% endverbatim %}
 	    		<span class="beta">beta</span><img src="{{ asset('bundles/raykupage/images/logo.png') }}" alt="" />
 	    	</a>
-	        {% verbatim %}
+	    	{% verbatim %}
 	        <nav>
 	        	<a href=# class="userRateLink"><span class="userRate">{{user.points}}</span>RP</a>
 
@@ -95,9 +100,10 @@
                     <div class="arrow-up"></div>
                     <ul class="submenu-item">
                         <li><a class="dashboard" href="{{ path('angular_dashboard') }}"><span class="raphael">L</span>Home</a></li>
-                        <li><a class="setting" href="{{ path('angular_settings') }}"><span class="raphael">`</span>Settings</a></li>
-                        <li><a class="myprofileedit" href="{{ path('angular_profile') }}"><span class="raphael">></span>Edit Profile</a></li>
+                        <li><a class="setting" href="{{ path('angular_profile') }}"><span class="raphael">`</span>Settings</a></li>
+                        <li><a class="myprofileedit" href="{{ path('angular_settings') }}"><span class="raphael">></span>Edit Profile</a></li>
                         <li><a class="tutor" href=# data-reveal-id="myTutorModal"><span class="raphael">u</span>Become a Tutor</a></li>
+                        <!-- <li><a class="tutor" href=# data-reveal-id="getStartedModal"><span class="raphael">u</span>Get Started</a></li> //-->
 						<li class="divider"></li>
                         <li><a class="logout" href="{{ path('fos_user_security_logout') }}"><span class="raphael">W</span>Logout</a></li>
                     </ul>
@@ -113,50 +119,60 @@
 		<!------------------------------
 		SIDE NAVIGATION
 		-------------------------------->
+		<div class="slide-in">
+			<div class="arrow-left">
+			</div>
+		</div>
 		<div class="large-4 columns" id="sidebar" ng-controller="UserDetailCtrl">
 			<div ng-include="UsernameTemplate"></div>
 			<h3 class="userstatus"><span class="status">{% if user.isTutor %}Tutor{% endif %}{% if user.isTutor == false %}Student{% endif %}</span><span class="online">&nbsp;</span></h3>
-			<ul class="userinfo">
-				<li><span class="degree">{{ user.degree }}</span></li>
-				<li><span class="grade">{{ user.grade }}</span></li>
-				<li><span class="school">From, {{ user.school }}</span></li>
-				<li class="about"><span class="bio">{{ user.bio }}</span></li>
-			</ul>
+			<div ng-include="SidebarDetailTemplate"></div>
 			
+			{% verbatim %}
 			<ul class="sidebar-nav">
-				{% verbatim %}
 				<li><a class="dashboard active" href="{{ path('angular_dashboard') }}"><span class="raphael">S</span> Dashboard</a></li>
 				<li><a class="myprofileedit" href="{{ path('angular_profile') }}"><span class="raphael">`</span> Settings</a></li>
 				<li><a class="buyPoints" href=# data-reveal-id="buyPointsModal"><span class="raphael">#</span> Buy Points</a></li>
 				<li><a class="userWhiteboard" href=#><span class="raphael">?</span> Practice</a></li>
 				<li class="backtoWhiteboard"><a class="backWhiteboard" href=#><span class="raphael">?</span> Back to Whiteboard</a></li>
 				<li class="divider backtoWhiteboard"></li>
-				{% endverbatim %}
 			</ul>
+			{% endverbatim %}
 		</div>
 
 		<div class="large-8 columns" id="content-body" ng-view>
-		</div>
 	</div>
 </div>
 
 
-<div id="tutorLoadModal" class="reveal-modal large">
+<div id="getStartedModal" class="reveal-modal medium">
 	<div class="row header">
 		<div class="large-12 columns">
-			<h2><img src="{{ asset('bundles/raykupage/images/ajax-loader.gif') }}" /><span>Please Wait, Notifying Tutors...</span></h2>
+			<h2><span>Profile Information</span></h2>
 		</div>
 	</div>
 	<div class="row body">
-		<div class="large-12 columns">
-			<p>Approximate waiting time 5 minutes... <a href=#>Notify me when a tutor connects</a></p>
-			<form>
-				<textarea placeholder="Describe your question in detail"></textarea>
-				<input type="submit" class="bbutton">
-			</form>
+		<div ng-controller="UserDetailCtrl">
+			<div class="large-12 columns editprofileinfo">
+				<form ng-upload="bar" action="{{ path('post_users', {'user':user.id}) }}">
+				<ul class="userinfo">
+					<li><span class="fname">Name</span><span class="editfname"><input type="text" ng-model="user.name" name="name" ng-change="updateUserName(user.name)"></span></li>
+					<li><span class="username">Username</span><span class="editusername"><input type="text" ng-model="user.username" name="username"></span></li>
+					<li><span class="degree">Degree</span><span class="editdegree"><input type="text" ng-model="user.degree" name="degree"></span></li>
+					<li><span class="grade">Level Of Education</span><span class="editgrade"><input type="text" ng-model="user.grade" name="grade"></span></li>
+					<li><span class="school">School</span><span class="editschool"><input type="text" ng-model="user.school" name="school"></span></li>
+				</ul>
+				<p><span>About (<span id="charNum"></span>)</span><span><textarea class="user-bio" ng-model="user.bio" name="bio" onkeyup="countChar(this)">{{ user.bio }}</textarea></span></p>
+				<p class="profile-pic-field"><span>Profile Picture</span><span><input type="file" name="file" /></span></p>
+				<div class="row">
+					<div class="large-12">
+						<input type="submit" upload-submit="update(contents, completed)" ng-click="refreshUser()" value="Save" class="bbutton startedSave" />
+					</div>
+				</div>
+				</form>
+			</div>
 		</div>
 	</div>
-  <a class="close-reveal-modal">&#215;</a>
 </div>
 
 {% include 'RaykuPageBundle:Partials:buy_points_modal.html.twig' %}

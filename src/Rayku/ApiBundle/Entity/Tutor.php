@@ -98,6 +98,7 @@ class Tutor
      *     maxMessage = "You can't have a rate more than 500."
      * )
      * @ORM\Column(name="rate", type="float", nullable=true)
+     * @Serializer\Groups({"tutor", "tutor.details"})
      */
     private $rate;
     

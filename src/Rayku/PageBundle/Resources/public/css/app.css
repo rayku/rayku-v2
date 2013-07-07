@@ -329,7 +329,7 @@ header a span.userRate{
 	position: absolute;
 	width:175px;
 	margin-top: 8px;
-	margin-left: 35px;
+	margin-left: 2.8%;
 	display: none;
 	z-index: 2;
 }
@@ -974,9 +974,9 @@ h4 a.myprofileedit{
 	
 	background-color:#007dc1;
 	
-	-moz-border-radius:2px;
+	/*-moz-border-radius:2px;
 	-webkit-border-radius:2px;
-	border-radius:2px;
+	border-radius:2px;*/
 	
 	border:1px solid #124d77;
 	
@@ -1449,6 +1449,10 @@ h4 a.myprofileedit{
 }
 #charNum{
 	font-weight: bold;
+}
+
+#saveChanges{
+	margin-left: 40%;
 }
 @media only screen and (min-width : 320px) and (max-width : 1024px) {
 /* Styles */

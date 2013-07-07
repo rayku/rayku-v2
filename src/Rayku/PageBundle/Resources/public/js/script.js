@@ -123,6 +123,7 @@ $(window).resize(function () {
     }
 });
 
+//Counyt characters for about 
 function countChar(val) {
     var len = val.value.length;
     if (len >= 120) {

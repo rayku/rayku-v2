@@ -236,11 +236,9 @@ class User extends BaseUser implements ParticipantInterface
     	if($this->last_name == 'Last Name'){
     		$this->last_name = '';
     	}
+    	$this->setImageWebPath();
     }
     
-    /**
-     * @ORM\PostLoad()
-     */
     private function setImageWebPath()
     {
     	if(null !== $this->getPath()){

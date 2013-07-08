@@ -189,6 +189,7 @@ class UserController extends Controller
     		throw new AccessDeniedException();
     	}
     	
+    	$user->setUpdatedAt(new \DateTime('now'));
     	$editForm = $this->createForm(new UserType(), $user);
         $editForm->bind($this->getRequest());
 

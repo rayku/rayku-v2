@@ -119,7 +119,9 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
     }
   	
     $scope.update = function(content, completed) {
-    	// Don't need to do anything
+      	$http.get(Routing.generate('get_user', {'entity':userId})).success(function (data){
+      		$rootScope.user = data;
+      	});
     }
 
     $scope.profile = function(user) {

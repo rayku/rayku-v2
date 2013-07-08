@@ -258,6 +258,7 @@ class User extends BaseUser implements ParticipantInterface
     		// do whatever you want to generate a unique name
     		$filename = sha1(uniqid(mt_rand(), true));
     		$this->path = $filename.'.'.$this->getFile()->guessExtension();
+    		$this->setImageWebPath();
     	}
     }
     
@@ -284,6 +285,7 @@ class User extends BaseUser implements ParticipantInterface
     		$this->temp = null;
     	}
     	$this->file = null;
+    	$this->setImageWebPath();
     }
     
     /**

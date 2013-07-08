@@ -5,19 +5,56 @@
 			<li class="tutorImage"><img ng-src="{{ tutor.user.web_path }}" style="width:50px;"></li>
 			<li class="tutorNameAmount"><h4><span class="tutorName">{{tutor.user.first_name}} {{tutor.user.last_name}}</span></h4><p><span class="tutorBio">{{tutor.school_amount}} From {{tutor.school_name}}</span></p><p><span class="tutorBio">{{tutor.bio}}</span></p></li>
 			<li class="tutorsRate"><p><span class="therate">{{tutor.rate}}</span>RP <span class="permn">per minute</span></p></li>
-			<li class="tutorCheck"><input ng-model="tutor.checked" type="checkbox" class="tutor-check" name="potential_tutors[0][tutor]" value="{{tutor.id}}" data-tutor-id="{{tutor.id}}" data-tutor-name="{{tutor.user.first_name}} {{tutor.user.last_name}}"></li>
+			<li class="tutorCheck"><input ng-click="tutor.checked = !tutor.checked" ng-model="tutor.checked" type="checkbox" class="tutor-check" name="potential_tutors[0][tutor]" value="{{tutor.id}}" data-tutor-id="{{tutor.id}}" data-tutor-name="{{tutor.user.first_name}} {{tutor.user.last_name}}"></li>
 		</ul>
 	</li>
 </ul>
+
 <script type="text/javascript">
-	$(function () {
-		$('ul.tutorsList li').on('click', function () {
-			$scope.$apply(function () {
-				console.log('checked');
-			});
-		});
+var session = null;
+
+$(document).ready(function(){
+	//Create a session
+	$('#create_session').submit(function() {
+		$('#loading-indicator').fadeIn('fast');
 	});
+    $('#create_session').ajaxForm(function(response) {
+    	if(response.success == true){
+    		session = response.redirect;
+    		if(session !== null){
+    			$('.backtoWhiteboard').css('display', 'block');
+    			$('#whiteboard').src = session;
+		        $('#whiteboard2 iframe').attr("src", session);
+		        $('#loading-indicator').fadeOut('slow');
+		        $('input[name="tutorConnect"]').addClass('disabled').attr("disabled", "disabled");
+		        $('.container').animate({
+		            display:'none'
+		        });
+		        $('body').css('overflow', 'hidden');
+		        $('.main-header').fadeOut('fast');
+		        $('#whiteboard2').fadeIn('slow');
+    		}
+    		else{
+    			$('input[name="tutorConnect"]').removeAttr('disabled').removeClass('disabled');
+    		}   
+	    }
+	    else{
+	    	alert('There was an error starting your session');
+	    }
+    });
+    if(session == null){
+    	$('.backtoWhiteboard').css('display', 'none');
+    }
+    $('.backWhiteboard').on('click', function (){
+    	//if a session already exists, load the iframe containing it
+    	if(session !== null && $('#whiteboard2 iframe').attr("src") === session){
+    		$('.main-header').fadeOut('fast');
+			$('#whiteboard2').fadeIn('slow');
+    	}
+    });
+});
 </script>
+
 <style type="text/css">
 	ul.tutorsList, ul.tutorsList li > ul{
 		list-style-type: none;

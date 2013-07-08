@@ -334,7 +334,7 @@ header a span.userRate{
 	position: absolute;
 	width:155px;
 	margin-top: -3px;
-	margin-left: 3%;
+	margin-left: 35px;
 	display: none;
 	z-index: 2;
 }

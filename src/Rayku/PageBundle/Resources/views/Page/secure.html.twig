@@ -90,10 +90,11 @@
 	    	{% verbatim %}
 	        <nav>
 	        	<a href=# class="userRateLink"><span class="userRate">{{user.points}}</span>RP</a>
+	        	
+	        	<a href=# class="notification" data-reveal-id="connectNotifModal"><span class="raphael">[</span><span class="notif-count">0</span></a>
 
-	            <a href=# class="notification" data-reveal-id="connectNotifModal"><span class="raphael">[</span><span class="notif-count">0</span></a>
-	            
-	            <a href=# class="logged-in-as"><img ng-src="{{ user.web_path }}"/> <span class="logged-in-as-name">{{ user.first_name }}</span><div class="arrow-down"></div></a> 
+	        	<a href=# class="logged-in-as"><img ng-src="{{ user.web_path }}"/> <span class="logged-in-as-name">{{ user.first_name }}</span><div class="arrow-down"></div></a>  
+	           
 	            <div class="submenu" id="submenu">
                     <div class="arrow-up"></div>
                     <ul class="submenu-item">

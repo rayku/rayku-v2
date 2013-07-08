@@ -587,6 +587,9 @@ ul.submenu-item li a:hover {
 	padding: 10px 2px;
 	margin: 0;
 }
+.tutor-list h3 a{
+	color:rgba(120, 120, 120, 1);
+}
 .course-view h3{
 	font-weight: normal;
 	font-size: 1em;
@@ -974,9 +977,9 @@ h4 a.myprofileedit{
 	
 	background-color:#007dc1;
 	
-	/*-moz-border-radius:2px;
-	-webkit-border-radius:2px;
-	border-radius:2px;*/
+	-moz-border-radius:1px;
+	-webkit-border-radius:1px;
+	border-radius:1px;
 	
 	border:1px solid #124d77;
 	
@@ -1449,10 +1452,6 @@ h4 a.myprofileedit{
 }
 #charNum{
 	font-weight: bold;
-}
-
-#saveChanges{
-	margin-left: 40%;
 }
 @media only screen and (min-width : 320px) and (max-width : 1024px) {
 /* Styles */

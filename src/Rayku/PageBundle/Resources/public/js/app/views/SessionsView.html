@@ -1,4 +1,12 @@
 <ul class="sessionsList">
+	<li id="sesListHeader">
+		<ul>
+			<li class="sesName">Name</li>
+
+			<li class="sesTutor">Tutor</li>
+			<li class="sesRating">Rating</li>
+		</ul>
+	</li>
 	<li ng-repeat="session in sessions" ng-cloak>
 		<ul>
 			<li class="sesName"><div ng-hide="editorEnabled">{{session.tutor_session_name}}</div><form><div ng-show="editorEnabled"><input type="text" name="session_name" ng-model="session.tutor_session_name"> <button class="save_session_name" ng-click="update(session)" ng-click="editorEnabled=!editorEnabled">Save</button></div></li>
@@ -28,7 +36,6 @@ input[name="session_name"]{
 .ng-edit:hover{
 	cursor: pointer;
 }
-
 ul.sessionsList, ul.sessionsList li > ul{
 		list-style-type: none;
 		padding: 0;
@@ -68,6 +75,18 @@ li.sesView{
 }
 li.sesEdit{
 	width:7.5%;
+}
+#sesListHeader{
+	border-bottom: 1px solid rgba(10, 10, 10, 0.2);
+
+	background:rgb(240,246,250);
+	padding-top: 0;
+}
+#sesListHeader:hover{
+	box-shadow: none;
+}
+#sesListHeader ul, #sesListHeader ul li{
+	background: transparent;
 }
 </style>
 

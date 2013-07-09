@@ -177,7 +177,8 @@ header nav a.logged-in-as {
     margin-right: 10px;
 }
 header nav a.logged-in-as img{
-	width:4em;
+	width:48px;
+	height:48px;
 	border-radius: 35px;
 	padding: 5px;
 }

@@ -40,12 +40,6 @@ class User extends BaseUser implements ParticipantInterface
 	 * @Serializer\Groups({"user.details"})
 	 */
 	private $tutor;
-	
-	/**
-	 * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Order", mappedBy="user")
-	 **/
-	private $orders;
-	
 
 	/**
 	 * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Favorite", mappedBy="sender")
@@ -884,44 +878,10 @@ class User extends BaseUser implements ParticipantInterface
      */
     public function __construct()
     {
-        $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
         $this->setImageWebPath();
         $this->getIsTutor();
         
         return parent::__construct();
-    }
-    
-    /**
-     * Add orders
-     *
-     * @param \Rayku\ApiBundle\Entity\Order $orders
-     * @return User
-     */
-    public function addOrder(\Rayku\ApiBundle\Entity\Order $orders)
-    {
-        $this->orders[] = $orders;
-    
-        return $this;
-    }
-
-    /**
-     * Remove orders
-     *
-     * @param \Rayku\ApiBundle\Entity\Order $orders
-     */
-    public function removeOrder(\Rayku\ApiBundle\Entity\Order $orders)
-    {
-        $this->orders->removeElement($orders);
-    }
-
-    /**
-     * Get orders
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getOrders()
-    {
-        return $this->orders;
     }
 
     /**

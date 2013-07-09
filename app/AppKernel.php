@@ -1,7 +1,5 @@
 <?php
 
-use Vespolina\Payment\StripeBundle\VespolinaPaymentStripeBundle;
-
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
@@ -28,14 +26,11 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
         	new Jmikola\AutoLoginBundle\JmikolaAutoLoginBundle(),
         	new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
-        	new Vespolina\Payment\StripeBundle\VespolinaPaymentStripeBundle(),
         		
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
         	new JMS\DiExtraBundle\JMSDiExtraBundle($this),
         	new JMS\SerializerBundle\JMSSerializerBundle($this),
-        	new JMS\Payment\CoreBundle\JMSPaymentCoreBundle(),
-        	new JMS\Payment\PaypalBundle\JMSPaymentPaypalBundle(),
 
             // DOCTRINE
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),

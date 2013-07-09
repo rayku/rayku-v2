@@ -33,7 +33,7 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
 }).controller('TutorListCtrl', function ($scope, $rootScope, $http) {
     //For pagination
     $scope.currentPage = 0;
-    $scope.pageSize = 10;
+    $scope.pageSize = 7;
 
     //Online Tutors List Controller
     $scope.TutorListTemplate = '/bundles/raykupage/js/app/views/TutorListView.html';

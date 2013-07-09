@@ -31,12 +31,31 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
     	return Routing.generate(path, args);
     }
 }).controller('TutorListCtrl', function ($scope, $rootScope, $http) {
+    //For pagination
+    $scope.currentPage = 0;
+    $scope.pageSize = 1;
+
     //Online Tutors List Controller
     $scope.TutorListTemplate = '/bundles/raykupage/js/app/views/TutorListView.html';
-	
+
     $http.get(Routing.generate('get_tutors')).success(function(data) {
         $scope.tutors = data;
     });
+
+    $scope.numberOfPages=function(){
+      return Math.ceil($scope.tutors.length/$scope.pageSize);                
+    }
+
+    $scope.prevPage = function () {
+        if ($scope.currentPage > 0) {
+            $scope.currentPage--;
+        }
+    };
+    
+    $scope.nextPage = function () {
+      $scope.currentPage++;
+    };
+    
 
     $scope.refreshTutors = function(){
         $http.get(Routing.generate('get_tutors')).success(function(data) {
@@ -132,6 +151,14 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
     }
 });  
 
+//We already have a limitTo filter built-in to angular,
+//let's make a startFrom filter
+app.filter('startFrom', function() {
+    return function(input, start) {
+        start = +start; //parse to int
+        return input.slice(start);
+    }
+});
 
 //DIRECTIVES
 app.directive('save', function (){

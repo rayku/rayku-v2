@@ -1,6 +1,6 @@
 <input type="hidden" value="" name="question" id="question" />
 <ul class="tutorsList">
-	<li ng-repeat="tutor in tutors" ng-cloak ng-click="tutor.checked = !tutor.checked">
+	<li ng-repeat="tutor in tutors | startFrom:currentPage*pageSize | limitTo:pageSize" ng-cloak ng-click="tutor.checked = !tutor.checked">
 		<ul>
 			<li class="tutorImage"><img ng-src="{{ tutor.user.web_path }}" style="width:50px;"></li>
 			<li class="tutorNameAmount"><h4><span class="tutorName">{{tutor.user.first_name}} {{tutor.user.last_name}}</span></h4><p><span class="tutorBio">{{tutor.school_amount}} From {{tutor.school_name}}</span></p><p><span class="tutorBio">{{tutor.bio}}</span></p></li>
@@ -9,6 +9,13 @@
 		</ul>
 	</li>
 </ul>
+<button ng-disabled="currentPage == 0" ng-click="prevPage()">
+        Previous
+</button>
+{{currentPage+1}}/{{numberOfPages()}}
+<button ng-disabled="currentPage >= tutors.length/pageSize - 1" ng-click="nextPage()">
+    Next
+</button>
 
 <script type="text/javascript">
 var session = null;

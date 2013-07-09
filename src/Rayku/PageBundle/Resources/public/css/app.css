@@ -651,7 +651,15 @@ table, th, td
 	margin-top:0;
 	margin-bottom:0;
 }
+.tutor-list .pagination{
+	float: left;
+	width: 50%;
+	margin-left: 0px;
+	margin-top: 10px;
+}
+.tutor-list .pagination button{
 
+}
 .tutorDetails{
 	margin: 0;
 	padding: 0;
@@ -686,9 +694,8 @@ table, th, td
 }
 #tutorConnect{
 	opacity: 1;
-	position: relative;
-	left:42%;
-	margin-top: 10px;
+	float:right;
+	margin-top: 5px;
 }
 .disabled{
 	opacity: 0.5;

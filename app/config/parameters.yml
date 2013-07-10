@@ -33,3 +33,9 @@ parameters:
     rayku_referral.listener.kernel.cookie_param_referer: referrer
     rayku_referral.listener.kernel.reward_referrer: 200
     rayku_referral.listener.kernel.reward_referral: 500
+    
+    omni_pay.gateway.name: Stripe
+    omni_pay.gateway.class: Omnipay\Stripe\Gateway
+
+    payment.gateway.api_key: "sk_live_wD3nzHCxEqRo52mNKDjl2WsM"
+    

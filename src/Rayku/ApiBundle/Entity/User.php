@@ -180,6 +180,15 @@ class User extends BaseUser implements ParticipantInterface
 	 */
 	private $file;
 	
+
+	/**
+	 * @var \User
+	 *
+	 * @ORM\OneToOne(targetEntity="\Rayku\ApiBundle\Entity\CreditCard", cascade={"persist"})
+	 * @ORM\JoinColumn(name="credit_card_id", referencedColumnName="id")
+	 */
+	private $credit_card;
+	
 	/**
 	 * @var \DateTime
 	 *
@@ -915,5 +924,28 @@ class User extends BaseUser implements ParticipantInterface
     public function getFavorites()
     {
         return $this->favorites;
+    }
+
+    /**
+     * Set credit_card
+     *
+     * @param \Rayku\ApiBundle\Entity\CreditCard $creditCard
+     * @return User
+     */
+    public function setCreditCard(\Rayku\ApiBundle\Entity\CreditCard $creditCard = null)
+    {
+        $this->credit_card = $creditCard;
+    
+        return $this;
+    }
+
+    /**
+     * Get credit_card
+     *
+     * @return \Rayku\ApiBundle\Entity\CreditCard 
+     */
+    public function getCreditCard()
+    {
+        return $this->credit_card;
     }
 }

@@ -158,6 +158,12 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type, alias: coupon_code }
+    rayku_payment_gateway:
+        class: "%omni_pay.gateway.class%"
+        factory_class: Omnipay\Common\GatewayFactory
+        factory_method: create
+        arguments: 
+            - "%omni_pay.gateway.name%"
 
 jms_security_extra:
     expressions: true

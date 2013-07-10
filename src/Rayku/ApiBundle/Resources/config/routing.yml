@@ -21,4 +21,7 @@ rayku_message_rest:
 rayku_course_rest:
     resource: Rayku\ApiBundle\Controller\CourseController
     type:     rest
-    
+
+rayku_credit_card_rest:
+    resource: Rayku\ApiBundle\Controller\CreditCardController
+    type:     rest

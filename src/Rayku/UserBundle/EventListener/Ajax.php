@@ -37,6 +37,9 @@ class Ajax
 			$results = $event->getControllerResult();
 			
 			foreach($results as $key => $result){
+				if($key == 'success' && $result == false){
+					$formError = true;
+				}
 				if($result instanceof \Symfony\Component\Form\Form){
 					foreach($result->getChildren() as $child){
 						// @todo properly iterate subchildren
@@ -50,7 +53,6 @@ class Ajax
 							$event->stopPropagation();
 							$return['success'] = false;
 							$return['errors'][$child->createView()->get('id')] = $this->translator->trans($error->getMessage(), array(), 'validators');
-							$response->setStatusCode(400);
 						}
 					}
 				}else{
@@ -58,6 +60,7 @@ class Ajax
 				}
 			}
 			if($formError){
+				$response->setStatusCode(400);
 				$response->setContent($this->serializer->serialize($return, 'json'));
 			}else{
 				$response->setContent($this->serializer->serialize($results, 'json'));

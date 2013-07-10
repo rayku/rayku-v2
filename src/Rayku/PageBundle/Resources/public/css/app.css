@@ -174,25 +174,31 @@ header nav a.logged-in-as {
     font-size:12px;
     font-weight:500;
     text-decoration:none;
-    margin-right: 10px;
+    margin-right: 0px;
+    margin-left: 0px;
+    width: 175px;
 }
 header nav a.logged-in-as img{
 	width:48px;
 	height:48px;
 	border-radius: 35px;
 	padding: 5px;
+	float: left;
 }
 header nav a.logged-in-as .arrow-down{
-	position: relative;
-	top:-30px;
+	float: left;
+	margin-top:-25px;
 }
 header nav a.logged-in-as span.logged-in-as-name{
-	position: relative;
-	top:-30px;
+	float:left;
 	color:rgba(221, 221, 221, 1);
 	font-weight: bold;
 	left: 50px;
-	max-width:100px;
+	max-width:95px;
+	margin-top: 19px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 header nav a.logged-in-as:active {
     position:relative;
@@ -266,8 +272,8 @@ header nav a.logged-in-as:active {
 }
 header nav a.notification{
 	position: relative;
-	top:-28px;
-	margin-right: -15px;
+	top:-18px;
+	margin-right: -12px;
 	font-size: 20px; 
 	padding:5px 5px;
 	color: rgba(221, 221, 221, 1);
@@ -312,8 +318,8 @@ header nav a.settings span.raphael{
 }
 header a.userRateLink{
 	position: relative;
-	top:-25px;
-	margin-right: -15px;
+	top:-18px;
+	margin-right: -12px;
 	color:rgba(221, 221, 221,1);
 }
 header a span.userRate{
@@ -332,10 +338,10 @@ header a span.userRate{
 
 /*Submenu*/
 .submenu{
-	position: absolute;
+	position: relative;
 	width:155px;
-	margin-top: -3px;
-	margin-left: 35px;
+	margin-top: 3px;
+	margin-left: 42px;
 	display: none;
 	z-index: 2;
 }
@@ -652,7 +658,7 @@ table, th, td
 	margin-top:0;
 	margin-bottom:0;
 }
-.tutor-list .pagination{
+.tutor-list .pagination, #sessions-list .pagination{
 	float: left;
 	width: 50%;
 	margin-left: 0px;

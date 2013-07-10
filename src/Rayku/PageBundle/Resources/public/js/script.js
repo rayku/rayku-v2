@@ -5,7 +5,8 @@ var abs = hash.split('/');
 
 $(document).ready(function(){
 	//Show dropdown navigation
-    $('a.logged-in-as').on('mouseenter',function(){
+    $('a.logged-in-as').on('click',function(event){
+        event.preventDefault();
             $('div.submenu').slideToggle(100);
         }
     );

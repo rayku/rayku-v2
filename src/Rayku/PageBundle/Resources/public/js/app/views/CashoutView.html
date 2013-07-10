@@ -1,0 +1,41 @@
+<div class="row content-header">
+	<h3><span class="raphael">`</span> Cashout</h3>
+</div>
+
+<div class="row userprofile" id="userprofile">
+	<div class="large-12 columns" id="profile">
+		<div class="row" ng-controller="UserDetailCtrl">
+			<div class="large-3 columns sidenav">
+				<!--<img ng-src="{{ user.web_path }}" style="height:150px;">-->
+				<h3>Account</h3>
+				<ul class="profilenav">
+					<li><a href="{{ path('angular_profile') }}" class="myprofile">Profile</a></li>
+					<li><a href="{{ path('angular_payout') }}" class="payout">Payout</a></li>
+					<li><a href="{{ path('angular_settings') }}" class="mysettings">Settings</a></li>
+					<li><a href="{{ path('angular_settings') }}" class="mysettings">Cashout</a></li>
+				</ul>
+			</div>
+
+			<div ng-controller="UserDetailCtrl">
+				<div class="large-9 columns editprofileinfo">
+					<form ng-upload="bar" action="{{ path('post_users', {'user':user.id}) }}">
+
+					<ul class="userinfo">
+						<li><span class="fname">First Name</span><span class="editfname"><input type="text" ng-model="user.first_name" name="first_name"></span></li>
+						<li><span class="lname">Last Name</span><span class="editlname"><input type="text" ng-model="user.last_name" name="last_name"></span></li>
+						<li><span class="degree">Email</span><span class="editdegree"><input type="text" ng-model="user.degree" name="degree"></span></li>
+						<li><span class="grade">Amount of Rayku Points to be cashed out</span><span class="editgrade"><input type="text" ng-model="user.grade" name="grade"></span></li>
+						<li><span class="school">School</span><span class="editschool"><input type="text" ng-model="user.school" name="school"></span></li>
+					</ul>
+					<p><span>About</span><span><textarea class="user-bio" ng-model="user.bio" name="bio" onkeyup="countChar(this)">{{ user.bio }}</textarea></span></p>
+					<p><span>Profile Picture</span><span><input type="file" name="file" /></span></p>
+					<div class="row">
+							<input type="submit" upload-submit="update(contents, completed)" value="Save Changes" id="saveChanges" class="bbutton" />
+					</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

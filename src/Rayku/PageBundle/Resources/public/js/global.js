@@ -47,7 +47,7 @@ $(function(){
     });
     
     //Show dropdown navigation
-    $('a.logged-in-as').on('mouseenter',function(){
+    $('a.logged-in-as').on('click',function(){
             $('div.submenu').slideToggle(300);
         }
     );

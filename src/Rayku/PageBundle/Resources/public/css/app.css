@@ -338,7 +338,7 @@ header a span.userRate{
 
 /*Submenu*/
 .submenu{
-	position: relative;
+	position: fixed;
 	width:155px;
 	margin-top: 3px;
 	margin-left: 42px;

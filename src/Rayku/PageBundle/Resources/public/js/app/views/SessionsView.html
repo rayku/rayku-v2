@@ -7,7 +7,7 @@
 			<li class="sesRating">Rating</li>
 		</ul>
 	</li>
-	<li ng-repeat="session in sessions" ng-cloak>
+	<li ng-repeat="session in sessions | startFrom:currentPage*pageSize | limitTo:pageSize" ng-cloak>
 		<ul>
 			<li class="sesName"><div ng-hide="editorEnabled">{{session.tutor_session_name}}</div><form><div ng-show="editorEnabled"><input type="text" name="session_name" ng-model="session.tutor_session_name"> <button class="save_session_name" ng-click="update(session)" ng-click="editorEnabled=!editorEnabled">Save</button></div></li>
 			<li class="sesTutor">{{session.selected_tutor.user.first_name}} {{session.selected_tutor.user.last_name}}</li>
@@ -20,6 +20,16 @@
 		<ul><li>No past Session</li></ul>
 	</li>
 </ul>
+
+<div class="pagination" ng-cloak>
+<button type="button"  ng-cloak ng-disabled="currentPage == 0" ng-click="prevPage()">
+        «
+</button>
+{{currentPage+1}}/{{numberOfPages()}}
+<button type="button" ng-cloak ng-disabled="currentPage >= tutors.length/pageSize - 1" ng-click="nextPage()">
+    »
+</button>
+</div>
 
 <style type="text/css">
 .session_displayed_name{

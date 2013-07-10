@@ -73,6 +73,10 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
       
     }
 }).controller('SessionListCtrl', function ($scope, $rootScope, $http, $templateCache, $timeout) {
+    //For pagination
+    $scope.currentPage = 0;
+    $scope.pageSize = 10;
+
     //Sessions List Controller
     $scope.SessionListTemplate = '/bundles/raykupage/js/app/views/SessionsView.html';
 
@@ -81,6 +85,20 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
       }).error(function (data) {
         $scope.error = data || "Request failed";
     });
+
+    $scope.numberOfPages=function(){
+      return Math.ceil($scope.sessions.length/$scope.pageSize);                
+    }
+
+    $scope.prevPage = function () {
+        if ($scope.currentPage > 0) {
+            $scope.currentPage--;
+        }
+    };
+    
+    $scope.nextPage = function () {
+      $scope.currentPage++;
+    };
 
     $scope.refreshSessions = function () {
       $http.get(Routing.generate('get_sessions', {'activeRequests':0})).success(function (data){

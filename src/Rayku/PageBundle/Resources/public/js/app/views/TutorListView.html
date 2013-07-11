@@ -4,7 +4,7 @@
 		<ul>
 			<li class="tutorImage"><img ng-src="{{ tutor.user.web_path }}" style="width:50px;"></li>
 			<li class="tutorNameAmount"><h4><span class="tutorName">{{tutor.user.first_name}} {{tutor.user.last_name}}</span></h4><p><span class="tutorBio">{{tutor.school_amount}} From {{tutor.school_name}}</span></p><p><span class="tutorBio">{{tutor.bio}}</span></p></li>
-			<li class="tutorsRate"><p><span class="therate">{{tutor.rate}}</span>RP <span class="permn">per minute</span></p></li>
+			<li class="tutorsRate"><p><span class="therate">{{tutor.rate}}</span>RP <br><span class="permn">per minute</span></p></li>
 			<li class="tutorCheck"><input ng-click="tutor.checked = !tutor.checked" ng-model="tutor.checked" type="checkbox" class="tutor-check" name="potential_tutors[0][tutor]" value="{{tutor.id}}" data-tutor-id="{{tutor.id}}" data-tutor-name="{{tutor.user.first_name}} {{tutor.user.last_name}}"></li>
 		</ul>
 	</li>

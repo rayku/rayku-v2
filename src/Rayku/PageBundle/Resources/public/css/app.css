@@ -188,6 +188,7 @@ header nav a.logged-in-as img{
 header nav a.logged-in-as .arrow-down{
 	float: left;
 	margin-top:-27px;
+	margin-right: -5px;
 }
 header nav a.logged-in-as span.logged-in-as-name{
 	float:left;

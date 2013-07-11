@@ -89,10 +89,14 @@
 	    	</a>
 	    	{% verbatim %}
 	        <nav>
+	        	<ul class="navigation">
+	        	<li>
 	        	<a href=# class="userRateLink"><span class="userRate">{{user.points}}</span>RP</a>
-	        	
+	        	</li>
+	        	<li>
 	        	<a href=# class="notification" data-reveal-id="connectNotifModal"><span class="raphael">[</span><span class="notif-count">0</span></a>
-
+	        	</li>
+				<li>
 	        	<a href=# class="logged-in-as"><img ng-src="{{ user.web_path }}"/> <span class="logged-in-as-name">{{ user.first_name }}</span><div class="arrow-down"></div></a>  
 	           
 	            <div class="submenu" id="submenu">
@@ -108,6 +112,8 @@
                         <li><a class="logout" href="{{ path('fos_user_security_logout') }}"><span class="raphael">W</span>Logout</a></li>
                     </ul>
                 </div>
+                </li>
+            	</ul>
 	        </nav>
 	        {% endverbatim %}
 	    </div>

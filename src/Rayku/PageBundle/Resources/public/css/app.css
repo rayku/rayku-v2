@@ -670,10 +670,17 @@ table, th, td
 	margin-bottom:0;
 }
 .tutor-list .pagination, #sessions-list .pagination{
-	float: left;
-	width: 50%;
-	margin-left: 0px;
+	float: right;
+	width: 15%;
+	margin-right: 0px;
 	margin-top: 10px;
+	padding-left: 10px;
+	padding-right: 0;
+}
+#sessions-list .pagination{
+	width: 25%;
+	padding-left: 30px;
+	padding-right: 0;
 }
 .tutor-list .pagination button{
 	font-weight: 12px;
@@ -712,7 +719,7 @@ table, th, td
 }
 #tutorConnect{
 	opacity: 1;
-	float:right;
+	float:left;
 	margin-top: 5px;
 }
 .disabled{

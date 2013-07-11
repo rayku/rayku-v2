@@ -187,7 +187,7 @@ header nav a.logged-in-as img{
 }
 header nav a.logged-in-as .arrow-down{
 	float: left;
-	margin-top:-25px;
+	margin-top:-27px;
 }
 header nav a.logged-in-as span.logged-in-as-name{
 	float:left;
@@ -195,7 +195,8 @@ header nav a.logged-in-as span.logged-in-as-name{
 	font-weight: bold;
 	left: 50px;
 	max-width:95px;
-	margin-top: 19px;
+	margin-top: 15px;
+	margin-left: 5px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -274,7 +275,7 @@ header nav a.notification{
 	position: relative;
 	top:-18px;
 	margin-right: -12px;
-	font-size: 20px; 
+	font-size: 30px; 
 	padding:5px 5px;
 	color: rgba(221, 221, 221, 1);
 }

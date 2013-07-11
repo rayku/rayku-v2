@@ -346,52 +346,63 @@ ul.navigation li{
 /*Submenu*/
 .submenu{
 	position: absolute;
-	width:165px;
-	margin-top: 0px;
+	width:170px;
+	margin-top: -5px;
 	display: none;
 	z-index: 2;
 }
 ul.submenu-item{
-	background: rgba(255, 255, 255, 1);
+	background: rgba(39, 39, 39, 1);
 	list-style-type: none;
 	box-shadow: 0 0 8px rgba(10, 10, 10, 0.2);
 	padding:3px 0px;
-	border-radius: 3px;
-	border-radius: 3px;
-	border:1px solid rgba(120, 120, 120, 1);
 }
 
 ul.submenu-item li{
 	width: 100%;
-	padding:7px 3px;
+	padding:5px 5px;
 	margin:0;
 }
 ul.submenu-item li:first-child{
-	margin-bottom: -25px;
+	border-bottom: 1px solid rgba(10, 10, 10, 0.3);
 }
 ul.submenu-item li:last-child{
-	margin-top: -7px;
+	border-top: 1px solid rgba(50, 50, 50, 0.6);
+	padding:8px 5px;
+}
+ul.submenu-item li:nth-child(2){
+	border-top: 1px solid rgba(50, 50, 50, 0.6);
+}
+ul.submenu-item li:nth-child(4){
+	border-bottom: 1px solid rgba(10, 10, 10, 0.3);
 }
 ul.submenu-item li:hover{
-	background: rgba(221, 221, 221, 0.5);
+	background: rgba(200, 200, 200, 0.1);
 }
 ul.submenu-item li.divider{
 	padding:0;
 	margin: 0;
-	border-bottom: 1px solid rgba(221, 221, 221, 0.3);
-	border-top: 1px solid rgba(200, 200, 200, 0.5);
+	margin-top: -10px;
+	border-top: 1px solid rgba(10, 10, 10, 0.5);
+	border-bottom: 1px solid rgba(50, 50, 50, 0.5);
 }
 ul.submenu-item li a{
 	font-family:Arial;
-	font-size: 13px;
+	font-size: 0.9em;
 	text-shadow:none;
-	color:rgba(81, 81, 81, 1);
+	color:rgba(221, 221, 221, 1);
 	
 	padding:10px;
 	padding-right: 100px;
 }
 ul.submenu-item li a:hover {
 	text-decoration: none;
+}
+ul.submenu-item li span.nav-desc{
+	position: relative;
+	top:-6px;
+	font-size: 0.8em;
+	margin-left: 10px;
 }
 .connectNotif h2{
 	border-bottom: 1px solid rgba(221, 221, 221, 1);

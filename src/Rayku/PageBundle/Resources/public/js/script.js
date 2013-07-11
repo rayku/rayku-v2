@@ -7,12 +7,19 @@ $(document).ready(function(){
 	//Show dropdown navigation
     $('a.logged-in-as').on('click',function(event){
         event.preventDefault();
-            $('div.submenu').slideToggle(100);
+        $(this).css('background', 'rgba(200, 200, 200, 0.1)');
+            $('div.submenu').slideDown(100);
         }
     );
     $('.submenu').on('mouseleave', function(){
         $(this).slideUp(30);
+        $('a.logged-in-as').css('background', 'transparent');
     });
+
+    if($('.submenu').is(":visible")){
+        console.log('Submenu is visible');
+        $('a.logged-in-as').css('background', 'rgba(200, 200, 200, 0.1)');
+    }
 
     $('#sidebar ul.sidebar-nav li a').click(function(){
     	var navitem = $(this).text().substr(1);

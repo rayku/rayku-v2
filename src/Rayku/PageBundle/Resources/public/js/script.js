@@ -14,13 +14,13 @@ $(document).ready(function(){
         $(this).slideUp(30);
     });
 
-    $('#sidebar ul.sidebar-nav li a').click(function(){
+    /*$('#sidebar ul.sidebar-nav li a').click(function(){
     	var navitem = $(this).text().substr(1);
     	var icon = $(this).text().charAt(0);
     	$(this).parent().siblings().find('a').removeClass('active');
     	$(this).addClass('active');
     	$('.content-header h3').html('<span class="raphael">'+ icon +'</span>' + navitem);
-    });
+    });*/
 
 
     $('a.setting').click(function (e) {

@@ -578,6 +578,14 @@ ul.submenu-item li a:hover {
 	font-weight: normal;
 	font-size: 1.4em;
 }
+#content-body .content-header h3 span.raphael{
+	font-size: 25px;
+}
+#content-body .content-header h3 span.text{
+	font-size: 25px;
+	position: relative;
+	top:-1px;
+}
 #content {
 	margin-top: 65px;
 }
@@ -611,6 +619,7 @@ ul.submenu-item li a:hover {
 	padding: 10px 2px;
 	margin: 0;
 }
+
 .tutor-list h3 a{
 	color:rgba(120, 120, 120, 1);
 }

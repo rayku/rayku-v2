@@ -425,7 +425,6 @@ ul.submenu-item li a:hover {
    	height:auto !important; 
 	width: 18%;
 	background: rgba(39, 39, 39, 1);
-	box-shadow: 3px 0 0px rgba(10, 10, 10, 0.2);
 	margin: 0;
 	padding: 0;
 	z-index: 2;

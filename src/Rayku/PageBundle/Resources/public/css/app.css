@@ -18,7 +18,7 @@ html{
 }
 body {
 	/*background: url(../images/bg.png);*/
-	background-image: url('http://www.rayku.local/bundles/raykupage/images/bg.png');
+	background-image: url('/bundles/raykupage/images/bg.png');
 	font-family: Helvetica Neue, 'Open Sans',sans-serif;
 	font-size: 0.9em;
 	color: #8c8c8c;
@@ -567,7 +567,7 @@ ul.submenu-item li span.nav-desc{
 	min-height: 100%; 
    	height:auto !important; 
 	width:82%;
-	background-image: url('http://www.rayku.local/bundles/raykupage/images/bg.png');
+	background-image: url('/bundles/raykupage/images/bg.png');
 	padding: 0px 35px;
 	padding-bottom: 15px;
 	z-index: 1;
@@ -1552,7 +1552,7 @@ h4 a.myprofileedit{
 		min-height: 100%; 
 	   	height:auto !important; 
 		width:82%;
-		background-image: url('http://www.rayku.local/bundles/raykupage/images/bg.png');
+		background-image: url('/bundles/raykupage/images/bg.png');
 		padding: 0px 35px;
 		padding-bottom: 15px;
 		z-index: 1;

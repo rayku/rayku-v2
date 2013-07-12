@@ -277,7 +277,7 @@ header nav a.logged-in-as:active {
 header nav a.notification{
 	position: relative;
 	top:-18px;
-	margin-right: -12px;
+	margin-right: -5px;
 	font-size: 30px; 
 	padding:5px 5px;
 	color: rgba(221, 221, 221, 1);

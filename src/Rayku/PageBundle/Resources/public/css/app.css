@@ -174,9 +174,11 @@ header nav a.logged-in-as {
     font-size:12px;
     font-weight:500;
     text-decoration:none;
+    padding-left: 0;
+    padding-right: 0;
     margin-right: 0px;
     margin-left: 0px;
-    width: 175px;
+    width: 165px;
 }
 header nav a.logged-in-as img{
 	width:48px;
@@ -347,7 +349,7 @@ ul.navigation li{
 /*Submenu*/
 .submenu{
 	position: absolute;
-	width:170px;
+	width: 165px;
 	margin-top: -5px;
 	display: none;
 	z-index: 2;
@@ -357,6 +359,8 @@ ul.submenu-item{
 	list-style-type: none;
 	box-shadow: 0 0 8px rgba(10, 10, 10, 0.2);
 	padding:3px 0px;
+	margin-left: 0;
+	width: 165px;
 }
 
 ul.submenu-item li{
@@ -599,6 +603,9 @@ ul.submenu-item li span.nav-desc{
 }
 #content {
 	margin-top: 65px;
+}
+input[name="ask"]{
+	background: rgba(255, 255, 255, 1);
 }
 #categories{
 	background: rgba(255, 255, 255, 1);

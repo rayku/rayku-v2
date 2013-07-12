@@ -20,7 +20,6 @@ class SessionRepository extends EntityRepository
 			->setParameter('tutorId', $tutor_id)
 			->setParameter('expire_session', date('Y-m-d H:i:s', strtotime($expire_session)))
 			->getQuery();		
-		
 		try{
 			return $query->getResult();
 		} catch (\Doctrine\ORM\NoResultException $e) {

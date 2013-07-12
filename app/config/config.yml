@@ -46,6 +46,8 @@ doctrine:
                 user:     %database_user%
                 host:     %database_host%
                 password: %database_password%
+                mapping_types:
+                    enum: string
         types:
             json: Sonata\Doctrine\Types\JsonType
 

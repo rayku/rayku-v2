@@ -2,6 +2,8 @@
 
 namespace Rayku\ApiBundle\Controller;
 
+use Rayku\ApiBundle\Entity\Invoice;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,7 +16,10 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use JMS\SecurityExtraBundle\Annotation\SecureParam;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Rayku\ApiBundle\Entity\CreditCard;
+use Rayku\ApiBundle\Entity\User;
+use Rayku\ApiBundle\Entity\Transaction;
 use Rayku\ApiBundle\Form\CreditCardType;
+use Rayku\ApiBundle\Form\InvoiceType;
 /**
  * RestCreditCard controller.
  */
@@ -28,12 +33,61 @@ class CreditCardController extends Controller
      *     400="Returned when there is an error",
      *     401="Returned when unauthorized"
      *   },
-	 *   description="Chardge a Credit Card"
+	 *   description="Chardge a Credit Card",
+	 *   input="Rayku\ApiBundle\Form\InvoiceType"
 	 * )
+	 * @param \Rayku\ApiBundle\Entity\CreditCard $card
 	 */
-	public function postCreditCardsChargeAction()
+	public function postCreditcardChargeAction(CreditCard $card)
 	{
-		die(__LINE__.' '.__FILE__);
+		$user = $this->getUser();
+		
+		if($user !== $card->getUser()){
+			throw new AccessDeniedException();
+		}
+		
+		$invoice = new Invoice();
+		$invoice->setUser($user);
+		$form = $this->createForm(new InvoiceType(), $invoice)->bind($this->getRequest());
+		
+		if($form->isValid()){
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($invoice);
+			
+			$gateway = $this->get('rayku_payment_gateway')->setApiKey($this->container->getParameter('payment.gateway.api_key'));
+			$response = $gateway->purchase(array(
+				'amount' => $invoice->getCost(),
+				'currency' => 'CAD',
+				'cardReference' => $card->getReference()		
+			))->send();
+			
+			$transaction = new Transaction();
+			$transaction->setUser($user);
+			$transaction->setCard($card);
+			$transaction->setCost($invoice->getCost());
+			$transaction->setReference($response->getTransactionReference());
+			$transaction->setData(serialize($response->getData()));
+			
+			if($response->isSuccessful()){
+				$transaction->setStatus('successful');
+				$invoice->setStatus('successful');
+				$em->persist($invoice);
+				$em->persist($transaction);
+				$em->flush();
+				
+				return array('success' => true, 'invoice' => $invoice);
+			}
+			
+			$transaction->setStatus('failed');
+			$em->persist($transaction);
+			$em->flush();
+			
+			return array('success' => false, 'invoice' => $invoice, 'message' => $response->getMessage());
+		}else{
+			\Doctrine\Common\Util\Debug::dump($form->getErrorsAsString());
+			die(__LINE__.' '.__FILE__);
+		}
+		return array('form' => $form, 'success' => false);
 	}
 	
 	/**
@@ -49,7 +103,7 @@ class CreditCardController extends Controller
 	 *   input="Rayku\ApiBundle\Form\CreditCardType"
 	 * )
 	 */
-	public function postCreditCardsAction()
+	public function postCreditcardAction()
 	{
 		$form = $this->createForm(new CreditCardType())->bind($this->getRequest());
 		

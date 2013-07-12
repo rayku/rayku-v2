@@ -48,6 +48,16 @@ class User extends BaseUser implements ParticipantInterface
 	private $favorites;
 	
 	/**
+	 * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Transaction", mappedBy="user")
+	 **/
+	private $transactions;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Invoice", mappedBy="user")
+	 **/
+	private $invoices;
+	
+	/**
 	 * @var integer
 	 * @ORM\Column(name="points", type="integer", nullable=false)
 	 */
@@ -184,8 +194,7 @@ class User extends BaseUser implements ParticipantInterface
 	/**
 	 * @var \User
 	 *
-	 * @ORM\OneToOne(targetEntity="\Rayku\ApiBundle\Entity\CreditCard", cascade={"persist"})
-	 * @ORM\JoinColumn(name="credit_card_id", referencedColumnName="id")
+	 * @ORM\OneToOne(targetEntity="\Rayku\ApiBundle\Entity\CreditCard", mappedBy="user")
 	 */
 	private $credit_card;
 	
@@ -387,7 +396,7 @@ class User extends BaseUser implements ParticipantInterface
      * @param integer $points
      * @return User
      */
-    public function setPoints($points)
+    private function setPoints($points)
     {
         $this->points = $points;
     
@@ -947,5 +956,71 @@ class User extends BaseUser implements ParticipantInterface
     public function getCreditCard()
     {
         return $this->credit_card;
+    }
+
+    /**
+     * Add transactions
+     *
+     * @param \Rayku\ApiBundle\Entity\Transaction $transactions
+     * @return User
+     */
+    public function addTransaction(\Rayku\ApiBundle\Entity\Transaction $transactions)
+    {
+        $this->transactions[] = $transactions;
+    
+        return $this;
+    }
+
+    /**
+     * Remove transactions
+     *
+     * @param \Rayku\ApiBundle\Entity\Transaction $transactions
+     */
+    public function removeTransaction(\Rayku\ApiBundle\Entity\Transaction $transactions)
+    {
+        $this->transactions->removeElement($transactions);
+    }
+
+    /**
+     * Get transactions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTransactions()
+    {
+        return $this->transactions;
+    }
+
+    /**
+     * Add invoices
+     *
+     * @param \Rayku\ApiBundle\Entity\Invoice $invoices
+     * @return User
+     */
+    public function addInvoice(\Rayku\ApiBundle\Entity\Invoice $invoices)
+    {
+        $this->invoices[] = $invoices;
+    
+        return $this;
+    }
+
+    /**
+     * Remove invoices
+     *
+     * @param \Rayku\ApiBundle\Entity\Invoice $invoices
+     */
+    public function removeInvoice(\Rayku\ApiBundle\Entity\Invoice $invoices)
+    {
+        $this->invoices->removeElement($invoices);
+    }
+
+    /**
+     * Get invoices
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getInvoices()
+    {
+        return $this->invoices;
     }
 }

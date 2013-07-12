@@ -54,7 +54,7 @@ class AppKernel extends Kernel
         	new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
 
             // Enable this if you want to audit backend action
-            new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
+            //new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
         	
         	// Rayku
             new Rayku\PageBundle\RaykuPageBundle(),

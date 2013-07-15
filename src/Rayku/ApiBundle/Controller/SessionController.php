@@ -359,5 +359,33 @@ class SessionController extends Controller
 		}
 		return $form;
 	}
+
+	/**
+	 * @View(serializerGroups={"session.details", "user", "tutor"})
+	 * @ApiDoc(
+	 *   description="Get active sessions for a tutor or a student",
+	 *   statusCodes={
+	 *     200="Returned when successful"
+	 *   }
+	 * )
+	 */
+	public function getStudentsessionAction()
+	{
+		$em = $this->getDoctrine()->getManager();
+		//if the user is a tutor and a student
+		if($this->getUser()){
+			if(!$this->getUser()->getIsTutor()){
+				$tutorId = 0; //get the users tutor ID
+			}else{
+				$tutorId = $this->getUser()->getTutor()->getId(); //get the users tutor ID
+			}
+
+			$studentId = $this->getUser()->getId(); // get the users student ID
+			$query = $em->createQuery('SELECT s FROM RaykuApiBundle:Session s WHERE s.student='.$studentId.'OR s.selectedTutor='.$tutorId);
+			$sessions = $query->getResult();
+		}//else if the user is not a tutor
+
+		return $sessions;
+	}
 }
 

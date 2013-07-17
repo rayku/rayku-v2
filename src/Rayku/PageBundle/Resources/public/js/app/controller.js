@@ -15,6 +15,8 @@ app.
 	config(['$routeProvider', 'routeGeneratorProvider', function($routeProvider, routeGeneratorProvider){
 		$routeProvider.
 			when(routeGeneratorProvider.generate('angular_course_view'), {templateUrl: '/bundles/raykupage/partials/course-view.html', controller: 'CourseViewCtrl'}).
+      when(routeGeneratorProvider.generate('rayku_page_tutor_onboard'), {templateUrl: '/bundles/raykupage/js/app/views/onboarding/TutorOnboard.html'}).
+      when(routeGeneratorProvider.generate('rayku_page_tutor_quiz'), {templateUrl: '/bundles/raykupage/js/app/views/onboarding/TutorQuiz.html'}).
 			when(routeGeneratorProvider.generate('rayku_username_dashboard', {username:username}), {templateUrl: '/bundles/raykupage/partials/dashboard-view.html'}).
 			when(routeGeneratorProvider.generate('angular_profile'), {templateUrl: '/bundles/raykupage/partials/user-edit.html'}).
 			when(routeGeneratorProvider.generate('angular_settings'), {templateUrl: '/bundles/raykupage/partials/user-settings.html'}).
@@ -166,6 +168,10 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
     		username = user.username; // update global username variable
     	});
     }
+}).controller('TutorOnboardingCtrl', function ($scope, $rootScope, $http){
+  //Users Details List Controller
+    $scope.OnboardSplashTemplate = '/bundles/raykupage/js/app/views/onboarding/splash.html';
+    $scope.OnboardQuizTemplate = '/bundles/raykupage/js/app/views/onboarding/quiz.html';
 });  
 
 //We already have a limitTo filter built-in to angular,

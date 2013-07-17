@@ -19,7 +19,7 @@ html{
 body {
 	/*background: url(../images/bg.png);*/
 	background-image: url('/bundles/raykupage/images/bg.png');
-	font-family: Helvetica Neue, 'Open Sans',sans-serif;
+	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 0.9em;
 	color: #8c8c8c;
    	margin:0;
@@ -35,6 +35,9 @@ body {
         url('../raphaelicons/raphaelicons-webfont.svgwebfontKOf9F4sx') format('svg');
     font-weight: normal;
     font-style: normal;
+}
+h1, h2, h3, h4, h5 {
+-webkit-font-smoothing: antialiased;
 }
 .raphael{
     font-family:'RaphaelIcons';
@@ -572,6 +575,7 @@ ul.submenu-item li span.nav-desc{
    	height:auto !important; 
 	width:82%;
 	background-image: url('/bundles/raykupage/images/bg.png');
+	background-attachment: fixed;
 	padding: 0px 35px;
 	padding-bottom: 15px;
 	z-index: 1;
@@ -580,18 +584,25 @@ ul.submenu-item li span.nav-desc{
 }
 
 #content-body .content-header{
-	position: absolute;
-	left: 15px;
+	position: fixed;
 	width: 100%;
 	border-bottom: 1px solid rgba(221, 221, 221, 1);
 	background: rgba(255, 255, 255, 1);
+	padding-left: 15px;
+	box-shadow: 0 0 5px rgba(221, 221, 221, 0.5);
+	z-index: 3;
 }
 #content-body .content-header h3{
-	color:rgba(39, 39, 39, 1);
 	padding: 5px 25px;
 	padding-bottom: 0px;
-	font-weight: normal;
-	font-size: 1.4em;
+	color: rgba(100, 100, 100, 1);
+	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 30px;
+	font-weight: 300;
+	word-spacing: -0.04em;
+	margin-bottom: 10px;
+	letter-spacing: -0.04em;
+	line-height: 1em;
 }
 #content-body .content-header h3 span.raphael{
 	font-size: 25px;
@@ -663,12 +674,6 @@ input[name="ask"]{
 	margin: 0;
 	border:1px solid rgba(221, 221, 221, 0.7);
 	border-bottom: none;	
-}
-.tutor-list h3 a, #sessions-list h3 a{
-	float: right;
-	font-weight: bold;
-	margin-top: 1px;
-	margin-right: 3px;
 }
 #table-div{
 	background: rgba(255, 255, 255, 1);
@@ -861,9 +866,14 @@ table, th, td
 	padding: 0;
 }
 #profile .sidenav h3{
-	font-weight: 500;
+	color:rgba(100, 100, 100, 1);
+	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 1.5em;
-	color:rgba(120, 120, 120, 1);
+	font-weight: 300;
+	word-spacing: -0.04em;
+	margin-bottom: 10px;
+	letter-spacing: -0.04em;
+	line-height: 1em;
 	text-align: center;
 	background: transparent;
 	border-bottom: none;
@@ -886,8 +896,15 @@ table, th, td
 #profile ul.profilenav li a{
 	width: 100%;
 	padding:10px 140px 10px 20px;
-	font-weight: bold;
+
+	color:rgba(100, 100, 100, 1);
+	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 1em;
+	font-weight: 300;
+	word-spacing: -0.04em;
+	margin-bottom: 10px;
+	letter-spacing: -0.04em;
+	line-height: 1em;
 }
 #profile ul.profilenav li:hover{
 	border-left: 3px solid rgba(22,158,244, 1);
@@ -915,9 +932,16 @@ h4 a.myprofileedit{
 	border-bottom: 1px solid rgba(221, 221, 221, 1); 
 }
 #profile .tutorpayout h5{
-	font-size: 1.1em;
-	color: rgba(160, 160, 160, 1);
+	color:rgba(100, 100, 100, 1);
+	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 1.5em;
+	font-weight: 300;
+	word-spacing: -0.04em;
+	margin-bottom: 10px;
+	letter-spacing: -0.04em;
+	line-height: 1em;
 }
+#profile .tutorpayout p{}
 #profile ul.userinfo li{
 	font-size: 0.95em;
 	font-style: italic;
@@ -1027,7 +1051,35 @@ h4 a.myprofileedit{
 	left:25%;
 }
 /*Tutor Profile Modal*/
-.bbutton {
+.bbutton{
+	background-color:#007dc1;
+	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 20px;
+	font-weight: 300;
+	word-spacing: -0.04em;
+	margin-bottom: 10px;
+	letter-spacing: -0.04em;
+	line-height: 1em;
+	border: none;
+	color:white;
+	-webkit-text-fill-color: white; /* Will override color (regardless of order) */
+	-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: rgba(221, 221, 221, 0.5);
+
+	-webkit-box-sizing: border-box; /* Android ≤ 2.3, iOS ≤ 4 */
+	-moz-box-sizing: border-box; /* Firefox 1+ */
+	box-sizing: border-box; /* Chrome, IE 8+, Opera, Safari 5.1 */
+	height: 36px;
+	cursor: pointer;
+	padding: 0 14px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+}
+.bbutton:hover{
+	background-color:#0061a7;
+}
+/*.bbutton {
         
 	-moz-box-shadow:inset 0px 1px 0px 0px #54a3f7;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #54a3f7;
@@ -1058,9 +1110,9 @@ h4 a.myprofileedit{
 	
 	text-shadow:0px 1px 0px #154682;
 	
-	-webkit-box-sizing: border-box; /* Android ≤ 2.3, iOS ≤ 4 */
-	-moz-box-sizing: border-box; /* Firefox 1+ */
-	box-sizing: border-box; /* Chrome, IE 8+, Opera, Safari 5.1 */
+	-webkit-box-sizing: border-box; /* Android ≤ 2.3, iOS ≤ 4 
+	-moz-box-sizing: border-box; /* Firefox 1+ 
+	box-sizing: border-box; /* Chrome, IE 8+, Opera, Safari 5.1 
 	height: 36px;
 	cursor: pointer;
 	padding: 0 14px;
@@ -1079,7 +1131,7 @@ h4 a.myprofileedit{
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0061a7', endColorstr='#007dc1',GradientType=0);
 	
 	background-color:#0061a7;
-}
+}*/
 .bbutton:active {
 	position:relative;
 	top:1px;

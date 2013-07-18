@@ -28,7 +28,25 @@ class PageController extends Controller
 	 * @Template
 	 */
 	public function legalAction() { }
+
+	/**
+	 * @Route("/#/onboarding", name="rayku_page_tutor_onboard")
+	 * @Template
+	 */
+	public function onboardAction(){
+		$user = "user";
+		return array($user=>$this->getUser());
+	}
 	
+	/**
+	 * @Route("/#/quiz", name="rayku_page_tutor_quiz")
+	 * @Template
+	 */
+	public function quizAction(){
+		$user = "user";
+		return array($user=>$this->getUser());
+	}
+
 	/**
 	 * @Route("/getwhiteboard", name="rayku_page_whiteboard_iframe")
 	 */
@@ -43,7 +61,6 @@ class PageController extends Controller
 	 * @Route("/register/confirmed", name="rayku_register_confirmed")
 	 * @Route("/dashboard", name="rayku_page_dashboard")
 	 * @Route("/#/{username}", name="rayku_username_dashboard", options={"expose"=true})
-	 * @Route("/onboarding", name="rayku_page_tutor_onboarding")
 	 * @Route("/ask", name="rayku_page_homepage_minimized_funnel")
 	 * @Template
 	 */

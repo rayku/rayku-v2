@@ -45,7 +45,7 @@ class Invoice extends PointTransfer
     private $points;
 
     /**
-     * @var integer
+     * @var string
      *
      * @ORM\Column(name="status", type="string", columnDefinition="ENUM('pending', 'successful', 'failed')")
      * @Assert\NotBlank()
@@ -166,7 +166,7 @@ class Invoice extends PointTransfer
     {
         $this->cost = $cost;
         
-        $points = $cost * self::POINTS_COST;
+        $points = $cost / self::POINTS_COST;
         $this->setPoints($points);
         $this->setTransferred($points);
         

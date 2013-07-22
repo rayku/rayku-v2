@@ -25,3 +25,8 @@ rayku_course_rest:
 rayku_credit_card_rest:
     resource: Rayku\ApiBundle\Controller\CreditCardController
     type:     rest
+
+invoice_rest:
+    resource: Rayku\ApiBundle\Controller\InvoiceController
+    type:     rest
+    

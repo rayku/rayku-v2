@@ -33,61 +33,23 @@ class CreditCardController extends Controller
      *     400="Returned when there is an error",
      *     401="Returned when unauthorized"
      *   },
-	 *   description="Chardge a Credit Card",
-	 *   input="Rayku\ApiBundle\Form\InvoiceType"
+	 *   description="Chardge a Credit Card"
 	 * )
 	 * @param \Rayku\ApiBundle\Entity\CreditCard $card
+	 * @param \Rayku\ApiBundle\Entity\Invoice $invoice
 	 */
-	public function postCreditcardChargeAction(CreditCard $card)
+	public function postCreditcardChargeAction(CreditCard $card, Invoice $invoice)
 	{
+		die('todo move to invoice action');
 		$user = $this->getUser();
 		
 		if($user !== $card->getUser()){
 			throw new AccessDeniedException();
 		}
 		
-		$invoice = new Invoice();
-		$invoice->setUser($user);
-		$form = $this->createForm(new InvoiceType(), $invoice)->bind($this->getRequest());
-		
-		if($form->isValid()){
-			$em = $this->getDoctrine()->getManager();
-			$em->persist($invoice);
+		$gateway = $this->get('rayku_payment_gateway')->setApiKey($this->container->getParameter('payment.gateway.api_key'));
 			
-			$gateway = $this->get('rayku_payment_gateway')->setApiKey($this->container->getParameter('payment.gateway.api_key'));
-			$response = $gateway->purchase(array(
-				'amount' => $invoice->getCost(),
-				'currency' => 'CAD',
-				'cardReference' => $card->getReference()		
-			))->send();
-			
-			$transaction = new Transaction();
-			$transaction->setUser($user);
-			$transaction->setCard($card);
-			$transaction->setCost($invoice->getCost());
-			$transaction->setReference($response->getTransactionReference());
-			$transaction->setData(serialize($response->getData()));
-			
-			if($response->isSuccessful()){
-				$transaction->setStatus('successful');
-				$invoice->setStatus('successful');
-				$em->persist($invoice);
-				$em->persist($transaction);
-				$em->flush();
-				
-				return array('success' => true, 'invoice' => $invoice);
-			}
-			
-			$transaction->setStatus('failed');
-			$em->persist($transaction);
-			$em->flush();
-			
-			return array('success' => false, 'invoice' => $invoice, 'message' => $response->getMessage());
-		}else{
-			\Doctrine\Common\Util\Debug::dump($form->getErrorsAsString());
-			die(__LINE__.' '.__FILE__);
-		}
-		return array('form' => $form, 'success' => false);
+		return $this->get('rayku_payment_processor')->process($invoice, $card, $gateway);
 	}
 	
 	/**
@@ -113,7 +75,12 @@ class CreditCardController extends Controller
 			$response = $gateway->createCard($params)->send();
 
 			if($response->isSuccessful()){
-				$creditCard = new CreditCard();
+				$new = false;
+				$creditCard = $this->getUser()->getCreditCard();
+				if(is_null($creditCard)){
+					$new = true;
+					$creditCard = new CreditCard();
+				}
 				$creditCard->setReference($response->getCardReference());
 				
 				$data = $response->getData();
@@ -129,19 +96,21 @@ class CreditCardController extends Controller
 				$em->persist($creditCard);
 				$em->flush();
 				
-				// creating the ACL
-				$aclProvider = $this->get('security.acl.provider');
-				$objectIdentity = ObjectIdentity::fromDomainObject($creditCard);
-				$acl = $aclProvider->createAcl($objectIdentity);
-				 
-				// retrieving the security identity of the currently logged-in user
-				$securityContext = $this->get('security.context');
-				$user = $securityContext->getToken()->getUser();
-				$securityIdentity = UserSecurityIdentity::fromAccount($user);
-				 
-				// grant owner access
-				$acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
-				$aclProvider->updateAcl($acl);
+				if($new){
+					// creating the ACL
+					$aclProvider = $this->get('security.acl.provider');
+					$objectIdentity = ObjectIdentity::fromDomainObject($creditCard);
+					$acl = $aclProvider->createAcl($objectIdentity);
+					 
+					// retrieving the security identity of the currently logged-in user
+					$securityContext = $this->get('security.context');
+					$user = $securityContext->getToken()->getUser();
+					$securityIdentity = UserSecurityIdentity::fromAccount($user);
+					 
+					// grant owner access
+					$acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+					$aclProvider->updateAcl($acl);
+				}
 				
 				return array('success' => true, 'card' => $creditCard);
 			}else{

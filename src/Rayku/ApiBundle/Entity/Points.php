@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use JMS\Serializer\Annotation\Groups;
 use Rayku\ApiBundle\Entity\Session;
 use Rayku\ApiBundle\Entity\Invoice;
 
@@ -28,6 +29,7 @@ class Points
 	 * @ORM\Id
 	 * @ORM\Column(type="integer")
 	 * @ORM\GeneratedValue(strategy="AUTO")
+	 * @Groups({"session", "session.details"})
      */
     private $id;	
     

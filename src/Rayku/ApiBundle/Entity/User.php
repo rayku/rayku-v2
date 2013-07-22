@@ -43,23 +43,57 @@ class User extends BaseUser implements ParticipantInterface
 
 	/**
 	 * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Favorite", mappedBy="sender")
-	 * @Serializer\Groups({"user.details"})
+	 * @Serializer\Exclude
 	 **/
 	private $favorites;
 	
 	/**
 	 * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Transaction", mappedBy="user")
+	 * @Serializer\Exclude
 	 **/
 	private $transactions;
 
 	/**
 	 * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Invoice", mappedBy="user")
+	 * @Serializer\Exclude
 	 **/
 	private $invoices;
+
+	/**
+	 * @var integer
+	 * @Serializer\Groups({"user.details"})
+	 * @ORM\Column(name="point_threshold", type="integer", nullable=false)
+	 * @Assert\NotBlank
+	 * @Assert\Range(
+	 *     min = 100,
+	 *     max = 9999,
+	 *     minMessage = "You cannot set your point threshold less than 100",
+	 *     maxMessage = "This is too large a value for your point threshold"
+	 * )
+	 */
+	private $point_threshold = 500;
 	
 	/**
 	 * @var integer
+	 * @Serializer\Groups({"user.details"})
+	 * @ORM\Column(name="point_purchase_amount", type="integer", nullable=false)
+	 * @Assert\NotBlank
+	 * @Assert\Range(
+	 *     min = 0,
+	 *     max = 99999,
+	 *     maxMessage = "This is too large a value for your point purchase amount"
+	 * )
+	 */
+	private $point_purchase = 1000;
+	
+	/**
+	 * @var integer
+	 * @Assert\Range(
+	 *     min = -100,
+	 *     max = 99999
+	 * )
 	 * @ORM\Column(name="points", type="integer", nullable=false)
+	 * 
 	 */
 	private $points = 500;
 	
@@ -106,7 +140,6 @@ class User extends BaseUser implements ParticipantInterface
 	/**
      * @ORM\ManyToOne(targetEntity="\Rayku\ApiBundle\Entity\User")
      * @ORM\JoinColumn(name="referral_referer", referencedColumnName="id", nullable=true)
-     * @Serializer\Groups({"user.details"})
 	 */
 	private $referral_referer;
 	
@@ -1022,5 +1055,51 @@ class User extends BaseUser implements ParticipantInterface
     public function getInvoices()
     {
         return $this->invoices;
+    }
+
+    /**
+     * Set point_threshold
+     *
+     * @param integer $pointThreshold
+     * @return User
+     */
+    public function setPointThreshold($pointThreshold)
+    {
+        $this->point_threshold = $pointThreshold;
+    
+        return $this;
+    }
+
+    /**
+     * Get point_threshold
+     *
+     * @return integer 
+     */
+    public function getPointThreshold()
+    {
+        return $this->point_threshold;
+    }
+
+    /**
+     * Set point_purchase
+     *
+     * @param integer $pointPurchase
+     * @return User
+     */
+    public function setPointPurchase($pointPurchase)
+    {
+        $this->point_purchase = $pointPurchase;
+    
+        return $this;
+    }
+
+    /**
+     * Get point_purchase
+     *
+     * @return integer 
+     */
+    public function getPointPurchase()
+    {
+        return $this->point_purchase;
     }
 }

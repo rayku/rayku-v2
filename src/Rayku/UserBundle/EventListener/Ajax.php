@@ -41,10 +41,10 @@ class Ajax
 					$formError = true;
 				}
 				if($result instanceof \Symfony\Component\Form\Form){
-					foreach($result->getChildren() as $child){
+					foreach($result->all() as $child){
 						// @todo properly iterate subchildren
-						if(array() !== $child->getChildren()){
-							$children = $child->getChildren();
+						if(array() !== $child->all()){
+							$children = $child->all();
 							$child = array_shift($children);
 						}
 						$errors = $child->getErrors();

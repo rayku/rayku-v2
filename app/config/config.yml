@@ -143,6 +143,9 @@ services:
         arguments: [@security.context, @doctrine]
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onCoreController }
+    rayku_payment_processor:
+        class: Rayku\ApiBundle\ProcessTransaction
+        arguments: [@doctrine]
     rayku_ajax_listener:
         class: Rayku\UserBundle\EventListener\Ajax
         arguments: [@kernel, @translator]

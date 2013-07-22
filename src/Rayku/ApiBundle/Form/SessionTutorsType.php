@@ -10,8 +10,12 @@ class SessionTutorsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('tutor')
-        ;
+        $builder->add('tutor', NULL, array(
+        	'class' => 'Rayku\ApiBundle\Entity\Tutor',
+        	/*'query_builder' => function(EntityRepository $er){
+        		return $er->createQueryBuilder('t');
+        	}*/
+        ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

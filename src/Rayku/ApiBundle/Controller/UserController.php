@@ -9,9 +9,11 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 use Rayku\ApiBundle\Entity\User;
 use Rayku\ApiBundle\Form\UserType;
+use Rayku\ApiBundle\Form\PointType;
 use Rayku\ApiBundle\Form\UserSettingType;
 use Rayku\UserBundle\Form\Type\RegistrationAndProfileFormType;
 use Rayku\UserBundle\Form\Type\RegistrationAndTutorProfileFormType;
@@ -21,7 +23,6 @@ use Rayku\UserBundle\Form\Type\RegistrationAndTutorProfileFormType;
  */
 class UserController extends Controller
 {
-	
 	/**
 	 * @ApiDoc(
 	 *     description="Register a user / tutor account",
@@ -117,38 +118,66 @@ class UserController extends Controller
 			// checker (not enabled, expired, etc.).
 		}
 	}
-	
-	/**
-	 * @ApiDoc(
-	 *   description="Get user accounts - not implemneted",
-	 *   resource=true
-	 * )
-	 */
-	public function getUsersAction()
-	{
-		throw new \Exception('not implemented');
-	}
 
 	/**
+	 * @Secure(roles="ROLE_USER")
 	 * @View()
 	 * @ApiDoc(
 	 *   statusCodes={
 	 *     200="Returned when successful"
 	 *   },
+	 *   resource=true,
 	 *   description="Get a user record",
 	 *   output="Rayku\ApiBundle\Entity\User"
 	 * )
 	 */
-	public function getUserAction(User $entity)
+	public function getUserAction(User $user)
 	{
-		return $entity;
+		return $user;
 	}
 	
 	/**
+	 * @Secure(roles="ROLE_USER")
+	 * @ApiDoc(
+	 *   description="Update a user points settings",
+	 *   input="Rayku\ApiBundle\Form\PointType"
+	 * )
+	 * @View(serializerGroups={"user.details"})
+	 */
+	public function postUsersPointsAction(User $user)
+	{
+		if($user->getId() !== $this->getUser()->getId()){
+			throw new AccessDeniedException();
+		}
+	
+		$editForm = $this->createForm(new PointType(), $user);
+		
+		// Ignore extra fields that Angularjs sends with the form
+		$data = $this->getRequest()->request->all();
+		$children = $editForm->all();
+		$data = array_intersect_key($data, $children);
+	
+		$editForm->bind($data);
+	
+		if ($editForm->isValid()) {
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($user);
+			$em->flush();
+			return $user;
+		}
+		return array(
+				'entity'      => $user,
+				'edit_form'   => $editForm,
+		);
+	}
+	
+	/**
+	 * @Secure(roles="ROLE_USER")
 	 * @ApiDoc(
 	 *   description="Update a user profile settings",
 	 *   input="Rayku\ApiBundle\Form\UserSettingType"
 	 * )
+	 * @View(serializerGroups={"user.details"})
 	 */
 	public function postUsersProfileAction(User $user)
 	{
@@ -166,11 +195,14 @@ class UserController extends Controller
 		$editForm->bind($data);
 	
 		if ($editForm->isValid()) {
+			$user->setPassword($data['plainPassword']['first']);
+			
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($user);
 			$em->flush();
 			return $user;
 		}
+		die('invalid');
 		return array(
 			'entity'      => $user,
 			'edit_form'   => $editForm,
@@ -178,6 +210,7 @@ class UserController extends Controller
 	}
 	
     /**
+     * @Secure(roles="ROLE_USER")
      * @ApiDoc(
      *   description="Update a user profile settings",
      *   input="Rayku\ApiBundle\Form\UserType"
@@ -189,7 +222,6 @@ class UserController extends Controller
     		throw new AccessDeniedException();
     	}
     	
-    	$user->setUpdatedAt(new \DateTime('now'));
     	$editForm = $this->createForm(new UserType(), $user);
         $editForm->bind($this->getRequest());
 

@@ -15,8 +15,8 @@ app.
 	config(['$routeProvider', 'routeGeneratorProvider', function($routeProvider, routeGeneratorProvider){
 		$routeProvider.
 			when(routeGeneratorProvider.generate('angular_course_view'), {templateUrl: '/bundles/raykupage/partials/course-view.html', controller: 'CourseViewCtrl'}).
-      when(routeGeneratorProvider.generate('rayku_page_tutor_onboard'), {templateUrl: '/bundles/raykupage/js/app/views/onboarding/TutorOnboard.html'}).
-      when(routeGeneratorProvider.generate('rayku_page_tutor_quiz'), {templateUrl: '/bundles/raykupage/js/app/views/onboarding/TutorQuiz.html'}).
+			when(routeGeneratorProvider.generate('rayku_page_tutor_onboard'), {templateUrl: '/bundles/raykupage/js/app/views/onboarding/TutorOnboard.html'}).
+			when(routeGeneratorProvider.generate('rayku_page_tutor_quiz'), {templateUrl: '/bundles/raykupage/js/app/views/onboarding/TutorQuiz.html'}).
 			when(routeGeneratorProvider.generate('rayku_username_dashboard', {username:username}), {templateUrl: '/bundles/raykupage/partials/dashboard-view.html'}).
 			when(routeGeneratorProvider.generate('angular_profile'), {templateUrl: '/bundles/raykupage/partials/user-edit.html'}).
 			when(routeGeneratorProvider.generate('angular_settings'), {templateUrl: '/bundles/raykupage/partials/user-settings.html'}).
@@ -66,13 +66,11 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
     }
     
     $scope.update = function(user) {
-    	$http.post(Routing.generate('post_tutors'), user.tutor).success(function(data){
-    		$rootScope.user = user;
-    		$('#myTutorModal').hide();
-    		$('.reveal-modal-bg').hide();
-    	});
-
-      
+      $http.post(Routing.generate('post_tutors'), user.tutor).success(function(data){
+    	$rootScope.user = user;
+    	$('#myTutorModal').hide();
+    	$('.reveal-modal-bg').hide();
+      });
     }
 }).controller('SessionListCtrl', function ($scope, $rootScope, $http, $templateCache, $timeout) {
     //For pagination
@@ -83,18 +81,18 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
     $scope.SessionListTemplate = '/bundles/raykupage/js/app/views/SessionsView.html';
 
     $http.get(Routing.generate('get_sessions', {'activeRequests':0})).success(function (data){
-        $scope.sessions = data;
-        $scope.numberOfPages=function(){
-          return Math.ceil($scope.sessions.length/$scope.pageSize);                
-        }
-      }).error(function (data) {
-        $scope.error = data || "Request failed";
+      $scope.sessions = data;
+      $scope.numberOfPages=function(){
+        return Math.ceil($scope.sessions.length/$scope.pageSize);                
+      }
+    }).error(function (data) {
+      $scope.error = data || "Request failed";
     });
 
     $scope.prevPage = function () {
-        if($scope.currentPage > 0) {
-          $scope.currentPage--;
-        }
+      if($scope.currentPage > 0) {
+        $scope.currentPage--;
+      }
     };
     
     $scope.nextPage = function () {
@@ -126,8 +124,36 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
     
 
     $scope.onLoad = function() {
-        $scope.loaded = true;
+      $scope.loaded = true;
     }
+}).controller('BillingCtrl', function ($scope, $rootScope, $http){
+	$scope.invoice = function () {
+		$http.post(Routing.generate('post_invoices'), {'cost':$scope.points.amount}).success(function(data){
+			if($scope.cc || $rootScope.user.credit_card == undefined){
+				$scope.step = 2;
+			}else{
+				$scope.step = 3;
+			}
+			$scope.purchased_points = data.invoice.points;
+		});
+	}
+	
+	$scope.chargeCard = function (card) {
+		$http.post(Routing.generate('post_creditcard'), card).success(function(data){
+			$scope.step = 3;
+			$rootScope.user.credit_card = data.card;
+		})
+		
+		if($scope.points.recharge){
+			$http.post(Routing.generate('post_users_points', {user:$rootScope.user.id}), 
+				{
+					'point_threshold':500,
+					'point_purchase':$scope.purchased_points,
+					'current_password':$scope.card.current_password
+				}).success(function(data){
+			})
+		}
+	}
 }).controller('UserDetailCtrl', function ($scope, $rootScope, $http){
     //Users Details List Controller
   	$scope.UserDetailTemplate = '/bundles/raykupage/js/app/views/ProfileView.html';
@@ -135,13 +161,13 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
     $scope.TutorStatusTemplate = '/bundles/raykupage/js/app/views/TutorStatusView.html';
     $scope.SidebarDetailTemplate = '/bundles/raykupage/js/app/views/SidebarDetailView.html';
 
-  	$http.get(Routing.generate('get_user', {'entity':userId})).success(function(data){
+  	$http.get(Routing.generate('get_user', {'user':userId})).success(function(data){
   		data.password = '';
   		$rootScope.user = data;
   	});
 
     $scope.refreshUser = function () {
-      $http.get(Routing.generate('get_user', {'entity':userId})).success(function(data){
+      $http.get(Routing.generate('get_user', {'user':userId})).success(function(data){
         data.password = '';
         $templateCache.remove('/bundles/raykupage/js/app/views/SidebarDetailView.html');
         $templateCache.remove('/bundles/raykupage/js/app/views/UsernameView.html');
@@ -157,7 +183,7 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
     }
   	
     $scope.update = function(content, completed) {
-      	$http.get(Routing.generate('get_user', {'entity':userId})).success(function (data){
+      	$http.get(Routing.generate('get_user', {'user':userId})).success(function (data){
       		$rootScope.user = data;
       	});
     }
@@ -178,6 +204,9 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
 //let's make a startFrom filter
 app.filter('startFrom', function() {
     return function(input, start) {
+    	if(undefined == input){
+    		return 0;
+    	}
         start = +start; //parse to int
         return input.slice(start);
     }

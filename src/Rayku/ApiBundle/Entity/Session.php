@@ -223,17 +223,7 @@ class Session extends PointTransfer
     public function setDuration($duration)
     {
         $this->duration = $duration;
-        
-        $minutes = 0;
-        $duration = 0;
-        $currentDate = new \DateTime(date('Y-m-d H:i:s'));
-        if(null !== $this->getStartTime()){
-        	$duration = $currentDate->diff($this->getStartTime());
-        	$minutes = $duration->days * 24 * 60;
-        	$minutes += $duration->h * 60;
-        	$minutes += $duration->i;
-        }
-        $points = $minutes * $this->getRate();
+        $points = $duration * $this->getRate();
         
         $this->setTransferred($points);
     
@@ -443,6 +433,16 @@ class Session extends PointTransfer
     		return $this;
     	}
     	
+    	$minutes = 0;
+    	$duration = 0;
+    	$currentDate = new \DateTime(date('Y-m-d H:i:s'));
+    	if(null !== $this->getStartTime()){
+    		$duration = $currentDate->diff($this->getStartTime());
+    		$minutes = $duration->days * 24 * 60;
+    		$minutes += $duration->h * 60;
+    		$minutes += $duration->i;
+    	}
+    	
     	$this->setDuration($minutes);
     	$this->setEndTime($currentDate);
     	$this->setUsersBusy();
@@ -458,13 +458,6 @@ class Session extends PointTransfer
      */
     public function setUsersBusy()
     {
-    	/*foreach($this->getPotentialTutors() as $potential_tutor)
-    	{
-    		if(in_array($potential_tutor->getTutorReply(), array('pending', 'contacted gtalk'))){
-	    		$potential_tutor->getTutor()->setBusy(true);
-    		}
-    	}*/
-    	
     	$tutor = $this->getSelectedTutor();
     	$student = ($this->getStudent()->getIsTutor()) ? $this->getStudent()->getTutor() : NULL;
     	if($this->getId() == null){ // New Session mark student as busy
@@ -570,7 +563,7 @@ class Session extends PointTransfer
     public function setSelectedTutor(\Rayku\ApiBundle\Entity\Tutor $selectedTutor = null)
     {
         $this->selectedTutor = $selectedTutor;
-        $this->setCreditUser($selectedTutor);
+        $this->setCreditUser($selectedTutor->getUser());
     
         return $this;
     }

@@ -56,6 +56,14 @@ class Points
      * @Assert\NotBlank()
      */
     private $transferred;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", columnDefinition="ENUM('pending', 'successful', 'failed')")
+     * @Assert\NotBlank()
+     */
+    private $status = 'pending';
 
     /**
      * Get id
@@ -155,5 +163,28 @@ class Points
         $this->id = $id;
     
         return $this;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     * @return Points
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

@@ -226,6 +226,7 @@ class Session extends PointTransfer
         $points = $duration * $this->getRate();
         
         $this->setTransferred($points);
+        $this->setStatus('successful');
     
         return $this;
     }

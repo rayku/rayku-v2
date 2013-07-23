@@ -43,14 +43,6 @@ class Invoice extends PointTransfer
      * @Assert\NotBlank()
      */
     private $points;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="status", type="string", columnDefinition="ENUM('pending', 'successful', 'failed')")
-     * @Assert\NotBlank()
-     */
-    private $status = 'pending';
     
     /**
      * @var \DateTime
@@ -204,28 +196,5 @@ class Invoice extends PointTransfer
     public function getPoints()
     {
         return $this->points;
-    }
-
-    /**
-     * Set status
-     *
-     * @param string $status
-     * @return Invoice
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return string 
-     */
-    public function getStatus()
-    {
-        return $this->status;
     }
 }

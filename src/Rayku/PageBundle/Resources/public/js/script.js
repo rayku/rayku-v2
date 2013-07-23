@@ -32,7 +32,6 @@ $(document).ready(function(){
 
     $('a.setting').click(function (e) {
         e.preventDefault();
-        console.log('Clicked');
         $('#content').fadeOut('fast');
         $('#userprofile').delay(500).fadeIn('fast');
         $('.profilesettings').siblings().fadeOut('fast');

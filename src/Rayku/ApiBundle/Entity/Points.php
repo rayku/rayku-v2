@@ -29,7 +29,7 @@ class Points
 	 * @ORM\Id
 	 * @ORM\Column(type="integer")
 	 * @ORM\GeneratedValue(strategy="AUTO")
-	 * @Groups({"session", "session.details"})
+	 * @Serializer\Groups({"session", "session.details"})
      */
     private $id;	
     
@@ -38,6 +38,7 @@ class Points
      *
      * @ORM\ManyToOne(targetEntity="\Rayku\ApiBundle\Entity\User", cascade={"all"})
      * @Assert\Type(type="\Rayku\ApiBundle\Entity\User")
+     * @Serializer\Exclude
      */
     private $credit_user;
 
@@ -46,6 +47,7 @@ class Points
      * @var \User
      *
      * @ORM\ManyToOne(targetEntity="\Rayku\ApiBundle\Entity\User", cascade={"all"})
+     * @Serializer\Exclude
      */
     private $debit_user;
     
@@ -54,6 +56,7 @@ class Points
      *
      * @ORM\Column(name="transferred", type="decimal", precision=10, scale=3, nullable=false)
      * @Assert\NotBlank()
+     * @Serializer\Exclude
      */
     private $transferred;
     
@@ -62,6 +65,7 @@ class Points
      *
      * @ORM\Column(name="status", type="string", columnDefinition="ENUM('pending', 'successful', 'failed')")
      * @Assert\NotBlank()
+     * @Serializer\Exclude
      */
     private $status = 'pending';
 

@@ -40,10 +40,13 @@ class CreditCardController extends Controller
 	 */
 	public function postCreditcardChargeAction(CreditCard $card, Invoice $invoice)
 	{
-		die('todo move to invoice action');
 		$user = $this->getUser();
 		
 		if($user !== $card->getUser()){
+			throw new AccessDeniedException();
+		}
+		
+		if($user !== $invoice->getUser()){
 			throw new AccessDeniedException();
 		}
 		

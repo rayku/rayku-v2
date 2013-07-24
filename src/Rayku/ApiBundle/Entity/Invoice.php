@@ -25,6 +25,7 @@ class Invoice extends PointTransfer
      *
      * @ORM\ManyToOne(targetEntity="\Rayku\ApiBundle\Entity\User", inversedBy="invoices", cascade={"all"})
      * @Assert\Type(type="\Rayku\ApiBundle\Entity\User")
+     * @Serializer\Exclude
      */
     private $user;
     

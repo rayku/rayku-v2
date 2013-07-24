@@ -127,31 +127,39 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
       $scope.loaded = true;
     }
 }).controller('BillingCtrl', function ($scope, $rootScope, $http){
-	$scope.invoice = function () {
+	$scope.createInvoice = function () {
+		console.log('hello world');
 		$http.post(Routing.generate('post_invoices'), {'cost':$scope.points.amount}).success(function(data){
+			$scope.invoice = data.invoice;
 			if($scope.cc || $rootScope.user.credit_card == undefined){
 				$scope.step = 2;
 			}else{
-				$scope.step = 3;
+				$http.post(Routing.generate('post_creditcard_charge', {'card':$rootScope.user.credit_card.id, 'invoice':$scope.invoice.id})).success(function(data){
+					$scope.step = 3;
+					$scope.invoice = data.invoice;
+				});
 			}
-			$scope.purchased_points = data.invoice.points;
 		});
 	}
 	
 	$scope.chargeCard = function (card) {
 		$http.post(Routing.generate('post_creditcard'), card).success(function(data){
-			$scope.step = 3;
 			$rootScope.user.credit_card = data.card;
-		})
+			
+			$http.post(Routing.generate('post_creditcard_charge', {'card':$rootScope.user.credit_card.id, 'invoice':$scope.invoice.id})).success(function(data){
+				$scope.step = 3;
+				$scope.invoice = data.invoice;
+			});
+		});
 		
 		if($scope.points.recharge){
 			$http.post(Routing.generate('post_users_points', {user:$rootScope.user.id}), 
 				{
 					'point_threshold':500,
-					'point_purchase':$scope.purchased_points,
+					'point_purchase':$scope.invoice.purchased_points,
 					'current_password':$scope.card.current_password
 				}).success(function(data){
-			})
+			});
 		}
 	}
 }).controller('UserDetailCtrl', function ($scope, $rootScope, $http){

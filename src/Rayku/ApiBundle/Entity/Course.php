@@ -24,6 +24,7 @@ class Course
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Serializer\Groups({"course", "course.details"})
      */
     private $id;
 
@@ -67,6 +68,7 @@ class Course
      *
      * @ORM\OneToOne(targetEntity="\Rayku\ApiBundle\Entity\User")
      * @ORM\JoinColumn(name="instructor_id", referencedColumnName="id")
+     * @Serializer\Groups({"course", "course.details"})
      */
     private $instructor;
     

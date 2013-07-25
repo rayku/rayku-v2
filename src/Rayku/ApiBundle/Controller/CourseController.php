@@ -48,7 +48,7 @@ class CourseController extends Controller
 	 *   description="Get a course record",
 	 *   output="Rayku\ApiBundle\Entity\Course"
 	 * )
-	 * @View(serializerGroups={"course.details", "session"})
+	 * @View(serializerGroups={"course.details", "session", "user"})
 	 */
 	public function getCourseAction($course)
 	{

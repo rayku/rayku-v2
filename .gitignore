@@ -19,3 +19,4 @@ app/var/*
 .vagrant
 composer.lock
 bootstrap.sh
+.project

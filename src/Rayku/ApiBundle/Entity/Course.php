@@ -65,7 +65,7 @@ class Course
     /**
      * @var \User
      *
-     * @ORM\OneToOne(targetEntity="\Rayku\ApiBundle\Entity\User", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="\Rayku\ApiBundle\Entity\User")
      * @ORM\JoinColumn(name="instructor_id", referencedColumnName="id")
      */
     private $instructor;

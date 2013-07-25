@@ -16,12 +16,20 @@
 			</div>
 
 			<div class="large-9 columns profilesettings">
-				<form class="css-form">
-
+				<form name="editSettingsForm">
 				<ul class="userinfo">
-					<li><span class="username">Username</span><span><input ng-required="true" required type="text" ng-model="user.username" name="username" /></span></li>
-					<li><span class="email">Email</span><span><input ng-required="true" required type="email" ng-model="user.email" name="email" /></span></li>
-					<li><span class="password">Current Password</span><span><input ng-required="true" required type="password" ng-model="user.current_password" name="current_password" value="" autocomplete="off" /></span></li>
+					<li>
+						<label for="username">Username</label><input ng-required="true" type="text" ng-model="user.username" id="username" name="username" />
+						<small class="error" ng-show="editSettingsForm.username.$invalid">You must setup a username</small>
+					</li>
+					<li>
+						<label for="email">Email</label><input ng-required="true" type="email" ng-model="user.email" id="email" name="email" />
+						<small class="error" ng-show="editSettingsForm.email.$invalid">You must setup a valid email</small>
+					</li>
+					<li>
+						<label for="current_password">Current Password</label><input ng-required="true" type="password" ng-model="user.current_password" name="current_password" id="current_password" value="" autocomplete="off" />
+						<small class="error" ng-show="editSettingsForm.$dirty && editSettingsForm.current_password.$invalid">Please enter your current password to make changes</small>
+					</li>
 					<li><span class="password">New Password</span><span><input type="password" ng-model="user.plainPassword.first" name="plainPassword[first]" /></span></li>
 					<li><span class="password">Confirm Password</span><span><input type="password" ng-model="user.plainPassword.second" name="plainPassword[second]" /></span></li>
 				</ul>

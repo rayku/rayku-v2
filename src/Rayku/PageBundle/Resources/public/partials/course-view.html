@@ -27,7 +27,7 @@
 			<tbody>
 				<tr ng-repeat="session in course.sessions">
 					<td>
-						<span ng-show="session.start_time >= session.end_time">
+						<span ng-show="session.end_time >= session.start_time">
 							{{ session.tutor_session_name}} <a href="{{whiteboardUrl}}/room/{{ session.id }}/playback">RECORDED</a>
 						</span>
 						<span ng-show="ession.start_time < session.end_time">

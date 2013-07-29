@@ -20,11 +20,11 @@
 				<ul class="userinfo">
 					<li>
 						<label for="username">Username</label><input ng-required="true" type="text" ng-model="user.username" id="username" name="username" />
-						<small class="error" ng-show="editSettingsForm.username.$invalid">You must setup a username</small>
+						<small class="error" ng-show="editSettingsForm.$dirty && editSettingsForm.username.$invalid">You must setup a username</small>
 					</li>
 					<li>
 						<label for="email">Email</label><input ng-required="true" type="email" ng-model="user.email" id="email" name="email" />
-						<small class="error" ng-show="editSettingsForm.email.$invalid">You must setup a valid email</small>
+						<small class="error" ng-show="editSettingsForm.$dirty && editSettingsForm.email.$invalid">You must setup a valid email</small>
 					</li>
 					<li>
 						<label for="current_password">Current Password</label><input ng-required="true" type="password" ng-model="user.current_password" name="current_password" id="current_password" value="" autocomplete="off" />

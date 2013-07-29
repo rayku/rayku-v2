@@ -96,6 +96,7 @@ class SessionController extends Controller
     }
 	
 	/**
+	 * @View(serializerGroups={"session.details", "session", "course", "user"})
 	 * @ApiDoc(
 	 *   description="Get a whiteboard session",
 	 *   statusCodes={

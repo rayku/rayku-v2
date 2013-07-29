@@ -15,7 +15,7 @@
 				<div ng-show="{{user.id != session.student.id}}">tutor</div>
 				<div ng-hide="{{user.id == session.student.id}}">Student</div>
 				&nbsp;</li>
-			<li class="sesView"><a href="http://whiteboard.rayku.com/room/{{session.id}}/playback">View</a></li>
+			<li class="sesView"><a href="{{whiteboardUrl}}/room/{{session.id}}/playback">View</a></li>
 			<li class="sesEdit"><div class="ng-edit" ng-click="editorEnabled=!editorEnabled" class="edit_session_name">Edit</div></form></li>
 		</ul>
 	</li>

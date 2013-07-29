@@ -27,7 +27,12 @@
 			<tbody>
 				<tr ng-repeat="session in course.sessions">
 					<td>
-						{{ session.tutor_session_name}} <a href="/room/{{ session.id }}/playback">RECORDED</a>
+						<span ng-show="session.duration > 0">
+							{{ session.tutor_session_name}} <a href="{{whiteboardUrl}}/room/{{ session.id }}/playback">RECORDED</a>
+						</span>
+						<span ng-show="session.duration == 0">
+							{{ session.tutor_session_name}} <a href="{{whiteboardUrl}}/room/{{ session.id }}/broadcast">SESSION IN PROGRESS</a>
+						</span>
 					</td>
 				</tr>
 			</tbody>

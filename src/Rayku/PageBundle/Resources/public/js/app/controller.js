@@ -32,6 +32,7 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
 	$rootScope.path = function(path, args) {
     	return Routing.generate(path, args);
     }
+	$rootScope.whiteboardUrl = whiteboardUrl;
 }).controller('TutorListCtrl', function ($scope, $rootScope, $http) {
     //For pagination
     $scope.currentPage = 0;

@@ -618,6 +618,7 @@ ul.submenu-item li span.nav-desc{
 input[name="ask"]{
 	margin-top: 10px;
 	background: rgba(255, 255, 255, 1);
+	border-bottom: 2px solid rgba(198, 198, 198, 1);
 }
 #categories{
 	background: rgba(255, 255, 255, 1);

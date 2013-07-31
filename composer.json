@@ -86,7 +86,8 @@
         "nelmio/api-doc-bundle": "dev-master",
         "jmikola/auto-login-bundle": "dev-master",
         "components/foundation": "dev-master",
-        "omnipay/omnipay": "dev-master"
+        "omnipay/omnipay": "dev-master",
+        "hwi/oauth-bundle": "0.3.*@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",

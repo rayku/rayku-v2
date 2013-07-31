@@ -55,6 +55,7 @@ class AppKernel extends Kernel
 
             // Enable this if you want to audit backend action
             //new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
+        	new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
         	
         	// Rayku
             new Rayku\PageBundle\RaykuPageBundle(),

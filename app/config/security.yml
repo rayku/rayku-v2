@@ -15,35 +15,13 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username_email
-
     firewalls:
-        # Disabling the security for the web debug toolbar, the profiler and Assetic.
-        dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-        admin:
-            switch_user:        true
-            context:            user
-            pattern:            /admin(.*)
-            form_login:
-                provider:       fos_userbundle
-                login_path:     /admin/login
-                use_forward:    false
-                check_path:     /admin/login_check
-                failure_path:   /login
-                use_referer:    true
-            logout:
-                path:           /admin/logout
-                target:         /admin/login
-
-            anonymous:    true
         main:
-            switch_user: true
+            pattern:    ^/
+            anonymous: true
+            logout: true
             jmikola_auto_login:
                 auto_login_user_provider: rayku.auto_login_user_provider
-                #token_param: al
-            pattern:      .*
-            context:        user
             form_login:
                 provider:       fos_userbundle
                 login_path:     /
@@ -52,22 +30,29 @@ security:
                 failure_path:   /login
                 always_use_default_target_path: true
                 default_target_path: /
-            logout:       true
-            anonymous:    true
+            oauth:
+                resource_owners:
+                    facebook:  "/connect/check-facebook"
+                login_path:    /connect
+                failure_path:  /connect
+                oauth_user_provider:
+                    service: my_user_provider
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
 
     access_control:
         # URL of FOSUserBundle which need to be available to anonymous users
         - { path: ^/_wdt, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/_profiler, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/connect, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/ryerson, role: IS_AUTHENTICATED_ANONYMOUSLY }
         
         # Admin secured areas
-        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/api, role: ROLE_ADMIN }
 

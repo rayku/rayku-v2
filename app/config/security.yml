@@ -33,6 +33,7 @@ security:
             oauth:
                 resource_owners:
                     facebook:  "/connect/check-facebook"
+                    linkedin:  "/connect/check-linkedin"
                 login_path:    /connect
                 failure_path:  /connect
                 oauth_user_provider:

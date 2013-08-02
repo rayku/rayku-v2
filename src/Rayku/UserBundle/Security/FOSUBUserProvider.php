@@ -35,6 +35,8 @@ class FOSUBUserProvider extends BaseClass
         
         if($response->getResourceOwner()->getName() == 'facebook'){
         	$this->facebookData($user, $response->getResponse());
+        }else if($response->getResourceOwner()->getName() == 'linkedin'){
+        	die(__LINE__.' '.__FILE__);
         }
  
         $this->userManager->updateUser($user);
@@ -56,19 +58,31 @@ class FOSUBUserProvider extends BaseClass
             $setter_token = $setter.'AccessToken';
             // create new user here
             
+            
             $data = $response->getResponse();
-            $user = $this->userManager->findUserByEmail($data['email']);
+            if($response->getResourceOwner()->getName() == 'facebook'){
+	            $user = $this->userManager->findUserByEmail($data['email']);
+            }else if($response->getResourceOwner()->getName() == 'linkedin'){
+            	$user = $this->userManager->findUserByEmail($data['emailAddress']);
+            }
+            
             if(null === $user){
 	            $user = $this->userManager->createUser();
-	            $user->setUsername($username);
 	            $user->setPassword(md5(time().rand()));
-	            $user->setEmail($response->getEmail());
 	            if($response->getResourceOwner()->getName() == 'facebook'){
-	            	$this->facebookData($user, $response->getResponse());
+	            	$user = $this->facebookData($user, $data);
+	            }else if($response->getResourceOwner()->getName() == 'linkedin'){
+	            	$user = $this->linkedinData($user, $data);
+	            }          
+	            $duplicateUsername = $this->userManager->findUserBy(array('username' => $user->getUsername()));
+	            if(!empty($duplicateUsername)){
+	            	$user->setUsername($user->getUsername().rand(1,24));
+	            	$duplicateUsername = $this->userManager->findUserBy(array('username' => $user->getUsername()));
 	            }
             }
             $user->$setter_id($username);
             $user->$setter_token($response->getAccessToken());
+            
             //I have set all requested data with the user's username
             //modify here with relevant data
 		    
@@ -88,6 +102,23 @@ class FOSUBUserProvider extends BaseClass
         return $user;
     }
     
+    private function linkedinData($user, $data)
+    {
+    	$user->setEnabled(true);
+    	if(isset($data['emailAddress'])) $user->setEmail($data['emailAddress']);
+    	if(isset($data['formattedName'])){
+    		$name = explode(" ", $data['formattedName']);
+    		$user->setFirstName($name[0]);
+    		$user->setLastName(array_pop($name));
+    	}
+    	if(isset($data['educations'])){
+    		$user->setDegree($data['educations']['values'][0]['fieldOfStudy']);
+    		$user->setSchool($data['educations']['values'][0]['schoolName']);
+    	}
+    	$user->setUsername($user->getFirstName().$user->getLastName());
+    	return $user;
+    }
+    
     private function facebookData($user, $data)
     {
     	$user->setEnabled(true);
@@ -100,12 +131,7 @@ class FOSUBUserProvider extends BaseClass
     		$user->setSchool($education['school']['name']);
     		$user->setDegree($education['degree']['name']);
     	}
-    	
-    	$duplicateUsername = $this->userManager->findUserBy(array('username' => $user->getUsername()));
-    	if(!empty($duplicateUsername)){
-    		$user->setUsername($user->getUsername().rand(1,24));
-    		$duplicateUsername = $this->userManager->findUserBy(array('username' => $user->getUsername()));
-    	}
+    	return $user;
     }
  
 }

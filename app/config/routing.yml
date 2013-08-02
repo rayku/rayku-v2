@@ -9,6 +9,9 @@ hwi_oauth_redirect:
 facebook_login:
     pattern: /connect/check-facebook
     
+linkedin_login:
+    pattern: /connect/check-linkedin
+    
 rayku_page_import:
     resource: "@RaykuPageBundle/Controller"
     type:     annotation

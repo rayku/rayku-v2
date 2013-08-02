@@ -18,6 +18,14 @@ use Rayku\ApiBundle\Entity\User;
 class PageController extends Controller
 {
 	/**
+	 * @Route("/ryerson", name="rayku_ryerson_landing")
+	 * @Template
+	 */
+	public function ryersonAction(){
+		
+	}
+	
+	/**
 	 * @Route("/about", name="rayku_page_about")
 	 * @Template
 	 */

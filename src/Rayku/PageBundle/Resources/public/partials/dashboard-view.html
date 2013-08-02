@@ -7,7 +7,8 @@
 TUTOR LIST TABLE
 -------------------------------->
 	<div id="tutorList" class="large-7 columns tutor-list" ng-controller="TutorListCtrl">
-		<h3>Displaying online tutors<a href="#" class="refreshTutors raphael" ng-click="refreshTutors()">0</a></h3>
+		<h3>Displaying online tutors
+			<div class="ng-edit session-refr refreshSession raphael" ng-click="refreshTutors()" style="float:right; margin-right:15px; font-weight:bold;">0</div></h3>
 		<form action="{{path('post_session')}}" method="post" class="custom" id="create_session">
 		<div ng-include="TutorListTemplate"></div>
 		</form>

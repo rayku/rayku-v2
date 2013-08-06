@@ -32,6 +32,27 @@ class User extends BaseUser implements ParticipantInterface
 	 */
 	protected $id;
 	
+	/** 
+	 * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true) 
+	 */
+	protected $facebook_id;
+	
+	/** 
+	 * @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true) 
+	 */
+	protected $facebook_access_token;
+
+
+	/**
+	 * @ORM\Column(name="linkedin_id", type="string", length=255, nullable=true)
+	 */
+	protected $linkedin_id;
+	
+	/**
+	 * @ORM\Column(name="linkedin_access_token", type="string", length=255, nullable=true)
+	 */
+	protected $linkedin_access_token;
+	
 	/**
 	 * @var \User
 	 *
@@ -1101,5 +1122,97 @@ class User extends BaseUser implements ParticipantInterface
     public function getPointPurchase()
     {
         return $this->point_purchase;
+    }
+
+    /**
+     * Set facebook_id
+     *
+     * @param string $facebookId
+     * @return User
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebook_id = $facebookId;
+    
+        return $this;
+    }
+
+    /**
+     * Get facebook_id
+     *
+     * @return string 
+     */
+    public function getFacebookId()
+    {
+        return $this->facebook_id;
+    }
+
+    /**
+     * Set facebook_access_token
+     *
+     * @param string $facebookAccessToken
+     * @return User
+     */
+    public function setFacebookAccessToken($facebookAccessToken)
+    {
+        $this->facebook_access_token = $facebookAccessToken;
+    
+        return $this;
+    }
+
+    /**
+     * Get facebook_access_token
+     *
+     * @return string 
+     */
+    public function getFacebookAccessToken()
+    {
+        return $this->facebook_access_token;
+    }
+
+    /**
+     * Set linkedin_id
+     *
+     * @param string $linkedinId
+     * @return User
+     */
+    public function setLinkedinId($linkedinId)
+    {
+        $this->linkedin_id = $linkedinId;
+    
+        return $this;
+    }
+
+    /**
+     * Get linkedin_id
+     *
+     * @return string 
+     */
+    public function getLinkedinId()
+    {
+        return $this->linkedin_id;
+    }
+
+    /**
+     * Set linkedin_access_token
+     *
+     * @param string $linkedinAccessToken
+     * @return User
+     */
+    public function setLinkedinAccessToken($linkedinAccessToken)
+    {
+        $this->linkedin_access_token = $linkedinAccessToken;
+    
+        return $this;
+    }
+
+    /**
+     * Get linkedin_access_token
+     *
+     * @return string 
+     */
+    public function getLinkedinAccessToken()
+    {
+        return $this->linkedin_access_token;
     }
 }

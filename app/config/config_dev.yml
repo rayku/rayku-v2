@@ -32,3 +32,4 @@ swiftmailer:
 
 parameters:
     payment.gateway.api_key: "sk_test_fXB6jN3wWpxC1u2BfBAUWw7L"
+    fb.secret: "1bf35a3021df5bc77f908f41c2e16afe"

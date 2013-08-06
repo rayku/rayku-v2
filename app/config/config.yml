@@ -169,6 +169,12 @@ services:
         factory_method: create
         arguments: 
             - "%omni_pay.gateway.name%"
+    hwi_oauth.user.provider.entity:
+        class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
+    my_user_provider:
+        class: "%my_user_provider.class%"
+        #this is the place where the properties are passed to the UserProvider - see config.yml
+        arguments: [@fos_user.user_manager,{facebook: facebook_id, linkedin: linkedin_id}]
 
 jms_security_extra:
     expressions: true
@@ -184,3 +190,17 @@ fos_message:
         
 fos_js_routing:
     routes_to_expose: [ fos_user_security_logout ]
+
+hwi_oauth:  
+    firewall_name: main  
+    resource_owners:
+        facebook:
+            type: facebook
+            client_id: 153916011466806
+            client_secret: 1bf35a3021df5bc77f908f41c2e16afe
+            scope:    "email, user_education_history, user_location"
+        linkedin:
+            type: linkedin
+            client_id: p8wds8ztyygz
+            client_secret: qtKbBayMuW99TgcP
+            scope:    "r_fullprofile r_emailaddress"

@@ -22,9 +22,6 @@ parameters:
 
     # Sonata Media options
     sonata_media.cdn.host:          /uploads/media
-
-    # Sonata User Options
-    sonata_user.google_authenticator.server:  demo.sonata-project.org
     
     rayku_referral.listener.kernel.query_param_name: refcode
     rayku_referral.listener.kernel.cookie_param_code: code
@@ -38,4 +35,5 @@ parameters:
     omni_pay.gateway.class: Omnipay\Stripe\Gateway
 
     payment.gateway.api_key: "sk_live_wD3nzHCxEqRo52mNKDjl2WsM"
+    my_user_provider.class: Rayku\UserBundle\Security\FOSUBUserProvider
     

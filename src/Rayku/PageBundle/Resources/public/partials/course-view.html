@@ -4,7 +4,7 @@
 <div class="row" id="content" ng-controller="CourseViewCtrl">
 	<div id="courseView" class="large-8 columns course-view">
 		<h3>About</h3>
-		<div style="padding:10px">{{ course.description }}</div>
+		<div style="padding:10px"><p ng-bind-html-unsafe="course.description"></p></div>
 		<span ng-show="user.id == course.instructor.id" ng-cloak>
 			<form action="{{ path('post_session_broadcast', {'course':course.id}) }}" method="post" id="broadcast_session">
 				<input value="New Broadcast" type="submit" class="bbutton" id="tutorConnect" name="tutorConnect">

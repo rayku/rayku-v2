@@ -196,11 +196,11 @@ hwi_oauth:
     resource_owners:
         facebook:
             type: facebook
-            client_id: 153916011466806
-            client_secret: 1bf35a3021df5bc77f908f41c2e16afe
+            client_id: 120906181315520
+            client_secret: 720072cfe458392fbb2e6c0fce37f054
             scope:    "email, user_education_history, user_location"
         linkedin:
             type: linkedin
-            client_id: p8wds8ztyygz
-            client_secret: qtKbBayMuW99TgcP
+            client_id: pmwchsmt4zvf
+            client_secret: aS03Ub9bs4lcxiF5
             scope:    "r_fullprofile r_emailaddress"

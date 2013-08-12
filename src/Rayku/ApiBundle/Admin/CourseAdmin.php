@@ -14,7 +14,7 @@ class CourseAdmin extends Admin
 	{
 		$formMapper
 			->add('name')
-			->add('description')
+			->add('description', 'textarea')
 			->add('slug')
 			->add('instructor')
 		;

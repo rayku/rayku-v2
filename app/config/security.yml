@@ -28,7 +28,6 @@ security:
                 use_forward:    false
                 check_path:     /login_check
                 failure_path:   /login
-                always_use_default_target_path: true
                 default_target_path: /
             oauth:
                 resource_owners:
@@ -36,6 +35,7 @@ security:
                     linkedin:  "/connect/check-linkedin"
                 login_path:    /connect
                 failure_path:  /connect
+                default_target_path: /#/course/math_center/view
                 oauth_user_provider:
                     service: my_user_provider
         dev:

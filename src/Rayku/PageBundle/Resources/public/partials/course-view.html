@@ -28,10 +28,10 @@
 			<tbody>
 				<tr ng-repeat="session in course.sessions">
 					<td>
-						<span ng-show="session.end_time >= session.start_time">
+						<span ng-hide="session.end_time == NULL">
 							{{ session.tutor_session_name}} <a href="{{whiteboardUrl}}/room/{{ session.id }}/playback">RECORDED</a>
 						</span>
-						<span ng-show="ession.start_time < session.end_time">
+						<span ng-show="session.end_time == NULL">
 							{{ session.tutor_session_name}} <a href="{{whiteboardUrl}}/room/{{ session.id }}/broadcast">SESSION IN PROGRESS</a>
 						</span>
 					</td>

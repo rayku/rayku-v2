@@ -104,13 +104,6 @@ li.sesEdit{
 </style>
 
 <script type="text/javascript">
-$(document).ready(function(){
-	$('a.edit_session_name').click(function (event){
-		event.preventDefault();
-		$('button.save_session_name').show();
-	});
-});
-
 $(function () {
     $('input[name="session_name_submit"]').click(function(){
         var session_name = $('input[name="session_name_input"]').val();

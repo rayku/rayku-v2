@@ -116,8 +116,7 @@ app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){
     //Should be used to update the sessions name
     $scope.update = function (session) {
       $http.post(Routing.generate('post_sessions', {'session':session.id, 'name':session.tutor_session_name})).success(function(data){
-        //done
-        $scope.refreshSessions();
+        //$scope.refreshSessions();
       }).error(function (data) {
         $scope.error = data || "Request failed";
       });

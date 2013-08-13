@@ -16,6 +16,7 @@ framework:
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] }
     default_locale:  %locale%
+    trusted_hosts: ~
     session:
         lifetime:       36000
         save_path: %kernel.root_dir%/var/sessions

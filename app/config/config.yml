@@ -7,10 +7,8 @@ imports:
     - { resource: @RaykuApiBundle/Resources/config/admin_coupon.xml }
     - { resource: @RaykuApiBundle/Resources/config/admin_course.xml }
 
-kernel:
-    trusted_hosts: ~
-
 framework:
+    trusted_hosts: ['.*\.?rayku.com$']
     translator: { fallback: en }
     secret:          %secret%
     router:          { resource: "%kernel.root_dir%/config/routing.yml" }

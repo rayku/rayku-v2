@@ -7,6 +7,9 @@ imports:
     - { resource: @RaykuApiBundle/Resources/config/admin_coupon.xml }
     - { resource: @RaykuApiBundle/Resources/config/admin_course.xml }
 
+kernel:
+    trusted_hosts: ~
+
 framework:
     translator: { fallback: en }
     secret:          %secret%
@@ -16,7 +19,6 @@ framework:
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] }
     default_locale:  %locale%
-    trusted_hosts: ~
     session:
         lifetime:       36000
         save_path: %kernel.root_dir%/var/sessions

@@ -83,27 +83,14 @@ class User extends BaseUser implements ParticipantInterface
 	/**
 	 * @var integer
 	 * @Serializer\Groups({"user.details"})
-	 * @ORM\Column(name="point_threshold", type="integer", nullable=false)
-	 * @Assert\NotBlank
-	 * @Assert\Range(
-	 *     min = 100,
-	 *     max = 9999,
-	 *     minMessage = "You cannot set your point threshold less than 100",
-	 *     maxMessage = "This is too large a value for your point threshold"
-	 * )
+	 * @ORM\Column(name="point_threshold", type="integer", nullable=true)
 	 */
 	private $point_threshold = 500;
 	
 	/**
 	 * @var integer
 	 * @Serializer\Groups({"user.details"})
-	 * @ORM\Column(name="point_purchase_amount", type="integer", nullable=false)
-	 * @Assert\NotBlank
-	 * @Assert\Range(
-	 *     min = 0,
-	 *     max = 99999,
-	 *     maxMessage = "This is too large a value for your point purchase amount"
-	 * )
+	 * @ORM\Column(name="point_purchase_amount", type="integer", nullable=true)
 	 */
 	private $point_purchase = 1000;
 	

@@ -32,12 +32,6 @@ class FOSUBUserProvider extends BaseClass
         //we connect current user
         $user->$setter_id($username);
         $user->$setter_token($response->getAccessToken());
-        
-        if($response->getResourceOwner()->getName() == 'facebook'){
-        	$this->facebookData($user, $response->getResponse());
-        }else if($response->getResourceOwner()->getName() == 'linkedin'){
-        	die(__LINE__.' '.__FILE__);
-        }
  
         $this->userManager->updateUser($user);
     }
@@ -116,6 +110,7 @@ class FOSUBUserProvider extends BaseClass
     		$user->setSchool($data['educations']['values'][0]['schoolName']);
     	}
     	$user->setUsername($user->getFirstName().$user->getLastName());
+    	
     	return $user;
     }
     

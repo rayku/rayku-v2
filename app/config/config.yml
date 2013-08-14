@@ -205,3 +205,4 @@ hwi_oauth:
             client_id: pmwchsmt4zvf
             client_secret: aS03Ub9bs4lcxiF5
             scope:    "r_fullprofile r_emailaddress"
+            infos_url: "https://api.linkedin.com/v1/people/~:(id,formatted-name,email-address,picture-url,educations)?format=json"

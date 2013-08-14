@@ -42,8 +42,3 @@ hwi_oauth:
             client_id: 153916011466806
             client_secret: 1bf35a3021df5bc77f908f41c2e16afe
             scope:    "email, user_education_history, user_location"
-        linkedin:
-            type: linkedin
-            client_id: p8wds8ztyygz
-            client_secret: qtKbBayMuW99TgcP
-            scope:    "r_fullprofile r_emailaddress"

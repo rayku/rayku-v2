@@ -120,7 +120,6 @@ class UserController extends Controller
 	}
 
 	/**
-	 * @Secure(roles="ROLE_USER")
 	 * @View()
 	 * @ApiDoc(
 	 *   statusCodes={

@@ -68,7 +68,8 @@ security:
         
         # Todo secure with HMAC
         - { path: ^/session, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/users, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/users, role: IS_AUTHENTICATED_ANONYMOUSLY, ip: 10.180.146.105 }
+        - { path: ^/users, role: ROLE_USER }
 
         # Secure rest of the site
         - { path: ^/, roles: ROLE_USER }

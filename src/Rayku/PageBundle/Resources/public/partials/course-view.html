@@ -46,7 +46,7 @@
 							<a href="{{whiteboardUrl}}/room/{{ session.id }}/playback">RECORDED</a>
 						</span>
 						<span ng-show="session.end_time == NULL">
-							<a href="{{whiteboardUrl}}/room/{{ session.id }}/broadcast">SESSION IN PROGRESS</a>
+							<a href="{{whiteboardUrl}}/room/{{ session.id }}/broadcast/user/{{user.id}}">SESSION IN PROGRESS</a>
 						</span>
 					</td>
 				</tr>

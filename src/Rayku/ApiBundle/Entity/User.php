@@ -437,7 +437,7 @@ class User extends BaseUser implements ParticipantInterface
      * @param integer $points
      * @return User
      */
-    private function setPoints($points)
+    public function setPoints($points)
     {
         $this->points = $points;
     

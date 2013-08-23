@@ -194,7 +194,9 @@ class UserController extends Controller
 		$editForm->bind($data);
 	
 		if ($editForm->isValid()) {
-			$user->setPassword($data['plainPassword']['first']);
+			if(isset($data['plainPassword']['first'])){
+				$user->setPassword($data['plainPassword']['first']);
+			}
 			
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($user);

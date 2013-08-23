@@ -17,7 +17,11 @@
 							window.location.replace(response.redirect);
 						}
 					};
-					$('#broadcast_session').ajaxForm(options)
+					try{
+					    $('#broadcast_session').ajaxForm(options)
+					}catch(e){
+						
+					}
 				});
 			</script>
 		</span>

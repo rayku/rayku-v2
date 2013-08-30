@@ -203,7 +203,7 @@ class UserController extends Controller
 			$em->flush();
 			return $user;
 		}
-		die('invalid');
+		
 		return array(
 			'entity'      => $user,
 			'edit_form'   => $editForm,

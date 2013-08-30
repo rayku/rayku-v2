@@ -24,11 +24,11 @@ security:
                 auto_login_user_provider: rayku.auto_login_user_provider
             form_login:
                 provider:       fos_userbundle
-                login_path:     /#/course/math_center/view
+                login_path:     /
                 use_forward:    false
                 check_path:     /login_check
                 failure_path:   /login
-                default_target_path: /
+                default_target_path: /#/course/math_center/view
             oauth:
                 resource_owners:
                     facebook:  "/connect/check-facebook"

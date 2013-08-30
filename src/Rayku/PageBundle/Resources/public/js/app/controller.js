@@ -21,7 +21,7 @@ app.
 			when(routeGeneratorProvider.generate('angular_profile'), {templateUrl: '/bundles/raykupage/partials/user-edit.html'}).
 			when(routeGeneratorProvider.generate('angular_settings'), {templateUrl: '/bundles/raykupage/partials/user-settings.html'}).
 			when(routeGeneratorProvider.generate('angular_payout'), {templateUrl: '/bundles/raykupage/partials/payout.html'}).
-			otherwise({redirectTo:routeGeneratorProvider.generate('rayku_username_dashboard', {username:username})});
+			otherwise({redirectTo:'/course/math_center/view'});
 	}]);
 
 app.controller('CourseViewCtrl', function ($scope, $http, $routeParams){

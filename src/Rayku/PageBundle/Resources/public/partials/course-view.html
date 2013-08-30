@@ -6,6 +6,11 @@
 		<h3>About</h3>
 		<div style="padding:10px" ng-bind-html-unsafe="course.description">
 		</div>
+		<div style="padding:10px" ng-repeat="session in course.sessions">
+	        <span ng-show="session.end_time == NULL" ng-cloak>
+	            <a href="{{whiteboardUrl}}/room/{{ session.id }}/broadcast/user/{{user.id}}">CURRENT SESSION IN PROGRESS</a>
+	        </span>
+		</div>
 		<span ng-show="user.id == course.instructor.id" ng-cloak>
 			<form action="{{ path('post_session_broadcast', {'course':course.id}) }}" method="post" id="broadcast_session">
 				<input value="New Broadcast" type="submit" class="bbutton" id="tutorConnect" name="tutorConnect">

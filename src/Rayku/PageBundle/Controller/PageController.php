@@ -77,14 +77,13 @@ class PageController extends Controller
 	public function indexAction($username = null)
 	{
 		if($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')){
-			return $this->redirect('/#/course/math_center/view');
-			/*$user = $this->getUser();
+			$user = $this->getUser();
 			return $this->render(
 				'RaykuPageBundle:Page:secure.html.twig',
 				array(
 					'user' => $user
 				)
-			);*/
+			);
 		}
 		return array('form' => $this->container->get('fos_user.registration.form'));
 	}	

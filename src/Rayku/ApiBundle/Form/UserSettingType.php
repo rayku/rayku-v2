@@ -26,14 +26,13 @@ class UserSettingType extends AbstractType
 				'constraints' => new UserPassword(),
 		));
 		$builder->add('plainPassword', 'repeated', array(
-				'type' => 'password',
-				'options' => array('translation_domain' => 'FOSUserBundle'),
-				'first_options' => array('label' => 'form.new_password'),
-				'second_options' => array('label' => 'form.new_password_confirmation'),
-				'invalid_message' => 'fos_user.password.mismatch',
+			'type' => 'password',
+			'options' => array('translation_domain' => 'FOSUserBundle'),
+			'first_options' => array('label' => 'form.new_password'),
+			'second_options' => array('label' => 'form.new_password_confirmation'),
+			'invalid_message' => 'fos_user.password.mismatch',
 		));
 	}
-	
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{

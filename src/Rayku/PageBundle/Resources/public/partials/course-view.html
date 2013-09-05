@@ -4,30 +4,59 @@
 <div class="row" id="content" ng-controller="CourseViewCtrl">
 	<div id="courseView" class="large-8 columns course-view">
 		<h3>About</h3>
-		<div style="padding:10px">{{ course.description }}</div>
-			<span ng-show="user.is_instructor" ng-cloak>
-				<form action="{{ path('post_session_broadcast', {'course':course.id}) }}" method="post" id="broadcast_session">
-					<input value="New Broadcast" type="submit" class="bbutton" id="tutorConnect" name="tutorConnect">
-				</form>
-				<script type="text/javascript">
-					$(document).ready(function(){
-						var options = { 
-							success: function(response){
-								window.location.replace(response.redirect);
-							}
-						};
-						$('#broadcast_session').ajaxForm(options)
-					});
-				</script>
-			</span>
+		<div style="padding:10px" ng-bind-html-unsafe="course.description">
+		</div>
+		<div style="padding:10px" ng-repeat="session in course.sessions">
+	        <span ng-show="session.end_time == NULL" ng-cloak>
+	            <a href="{{whiteboardUrl}}/room/{{ session.id }}/broadcast/user/{{user.id}}">CURRENT SESSION IN PROGRESS</a>
+	        </span>
+		</div>
+		<span ng-show="user.id == course.instructor.id" ng-cloak>
+			<form action="{{ path('post_session_broadcast', {'course':course.id}) }}" method="post" id="broadcast_session">
+				<input value="New Broadcast" type="submit" class="bbutton" id="tutorConnect" name="tutorConnect">
+			</form>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					var options = { 
+						success: function(response){
+							window.location.replace(response.redirect);
+						}
+					};
+					try{
+					    $('#broadcast_session').ajaxForm(options)
+					}catch(e){
+						
+					}
+				});
+			</script>
+		</span>
 	</div>
-	<div class="large-4 columns course-view" id="session-list">
+	<div class="large-4 columns course-view" id="session-list" ng-controller="SessionListCtrl">
 		<h3>Sessions</h3>
-		<div><table>
+		<div><table width="100%">
 			<tbody>
-				<tr ng-repeat="session in course.sessions">
+				<tr ng-repeat="session in course.sessions" ng-init="editorEnabled = false">
 					<td>
-						{{ session.tutor_session_name}} <a href="/room/{{ session.id }}/playback">RECORDED</a>
+						<span ng-hide="editorEnabled">
+							{{ session.tutor_session_name}}
+						</span>
+						<span ng-show="editorEnabled" ng-cloak>
+							<form>
+								<label for="session_name">Session Name:</label> <input type="text" name="session_name" id="session_name" ng-model="session.tutor_session_name" />
+								<button class="save_session_name" ng-click="update(session); editorEnabled=!editorEnabled">Save</button>
+							</form>
+						</span>
+						<span ng-show="user.id == course.instructor.id && !editorEnabled" ng-cloak>
+							<a href="" ng-click="editorEnabled=!editorEnabled">Edit</a>
+						</span>
+					</td>
+					<td style="text-align:right">
+						<span ng-hide="session.end_time == NULL">
+							<a href="{{whiteboardUrl}}/room/{{ session.id }}/playback">RECORDED</a>
+						</span>
+						<span ng-show="session.end_time == NULL">
+							<a href="{{whiteboardUrl}}/room/{{ session.id }}/broadcast/user/{{user.id}}">SESSION IN PROGRESS</a>
+						</span>
 					</td>
 				</tr>
 			</tbody>

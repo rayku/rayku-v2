@@ -24,6 +24,7 @@ class Course
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Serializer\Groups({"course", "course.details"})
      */
     private $id;
 
@@ -49,7 +50,7 @@ class Course
      * @var string
      *
      * @Assert\NotBlank
-     * @ORM\Column(name="description", type="string", length=255, nullable=false)
+     * @ORM\Column(name="description", type="text", nullable=false)
      * @Serializer\Groups({"course", "course.details"})
      */
     private $description = '';   
@@ -65,8 +66,9 @@ class Course
     /**
      * @var \User
      *
-     * @ORM\OneToOne(targetEntity="\Rayku\ApiBundle\Entity\User", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="\Rayku\ApiBundle\Entity\User")
      * @ORM\JoinColumn(name="instructor_id", referencedColumnName="id")
+     * @Serializer\Groups({"course", "course.details"})
      */
     private $instructor;
     

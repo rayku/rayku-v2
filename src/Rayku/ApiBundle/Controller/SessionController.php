@@ -24,7 +24,7 @@ class SessionController extends Controller
 	/**
 	 * @View(serializerGroups={"session.details", "user", "tutor"})
 	 * @ApiDoc(
-	 *   description="Get active sessions for a tutor",
+	 *   description="Get active sessions for a tutor or a student",
 	 *   filters={
 	 *     {"name"="activeRequests", "dataType"="boolean"}
 	 *   },
@@ -41,10 +41,17 @@ class SessionController extends Controller
 		
 		$em = $this->getDoctrine()->getManager();
 		if(!$this->getRequest()->get('activeRequests')){
-			if($this->getUser()->getIsTutor()){
-				$sessions = $em->getRepository('RaykuApiBundle:Session')->findBySelectedTutor($this->getUser()->getTutor());
-			}else{
-				$sessions = $em->getRepository('RaykuApiBundle:Session')->findByStudent($this->getUser());
+			//if the user is a tutor and a student
+			if($this->getUser()){
+				if(!$this->getUser()->getIsTutor()){
+					$tutorId = 0; //set tutor id to 0 if the user is not a tutor
+				}else{
+					$tutorId = $this->getUser()->getTutor()->getId(); //get the users tutor ID
+				}
+
+				$studentId = $this->getUser()->getId(); // get the users student ID
+				$query = $em->createQuery('SELECT s FROM RaykuApiBundle:Session s WHERE (s.student='.$studentId.'OR s.selectedTutor='.$tutorId.') AND s.duration > 0');
+				$sessions = $query->getResult();
 			}
 		}else{
 			$sessions = $em->getRepository('RaykuApiBundle:Session')->findAllActiveByTutor($this->getUser()->getTutor()->getId(), Session::expire_session);
@@ -89,6 +96,7 @@ class SessionController extends Controller
     }
 	
 	/**
+	 * @View(serializerGroups={"session.details", "session", "course", "user"})
 	 * @ApiDoc(
 	 *   description="Get a whiteboard session",
 	 *   statusCodes={
@@ -304,6 +312,13 @@ class SessionController extends Controller
 			throw new AccessDeniedException();
 		}
 		
+		if($this->getUser()->getTutor() === NULL){
+			return array(
+				'success' => false,
+				'message' => 'User must be a tutor to start a session'
+			);
+		}
+		
 		$pastSessions = $course->getSessions();
 		foreach($pastSessions as $pastSession){
 			if($pastSession->getEndTime() == NULL){
@@ -343,13 +358,7 @@ class SessionController extends Controller
 	
 	private function processForm(Session $session)
 	{
-		$form = $this->createForm(new SessionType(), $session);
-		// Ignore extra fields that Angularjs sends with the form
-		$data = $this->getRequest()->request->all();
-		$children = $form->all();
-		$data = array_intersect_key($data, $children);
-
-		$form->bind($data);
+		$form = $this->createForm(new SessionType(), $session)->bind($this->getRequest());
 		
 		if($form->isValid()){
 			$em = $this->getDoctrine()->getManager();

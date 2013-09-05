@@ -32,7 +32,6 @@ $(document).ready(function(){
 
     $('a.setting').click(function (e) {
         e.preventDefault();
-        console.log('Clicked');
         $('#content').fadeOut('fast');
         $('#userprofile').delay(500).fadeIn('fast');
         $('.profilesettings').siblings().fadeOut('fast');
@@ -61,7 +60,7 @@ $(document).ready(function(){
     //Animation to show practice whiteboard iFrame for now
     $('.userWhiteboard').click(function (){
         $('.container').fadeOut('fast');
-        $('#whiteboard2 iframe').attr("src", "http://whiteboard.rayku.com/standalone");
+        $('#whiteboard2 iframe').attr("src", whiteboardUrl + "/standalone");
         $('#whiteboard2').delay(500).fadeIn('slow');
 
     });

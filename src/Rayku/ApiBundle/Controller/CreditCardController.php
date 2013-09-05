@@ -2,6 +2,8 @@
 
 namespace Rayku\ApiBundle\Controller;
 
+use Rayku\ApiBundle\Entity\Invoice;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,7 +16,10 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use JMS\SecurityExtraBundle\Annotation\SecureParam;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Rayku\ApiBundle\Entity\CreditCard;
+use Rayku\ApiBundle\Entity\User;
+use Rayku\ApiBundle\Entity\Transaction;
 use Rayku\ApiBundle\Form\CreditCardType;
+use Rayku\ApiBundle\Form\InvoiceType;
 /**
  * RestCreditCard controller.
  */
@@ -30,10 +35,24 @@ class CreditCardController extends Controller
      *   },
 	 *   description="Chardge a Credit Card"
 	 * )
+	 * @param \Rayku\ApiBundle\Entity\CreditCard $card
+	 * @param \Rayku\ApiBundle\Entity\Invoice $invoice
 	 */
-	public function postCreditCardsChargeAction()
+	public function postCreditcardChargeAction(CreditCard $card, Invoice $invoice)
 	{
-		die(__LINE__.' '.__FILE__);
+		$user = $this->getUser();
+		
+		if($user !== $card->getUser()){
+			throw new AccessDeniedException();
+		}
+		
+		if($user !== $invoice->getUser()){
+			throw new AccessDeniedException();
+		}
+		
+		$gateway = $this->get('rayku_payment_gateway')->setApiKey($this->container->getParameter('payment.gateway.api_key'));
+			
+		return $this->get('rayku_payment_processor')->process($invoice, $card, $gateway);
 	}
 	
 	/**
@@ -49,7 +68,7 @@ class CreditCardController extends Controller
 	 *   input="Rayku\ApiBundle\Form\CreditCardType"
 	 * )
 	 */
-	public function postCreditCardsAction()
+	public function postCreditcardAction()
 	{
 		$form = $this->createForm(new CreditCardType())->bind($this->getRequest());
 		
@@ -59,7 +78,12 @@ class CreditCardController extends Controller
 			$response = $gateway->createCard($params)->send();
 
 			if($response->isSuccessful()){
-				$creditCard = new CreditCard();
+				$new = false;
+				$creditCard = $this->getUser()->getCreditCard();
+				if(is_null($creditCard)){
+					$new = true;
+					$creditCard = new CreditCard();
+				}
 				$creditCard->setReference($response->getCardReference());
 				
 				$data = $response->getData();
@@ -75,19 +99,21 @@ class CreditCardController extends Controller
 				$em->persist($creditCard);
 				$em->flush();
 				
-				// creating the ACL
-				$aclProvider = $this->get('security.acl.provider');
-				$objectIdentity = ObjectIdentity::fromDomainObject($creditCard);
-				$acl = $aclProvider->createAcl($objectIdentity);
-				 
-				// retrieving the security identity of the currently logged-in user
-				$securityContext = $this->get('security.context');
-				$user = $securityContext->getToken()->getUser();
-				$securityIdentity = UserSecurityIdentity::fromAccount($user);
-				 
-				// grant owner access
-				$acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
-				$aclProvider->updateAcl($acl);
+				if($new){
+					// creating the ACL
+					$aclProvider = $this->get('security.acl.provider');
+					$objectIdentity = ObjectIdentity::fromDomainObject($creditCard);
+					$acl = $aclProvider->createAcl($objectIdentity);
+					 
+					// retrieving the security identity of the currently logged-in user
+					$securityContext = $this->get('security.context');
+					$user = $securityContext->getToken()->getUser();
+					$securityIdentity = UserSecurityIdentity::fromAccount($user);
+					 
+					// grant owner access
+					$acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+					$aclProvider->updateAcl($acl);
+				}
 				
 				return array('success' => true, 'card' => $creditCard);
 			}else{

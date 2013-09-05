@@ -3,7 +3,7 @@
 		<h2>Buy Rayku Points</h2>
 	</div>
 	<div class="row registration-body">
-        <form class="buy-rayku-points custom" name="buy_rayku_points" action="/paypal.php" method="post">
+        <form>
             <select id="customDropdown1" class="large" name="amount">
                 <option DISABLED>Points</option>
                 <option value="5">500 Points for $5</option>
@@ -11,8 +11,9 @@
                 <option value="25">2500 Points for $25</option>
                 <option value="50">5000 Points for $50</option>
                 <option value="100">10000 Points for $100</option>
-            </select>
-        	<input type="hidden" name="loginid" value="{{ user.id }}" />
+            </select><br />
+            Enable Auto-recharge <input type="checkbox" /><br />
+            Auto-recharge saves you time and hassle. We'll simply credit your account with amount selected when your balance falls below 500 Rayku Points (RP).<br />
             <input type="submit" class="bbutton" value="Buy">
         </form>
 	</div>

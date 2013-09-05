@@ -14,6 +14,9 @@ class CourseAdmin extends Admin
 	{
 		$formMapper
 			->add('name')
+			->add('description', 'textarea')
+			->add('slug')
+			->add('instructor')
 		;
 	}
 	
@@ -21,7 +24,9 @@ class CourseAdmin extends Admin
 	{
 		$showMapper
             ->add('name')
+            ->add('slug')
             ->add('instructor')
+            ->add('description')
 		;
 	}
 	
@@ -39,5 +44,22 @@ class CourseAdmin extends Admin
         $listMapper
         	->addIdentifier('name', null, array('route' => array('name' => 'show')))
         ;
+    }
+
+    public function preUpdate($course){
+    	$this->validateInstructorPermissions($course);
+    }
+    
+    public function prePersist($course){
+    	$this->validateInstructorPermissions($course);
+    }
+    
+    private function validateInstructorPermissions($course)
+    {
+    	$instructor = $course->getInstructor();
+    	if(!$instructor->hasRole('ROLE_INSTRUCTOR')){
+    		$instructor->addRole('ROLE_INSTRUCTOR');
+    		$this->getModelManager()->getEntityManager($instructor)->persist($instructor);
+    	}
     }
 }

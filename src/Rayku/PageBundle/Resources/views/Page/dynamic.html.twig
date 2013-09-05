@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Rayku | Ryerson</title>
+	<link href="{{ asset('bundles/raykupage/css/normalize.css') }}" type="text/css" rel="stylesheet" media="screen" />
+	<link href="{{ asset('bundles/raykupage/css/foundation.min.css') }}" type="text/css" rel="stylesheet" media="screen" />
+	<link href="{{ asset('bundles/raykupage/css/app.css') }}" type="text/css" rel="stylesheet" media="screen" />
+	<link rel="icon" type="image/ico" href="{{ asset('bundles/raykupage/images/favicon.ico') }}">
+	<style type="text/css">	
+	body {
+	  background-image: url('/bundles/raykupage/images/bg.png');
+	  font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue", Helvetica, Arial, sans-serif;
+	  color: #404040;
+	}
+
+	.login {
+	  position: relative;
+	  margin: 0 auto;
+	  padding: 20px 20px 20px;
+	  width: 310px;
+	  background: white;
+	  border-radius: 3px;
+	  -webkit-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+	  box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+	}
+	.login:before {
+	  content: '';
+	  position: absolute;
+	  top: -8px;
+	  right: -8px;
+	  bottom: -8px;
+	  left: -8px;
+	  z-index: -1;
+	  background: rgba(0, 0, 0, 0.08);
+	  border-radius: 4px;
+	}
+	.login h1 {
+	  margin: -20px -20px 21px;
+	  line-height: 40px;
+	  font-size: 15px;
+	  font-weight: bold;
+	  color: #555;
+	  text-align: center;
+	  text-shadow: 0 1px white;
+	  background: #f3f3f3;
+	  border-bottom: 1px solid #cfcfcf;
+	  border-radius: 3px 3px 0 0;
+	  background-image: -webkit-linear-gradient(top, whiteffd, #eef2f5);
+	  background-image: -moz-linear-gradient(top, whiteffd, #eef2f5);
+	  background-image: -o-linear-gradient(top, whiteffd, #eef2f5);
+	  background-image: linear-gradient(to bottom, whiteffd, #eef2f5);
+	  -webkit-box-shadow: 0 1px whitesmoke;
+	  box-shadow: 0 1px whitesmoke;
+	}
+	.login p {
+	  margin: 20px 0 0;
+	}
+	.login p:first-child {
+	  margin-top: 0;
+	}
+	.login input[type=text], .login input[type=password] {
+	  width: 258px;
+	}
+	.login p.remember_me {
+	  float: left;
+	  line-height: 31px;
+	}
+	.login p.remember_me label {
+	  font-size: 12px;
+	  color: #777;
+	  cursor: pointer;
+	}
+	.login p.remember_me input {
+	  position: relative;
+	  bottom: 1px;
+	  margin-right: 4px;
+	  vertical-align: middle;
+	}
+	.login p.submit {
+	  text-align: right;
+	  padding: 0 5px;
+	}
+
+	.login-help {
+	  margin: 20px 0;
+	  font-size: 11px;
+	  color: rgba(39, 39, 39, 1);
+	  text-align: center;
+	}
+	.login-help a {
+	  color: rgba(50, 50, 50, 1);
+	  text-decoration: none;
+	}
+	.login-help a:hover {
+	  text-decoration: underline;
+	}
+
+	:-moz-placeholder {
+	  color: #c9c9c9 !important;
+	  font-size: 13px;
+	}
+
+	::-webkit-input-placeholder {
+	  color: #ccc;
+	  font-size: 13px;
+	}
+
+	input {
+	  font-family: 'Lucida Grande', Tahoma, Verdana, sans-serif;
+	  font-size: 14px;
+	}
+
+	input[type=text], input[type=password] {
+	  margin: 5px;
+	  padding: 0 10px;
+	  width: 200px;
+	  height: 34px;
+	  color: #404040;
+	  background: white;
+	  border: 1px solid;
+	  border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+	  border-radius: 2px;
+	  outline: 5px solid #eff4f7;
+	  -moz-outline-radius: 3px;
+	  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+	  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+	}
+	input[type=text]:focus, input[type=password]:focus {
+	  border-color: #7dc9e2;
+	  outline-color: #dceefc;
+	  outline-offset: 0;
+	}
+
+	input[type=submit] {
+	  padding: 0 18px;
+	  height: 29px;
+	  font-size: 12px;
+	  font-weight: bold;
+	  color: #527881;
+	  text-shadow: 0 1px #e3f1f1;
+	  background: #cde5ef;
+	  border: 1px solid;
+	  border-color: #b4ccce #b3c0c8 #9eb9c2;
+	  border-radius: 16px;
+	  outline: 0;
+	  -webkit-box-sizing: content-box;
+	  -moz-box-sizing: content-box;
+	  box-sizing: content-box;
+	  background-image: -webkit-linear-gradient(top, #edf5f8, #cde5ef);
+	  background-image: -moz-linear-gradient(top, #edf5f8, #cde5ef);
+	  background-image: -o-linear-gradient(top, #edf5f8, #cde5ef);
+	  background-image: linear-gradient(to bottom, #edf5f8, #cde5ef);
+	  -webkit-box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
+	  box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
+	}
+	input[type=submit]:active {
+	  background: #cde5ef;
+	  border-color: #9eb9c2 #b3c0c8 #b4ccce;
+	  -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
+	  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
+	}
+	footer.footer{
+		background: #272727;
+		border-top: 2px solid rgb(26,106,175);
+	}
+	.lt-ie9 input[type=text], .lt-ie9 input[type=password] {
+	  line-height: 34px;
+	}
+	#ryserson-login{
+		position: relative;
+		top: 100px;
+	}
+	.or{
+		font-size: 14px/20px;
+		font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-weight: normal;
+		background: rgba(39, 39, 39, 0.7);
+		color:rgba(245, 245, 245, 1);
+		padding: 7px 6px;
+		border-radius: 35px;
+	}
+	.theform h3{
+		text-align: center;
+		margin-bottom: 30px;
+	}
+	</style>
+	<link href='http://fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+	<script src="{{ asset('components/ngUpload/ng-upload.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/app/loadingIndicator.js') }}"></script>
+	<script src="{{ asset('bundles/raykupage/js/foundation.min.js') }}"></script>
+    <script src="{{ asset('bundles/raykupage/js/vendor/custom.modernizr.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/raykupage/js/script.js') }}"></script>
+</head>
+<body>
+	<div class="container" id="ryserson-login">
+		<header id="header">
+		    <div class="inside">
+		    	{% verbatim %}
+		    	<a href="{{ path('rayku_username_dashboard', {username:user.username}) }}" id="logo">
+		    	{% endverbatim %}
+		    		<span class="beta">beta</span><img src="{{ asset('bundles/raykupage/images/logo.png') }}" alt="" />
+		    	</a>
+		    </div>
+		</header>
+		<div class="row">
+		    <div class="large-8 large-centered columns theform">
+		    	<h3>Rayku & {{ title }}
+		    	</h3>
+		    	<div class="login">
+		      		<h1>Login to Rayku</h1>
+		      		<form action="{{ path('fos_user_security_check') }}" method="post">
+		        		<p><input type="text" id="username" name="_username" placeholder="E-mail or Username" required="required" /></p>
+		        		<p><input type="password" id="password" name="_password" placeholder="Password" required="required" /></p>
+		        		<p class="submit"><input type="submit" name="commit" value="Login"></p>
+		        		<input type="hidden" name="_target_path" value="{{ redirect }}" />
+		     		</form>
+		    	</div>
+
+			    <div class="login-help">
+			      	<p>Forgot your password? <a href="index.html">Click here to reset it</a>.</p>
+			    </div>
+		  	</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="large-1 large-centered columns">
+	  			<h3 class="or">OR</h3>
+	  		</div>
+	  	</div>
+	    <div class="row">
+	        <div class="large-3 large-centered columns" style="padding: 35px; text-align:center; font-family: 'Francois One', sans-serif; font-size:19pt">
+	        	<a href="{{ path('hwi_oauth_service_redirect', {'service':'facebook'}) }}?_destination={{redirect}}">
+	        		<img id="fb" style="background:url({{ asset('bundles/raykupage/images/fb_login.png') }}); width: 150px; height: 23px;" alt="Login with Facebook" />
+	        	</a><br />
+	        	<a href="{{ path('hwi_oauth_service_redirect', {'service':'linkedin'}) }}?_destination={{redirect}}">
+	        		<img id="ln" style="background:url({{ asset('bundles/raykupage/images/ln_login.png') }}); width: 150px; height: 23px;" alt="Login with Linkedin" />
+	        	</a>
+	        </div>
+	    </div>
+	</div>
+</body>
+</html>

@@ -11,8 +11,11 @@
 		<ul>
 			<li class="sesName"><div ng-hide="editorEnabled">{{session.tutor_session_name}}</div><form><div ng-show="editorEnabled"><input type="text" name="session_name" ng-model="session.tutor_session_name"> <button class="save_session_name" ng-click="update(session)" ng-click="editorEnabled=!editorEnabled">Save</button></div></li>
 			<li class="sesTutor">{{session.selected_tutor.user.first_name}} {{session.selected_tutor.user.last_name}}</li>
-			<li class="sesRating">{{session.rating}} &nbsp;</li>
-			<li class="sesView"><a href="http://whiteboard.rayku.com/room/{{session.id}}/playback">View</a></li>
+			<li class="sesRating">
+				<div ng-show="{{user.id != session.student.id}}">tutor</div>
+				<div ng-hide="{{user.id == session.student.id}}">Student</div>
+				&nbsp;</li>
+			<li class="sesView"><a href="{{whiteboardUrl}}/room/{{session.id}}/playback">View</a></li>
 			<li class="sesEdit"><div class="ng-edit" ng-click="editorEnabled=!editorEnabled" class="edit_session_name">Edit</div></form></li>
 		</ul>
 	</li>
@@ -101,13 +104,6 @@ li.sesEdit{
 </style>
 
 <script type="text/javascript">
-$(document).ready(function(){
-	$('a.edit_session_name').click(function (event){
-		event.preventDefault();
-		$('button.save_session_name').show();
-	});
-});
-
 $(function () {
     $('input[name="session_name_submit"]').click(function(){
         var session_name = $('input[name="session_name_input"]').val();

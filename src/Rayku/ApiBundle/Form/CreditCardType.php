@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
 class CreditCardType extends AbstractType
 {
@@ -45,18 +46,25 @@ class CreditCardType extends AbstractType
             ->add('billingPostcode', 'text', array('label' => 'Postal Code'))
             ->add('billingState', 'text', array('label' => 'Province / State'))
             ->add('billingCountry', 'text', array('label' => 'Country'))
+            ->add('current_password', 'password', array(
+            	'label' => 'form.current_password',
+            	'translation_domain' => 'FOSUserBundle',
+            	'mapped' => false,
+            	'constraints' => new UserPassword(),
+            ));
         ;
     }
     
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
     	$resolver->setDefaults(array(
-    		'csrf_protection' => false
+    		'csrf_protection' => false,
+    		'cascade_validation' => true,
     	));
     }
 
     public function getName()
     {
-        return 'card';
+        return '';
     }
 }

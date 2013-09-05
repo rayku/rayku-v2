@@ -3,16 +3,6 @@ $(function(){
     var tutorCount = 0;
     var $settings = $('.user-settings');
     var $profile = $('.user-profile');
-
-    $('.whiteboard').click(function (){
-        $('.dashboard').animate({
-            display:'none'
-        });
-        $('body').css('overflow', 'hidden');
-        $('.main-header').fadeOut('fast');
-        $('#whiteboard2 iframe').attr("src", "http://whiteboard.rayku.local:8080/standalone");
-        $('#whiteboard2').fadeIn('slow');
-    });
     
     //Forgot password on login modal
     $('a.forgot-password').on('click', function(){

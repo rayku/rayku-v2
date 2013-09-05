@@ -18,6 +18,38 @@ use Rayku\ApiBundle\Entity\User;
 class PageController extends Controller
 {
 	/**
+	 * @Route("/{page}/login", name="dynamic_login_page")
+	 */
+	public function dynamicLoginAction($page){
+		$pageData = array(
+			'ryerson' => array('redirect' => '/%23/course/math_center/view', 'title' => 'Ryerson University')
+		);
+		
+		if(!isset($pageData[$page])){
+			return $this->createNotFoundException();
+		}else{
+			$redirect = $pageData[$page]['redirect'];
+			$title = $pageData[$page]['title'];
+		}
+		
+		if($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')){
+			return $this->redirect($redirect);
+		}else{
+			return $this->render('RaykuPageBundle:Page:dynamic.html.twig', array('redirect' => $redirect, 'title' => $title));
+		}
+	}
+	
+	/**
+	 * @Route("/ryerson", name="rayku_ryerson_landing")
+	 * @Template
+	 */
+	public function ryersonAction(){
+		if($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')){
+			return $this->redirect('/#/course/math_center/view');
+		}
+	}
+	
+	/**
 	 * @Route("/about", name="rayku_page_about")
 	 * @Template
 	 */
@@ -28,7 +60,25 @@ class PageController extends Controller
 	 * @Template
 	 */
 	public function legalAction() { }
+
+	/**
+	 * @Route("/#/onboarding", name="rayku_page_tutor_onboard")
+	 * @Template
+	 */
+	public function onboardAction(){
+		$user = "user";
+		return array($user=>$this->getUser());
+	}
 	
+	/**
+	 * @Route("/#/quiz", name="rayku_page_tutor_quiz")
+	 * @Template
+	 */
+	public function quizAction(){
+		$user = "user";
+		return array($user=>$this->getUser());
+	}
+
 	/**
 	 * @Route("/getwhiteboard", name="rayku_page_whiteboard_iframe")
 	 */
@@ -43,7 +93,6 @@ class PageController extends Controller
 	 * @Route("/register/confirmed", name="rayku_register_confirmed")
 	 * @Route("/dashboard", name="rayku_page_dashboard")
 	 * @Route("/#/{username}", name="rayku_username_dashboard", options={"expose"=true})
-	 * @Route("/onboarding", name="rayku_page_tutor_onboarding")
 	 * @Route("/ask", name="rayku_page_homepage_minimized_funnel")
 	 * @Template
 	 */

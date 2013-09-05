@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="raykuApp">
+<html lang="en" xmlns:ng="http://angularjs.org"  id="ng-app" ng-app="raykuApp">
 <head>
 	<meta charset="utf-8">
 	<title>{{user.username}} | Rayku</title>
@@ -16,9 +16,6 @@
     <script src="{{ asset('bundles/raykupage/js/vendor/custom.modernizr.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/raykupage/js/script.js') }}"></script>
 	
-	<!--REQUIRE-->
-	<script src="{{ asset('bundles/raykupage/js/require.js') }}"></script>
-	<script src="{{ asset('bundles/raykupage/js/main.js') }}"></script>
 	<script src="{{ asset('bundles/raykupage/js/app/controller.js') }}"></script>
 
 	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
@@ -27,6 +24,7 @@
 	<script>
 		var userId = {{ user.id }};
 		var username = '{{ user.username }}';
+		var whiteboardUrl = '{{ whiteboard_url }}';
 	</script>
 	
 	<script type="text/javascript">
@@ -106,6 +104,8 @@
                         <li><a class="setting" href="{{ path('angular_profile') }}">Profile</a><br><span class="nav-desc">Edit your profile</span></li>
                         <li><a class="myprofileedit" href="{{ path('angular_settings') }}">Settings</a><br><span class="nav-desc">Change settings</span></li>
                         <li><a class="tutor" href=# data-reveal-id="myTutorModal">Tutor</a><br><span class="nav-desc">Become a tutor</span></li>
+                        
+                        <li><a class="onboard" href="#/onboarding">Onboarding</a><br><span class="nav-desc">Tutor Training Tutorial</span></li>
                         <!-- <li><a class="tutor" href=# data-reveal-id="getStartedModal"><span class="raphael">u</span>Get Started</a></li> //-->
 						
                         <li><a class="logout" href="{{ path('fos_user_security_logout') }}">Logout</a></li>
@@ -135,19 +135,17 @@
 			
 			{% verbatim %}
 			<ul class="sidebar-nav">
-				<li><a class="dashboard active" href="{{ path('rayku_username_dashboard', {username:user.username}) }}"><span class="raphael">S</span> Dashboard</a></li>
-				<li><a class="myprofileedit" href="{{ path('angular_profile') }}"><span class="raphael">`</span> Settings</a></li>
+				<!--<li><a class="dashboard active" href="{{ path('rayku_username_dashboard', {username:user.username}) }}"><span class="raphael">S</span> Dashboard</a></li>
+				<li><a class="myprofileedit" href="{{ path('angular_profile') }}"><span class="raphael">`</span> Settings</a></li>-->
 				<li><a class="buyPoints" href=# data-reveal-id="buyPointsModal"><span class="raphael">#</span> Buy Points</a></li>
 				<li><a class="userWhiteboard" href=#><span class="raphael">?</span> Practice</a></li>
-				<li class="backtoWhiteboard"><a class="backWhiteboard" href=#><span class="raphael">?</span> Back to Whiteboard</a></li>
-				<li class="divider backtoWhiteboard"></li>
+				<!--<li class="backtoWhiteboard"><a class="backWhiteboard" href=#><span class="raphael">?</span> Back to Whiteboard</a></li>-->
 			</ul>
 			{% endverbatim %}
 		</div>
 
-		<div class="large-8 columns" id="content-body" ng-view>
+		<div class="large-8 columns" id="content-body" ng-view></div>
 	</div>
-</div>
 
 
 <div id="getStartedModal" class="reveal-modal medium">
@@ -181,7 +179,69 @@
 	</div>
 </div>
 
-{% include 'RaykuPageBundle:Partials:buy_points_modal.html.twig' %}
+<div id="buyPointsModal" class="reveal-modal medium" ng-controller="BillingCtrl" ng-init="step = 1">
+	<span ng-show="step == 1">
+		<div class="row registration-header">
+			<h2>Buy Rayku Points</h2>
+		</div>
+		<div class="row registration-body">
+			<form name="invoiceform">
+	            <select id="customDropdown1" class="large" ng-required="true" required ng-model="points.amount" required>
+	                <option value="5">500 Points for $5</option>
+	                <option value="10">1000 Points for $10</option>
+	                <option value="25">2500 Points for $25</option>
+	                <option value="50">5000 Points for $50</option>
+	                <option value="100">10000 Points for $100</option>
+	            </select><br />
+	            <input type="checkbox" ng-model="points.recharge" /> Enable Auto-recharge <br />
+	            Auto-recharge saves you time and hassle.  We'll credit your account with the amount selected when your balance falls below 100 Rayku Points<br /><br />
+	
+				{% verbatim %}
+				<span ng-hide="user.credit_card == undefined">
+					Your credit card ending with {{ user.credit_card.digits }} will be charged.<br />
+					Change Credit Card on next step <input type="checkbox" ng-model="cc" /><br />
+				</span>
+				{% endverbatim %}
+	            <br /><input type="submit" class="bbutton" value="Buy" ng-disabled="!invoiceform.$valid" ng-click="createInvoice()">
+			</form>
+		</div>
+	</span>
+	
+	<span ng-show="step == 2">
+		<div class="row registration-header">
+			<h2>Credit Card</h2>
+		</div>
+		<div class="row registration-body">
+			<form name="ccform">
+				<label for="firstName">First Name</label>
+				<input type="text" ng-model="card.firstName" placeholder="First Name" id="firstName" ng-required="true" required />
+				<label for="lastName">Last Name</label>
+	            <input type="text" ng-model="card.lastName" placeholder="Last Name" id="lastName" ng-required="true" required />
+	            <label for="number">Card Number</label>
+	            <input type="text" ng-model="card.number" placeholder="Card Number" id="number" ng-required="true" required />
+	            <label for="expiryYear">Expires Year</label>
+	            <input type="number" ng-model="card.expiryYear" placeholder="YY" min="13" max="35" id="expiryYear" ng-required="true" required />
+	            <label for="expiryMonth">Expires Month</label>
+	            <input type="number" ng-model="card.expiryMonth" placeholder="MM" min="1" max="12" id="expiryMonth" ng-required="true" required />
+	            <label for="ccv">CCV</label>
+	            <input type="number" ng-model="card.cvv" id="ccv" placeholder="CCV" min="100" max="900" ng-required="true" required />
+	            <label for="type">Type of Card</label>
+	            <input type="text" ng-model="card.type" id="type" placeholder="Credit Card Type" ng-required="true" required />
+	            <label for="password">Current Password</label>
+	            <input type="password" ng-model="card.current_password" id="password" ng-required="true" required />
+	            <br /><input type="submit" class="bbutton" value="Buy" ng-disabled="!ccform.$valid" ng-click="chargeCard(card)">
+			</form>
+		</div>
+	</span>
+	
+	<span ng-show="step == 3">
+		Thanks
+	</span>
+	
+	<a class="close-reveal-modal" ng-click="step = 1">×</a>
+</div>
+
+
 {% include 'RaykuPageBundle:Partials:activate_tutor_modal.html.twig' %}
 {% include 'RaykuPageBundle:Partials:notification_modal.html.twig' %}
 

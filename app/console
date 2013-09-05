@@ -8,6 +8,7 @@ require_once __DIR__.'/AppKernel.php';
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
+use Rayku\ApiBundle\Command\RebillCommand;
 
 $input = new ArgvInput();
 $env = $input->getParameterOption(array('--env', '-e'), 'dev');
@@ -15,4 +16,5 @@ $debug = !$input->hasParameterOption(array('--no-debug', ''));
 
 $kernel = new AppKernel($env, $debug);
 $application = new Application($kernel);
+$application->add(new RebillCommand);
 $application->run();

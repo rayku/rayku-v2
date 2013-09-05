@@ -12,22 +12,38 @@
 					<li><a href="{{ path('angular_profile') }}" class="myprofile">Profile</a></li>
 					<li><a href="{{ path('angular_payout') }}" class="payout">Payout</a></li>
 					<li><a href="{{ path('angular_settings') }}" class="mysettings">Settings</a></li>
+					<li><a href="#" class="mypoints">Billing</a></li>
 				</ul>
 			</div>
 
 			<div ng-controller="UserDetailCtrl">
 				<div class="large-9 columns editprofileinfo">
-					<form ng-upload="bar" action="{{ path('post_users', {'user':user.id}) }}">
+					<form ng-upload="bar" action="{{ path('post_users', {'user':user.id}) }}" name="editProfileForm">
 
 					<ul class="userinfo">
-						<li><span class="fname">First Name</span><span class="editfname"><input type="text" ng-model="user.first_name" name="first_name"></span></li>
-						<li><span class="lname">Last Name</span><span class="editlname"><input type="text" ng-model="user.last_name" name="last_name"></span></li>
-						<li><span class="degree">Degree</span><span class="editdegree"><input type="text" ng-model="user.degree" name="degree"></span></li>
-						<li><span class="grade">Level Of Education</span><span class="editgrade"><input type="text" ng-model="user.grade" name="grade"></span></li>
-						<li><span class="school">School</span><span class="editschool"><input type="text" ng-model="user.school" name="school"></span></li>
+						<li>
+							<label for="first_name">First Name</label><input ng-required="true" type="text" ng-model="user.first_name" name="first_name" id="first_name">
+							<small class="error" ng-show="editProfileForm.$dirty && editProfileForm.first_name.$invalid">First name is required</small>
+						</li>
+						<li>
+							<label for="last_name">Last Name</label><input ng-required="true" type="text" ng-model="user.last_name" name="last_name" id="last_name">
+							<small class="error" ng-show="editProfileForm.$dirty && editProfileForm.last_name.$invalid">Last name is required</small>
+						</li>
+						<li>
+							<label for="degree">Degree</label><input ng-required="true" type="text" ng-model="user.degree" name="degree" id="degree">
+							<small class="error" ng-show="editProfileForm.$dirty && editProfileForm.degree.$invalid">Degree attainted / working towards is required</small>
+						</li>
+						<li>
+							<label for="grade">Level Of Education</label><input ng-required="true" type="text" ng-model="user.grade" name="grade" id="grade">
+							<small class="error" ng-show="editProfileForm.$dirty && editProfileForm.grade.$invalid">Grade achieved is required</small>
+						</li>
+						<li>
+							<label for="school">School</label><input ng-required="true" type="text" ng-model="user.school" name="school" id="school">
+							<small class="error" ng-show="editProfileForm.$dirty && editProfileForm.school.$invalid">School attended/attending is required</small>
+						</li>
 					</ul>
-					<p><span>About</span><span><textarea class="user-bio" ng-model="user.bio" name="bio" onkeyup="countChar(this)">{{ user.bio }}</textarea></span></p>
-					<p><span>Profile Picture</span><span><input type="file" name="file" /></span></p>
+					<p><label for="bio">About</label><textarea class="user-bio" ng-model="user.bio" name="bio" onkeyup="countChar(this)" id="bio">{{ user.bio }}</textarea></p>
+					<p><label for="file">Profile Picture</label><input type="file" name="file" id="file" /></p>
 					<div class="row">
 							<input type="submit" upload-submit="update(contents, completed)" value="Save Changes" id="saveChanges" class="bbutton" />
 					</div>

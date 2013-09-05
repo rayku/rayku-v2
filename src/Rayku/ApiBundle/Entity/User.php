@@ -32,6 +32,27 @@ class User extends BaseUser implements ParticipantInterface
 	 */
 	protected $id;
 	
+	/** 
+	 * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true) 
+	 */
+	protected $facebook_id;
+	
+	/** 
+	 * @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true) 
+	 */
+	protected $facebook_access_token;
+
+
+	/**
+	 * @ORM\Column(name="linkedin_id", type="string", length=255, nullable=true)
+	 */
+	protected $linkedin_id;
+	
+	/**
+	 * @ORM\Column(name="linkedin_access_token", type="string", length=255, nullable=true)
+	 */
+	protected $linkedin_access_token;
+	
 	/**
 	 * @var \User
 	 *
@@ -43,13 +64,44 @@ class User extends BaseUser implements ParticipantInterface
 
 	/**
 	 * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Favorite", mappedBy="sender")
-	 * @Serializer\Groups({"user.details"})
+	 * @Serializer\Exclude
 	 **/
 	private $favorites;
 	
 	/**
+	 * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Transaction", mappedBy="user")
+	 * @Serializer\Exclude
+	 **/
+	private $transactions;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Invoice", mappedBy="user")
+	 * @Serializer\Exclude
+	 **/
+	private $invoices;
+
+	/**
 	 * @var integer
+	 * @Serializer\Groups({"user.details"})
+	 * @ORM\Column(name="point_threshold", type="integer", nullable=true)
+	 */
+	private $point_threshold = 500;
+	
+	/**
+	 * @var integer
+	 * @Serializer\Groups({"user.details"})
+	 * @ORM\Column(name="point_purchase_amount", type="integer", nullable=true)
+	 */
+	private $point_purchase = 1000;
+	
+	/**
+	 * @var integer
+	 * @Assert\Range(
+	 *     min = -100,
+	 *     max = 99999
+	 * )
 	 * @ORM\Column(name="points", type="integer", nullable=false)
+	 * 
 	 */
 	private $points = 500;
 	
@@ -96,7 +148,6 @@ class User extends BaseUser implements ParticipantInterface
 	/**
      * @ORM\ManyToOne(targetEntity="\Rayku\ApiBundle\Entity\User")
      * @ORM\JoinColumn(name="referral_referer", referencedColumnName="id", nullable=true)
-     * @Serializer\Groups({"user.details"})
 	 */
 	private $referral_referer;
 	
@@ -184,8 +235,7 @@ class User extends BaseUser implements ParticipantInterface
 	/**
 	 * @var \User
 	 *
-	 * @ORM\OneToOne(targetEntity="\Rayku\ApiBundle\Entity\CreditCard", cascade={"persist"})
-	 * @ORM\JoinColumn(name="credit_card_id", referencedColumnName="id")
+	 * @ORM\OneToOne(targetEntity="\Rayku\ApiBundle\Entity\CreditCard", mappedBy="user")
 	 */
 	private $credit_card;
 	
@@ -947,5 +997,209 @@ class User extends BaseUser implements ParticipantInterface
     public function getCreditCard()
     {
         return $this->credit_card;
+    }
+
+    /**
+     * Add transactions
+     *
+     * @param \Rayku\ApiBundle\Entity\Transaction $transactions
+     * @return User
+     */
+    public function addTransaction(\Rayku\ApiBundle\Entity\Transaction $transactions)
+    {
+        $this->transactions[] = $transactions;
+    
+        return $this;
+    }
+
+    /**
+     * Remove transactions
+     *
+     * @param \Rayku\ApiBundle\Entity\Transaction $transactions
+     */
+    public function removeTransaction(\Rayku\ApiBundle\Entity\Transaction $transactions)
+    {
+        $this->transactions->removeElement($transactions);
+    }
+
+    /**
+     * Get transactions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTransactions()
+    {
+        return $this->transactions;
+    }
+
+    /**
+     * Add invoices
+     *
+     * @param \Rayku\ApiBundle\Entity\Invoice $invoices
+     * @return User
+     */
+    public function addInvoice(\Rayku\ApiBundle\Entity\Invoice $invoices)
+    {
+        $this->invoices[] = $invoices;
+    
+        return $this;
+    }
+
+    /**
+     * Remove invoices
+     *
+     * @param \Rayku\ApiBundle\Entity\Invoice $invoices
+     */
+    public function removeInvoice(\Rayku\ApiBundle\Entity\Invoice $invoices)
+    {
+        $this->invoices->removeElement($invoices);
+    }
+
+    /**
+     * Get invoices
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getInvoices()
+    {
+        return $this->invoices;
+    }
+
+    /**
+     * Set point_threshold
+     *
+     * @param integer $pointThreshold
+     * @return User
+     */
+    public function setPointThreshold($pointThreshold)
+    {
+        $this->point_threshold = $pointThreshold;
+    
+        return $this;
+    }
+
+    /**
+     * Get point_threshold
+     *
+     * @return integer 
+     */
+    public function getPointThreshold()
+    {
+        return $this->point_threshold;
+    }
+
+    /**
+     * Set point_purchase
+     *
+     * @param integer $pointPurchase
+     * @return User
+     */
+    public function setPointPurchase($pointPurchase)
+    {
+        $this->point_purchase = $pointPurchase;
+    
+        return $this;
+    }
+
+    /**
+     * Get point_purchase
+     *
+     * @return integer 
+     */
+    public function getPointPurchase()
+    {
+        return $this->point_purchase;
+    }
+
+    /**
+     * Set facebook_id
+     *
+     * @param string $facebookId
+     * @return User
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebook_id = $facebookId;
+    
+        return $this;
+    }
+
+    /**
+     * Get facebook_id
+     *
+     * @return string 
+     */
+    public function getFacebookId()
+    {
+        return $this->facebook_id;
+    }
+
+    /**
+     * Set facebook_access_token
+     *
+     * @param string $facebookAccessToken
+     * @return User
+     */
+    public function setFacebookAccessToken($facebookAccessToken)
+    {
+        $this->facebook_access_token = $facebookAccessToken;
+    
+        return $this;
+    }
+
+    /**
+     * Get facebook_access_token
+     *
+     * @return string 
+     */
+    public function getFacebookAccessToken()
+    {
+        return $this->facebook_access_token;
+    }
+
+    /**
+     * Set linkedin_id
+     *
+     * @param string $linkedinId
+     * @return User
+     */
+    public function setLinkedinId($linkedinId)
+    {
+        $this->linkedin_id = $linkedinId;
+    
+        return $this;
+    }
+
+    /**
+     * Get linkedin_id
+     *
+     * @return string 
+     */
+    public function getLinkedinId()
+    {
+        return $this->linkedin_id;
+    }
+
+    /**
+     * Set linkedin_access_token
+     *
+     * @param string $linkedinAccessToken
+     * @return User
+     */
+    public function setLinkedinAccessToken($linkedinAccessToken)
+    {
+        $this->linkedin_access_token = $linkedinAccessToken;
+    
+        return $this;
+    }
+
+    /**
+     * Get linkedin_access_token
+     *
+     * @return string 
+     */
+    public function getLinkedinAccessToken()
+    {
+        return $this->linkedin_access_token;
     }
 }

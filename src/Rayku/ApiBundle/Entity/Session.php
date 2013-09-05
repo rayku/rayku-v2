@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
+use Rayku\ApiBundle\Entity\Points as PointTransfer;
 
 /**
  * Session
@@ -15,18 +16,9 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Serializer\AccessorOrder("alphabetical")
  * @ORM\HasLifecycleCallbacks
  */
-class Session
+class Session extends PointTransfer
 {
 	const expire_session = '-20 minutes';
-    /**
-     * @var integer
-     *
-     * @Serializer\Groups({"session", "session.details"})
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
 
     /**
      * @var \DateTime
@@ -177,16 +169,6 @@ class Session
     }
     
     /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * Set startTime
      *
      * @param \DateTime $startTime
@@ -241,6 +223,10 @@ class Session
     public function setDuration($duration)
     {
         $this->duration = $duration;
+        $points = $duration * $this->getRate();
+        
+        $this->setTransferred($points);
+        $this->setStatus('successful');
     
         return $this;
     }
@@ -381,6 +367,7 @@ class Session
     public function setStudent(\Rayku\ApiBundle\Entity\User $student = null)
     {
         $this->student = $student;
+        $this->setDebitUser($student);
     
         return $this;
     }
@@ -451,20 +438,14 @@ class Session
     	$duration = 0;
     	$currentDate = new \DateTime(date('Y-m-d H:i:s'));
     	if(null !== $this->getStartTime()){
-	    	$duration = $currentDate->diff($this->getStartTime());
-	    	$minutes = $duration->days * 24 * 60;
-	    	$minutes += $duration->h * 60;
-	    	$minutes += $duration->i;
+    		$duration = $currentDate->diff($this->getStartTime());
+    		$minutes = $duration->days * 24 * 60;
+    		$minutes += $duration->h * 60;
+    		$minutes += $duration->i;
     	}
     	
     	$this->setDuration($minutes);
     	$this->setEndTime($currentDate);
-    	$points = $minutes * $this->getRate();
-    	
-    	if(null !== $this->getSelectedTutor()){
-	    	$this->getSelectedTutor()->getUser()->addPoints($points);
-	    	$this->getStudent()->subtractPoints($points);
-    	}
     	$this->setUsersBusy();
     	
     	return $this;
@@ -478,13 +459,6 @@ class Session
      */
     public function setUsersBusy()
     {
-    	/*foreach($this->getPotentialTutors() as $potential_tutor)
-    	{
-    		if(in_array($potential_tutor->getTutorReply(), array('pending', 'contacted gtalk'))){
-	    		$potential_tutor->getTutor()->setBusy(true);
-    		}
-    	}*/
-    	
     	$tutor = $this->getSelectedTutor();
     	$student = ($this->getStudent()->getIsTutor()) ? $this->getStudent()->getTutor() : NULL;
     	if($this->getId() == null){ // New Session mark student as busy
@@ -522,6 +496,7 @@ class Session
     public function __construct()
     {
         $this->tutors = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setTransferred(0);
     }
 
     /**
@@ -589,6 +564,10 @@ class Session
     public function setSelectedTutor(\Rayku\ApiBundle\Entity\Tutor $selectedTutor = null)
     {
         $this->selectedTutor = $selectedTutor;
+        if($selectedTutor->getUser() === null){
+        	throw new \Exception('User must be a tutor');
+        }
+        $this->setCreditUser($selectedTutor->getUser());
     
         return $this;
     }

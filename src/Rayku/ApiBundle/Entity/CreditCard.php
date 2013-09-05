@@ -29,15 +29,31 @@ class CreditCard
     /**
      * @var \User
      *
-     * @ORM\OneToOne(targetEntity="\Rayku\ApiBundle\Entity\User", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="\Rayku\ApiBundle\Entity\User", inversedBy="credit_card", cascade={"all"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @Serializer\Exclude
      */
     private $user;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", columnDefinition="ENUM('valid', 'invalid')")
+     * @Assert\NotBlank()
+     */
+    private $status = 'valid';
+    
+    /**
+     * @ORM\OneToMany(targetEntity="\Rayku\ApiBundle\Entity\Transaction", mappedBy="card")
+     * @Serializer\Exclude
+     **/
+    private $transactions;
     
     /**
 	 * @var string
 	 *
 	 * @ORM\Column(name="card_reference", type="string", length=255, nullable=false)
+	 * @Serializer\Exclude
 	 * @Assert\NotBlank()
      */
     private $reference;
@@ -46,6 +62,7 @@ class CreditCard
      * @var string
      *
      * @ORM\Column(name="card_data", type="string", length=255, nullable=false)
+     * @Serializer\Exclude
      * @Assert\NotBlank()
      */
     private $data;
@@ -356,5 +373,68 @@ class CreditCard
     public function getUser()
     {
         return $this->user;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->transactions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add transactions
+     *
+     * @param \Rayku\ApiBundle\Entity\Transaction $transactions
+     * @return CreditCard
+     */
+    public function addTransaction(\Rayku\ApiBundle\Entity\Transaction $transactions)
+    {
+        $this->transactions[] = $transactions;
+    
+        return $this;
+    }
+
+    /**
+     * Remove transactions
+     *
+     * @param \Rayku\ApiBundle\Entity\Transaction $transactions
+     */
+    public function removeTransaction(\Rayku\ApiBundle\Entity\Transaction $transactions)
+    {
+        $this->transactions->removeElement($transactions);
+    }
+
+    /**
+     * Get transactions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTransactions()
+    {
+        return $this->transactions;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     * @return CreditCard
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

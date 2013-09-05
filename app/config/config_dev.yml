@@ -32,3 +32,19 @@ swiftmailer:
 
 parameters:
     payment.gateway.api_key: "sk_test_fXB6jN3wWpxC1u2BfBAUWw7L"
+    fb.secret: "1bf35a3021df5bc77f908f41c2e16afe"
+
+hwi_oauth:  
+    firewall_name: main  
+    resource_owners:
+        facebook:
+            type: facebook
+            client_id: 153916011466806
+            client_secret: 1bf35a3021df5bc77f908f41c2e16afe
+            scope:    "email, user_education_history, user_location"
+        linkedin:
+            type: linkedin
+            client_id: pmwchsmt4zvf
+            client_secret: aS03Ub9bs4lcxiF5
+            scope:    "r_fullprofile r_emailaddress"
+            infos_url: "https://api.linkedin.com/v1/people/~:(id,formatted-name,email-address,picture-url,educations)?format=json"

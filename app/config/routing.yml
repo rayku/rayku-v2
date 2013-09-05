@@ -1,3 +1,17 @@
+#HWIOAuthBundle routes
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /connect
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+    
+facebook_login:
+    pattern: /connect/check-facebook
+    
+linkedin_login:
+    pattern: /connect/check-linkedin
+    
 rayku_page_import:
     resource: "@RaykuPageBundle/Controller"
     type:     annotation
@@ -13,11 +27,6 @@ rayku_api_import:
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc
-
-# Internal routing configuration to handle ESI
-#_internal:
-#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
-#   prefix:   /_internal
     
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

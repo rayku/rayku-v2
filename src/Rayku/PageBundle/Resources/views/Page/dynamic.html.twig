@@ -232,10 +232,10 @@
 	  	</div>
 	    <div class="row">
 	        <div class="large-3 large-centered columns" style="padding: 35px; text-align:center; font-family: 'Francois One', sans-serif; font-size:19pt">
-	        	<a href="{{ path('hwi_oauth_service_redirect', {'service':'facebook'}) }}?_destination={{redirect}}">
+	        	<a href="{{ path('hwi_oauth_service_redirect', {'service':'facebook'}) }}?_destination={{redirect|url_encode}}">
 	        		<img id="fb" style="background:url({{ asset('bundles/raykupage/images/fb_login.png') }}); width: 150px; height: 23px;" alt="Login with Facebook" />
 	        	</a><br />
-	        	<a href="{{ path('hwi_oauth_service_redirect', {'service':'linkedin'}) }}?_destination={{redirect}}">
+	        	<a href="{{ path('hwi_oauth_service_redirect', {'service':'linkedin'}) }}?_destination={{redirect|url_encode}}">
 	        		<img id="ln" style="background:url({{ asset('bundles/raykupage/images/ln_login.png') }}); width: 150px; height: 23px;" alt="Login with Linkedin" />
 	        	</a>
 	        </div>

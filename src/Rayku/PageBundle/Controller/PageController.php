@@ -22,7 +22,9 @@ class PageController extends Controller
 	 */
 	public function dynamicLoginAction($page){
 		$pageData = array(
-			'ryerson' => array('redirect' => '/%23/course/math_center/view', 'title' => 'Ryerson University')
+			'ryerson' => array('redirect' => '/%23/course/math_center/view', 'title' => 'Ryerson University'),
+			'uoft' => array('redirect' => '/%23/course/uoftmathcenter/view', 'title' => 'University of Toronto'),
+			'kangaroo' => array('redirect' => '/%23/course/mathcenter/view', 'title' => 'Canadian Math Kangaroo Contest')
 		);
 		
 		if(!isset($pageData[$page])){

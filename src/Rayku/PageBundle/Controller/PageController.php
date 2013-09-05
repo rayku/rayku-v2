@@ -18,6 +18,28 @@ use Rayku\ApiBundle\Entity\User;
 class PageController extends Controller
 {
 	/**
+	 * @Route("/{page}/login", name="dynamic_login_page")
+	 */
+	public function dynamicLoginAction($page){
+		$pageData = array(
+			'ryerson' => array('redirect' => '/%23/course/math_center/view', 'title' => 'Ryerson University')
+		);
+		
+		if(!isset($pageData[$page])){
+			return $this->createNotFoundException();
+		}else{
+			$redirect = $pageData[$page]['redirect'];
+			$title = $pageData[$page]['title'];
+		}
+		
+		if($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')){
+			return $this->redirect($redirect);
+		}else{
+			return $this->render('RaykuPageBundle:Page:dynamic.html.twig', array('redirect' => $redirect, 'title' => $title));
+		}
+	}
+	
+	/**
 	 * @Route("/ryerson", name="rayku_ryerson_landing")
 	 * @Template
 	 */

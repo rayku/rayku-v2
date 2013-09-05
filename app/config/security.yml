@@ -35,7 +35,6 @@ security:
                     linkedin:  "/connect/check-linkedin"
                 login_path:    /connect
                 failure_path:  /connect
-                default_target_path: /#/course/math_center/view
                 oauth_user_provider:
                     service: my_user_provider
         dev:

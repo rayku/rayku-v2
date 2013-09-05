@@ -208,14 +208,15 @@
 		</header>
 		<div class="row">
 		    <div class="large-8 large-centered columns theform">
-		    	<h3>Rayku & Ryerson University</h3>
+		    	<h3>Rayku & {{ title }}
+		    	</h3>
 		    	<div class="login">
 		      		<h1>Login to Rayku</h1>
 		      		<form action="{{ path('fos_user_security_check') }}" method="post">
 		        		<p><input type="text" id="username" name="_username" placeholder="E-mail or Username" required="required" /></p>
 		        		<p><input type="password" id="password" name="_password" placeholder="Password" required="required" /></p>
 		        		<p class="submit"><input type="submit" name="commit" value="Login"></p>
-		        		<input type="hidden" name="_target_path" value="/#/course/math_center/view" />
+		        		<input type="hidden" name="_target_path" value="{{ redirect }}" />
 		     		</form>
 		    	</div>
 
@@ -231,10 +232,10 @@
 	  	</div>
 	    <div class="row">
 	        <div class="large-3 large-centered columns" style="padding: 35px; text-align:center; font-family: 'Francois One', sans-serif; font-size:19pt">
-	        	<a href="{{ path('hwi_oauth_service_redirect', {'service':'facebook'}) }}">
+	        	<a href="{{ path('hwi_oauth_service_redirect', {'service':'facebook'}) }}?_destination={{redirect}}">
 	        		<img id="fb" style="background:url({{ asset('bundles/raykupage/images/fb_login.png') }}); width: 150px; height: 23px;" alt="Login with Facebook" />
 	        	</a><br />
-	        	<a href="{{ path('hwi_oauth_service_redirect', {'service':'linkedin'}) }}">
+	        	<a href="{{ path('hwi_oauth_service_redirect', {'service':'linkedin'}) }}?_destination={{redirect}}">
 	        		<img id="ln" style="background:url({{ asset('bundles/raykupage/images/ln_login.png') }}); width: 150px; height: 23px;" alt="Login with Linkedin" />
 	        	</a>
 	        </div>

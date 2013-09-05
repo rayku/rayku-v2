@@ -564,6 +564,9 @@ class Session extends PointTransfer
     public function setSelectedTutor(\Rayku\ApiBundle\Entity\Tutor $selectedTutor = null)
     {
         $this->selectedTutor = $selectedTutor;
+        if($selectedTutor->getUser() === null){
+        	throw new \Exception('User must be a tutor');
+        }
         $this->setCreditUser($selectedTutor->getUser());
     
         return $this;

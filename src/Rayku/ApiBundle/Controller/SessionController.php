@@ -312,6 +312,13 @@ class SessionController extends Controller
 			throw new AccessDeniedException();
 		}
 		
+		if($this->getUser()->getTutor() === NULL){
+			return array(
+				'success' => false,
+				'message' => 'User must be a tutor to start a session'
+			);
+		}
+		
 		$pastSessions = $course->getSessions();
 		foreach($pastSessions as $pastSession){
 			if($pastSession->getEndTime() == NULL){

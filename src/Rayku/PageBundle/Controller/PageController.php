@@ -35,6 +35,7 @@ class PageController extends Controller
 		}
 		
 		if($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')){
+			die(__LINE__.' '.__FILE__);
 			return $this->redirect($redirect);
 		}else{
 			return $this->render('RaykuPageBundle:Page:dynamic.html.twig', array('redirect' => $redirect, 'title' => $title));

@@ -50,7 +50,7 @@ security:
         - { path: ^/connect, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/ryerson, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/.+/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         
         # Admin secured areas
         - { path: ^/admin/, role: ROLE_ADMIN }

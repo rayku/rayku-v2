@@ -55,6 +55,15 @@ class Session extends PointTransfer
     private $rating;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", columnDefinition="ENUM('rayku', 'cavas')")
+     * @Serializer\Groups({"session", "session.details"})
+     * @Assert\NotBlank()
+     */
+    private $type = 'rayku';
+    
+    /**
      * @var float
      *
      * @Serializer\Groups({"session", "session.details"})
@@ -659,5 +668,28 @@ class Session extends PointTransfer
     public function getCourses()
     {
         return $this->courses;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return Session
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

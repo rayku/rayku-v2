@@ -57,7 +57,7 @@ class Session extends PointTransfer
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", columnDefinition="ENUM('rayku', 'cavas')")
+     * @ORM\Column(name="type", type="string", columnDefinition="ENUM('rayku', 'canvas')")
      * @Serializer\Groups({"session", "session.details"})
      * @Assert\NotBlank()
      */
